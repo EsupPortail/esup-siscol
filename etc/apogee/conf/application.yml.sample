@@ -1,10 +1,9 @@
 
 spring:
- 
-  ldap:
+ ldap:
     urls: 
-    - ldap://ldap.univ.fr:389
-    username: uid=user,ou=admins,dc=univ,dc=fr
+    - ldap://ldap.fr:389
+    username: uid=user,ou=admins,dc=univ.fr
     password: password
     base: dc=univ,dc=fr
  
@@ -21,7 +20,7 @@ springdoc:
     disable-swagger-default-url: true
     use-root-path: true
     path: /swagger-ui.html
-    url: /api-docs.yaml
+    url: /api-docs.yaml 
      
 server:
   error:
@@ -33,7 +32,7 @@ server:
    
 app:
   ldap:
-    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=acheraga))
+    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (eduPersonAffiliation=staff)
     repoStringFilterStudent: (eduPersonAffiliation=student)
@@ -41,28 +40,24 @@ app:
     repoStringFilterStudentByUId: (&(eduPersonAffiliation=student)(uid={0}))
     repoStringFilterStudentByNumEtu: (&(eduPersonAffiliation=student)(numlEtu={0}))
     dnPeople: ou=people
-    dnAlum: ou=alum
-    test: 1232
+    
   apogee:
     startYearMonth: 09
     startYearDay: 01
     universityCode: UPN
     urlService:
-      administratifMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/AdministratifMetier
-      etudiantMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/EtudiantMetier
-      pedagogiqueMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/PedagogiqueMetier
-      geographieMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/GeographieMetier
-      referentielMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/ReferentielMetier
-      offreFormationMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/OffreFormationMetier
+      administratifMetier: http://ws.apogee.univ.fr:8080/aws/services/AdministratifMetier
+      etudiantMetier: http://ws.apogee.univ.fr:8080/aws/services/EtudiantMetier
+      pedagogiqueMetier: http://ws.apogee.univ.fr:8080/aws/services/PedagogiqueMetier
+      geographieMetier: http://ws.apogee.univ.fr:8080/aws/services/GeographieMetier
+      referentielMetier: http://ws.apogee.univ.fr:8080/aws/services/ReferentielMetier
+      offreFormationMetier: http://ws.apogee.univ.fr:8080/aws/services/OffreFormationMetier
     
-    
-    
-  
 credential:
   userscredential:
     root:
       username: root
-      password: password_principal_rest_servcie
+      password: root
       roles:
         - ADMIN
         - USER
@@ -70,7 +65,7 @@ credential:
         - USER_LDAP
     guest:
       username: guest
-      password: password_guest_rest_servcie
+      password: jhdsiojgio56465dsg4qsdgsdqg
       roles:
         - GUEST
   autorisation:
@@ -80,9 +75,5 @@ credential:
     referentiel:
       - USER_APOGEE
       - ADMIN
-      
-     
-
-          
 
 
