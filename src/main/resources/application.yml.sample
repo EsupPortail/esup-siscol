@@ -1,0 +1,79 @@
+
+spring:
+ ldap:
+    urls: 
+    - ldap://ldap-paris.fr:389
+    username: uid=xxxx,ou=admins,dc=u-paris10,dc=fr
+    password: xxxx
+    base: dc=u-paris10,dc=fr
+ 
+springdoc:
+  version: '@springdoc.version@'
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+
+    display-request-duration: true
+    groups-order: ASC
+    operationsSorter: method
+    disable-swagger-default-url: true
+    use-root-path: true
+    path: /swagger-ui.html
+    url: /api-docs.yaml 
+     
+server:
+  error:
+    include-exception: true
+    whitelabel:
+      enabled: true
+    path: /error.html
+    include-stacktrace: always
+   
+app:
+  ldap:
+    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=acheraga))
+    stringFilterStudent: (eduPersonAffiliation=student)
+    stringFilterStaff: (eduPersonAffiliation=staff)
+    repoStringFilterStudent: (eduPersonAffiliation=student)
+    repoStringFilterStudentBySn: (&(eduPersonAffiliation=student)(sn={0}))
+    repoStringFilterStudentByUId: (&(eduPersonAffiliation=student)(uid={0}))
+    repoStringFilterStudentByNumEtu: (&(eduPersonAffiliation=student)(numlEtu={0}))
+    dnPeople: ou=people
+    
+  apogee:
+    startYearMonth: 09
+    startYearDay: 01
+    universityCode: UPN
+    urlService:
+      administratifMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/AdministratifMetier
+      etudiantMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/EtudiantMetier
+      pedagogiqueMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/PedagogiqueMetier
+      geographieMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/GeographieMetier
+      referentielMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/ReferentielMetier
+      offreFormationMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/OffreFormationMetier
+    
+credential:
+  userscredential:
+    root:
+      username: root
+      password: root
+      roles:
+        - ADMIN
+        - USER
+        - USER_APOGEE
+        - USER_LDAP
+    guest:
+      username: guest
+      password: jhdsiojgio56465dsg4qsdgsdqg
+      roles:
+        - GUEST
+  autorisation:
+    supann:
+      - USER_LDAP
+      - ADMIN
+    referentiel:
+      - USER_APOGEE
+      - ADMIN
+
+

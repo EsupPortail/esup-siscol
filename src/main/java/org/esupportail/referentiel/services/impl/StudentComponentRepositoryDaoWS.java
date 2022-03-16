@@ -1,0 +1,366 @@
+package org.esupportail.referentiel.services.impl;
+
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.esupportail.referentiel.beans.EtabRef;
+import org.esupportail.referentiel.beans.SignataireRef;
+import org.esupportail.referentiel.services.StudentComponentRepositoryDao;
+import org.esupportail.referentiel.utils.DonneesStatic;
+import org.slf4j.Logger;
+//import org.esupportail.apogee.services.remote.ReadEnseignement;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+
+import gouv.education.apogee.commun.client.ws.AdministratifMetier.AdministratifMetierServiceInterface;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantMetierServiceInterface;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.EtapeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.OffreFormationMetierServiceInterface;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.SECritereDTO2;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauEtapeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauVersionDiplomeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauVersionEtapeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionEtapeDTO32;
+import gouv.education.apogee.commun.client.ws.ReferentielMetier.ComposanteDTO3;
+import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterface;
+import gouv.education.apogee.commun.client.ws.ReferentielMetier.SignataireWSSignataireDTO;
+import gouv.education.apogee.commun.client.ws.ReferentielMetier.VariableAppliWSEtabRefDTO;
+
+/**
+ * 
+ * Acces au composantes du personnel personnalise.
+ *
+ */
+
+@SuppressWarnings("serial")
+@Service
+public class StudentComponentRepositoryDaoWS implements StudentComponentRepositoryDao {
+
+	/**
+	 * 
+	 */
+	@Autowired
+	protected ReferentielMetierServiceInterface referentielMetierService;
+	/**
+	 * 
+	 */
+	@Autowired
+	protected EtudiantMetierServiceInterface etudiantMetierService;
+	/**
+	 * 
+	 */
+	@Autowired
+	protected AdministratifMetierServiceInterface serviceAdministratif;
+
+	/**
+	 * 
+	 */
+	@Autowired
+	protected OffreFormationMetierServiceInterface offreFormationMetierService;
+
+	/**
+	 * 
+	 */
+	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	/**
+	 * Can read the education Apogee.
+	 */
+	// private ReadEnseignement remoteCriApogeeEns;
+
+	/**
+	 * startYearDay.
+	 */
+	protected String startYearDay;
+	/**
+	 * startYearMonth.
+	 */
+	protected String startYearMonth;
+
+	/**
+	 * mapComp.
+	 */
+	LinkedHashMap<String, String> mapComp = new LinkedHashMap<String, String>();
+
+	/**
+	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getEtabRef(java.lang.String)
+	 */
+	public EtabRef getEtabRef(String universityCode) {
+		String nomEtabRef = "";
+		String adresseEtabRef = "";
+		String ad2 = "";
+		String ad3 = "";
+		String cpo = "";
+		String com = "";
+
+		// recuperer le nom de l'etablissement
+		List<VariableAppliWSEtabRefDTO> variableAppli = null;
+		EtabRef etabRef = new EtabRef();
+		try {
+			variableAppli = referentielMetierService.recupererInformationEtabRef(DonneesStatic.COD_VAP_ETB_LIB);
+		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (variableAppli != null) {
+			for (VariableAppliWSEtabRefDTO vapp : variableAppli) {
+				if (vapp.getParVap() != null) {
+					nomEtabRef = vapp.getParVap();
+				}
+			}
+		}
+		// recuperer adresse 2
+		List<VariableAppliWSEtabRefDTO> variableAppliAd2 = null;
+		try {
+			variableAppliAd2 = referentielMetierService.recupererInformationEtabRef(DonneesStatic.COD_VAP_ETB_AD2);
+		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (variableAppliAd2 != null) {
+			for (VariableAppliWSEtabRefDTO varApp : variableAppliAd2) {
+				if (varApp.getParVap() != null) {
+					ad2 = varApp.getParVap();
+				}
+			}
+		}
+		// recuperer adresse 3
+		List<VariableAppliWSEtabRefDTO> variableAppliAd3 = null;
+		try {
+			variableAppliAd3 = referentielMetierService.recupererInformationEtabRef(DonneesStatic.COD_VAP_ETB_AD3);
+		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (variableAppliAd3 != null) {
+			for (VariableAppliWSEtabRefDTO varApp : variableAppliAd3) {
+				if (varApp.getParVap() != null) {
+					ad3 = varApp.getParVap();
+				}
+			}
+		}
+		// recuperer code postal
+		List<VariableAppliWSEtabRefDTO> variableAppliCpo = null;
+		try {
+			variableAppliCpo = referentielMetierService.recupererInformationEtabRef(DonneesStatic.COD_VAP_ETB_CPO);
+		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (variableAppliCpo != null) {
+			for (VariableAppliWSEtabRefDTO varApp : variableAppliCpo) {
+				if (varApp.getParVap() != null) {
+					cpo = varApp.getParVap();
+				}
+			}
+		}
+		// recuperer commune
+		List<VariableAppliWSEtabRefDTO> variableAppliCom = null;
+		try {
+			variableAppliCom = referentielMetierService.recupererInformationEtabRef(DonneesStatic.COD_VAP_ETB_COM);
+		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (variableAppliCom != null) {
+			for (VariableAppliWSEtabRefDTO varApp : variableAppliCom) {
+				if (varApp.getParVap() != null) {
+					com = varApp.getParVap();
+				}
+			}
+		}
+		adresseEtabRef = ad2 + " " + cpo + " " + com;
+		etabRef.setNomEtabRef(nomEtabRef);
+		etabRef.setAdresseEtabRef(adresseEtabRef);
+		return etabRef;
+
+	}
+
+	/**
+	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getEtapesRef(java.lang.String)
+	 */
+	@Cacheable("Etapes")
+	public LinkedHashMap<String, String> getEtapesRef(String universityCode) {
+		// Recuperation des etapes depuis Apogee, cod et lib
+		if (logger.isDebugEnabled()) {
+			logger.debug("getEtapesRef - universityCode = " + universityCode);
+		}
+		LinkedHashMap<String, String> lSI = new LinkedHashMap<String, String>();
+
+		Object idl = new Object();
+		String lib = "";
+
+		SECritereDTO2 param = new SECritereDTO2();
+
+		// Retrait du filtre sur l'annee pour permettre de rattacher les codes etape des
+		// annees autres que celle en cours
+		param.setTemOuvertRecrutement("O");
+		param.setCodEtp("tous");
+		param.setCodVrsVet("tous");
+		param.setCodDip("aucun");
+		param.setCodVrsVdi("aucun");
+		param.setCodElp("aucun");
+		List<DiplomeDTO3> diplomeDTO3 = null;
+		try {
+			diplomeDTO3 = offreFormationMetierService.recupererSEV3(param);
+		} catch (gouv.education.apogee.commun.client.ws.OffreFormationMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+		for (DiplomeDTO3 ld : diplomeDTO3) {
+			TableauVersionDiplomeDTO3 versionDiplomeDTO3 = ld.getListVersionDiplome();
+			for (VersionDiplomeDTO3 lvd : versionDiplomeDTO3.getItem()) {
+				TableauEtapeDTO3 etapeDTO3 = lvd.getOffreFormation().getListEtape();
+				for (EtapeDTO3 le : etapeDTO3.getItem()) {
+					TableauVersionEtapeDTO3 versionEtapeDTO3 = le.getListVersionEtape();
+					for (VersionEtapeDTO32 ve : versionEtapeDTO3.getItem()) {
+						idl = le.getCodEtp();
+						lib = ve.getLibWebVet();
+						lSI.put(idl + ";" + ve.getCodVrsVet(), lib);
+					}
+				}
+			}
+		}
+
+		return lSI;
+
+	}
+
+	/**
+	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getSigCompoRef(java.lang.String,
+	 *      java.lang.String)
+	 */
+	public SignataireRef getSigCompoRef(String universityCode, String composante) {
+		SignataireRef sigRef = new SignataireRef();
+
+		// recuperer le code signataire de la composante
+		List<ComposanteDTO3> lcomposante = null;
+
+		try {
+			lcomposante = referentielMetierService.recupererComposanteV2(composante, null);
+		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		if (lcomposante != null) {
+			for (ComposanteDTO3 compos : lcomposante) {
+				if (compos.getCodCmp().equals(composante)) {
+					// recherche du signataire de la composante
+					if (compos.getCodSig() != null) {
+						List<SignataireWSSignataireDTO> lsignataire = null;
+
+						try {
+							lsignataire = referentielMetierService.recupererSignataire(compos.getCodSig(),
+									DonneesStatic.TEM_EN_SVE_O);
+						} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+
+						if (lsignataire != null) {
+							for (SignataireWSSignataireDTO signataire : lsignataire) {
+								sigRef.setNomSignataireComposante(signataire.getNomSig());
+								sigRef.setQualiteSignataire(signataire.getQuaSig());
+							}
+						}
+					}
+				}
+			}
+		}
+		return sigRef;
+
+	}
+
+	/**
+	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getComposantesPrincipalesRef(java.lang.String,
+	 *      java.util.Map)
+	 */
+	@Cacheable("Composantes")
+	public Map<String, String> getComposantesPrincipalesRef(String universityCode, Map<String, String> lesComposantes) {
+
+		if (logger.isDebugEnabled()) {
+			logger.debug("StudentComponentRepositoryDaoWS:: getComposantesPrincipalesRef . universityCode  = "
+					+ universityCode);
+		}
+		mapComp = new LinkedHashMap<String, String>();
+
+		// recuperer la liste des composantes
+		List<ComposanteDTO3> composante;
+		try {
+			composante = referentielMetierService.recupererComposanteV2(null, null);
+			if (composante != null) {
+
+				if (logger.isDebugEnabled()) {
+					logger.debug("StudentComponentRepositoryDaoWS:: getComposantesPrincipalesRef. composante  = "
+							+ composante.size());
+				}
+
+				recupComposantes(composante);
+
+			}
+
+			return mapComp;
+		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception  e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
+	public void recupComposantes(List<ComposanteDTO3> composantes) {
+
+		for (ComposanteDTO3 composante : composantes) {
+			Object idl = composante.getCodCmp();
+			String lib = composante.getLibCmp();
+			if (composante.getTemEnSveCmp().equals("O")) {
+				mapComp.put(idl + "", lib);
+			}
+			// Si la composante en cours de recuperation contient une liste de composantes
+			// filles
+			// On la parcours egalement
+			if (composante.getListeComposanteFils() != null
+					&& !composante.getListeComposanteFils().getComposante().isEmpty()) {
+				recupComposantes(composante.getListeComposanteFils().getComposante());
+			}
+		}
+	}
+
+	/**
+	 * @return the startYearDay
+	 */
+	public String getStartYearDay() {
+		return startYearDay;
+	}
+
+	/**
+	 * @param startYearDay the startYearDay to set
+	 */
+	public void setStartYearDay(final String startYearDay) {
+		this.startYearDay = startYearDay;
+	}
+
+	/**
+	 * @return the startYearMonth
+	 */
+	public String getStartYearMonth() {
+		return startYearMonth;
+	}
+
+	/**
+	 * @param startYearMonth the startYearMonth to set
+	 */
+	public void setStartYearMonth(final String startYearMonth) {
+		this.startYearMonth = startYearMonth;
+	}
+
+}

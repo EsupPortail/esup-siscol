@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+
+
+
+	<appender name="EMAIL"
+		class="ch.qos.logback.classic.net.SMTPAppender">
+
+		<smtpHost>smtp.parisnanterre.fr</smtpHost>
+		<to>acheraga@parisnanterre.fr</to>
+		<!-- <to>abdel@parisnanterre.fr</to> -->
+		<!-- <to>ANOTHER_EMAIL_DESTINATION</to> additional destinations are possible -->
+		<from>procurations-noreply@parisnanterre.fr</from>
+		<subject>ERROR CONGES: %logger{20} - %m</subject>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date %-5level %logger{36}.%M - %message%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n
+			</pattern>
+		</encoder>
+
+	</appender>
+
+	<logger name="fr.upond" level="debug" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE"/> -->
+		<!-- <appender-ref ref="EMAIL" /> -->
+	</logger>
+
+	<logger name="org.springframework.security" level="info"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE"/> -->
+	</logger>
+
+
+	<logger name="org.esupportail" level="trace" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE"/> -->
+	</logger>
+	<logger name="org.esupportail.referentiel.services.impl" level="trace" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE"/> -->
+	</logger>
+	
+
+<!-- 	<logger name="org.springframework.util" level="trace" -->
+<!-- 		additivity="false"> -->
+<!-- 		<appender-ref ref="STDOUT" /> -->
+
+<!-- 	</logger> -->
+
+<!-- 	<logger name="org.springframework.security" level="trace" -->
+<!-- 		additivity="false"> -->
+<!-- 		<appender-ref ref="STDOUT" /> -->
+
+<!-- 	</logger> -->
+
+
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE"/> -->
+		<!-- <appender-ref ref="EMAIL" /> -->
+	</root>
+</configuration>

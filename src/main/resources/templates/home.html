@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org">
+<head>
+<title>Spring Security Example</title>
+<link rel="stylesheet" type="text/css"
+	href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
+<link href="/prism.css" rel="stylesheet" />
+
+</head>
+<body>
+	<div th:replace="fragments/header :: header">
+		<!-- ============================================================================ -->
+		<!-- This content is only used for static prototyping purposes (natural templates)-->
+		<!-- and is therefore entirely optional, as this markup fragment will be included -->
+		<!-- from "fragments/header.html" at runtime.                                     -->
+		<!-- ============================================================================ -->
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">Static header</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#">Home</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="hero-unit">
+			<p>
+
+				<a href="/logout" th:href="@{/logout}"
+					class="btn btn-large btn-success">Sign up</a>
+			</p>
+
+
+			<h1>Test</h1>
+			<ul>
+				<li>Récupérer l'identifiant de l'étudiant :
+					<ul>
+						<li><a href="/apogee/identifiantsEtudiant?codEtud=38004031">/apogee/identifiantsEtudiant?codEtud=38004031</a></li>
+					</ul>
+
+				</li>
+
+
+				<li>Récupérer les infos de l'étudiant (date de naiss, adresse,
+					mail ....)
+					<ul>
+						<li><a href="/apogee/etudiantRef?codEtud=38004031&annee=2020">/apogee/etudiantRef?codEtud=38004031&annee=2020</a></li>
+					</ul>
+				</li>
+
+
+				<li>Récupération des années d'inscriptions :
+					<ul>
+						<li><a href="/apogee/anneesIa?codEtud=39004031">/apogee/anneesIa?codEtud=39004031</a>
+						</li>
+					</ul>
+				</li>
+
+
+
+				<li>Liste des étapes d'inscription d'un étudiant à une année,
+					le regime d'inscription et les ELPs type stage :
+					<ul>
+						<li><a
+							href="/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2019">/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2019</a></li>
+
+						<li><a
+							href="/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2020">/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2020</a>
+						</li>
+						<li><pre>
+								<code class="language-java">
+HttpHeaders headers = new HttpHeaders();
+headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
+HttpEntity &lt;? &gt; entity = new HttpEntity&lt;&gt;(headers);
+UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl).queryParam("codeEtud", "38004031").queryParam("annee", "2020");
+ResponseEntity&lt;ApogeeMap&gt; result = testRestTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, ApogeeMap.class);
+		</code>
+							</pre></li>
+						<li> <h5>Utilisation de webClient</h5> <pre>
+							<code class="language-java">
+	@Test
+	public void etapesByEtudiantAndAnnee() {
+	ResponseSpec responseSpec =  WebClient.builder().baseUrl(baseUrl)
+				.defaultHeaders(header -> header.setBasicAuth(login, password))
+				.build()
+				.get()
+				.uri(uriBuilder -> uriBuilder.path("/apogee/etapesByEtudiantAndAnnee")
+				.queryParam("codEtud", "38004031").
+				queryParam("annee", "2020").build()).
+				retrieve();
+			
+		Mono&lt;ApogeeMap&gt; mono = responseSpec.bodyToMono(ApogeeMap.class);
+		ApogeeMap apogeeMap = mono.block();
+	
+		System.out.println(apogeeMap.getRegimeInscription().get(0).getLibRg());
+		}
+							
+								
+								</code>
+							
+							</pre></li>
+
+					</ul>
+				<li>Liste des étapes d'inscription d'un étudiant à une année :
+
+					<ul>
+						<li><a
+							href="/apogee/studentEtapeVets?codEtud=38004031&annee=2020">/apogee/studentEtapeVets?codEtud=38004031&annee=2020</a></li>
+					</ul>
+				</li>
+
+				<li>Liste des ELPs Stage d'une version d'étape : exmeple
+					etape=S2APS et versionEtape=201 :
+					<ul>
+						<li><a
+							href="/apogee/studentListeElpStage?codeEtape=S2APS&versionEtape=161">/apogee/studentListeElpStage?codeEtape=S2APS&versionEtape=161</a></li>
+					</ul>
+				</li>
+
+
+				<li>Liste des Etape d'Inscription codEtu et année
+					<ul>
+						<li><a
+							href="/apogee/studentListeEtapeInscription?codEtud=35006817&annee=2020">/apogee/studentListeEtapeInscription?codEtud=35006817&annee=2020</a></li>
+					</ul>
+				</li>
+
+
+				<li>Liste des ELPs d'une version d'étape : exmeple etape=V2LCA
+					et versionEtape=201 :
+					<ul>
+						<li><a
+							href="/apogee/studentListeELPs?codeEtape=V2LCA&versionEtape=201">/apogee/studentListeELPs?codeEtape=V2LCA&versionEtape=201</a></li>
+					</ul>
+				</li>
+
+				<li>Etablissement Reference :
+					<ul>
+						<li><a href="/apogee/etablissementReference">/apogee/etablissementReference</a></li>
+					</ul>
+				</li>
+				<li>Toutes les composantes depuis le WS Apogee :
+					<ul>
+						<li><a href="/apogee/composantesPrincipalesRef">/apogee/composantesPrincipalesRef</a></li>
+					</ul>
+				</li>
+				<li>Toutes les étapes depuis le WS Apogee :
+					<ul>
+						<li><a href="/apogee/etapesReference">/apogee/etapesReference</a>
+							</il>
+					</ul>
+
+				</li>
+				<li>le signataire de ref :
+					<ul>
+						<li><a href="/apogee/composanteSignaitaireRef?composante=OIP">/apogee/composanteSignaitaireRef?composante=OIP</a></li>
+					</ul>
+				</li>
+
+
+
+
+
+			</ul>
+			<p>Example d'appel utilisant CURL.</p>
+			<p>curl --cookie-jar cookie -L
+				http://localhost:8080/apogee/infosAdmEtuV2?numEtud=39004031 -u
+				user:password</p>
+
+
+			<div>
+				<h1>Test ldap service REST</h1>
+				<p>On va distinguer 4 types d'interrogation :
+				<li>chercher un étudiant /ldap/etudiant</li>
+				<li>chercher un enseignant /ldap/tuteur</li>
+				<li>chercher un personnel /ldap/staff</li> pour ces trois types
+				d'appel an data générique --data '{"nom":"cheraga", "prenom":"*",
+				"id":"*","mail":"*"}' au mois un attribut doit être présent : <a
+					href="#ldapCurl">curl test</a>.<br> Le quatriéme appel est
+				illustré dans le paragraphe sui va suivre.
+
+				</p>
+				<div>
+					<h3>Tester un filtre LDAP</h3>
+					<li><a href="/ldap/byFilter?filter=(givenName=abdel*)">/ldap/byFilter?filter=(givenName=abdel*)</a></li>
+					<li><a href="/ldap/bySupannAliasLogin?login=acheraga">/ldap/bySupannAliasLogin?login=acheraga</a></li>
+					<p>
+					<h3>Tester des appels JAVA</h3>
+					<pre>
+						<code class="language-java">
+TestRestTemplate testRestTemplate = new TestRestTemplate("root", "root",TestRestTemplate.HttpClientOption.ENABLE_COOKIES);
+final String baseUrl = "http://localhost:8080/ldap/etudiant";
+URI uri = new URI(baseUrl);
+FormSearchTest person = new FormSearchTest( "boop", "");
+         
+HttpHeaders headers = new HttpHeaders();
+headers.set("X-COM-PERSIST", "true");      
+HttpEntity &lt;FormSearchTest&gt; request = new HttpEntity&lt;&gt;(person, headers);
+List&lt;Person&gt; result = this.testRestTemplate.postForObject(uri, request, List.class);
+System.out.println(result);
+
+
+public class FormSearchTest implements Serializable {
+	private String id;
+	private String supannAliasLogin
+	private String nom;
+	private String mail;
+	private String prenom;
+	private String primaryAffiliation;
+	private String affiliation;
+		//	getter and setter ...
+
+</code>	</pre>
+					<li> <h5>Utilisation de webClient</h5><pre>
+							<code class="language-java">
+@Test
+	public void testLdapWebCLient() {
+		FormSearchTest person = new FormSearchTest("boop", "");
+		Mono&lt;FormSearchTest&gt; m = Mono.just(person);
+		Mono&lt;Person[]&gt; result = ldapSearchByForm(m);
+		Person[] list = result.block();
+		for (Person p : list) {
+			System.out.println(p.getCn());
+		}
+	}
+
+public Mono&lt;Person[]&gt; ldapSearchByForm(Mono&lt;FormSearchTest&gt; form) {
+		WebClient webClient = WebClient
+				.builder()
+				.baseUrl(baseUrl)
+				.defaultHeaders(header -> header.setBasicAuth(login, password))
+				.build();
+		return webClient
+				.post()
+				.uri("/ldap/etudiant")
+				.accept(MediaType.APPLICATION_JSON)
+				.body(form, FormSearchTest.class)
+				.retrieve()
+				.bodyToMono(Person[].class);
+	}
+</code>
+						</pre></li>
+
+
+					</p>
+					<h2>CURL TEST</h2>
+					<p id="ldapCurl">
+					<pre>
+						<code class="language-shell">
+curl -i \
+-H "Accept: application/json" \
+-H "Content-Type:application/json" \
+-X POST  --data  '{"nom":"cheraga"}' "http://localhost:8080/ldap/person" \
+-u root:root ;
+			</code>
+					</pre>
+					</p>
+
+
+				</div>
+
+			</div>
+
+
+		</div>
+		<div th:replace="fragments/footer :: footer">&copy; 2016 The
+			Static Templates</div>
+	</div>
+</body>
+</html>
