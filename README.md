@@ -16,7 +16,47 @@ Avant de commencer l'installation il faut bien installer le jar client apo-webse
 mvn install:install-file -Dfile=apo-webservices-client{mettre la version}.jar -DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client -Dversion={mettre la version} -Dpackaging=jar
 ```
 
-une fois le jar installer, il faut ajouter  la bonne dépendance dans le pom.xml	
+
+# Clonage et installation
+ 
+``` 
+git clone https://github.com/EsupPortail/esup-siscol.git esup-siscol
+cd esup-siscol/src/main/resources/
+cp application.yml.sample application.yml
+
+vim application.yml
+
+```
+La première partie LDAP : renseigner les paramtères LDAP 
+
+	ldap:
+    	urls: 
+    		- ldap://ldap-paris.fr:389
+       username: uid=xxxx,ou=admins,dc=u-paris10,dc=fr
+       password: xxxx
+       base: dc=u-paris10,dc=fr
+
+
+La deuxiéme  partie  concerne les urls APOGEE
+
+	  administratifMetier: http://ws.uni.fr:8080/aws/services/AdministratifMetier
+      tudiantMetier: http://ws.uni.fr:8080/aws/services/EtudiantMetier
+      pedagogiqueMetier: http://ws.uni.fr:8080/aws/services/PedagogiqueMetier
+      geographieMetier: http://ws.uni.fr:8080/aws/services/GeographieMetier
+      referentielMetier: http://ws.uni.fr:8080/aws/services/ReferentielMetier
+      offreFormationMetier: http://ws.uni.fr:8080/aws/services/OffreFormationMetier
+
+La troisième Partie
+
+	credential:
+		userscredential:
+    		root:
+      			username: root
+      			password: {password}
+
+
+
+ il faut ajouter  la bonne dépendance ({mettre la version}) dans le pom.xml	 
 			
 				<dependency>
 						<groupId>gouv.education.apogee</groupId>
