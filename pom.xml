@@ -27,29 +27,27 @@
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
-                <!-- compabilite tomcat -->
+		<!-- compabilite tomcat -->
 		<dependency>
-		   <groupId>org.springframework.boot</groupId>
-		   <artifactId>spring-boot-starter-tomcat</artifactId>
-		   <scope>provided</scope>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
 		</dependency>
-		<!--
 
+		<!-- mettre la version du client apogee installée -->
+		<!-- exemple
+			 mvn install:install-file -Dfile=apo-webservices-client62070.jar 
+				-DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client -Dversion=62070 
+				-Dpackaging=jar
+		le version dans ce cas c'est la 62070		
+		 -->
 		<dependency>
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
-			<version>62031</version>
+			<version>62070</version>
 		</dependency>
-		-->
-			<!-- Nanterre WS version -->
-			 
-					<dependency>
-						<groupId>gouv.education.apogee</groupId>
-						<artifactId>apo-webservices-client</artifactId>
-						<version>62070</version>
-					</dependency>
-			
-	
+
+
 		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>javax.annotation-api</artifactId>
@@ -188,7 +186,7 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
@@ -200,11 +198,11 @@
 			<artifactId>springdoc-openapi-javadoc</artifactId>
 			<version>1.5.12</version>
 		</dependency>
-		
-		
-		
-		
-		
+
+
+
+
+
 	</dependencies>
 
 	<build>

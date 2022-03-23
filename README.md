@@ -36,6 +36,8 @@ mvn install
 Pour éxecuter le projet en mode développement il suffit de le lancer  avec la commande : 
 
 ```bash
+cp application.yml.sample application.yml
+##configurer la partie LDAP, apogee (urls de services) et userscredential
 mvn  spring-boot:run
 ```
 
@@ -53,8 +55,8 @@ dans le fichier application.yml configurer la partie LDAP, apogee (urls de servi
 
 
 
-
-Attetion ici c'est une option, à adapter selon le fonctionnement de chaque 
+## en mode java (alternative)
+ ***Attention***  à adapter selon le fonctionnement de chaque établissement,
 - The `etc` directory contains the configuration files and directories that need to be copied to `/etc/apogee/config`. --example usage : 
 
 ```bash
