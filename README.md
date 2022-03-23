@@ -43,11 +43,16 @@ mvn  spring-boot:run
 # Configuration
 
 ## en mode Tomcat:
-
+```
 cp target/esup-siscol-0.1.11.jar {path}/tomcat/webapps
 unzip esup-siscol-0.1.11.jar -d esup-siscol
 cd esup-siscol/WEB-INF/classes/
-cp 
+cp application.yml.sample application.yml
+```
+dans le fichier application.yml configurer la partie LDAP, apogee (urls de services) et userscredential
+
+
+
 
 Attetion ici c'est une option, à adapter selon le fonctionnement de chaque 
 - The `etc` directory contains the configuration files and directories that need to be copied to `/etc/apogee/config`. --example usage : 
