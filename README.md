@@ -7,29 +7,49 @@ Generic  Referentiel WAR overlay to expose apogee and LDAP data . This programm 
 
 - APOGEE `6.4.x`
 - JDK `11`, `8`
-- APOGEE WS `6.xxxxxxx`
-- mvn install:install-file -Dfile=apo-webservices-client62031.jar -DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client -Dversion=62031 -Dpackaging=jar
+- APOGEE WS `62031` ...`62070`
+
+# Installation du JAR client WS-APOGEE
+Avant de commencer l'installation il faut bien installer le jar client apo-webservices-client, chaque établissement doit s'assurer que la version installée correspond au web-service qui va être interroger:
+
+```bash
+mvn install:install-file -Dfile=apo-webservices-client{mettre la version}.jar -DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client -Dversion={mettre la version} -Dpackaging=jar
+```
+
+une fois le jar installer, il faut ajouter  la bonne dépendance dans le pom.xml	
+			
+				<dependency>
+						<groupId>gouv.education.apogee</groupId>
+						<artifactId>apo-webservices-client</artifactId>
+						<version>{mettre la version}</version>
+					</dependency>
+					
+Pour tester le bonne compilation.
+					
+```bash
+mvn clean compile
+mvn install
+```
 
 # Overview
 
-To build the project, use:
+Pour éxecuter le projet en mode développement il suffit de le lancer  avec la commande : 
 
 ```bash
-# Use --refresh-dependencies to force-update SNAPSHOT versions
-./mvnw[.bat] clean build
-./mvnw spring-boot:run
+mvn  spring-boot:run
 ```
 
-To see what commands are available to the build script, run:
-
-```bash
-./mvnw[.bat] tasks
-```
-# Apogee WS client
-Pour le génération du jar apo-wsl lien .....
 
 # Configuration
 
+## en mode Tomcat:
+
+cp target/esup-siscol-0.1.11.jar {path}/tomcat/webapps
+unzip esup-siscol-0.1.11.jar -d esup-siscol
+cd esup-siscol/WEB-INF/classes/
+cp 
+
+Attetion ici c'est une option, à adapter selon le fonctionnement de chaque 
 - The `etc` directory contains the configuration files and directories that need to be copied to `/etc/apogee/config`. --example usage : 
 
 ```bash
