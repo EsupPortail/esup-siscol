@@ -84,7 +84,7 @@ public class AppErrorController extends AbstractErrorController { // NO_UCD (unu
 //				+ "</head><body><h2>Error Page</h2><table>%s</table></body></html>", errorDetails.toString());
 	}
 
-	@Override
+	//@Override
 	public String getErrorPath() {
 		return "/error";
 	}

@@ -3,14 +3,16 @@ package org.esupportail.referentiel.conf;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.servers.Server;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
+
 @Configuration
 @OpenAPIDefinition(servers = {
-		@Server(url = "/") }, info = @Info(title = "Client API SCLARITE REST", version = "0.1.10"))
+		@Server(url = "") }, info = @Info(title = "Client API SCLARITE REST", version = "0.1.11"))
 public class OpenApiConfig {
 
 	@Bean

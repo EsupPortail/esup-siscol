@@ -1,8 +1,4 @@
 
-**/application.properties
-**/application.yml
-
-
 target/
 pom.xml.tag
 pom.xml.releaseBackup

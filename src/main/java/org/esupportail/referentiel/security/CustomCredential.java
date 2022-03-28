@@ -25,6 +25,12 @@ public class CustomCredential {
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
+	@Override
+	public String toString() {
+		return "CustomCredential [username=" + username + ", password=" + password + ", roles=" + roles + "]";
+	}
+	
+	
     
     
     

@@ -4,8 +4,8 @@
 <head>
 <title>Spring Security Example</title>
 <link rel="stylesheet" type="text/css"
-	href="/webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
-<link href="/prism.css" rel="stylesheet" />
+	href="webjars/bootstrap/4.6.0/css/bootstrap.min.css" />
+<link href="prism.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -41,7 +41,7 @@
 			<ul>
 				<li>Récupérer l'identifiant de l'étudiant :
 					<ul>
-						<li><a href="/apogee/identifiantsEtudiant?codEtud=38004031">/apogee/identifiantsEtudiant?codEtud=38004031</a></li>
+						<li><a href="apogee/identifiantsEtudiant?codEtud=38004031">/apogee/identifiantsEtudiant?codEtud=38004031</a></li>
 					</ul>
 
 				</li>
@@ -50,14 +50,14 @@
 				<li>Récupérer les infos de l'étudiant (date de naiss, adresse,
 					mail ....)
 					<ul>
-						<li><a href="/apogee/etudiantRef?codEtud=38004031&annee=2020">/apogee/etudiantRef?codEtud=38004031&annee=2020</a></li>
+						<li><a href="apogee/etudiantRef?codEtud=38004031&annee=2020">/apogee/etudiantRef?codEtud=38004031&annee=2020</a></li>
 					</ul>
 				</li>
 
 
 				<li>Récupération des années d'inscriptions :
 					<ul>
-						<li><a href="/apogee/anneesIa?codEtud=39004031">/apogee/anneesIa?codEtud=39004031</a>
+						<li><a href="apogee/anneesIa?codEtud=39004031">/apogee/anneesIa?codEtud=39004031</a>
 						</li>
 					</ul>
 				</li>
@@ -68,10 +68,10 @@
 					le regime d'inscription et les ELPs type stage :
 					<ul>
 						<li><a
-							href="/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2019">/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2019</a></li>
+							href="apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2019">/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2019</a></li>
 
 						<li><a
-							href="/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2020">/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2020</a>
+							href="apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2020">/apogee/etapesByEtudiantAndAnnee?codEtud=38004031&annee=2020</a>
 						</li>
 						<li><pre>
 								<code class="language-java">
@@ -111,7 +111,7 @@ ResponseEntity&lt;ApogeeMap&gt; result = testRestTemplate.exchange(builder.toUri
 
 					<ul>
 						<li><a
-							href="/apogee/studentEtapeVets?codEtud=38004031&annee=2020">/apogee/studentEtapeVets?codEtud=38004031&annee=2020</a></li>
+							href="apogee/studentEtapeVets?codEtud=38004031&annee=2020">/apogee/studentEtapeVets?codEtud=38004031&annee=2020</a></li>
 					</ul>
 				</li>
 
@@ -119,7 +119,7 @@ ResponseEntity&lt;ApogeeMap&gt; result = testRestTemplate.exchange(builder.toUri
 					etape=S2APS et versionEtape=201 :
 					<ul>
 						<li><a
-							href="/apogee/studentListeElpStage?codeEtape=S2APS&versionEtape=161">/apogee/studentListeElpStage?codeEtape=S2APS&versionEtape=161</a></li>
+							href="apogee/studentListeElpStage?codeEtape=S2APS&versionEtape=161">/apogee/studentListeElpStage?codeEtape=S2APS&versionEtape=161</a></li>
 					</ul>
 				</li>
 
@@ -127,7 +127,7 @@ ResponseEntity&lt;ApogeeMap&gt; result = testRestTemplate.exchange(builder.toUri
 				<li>Liste des Etape d'Inscription codEtu et année
 					<ul>
 						<li><a
-							href="/apogee/studentListeEtapeInscription?codEtud=35006817&annee=2020">/apogee/studentListeEtapeInscription?codEtud=35006817&annee=2020</a></li>
+							href="apogee/studentListeEtapeInscription?codEtud=35006817&annee=2020">/apogee/studentListeEtapeInscription?codEtud=35006817&annee=2020</a></li>
 					</ul>
 				</li>
 
@@ -136,30 +136,30 @@ ResponseEntity&lt;ApogeeMap&gt; result = testRestTemplate.exchange(builder.toUri
 					et versionEtape=201 :
 					<ul>
 						<li><a
-							href="/apogee/studentListeELPs?codeEtape=V2LCA&versionEtape=201">/apogee/studentListeELPs?codeEtape=V2LCA&versionEtape=201</a></li>
+							href="apogee/studentListeELPs?codeEtape=V2LCA&versionEtape=201">/apogee/studentListeELPs?codeEtape=V2LCA&versionEtape=201</a></li>
 					</ul>
 				</li>
 
 				<li>Etablissement Reference :
 					<ul>
-						<li><a href="/apogee/etablissementReference">/apogee/etablissementReference</a></li>
+						<li><a href="apogee/etablissementReference">/apogee/etablissementReference</a></li>
 					</ul>
 				</li>
 				<li>Toutes les composantes depuis le WS Apogee :
 					<ul>
-						<li><a href="/apogee/composantesPrincipalesRef">/apogee/composantesPrincipalesRef</a></li>
+						<li><a href="apogee/composantesPrincipalesRef">/apogee/composantesPrincipalesRef</a></li>
 					</ul>
 				</li>
 				<li>Toutes les étapes depuis le WS Apogee :
 					<ul>
-						<li><a href="/apogee/etapesReference">/apogee/etapesReference</a>
+						<li><a href="apogee/etapesReference">/apogee/etapesReference</a>
 							</il>
 					</ul>
 
 				</li>
 				<li>le signataire de ref :
 					<ul>
-						<li><a href="/apogee/composanteSignaitaireRef?composante=OIP">/apogee/composanteSignaitaireRef?composante=OIP</a></li>
+						<li><a href="apogee/composanteSignaitaireRef?composante=OIP">/apogee/composanteSignaitaireRef?composante=OIP</a></li>
 					</ul>
 				</li>
 
@@ -188,8 +188,8 @@ ResponseEntity&lt;ApogeeMap&gt; result = testRestTemplate.exchange(builder.toUri
 				</p>
 				<div>
 					<h3>Tester un filtre LDAP</h3>
-					<li><a href="/ldap/byFilter?filter=(givenName=abdel*)">/ldap/byFilter?filter=(givenName=abdel*)</a></li>
-					<li><a href="/ldap/bySupannAliasLogin?login=acheraga">/ldap/bySupannAliasLogin?login=acheraga</a></li>
+					<li><a href="ldap/byFilter?filter=(givenName=abdel*)">/ldap/byFilter?filter=(givenName=abdel*)</a></li>
+					<li><a href="ldap/bySupannAliasLogin?login=acheraga">/ldap/bySupannAliasLogin?login=acheraga</a></li>
 					<p>
 					<h3>Tester des appels JAVA</h3>
 					<pre>

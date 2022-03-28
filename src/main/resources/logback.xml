@@ -2,20 +2,24 @@
 <configuration>
 
 
-	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${catalina.home}/logs/si-scol.log</file>
-    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-      <!-- rollover daily -->
-      <fileNamePattern>${catalina.home}/logs/si-scol.log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-       <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
-       <maxFileSize>100MB</maxFileSize>    
-       <maxHistory>60</maxHistory>
-       <totalSizeCap>5GB</totalSizeCap>
-    </rollingPolicy>
-    <encoder>
-      <pattern>%date %-5level %logger{36}.%M - %message%n</pattern>
-    </encoder>
-  </appender>
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/opt/tomcat/logs/si-scol.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>/opt/tomcat/si-scol.log-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- each file should be at most 100MB, keep 60 days worth of history, 
+				but at most 20GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>5GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date %-5level %logger{36}.%M - %message%n</pattern>
+		</encoder>
+	</appender>
 
 
 
@@ -46,21 +50,26 @@
 	</appender>
 
 	<logger name="org.esupportail" level="debug" additivity="false">
-		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE"/> -->
-		<!-- <appender-ref ref="EMAIL" /> -->
+				 <appender-ref ref="FILE"/> 
+				 <appender-ref ref="STDOUT" />
+		
+	</logger>
+	
+	<logger name="org.springframework.boot" level="INFO" additivity="false">
+				 <appender-ref ref="STDOUT"/> 
+		
 	</logger>
 
-	<logger name="org.springframework.security" level="info"
+	<logger name="org.springframework.security" level="INFO"
 		additivity="false">
+		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE"/> -->
 	</logger>
 
 
 	<root level="error">
 		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE"/> -->
-		<!-- <appender-ref ref="EMAIL" /> -->
+		<appender-ref ref="FILE" />
+
 	</root>
 </configuration>

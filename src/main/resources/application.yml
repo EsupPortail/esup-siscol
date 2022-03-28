@@ -1,0 +1,7 @@
+
+spring:
+ config:
+    import:
+    - file:///etc/esup-siscol/application.yml
+logging:
+  config: file:/etc/esup-siscol/logback.xml

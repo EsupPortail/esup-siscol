@@ -15,6 +15,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // NO_UCD (unused code)
@@ -44,12 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // NO_UCD 
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//		auth.inMemoryAuthentication().withUser("user").password(encoder.encode("password")).roles("USER").and()
-//				.withUser("admin").password(encoder.encode("admin")).roles("USER", "ADMIN");
 		auth.authenticationProvider(authProvider);
 	}
 
+	
 	@Bean
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -66,12 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // NO_UCD 
 		return new CorsFilter(source);
 
 	}
+	
 
-	public CustomAuthenticationProvider getAuthProvider() {
-		return authProvider;
-	}
-
-	public void setAuthProvider(CustomAuthenticationProvider authProvider) {
-		this.authProvider = authProvider;
-	}
+	      
 }

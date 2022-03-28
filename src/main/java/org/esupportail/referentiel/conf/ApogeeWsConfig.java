@@ -26,7 +26,6 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetie
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterfaceService;
 
 @Configuration
-//@PropertySource("classpath:configUrlServices.properties")
 public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code)
 
 	private static final Logger log = LoggerFactory.getLogger(ApogeeWsConfig.class);
@@ -56,12 +55,6 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		log.debug(getReferentielMetierUrlService());
 		log.debug(getPedagogiqueMetierUrlService());
 		log.debug(getEtudiantMetierUrlService());
-		Assert.notNull(etudiantMetier(), "etudiantMetier() cannot bu null !");
-		Assert.notNull(administratifMetier(), "administratifMetier() cannot bu null !");
-		Assert.notNull(pedagogiqueMetier(), "pedagogiqueMetier() cannot bu null !");
-		Assert.notNull(geographieMetier(), "geographieMetier() cannot bu null !");
-		Assert.notNull(referentielMetier(), "referentielMetier() cannot bu null !");
-		Assert.notNull(offreFormationMetier(), "offreFormationMetier() cannot bu null !");
 	}
 
 	@Bean
