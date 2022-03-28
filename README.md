@@ -100,9 +100,9 @@ dans le fichier application.yml configurer la partie LDAP, apogee (urls de servi
 - The `etc` directory contains the configuration files and directories that need to be copied to `/etc/apogee/config`. --example usage : 
 
 ```bash
-cd path/apogee
-./cp -r etc/conf /etc/apogee/conf/
-java -server  -noverify -Xmx2048M -jar target/apogee-0.0.1-SNAPSHOT.jar --spring.config.location=/etc/apogee/conf/
+cd path/esup-siscol
+./cp -r etc/esup-siscol/ /etc/esup-siscol/
+java -server  -noverify -Xmx2048M -jar target/esup-siscol{version}.jar  --spring.config.location=/etc/esup-siscol/
 ```
 
 ### Clear Maven Cache
@@ -124,13 +124,12 @@ Same strategy applies to Windows too, provided you switch `$HOME` to its equival
 ## Executable WAR
 
 ```bash
-java -server  -noverify -Xmx2048M -jar target/apogee-0.0.1-SNAPSHOT.jar --spring.config.location=etc/apogee/conf/
-f/
+java -server  -noverify -Xmx2048M -jar target/esup-siscol{version}.jar --spring.config.location=etc/esup-siscol/
 ```
 
 ## External
 
-Deploy the binary web application file `apogee.jar` after a successful build to a servlet container of choice.
+Deploy the binary web application file `esup-siscol.jar` after a successful build to a servlet container of choice.
 
 ## Docker
 

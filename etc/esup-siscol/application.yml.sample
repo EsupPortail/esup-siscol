@@ -63,12 +63,7 @@ credential:
         - USER
         - USER_APOGEE
         - USER_LDAP
-    guest:
-      username: guest
-      password: jhdsiojgio56465dsg4qsdgsdqg
-      roles:
-        - GUEST
-  autorisation:
+   autorisation:
     supann:
       - USER_LDAP
       - ADMIN

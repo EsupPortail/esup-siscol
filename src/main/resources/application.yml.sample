@@ -32,7 +32,7 @@ server:
    
 app:
   ldap:
-    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=acheraga))
+    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (eduPersonAffiliation=staff)
     repoStringFilterStudent: (eduPersonAffiliation=student)
@@ -46,12 +46,12 @@ app:
     startYearDay: 01
     universityCode: UPN
     urlService:
-      administratifMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/AdministratifMetier
-      etudiantMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/EtudiantMetier
-      pedagogiqueMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/PedagogiqueMetier
-      geographieMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/GeographieMetier
-      referentielMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/ReferentielMetier
-      offreFormationMetier: http://gestionwspp.admc.parisnanterre.fr:8080/aws/services/OffreFormationMetier
+      administratifMetier: http://webservice.univ.fr:8080/aws/services/AdministratifMetier
+      etudiantMetier: http://webservice.univ.fr:8080/aws/services/EtudiantMetier
+      pedagogiqueMetier: http://webservice.univ.fr:8080/aws/services/PedagogiqueMetier
+      geographieMetier: http://webservice.univ.fr:8080/aws/services/GeographieMetier
+      referentielMetier: http://webservice.univ.fr:8080/aws/services/ReferentielMetier
+      offreFormationMetier: http://webservice.univ.fr:8080/aws/services/OffreFormationMetier
     
 credential:
   userscredential:
@@ -63,11 +63,6 @@ credential:
         - USER
         - USER_APOGEE
         - USER_LDAP
-    guest:
-      username: guest
-      password: jhdsiojgio56465dsg4qsdgsdqg
-      roles:
-        - GUEST
   autorisation:
     supann:
       - USER_LDAP
