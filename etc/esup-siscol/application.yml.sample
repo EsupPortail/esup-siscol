@@ -45,6 +45,10 @@ app:
     startYearMonth: 09
     startYearDay: 01
     universityCode: UPN
+    codesRegimeInscriptionFC: 2;4;5
+    # valeurs de temoinRecupAnnu  possible :  TOUS,  N,   O
+    temoinRecupAnnu : N
+    
     urlService:
       administratifMetier: http://ws.apogee.univ.fr:8080/aws/services/AdministratifMetier
       etudiantMetier: http://ws.apogee.univ.fr:8080/aws/services/EtudiantMetier

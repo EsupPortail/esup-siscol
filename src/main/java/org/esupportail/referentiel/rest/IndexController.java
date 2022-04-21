@@ -17,7 +17,7 @@ public class IndexController {
     @RequestMapping("/")
     public String welcome(Map<String, Object> model) {
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	System.out.println(authentication.getAuthorities()+"+++++++++++++++++");
+    	
     	model.put("message", this.message);
         return "home";
     }

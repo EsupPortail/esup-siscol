@@ -79,7 +79,8 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	/**
 	 * temoinRecupAnnu;
 	 */
-	private String temoinRecupAnnu = "O";
+	@Value("${app.apogee.temoinRecupAnnu}")
+	private String temoinRecupAnnu = "TOUS";
 
 	/**
 	 * ldapStudentIdIsCODETU
@@ -89,6 +90,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	/**
 	 * Codes correspondants aux regimes d'inscription de la Formation Continue
 	 */
+	@Value("${app.apogee.codesRegimeInscriptionFC}")
 	private String codesRegimeInscriptionFC = "2;4;5";
 
 	/**
@@ -144,6 +146,9 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	 */
 	@Override
 	public IdentifiantsEtudiantDTO2 recupererIdentifiantsEtudiantDTO2(String uid) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("#getStudentCodInd# - this.temoinRecupAnnu : " + this.temoinRecupAnnu);
+		}
 		IdentifiantsEtudiantDTO2 dentifiantsEtudiant_v2 = etudiantMetierClient
 				.recupererIdentifiantsEtudiantByCodEtu(uid, this.temoinRecupAnnu);
 		return dentifiantsEtudiant_v2;
@@ -614,13 +619,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		etudiantRef.setLibelleCPAM(libelleCPAM);
 		// etudiantRef.setSteps(steps);
 
-		// ajout de l'eventuelle liste des inscriptions FC
-		if (anneesInscriptionFC != null && !anneesInscriptionFC.isEmpty()) {
-			logger.info("anneesInscriptionFC", anneesInscriptionFC);
-			etudiantRef.setAnneesInscriptionFC(anneesInscriptionFC);
-		} else {
-			logger.info(" NULL anneesInscriptionFC ");
-		}
+		etudiantRef.setAnneesInscriptionFC(anneesInscriptionFC);
 
 		logger.info("anneesInscriptionFC", adminApogee);
 
@@ -1226,7 +1225,6 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 								TableauVersionDiplomeDTO3 versionDiplomes = diplomeDTO.getListVersionDiplome();
 								for (VersionDiplomeDTO3 versionDiplome : versionDiplomes.getItem()) {
 									if (versionDiplome != null) {
-										System.out.println("+++++++++++++++++" + etpins.getCodeEtp());
 										etpins.setCodCursusLmd(versionDiplome.getCodCursusLmd());
 									}
 									OffreFormationDTO3 offreFormation = versionDiplome.getOffreFormation();

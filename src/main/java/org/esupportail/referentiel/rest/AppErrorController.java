@@ -43,7 +43,7 @@ public class AppErrorController extends AbstractErrorController { // NO_UCD (unu
 		 * "java.util.List.iterator()" because "tabInsAdmEtp" is null
 		 */
 		String timestamp = errorAttributes.get("timestamp").toString();
-		System.out.println(timestamp.getClass().getCanonicalName());
+		
 		String message = errorAttributes.get("message").toString();
 		String error = errorAttributes.get("error").toString();
 		String exception = "";
@@ -56,7 +56,6 @@ public class AppErrorController extends AbstractErrorController { // NO_UCD (unu
 
 		ErrorCustom err = new ErrorCustom(timestamp, message, error, exception, trace, status);
 
-		System.out.println(errorAttributes);
 		try {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
@@ -84,7 +83,7 @@ public class AppErrorController extends AbstractErrorController { // NO_UCD (unu
 //				+ "</head><body><h2>Error Page</h2><table>%s</table></body></html>", errorDetails.toString());
 	}
 
-	//@Override
+	// @Override
 	public String getErrorPath() {
 		return "/error";
 	}

@@ -2,16 +2,35 @@
 <configuration>
 
 
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>/opt/tomcat/logs/si-scol.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>/opt/tomcat/si-scol.log-%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<!-- each file should be at most 100MB, keep 60 days worth of history, 
+				but at most 20GB -->
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>60</maxHistory>
+			<totalSizeCap>5GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date %-5level %logger{36}.%M - %message%n</pattern>
+		</encoder>
+	</appender>
+
 
 
 	<appender name="EMAIL"
 		class="ch.qos.logback.classic.net.SMTPAppender">
 
 		<smtpHost>smtp.parisnanterre.fr</smtpHost>
-		<to>acheraga@parisnanterre.fr</to>
+		<to>mail@univ.fr</to>
 		<!-- <to>abdel@parisnanterre.fr</to> -->
 		<!-- <to>ANOTHER_EMAIL_DESTINATION</to> additional destinations are possible -->
-		<from>procurations-noreply@parisnanterre.fr</from>
+		<from>si-scol@univ.fr</from>
 		<subject>ERROR CONGES: %logger{20} - %m</subject>
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<pattern>%date %-5level %logger{36}.%M - %message%n</pattern>
@@ -29,45 +48,27 @@
 
 	</appender>
 
-	<logger name="fr.upond" level="debug" additivity="false">
-		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE"/> -->
-		<!-- <appender-ref ref="EMAIL" /> -->
-	</logger>
-
-	<logger name="org.springframework.security" level="info"
-		additivity="false">
-		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE"/> -->
-	</logger>
-
-
-	<logger name="org.esupportail" level="trace" additivity="false">
-		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE"/> -->
-	</logger>
-	<logger name="org.esupportail.referentiel.services.impl" level="trace" additivity="false">
-		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE"/> -->
+	<logger name="org.esupportail" level="debug" additivity="false">
+				 <appender-ref ref="FILE"/> 
+				 <appender-ref ref="STDOUT" />
+		
 	</logger>
 	
+	<logger name="org.springframework.boot" level="INFO" additivity="false">
+				 <appender-ref ref="STDOUT"/> 
+		
+	</logger>
 
-<!-- 	<logger name="org.springframework.util" level="trace" -->
-<!-- 		additivity="false"> -->
-<!-- 		<appender-ref ref="STDOUT" /> -->
-
-<!-- 	</logger> -->
-
-<!-- 	<logger name="org.springframework.security" level="trace" -->
-<!-- 		additivity="false"> -->
-<!-- 		<appender-ref ref="STDOUT" /> -->
-
-<!-- 	</logger> -->
+	<logger name="org.springframework.security" level="DEBUG"
+		additivity="false">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
 
 
 	<root level="error">
 		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE"/> -->
-		<!-- <appender-ref ref="EMAIL" /> -->
+		<appender-ref ref="FILE" />
+
 	</root>
 </configuration>
