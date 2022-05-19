@@ -1,6 +1,6 @@
-imageTag=0.1
+imageTag=0.1.14
 echo "Building CAS docker image tagged as [$imageTag]"
 
-docker build  --tag="local/apogee:v$imageTag" . \
-  && echo "Built CAS image successfully tagged as local/apogee:v$imageTag" \
-  && docker images "local/apogee:v$imageTag"
+docker build  --tag="local/esup-siscol:v$imageTag" . \
+  && echo "Built CAS image successfully tagged as local/esup-siscol:v$imageTag" \
+  && docker images "local/esup-siscol:v$imageTag"

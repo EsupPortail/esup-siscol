@@ -67,12 +67,10 @@ credential:
         - USER
         - USER_APOGEE
         - USER_LDAP
-   autorisation:
+  autorisation:
     supann:
       - USER_LDAP
       - ADMIN
     referentiel:
       - USER_APOGEE
       - ADMIN
-
-

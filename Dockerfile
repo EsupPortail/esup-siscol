@@ -10,15 +10,15 @@ ENV TZ=Europe/Paris
 # Clean APK cache
 RUN rm -rf /var/cache/apk/*
 
-RUN mkdir -p apogee
-RUN mkdir -p /etc/apogee/config
+RUN mkdir -p esup-siscol 
+RUN mkdir -p /etc/esup-siscol
 
-COPY etc/resolv.conf /etc/resolv.conf
-COPY  target/apogee-0.0.1-SNAPSHOT.jar  /apogee/apogee.jar
-COPY  etc/apogee/conf /etc/apogee/conf
+#COPY etc/resolv.conf /etc/resolv.conf
+COPY  target/esup-siscol-0.1.14.war  /esup-siscol/esup-siscol.jar
+COPY  etc/esup-siscol /etc/esup-siscol
 EXPOSE 8080
 
 ENV PATH $PATH:$JAVA_HOME/bin:.
 
-WORKDIR apogee
-ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "apogee.jar", "--spring.config.location=/etc/apogee/conf/"]
+WORKDIR esup-siscol
+ENTRYPOINT ["java", "-server", "-noverify", "-Xmx2048M", "-jar", "esup-siscol.jar"]

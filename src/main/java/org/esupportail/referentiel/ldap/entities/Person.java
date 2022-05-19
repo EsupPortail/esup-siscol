@@ -28,7 +28,7 @@ public class Person implements Serializable {
 	
 	private String supannAliasLogin;
 	
-	@Attribute(name = "uid")
+	@Attribute(name = "supannEtuId")
 	private String codEtu;
 	
 	private String supannEtuId;
