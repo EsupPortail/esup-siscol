@@ -21,10 +21,13 @@ mvn install:install-file -Dfile=apo-webservices-client{mettre la version}.jar -D
  
 ``` 
 git clone https://github.com/EsupPortail/esup-siscol.git esup-siscol
-cd esup-siscol/src/main/resources/
+cd esup-siscol/etc 
+cp esup-siscol /etc/
+
 cp application.yml.sample application.yml
 
 vim application.yml
+vim logback.xml 
 
 ```
 La première partie LDAP : renseigner les paramtères LDAP 
