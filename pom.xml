@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
-			<version>63000</version>
+			<version>63030</version>
 		</dependency>
 
 

@@ -12,7 +12,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 
 @Configuration
 @OpenAPIDefinition(servers = {
-		@Server(url = "") }, info = @Info(title = "Client API SCLARITE REST", version = "0.1.11"))
+		@Server(url = "/") }, info = @Info(title = "Client API SCLARITE REST", version = "0.1.14"))
 public class OpenApiConfig {
 
 	@Bean
