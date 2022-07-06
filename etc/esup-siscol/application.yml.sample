@@ -31,6 +31,7 @@ server:
     include-stacktrace: always
    
 app:
+  server-url: http://localhost:8080/
   ldap:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
     stringFilterStudent: (eduPersonAffiliation=student)
