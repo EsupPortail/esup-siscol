@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.util.Assert;
+import org.springframework.web.context.annotation.RequestScope;
 
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.AdministratifMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.AdministratifMetierServiceInterfaceService;
@@ -58,6 +59,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	}
 
 	@Bean
+	@RequestScope
 	public EtudiantMetierServiceInterface etudiantMetier() {
 		URL wsdlLocation = wsdlLocation(etudiantMetierUrlService);
 		EtudiantMetierServiceInterfaceService client = new EtudiantMetierServiceInterfaceService(wsdlLocation);
@@ -66,6 +68,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	}
 
 	@Bean("administratifMetier")
+	@RequestScope
 	public AdministratifMetierServiceInterface administratifMetier() {
 		URL wsdlLocation = wsdlLocation(administratifMetierUrlService);
 		AdministratifMetierServiceInterfaceService client = new AdministratifMetierServiceInterfaceService(
@@ -75,6 +78,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	}
 
 	@Bean("pedagogiqueMetier")
+	@RequestScope
 	public PedagogiqueMetierServiceInterface pedagogiqueMetier() {
 		URL wsdlLocation = wsdlLocation(pedagogiqueMetierUrlService);
 		PedagogiqueMetierServiceInterfaceService client = new PedagogiqueMetierServiceInterfaceService(wsdlLocation);
@@ -83,6 +87,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	}
 
 	@Bean
+	@RequestScope
 	public GeographieMetierServiceInterface geographieMetier() {
 		URL wsdlLocation = wsdlLocation(geographieMetierUrlService);
 		GeographieMetierServiceInterfaceService client = new GeographieMetierServiceInterfaceService(wsdlLocation);
@@ -91,7 +96,9 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	}
 
 	@Bean
+	@RequestScope
 	public ReferentielMetierServiceInterface referentielMetier() {
+		log.debug("Instanciation ReferentielMetierServiceInterface @RequestScope ");
 		URL wsdlLocation = wsdlLocation(referentielMetierUrlService);
 		ReferentielMetierServiceInterfaceService client = new ReferentielMetierServiceInterfaceService(wsdlLocation);
 		ReferentielMetierServiceInterface clientMetier = client.getReferentielMetier();
@@ -99,6 +106,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	}
 
 	@Bean
+	@RequestScope
 	public OffreFormationMetierServiceInterface offreFormationMetier() {
 		URL wsdlLocation = wsdlLocation(offreFormationMetierUrlService);
 		OffreFormationMetierServiceInterfaceService client = new OffreFormationMetierServiceInterfaceService(

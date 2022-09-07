@@ -18,7 +18,7 @@ public class Person implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 9201637130740729137L;
+	private static final long serialVersionUID = 9085253297474155575L;
 
 	@JsonIgnore
 	@Id
@@ -51,16 +51,18 @@ public class Person implements Serializable {
 	private List<String> eduPersonAffiliation;
 	
 	private List<String> supannEntiteAffectation;
-	
-	
+		
 	private String supannEntiteAffectationPrincipale;
 	
 	private String supannCivilite;
 	
 	private String telephoneNumber;
-
+	
+	private List<String> supannEtuCursusAnnee;
 	
 	
+	private String eduPersonOrgDN;
+		
 	@JsonIgnore
 	private String supannEmpId;
 	@JsonIgnore
@@ -228,6 +230,22 @@ public class Person implements Serializable {
 
 	public void setTelephoneNumber(String telephoneNumber) {
 		this.telephoneNumber = telephoneNumber;
+	}
+
+	public List<String> getSupannEtuCursusAnnee() {
+		return supannEtuCursusAnnee;
+	}
+
+	public void setSupannEtuCursusAnnee(List<String> supannEtuCursusAnnee) {
+		this.supannEtuCursusAnnee = supannEtuCursusAnnee;
+	}
+
+	public String getEduPersonOrgDN() {
+		return eduPersonOrgDN;
+	}
+
+	public void setEduPersonOrgDN(String eduPersonOrgDN) {
+		this.eduPersonOrgDN = eduPersonOrgDN;
 	}
 	
 	
