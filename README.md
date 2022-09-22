@@ -1,4 +1,4 @@
-Referentiel overlay Template
+APOGEE WS à partir de la version 62031 ...Referentiel overlay Template
 =======================
 
 Generic  Referentiel WAR overlay to expose apogee and LDAP data . This programm  could be freely used.
@@ -7,7 +7,7 @@ Generic  Referentiel WAR overlay to expose apogee and LDAP data . This programm 
 
 - APOGEE `6.4.x`
 - JDK `11`, `8`
-- APOGEE WS `62031` ...`62070`
+- APOGEE WS à partir de la version `62031`...
 
 # Installation du JAR client WS-APOGEE
 Avant de commencer l'installation il faut bien installer le jar client apo-webservices-client, chaque établissement doit s'assurer que la version installée correspond au web-service qui va être interroger:
