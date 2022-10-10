@@ -38,6 +38,16 @@ La première partie LDAP : renseigner les paramtères LDAP
        username: uid=xxxx,ou=admins,dc=u-paris10,dc=fr
        password: xxxx
        base: dc=u-paris10,dc=fr
+       ldap:
+       stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
+       stringFilterStudent: (eduPersonAffiliation=student)
+       stringFilterStaff: (eduPersonAffiliation=staff)
+       attributes:
+                objectClass: Person
+                supannAliasLogin: supannAliasLogin
+                baseDn: ou=people
+                dn: dn
+                etc ...
 
 
 La deuxiéme  partie  concerne les urls APOGEE

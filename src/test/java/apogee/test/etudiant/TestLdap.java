@@ -21,9 +21,9 @@ import reactor.core.publisher.Mono;
 
 public class TestLdap {
 
-	String baseUrl = "https://referentiel-test.parisnanterre.fr";
+	String baseUrl = "http://cri146.admc.parisnanterre.fr:8080";
 	String login = "root";
-	String password = "2021@lo&&garantiE";
+	String password = "root";
 
 	@Test
 	public void testLdapWebCLient() {
@@ -32,7 +32,8 @@ public class TestLdap {
 		Mono<Person[]> result = ldapSearchByForm(m);
 		Person[] list = result.block();
 		for (Person p : list) {
-			System.out.println(p.getCn());
+			System.out.println(p.getCn()+ ": " +p.getEduPersonPrimaryAffiliation());
+			System.out.println(p);
 		}
 	}
 

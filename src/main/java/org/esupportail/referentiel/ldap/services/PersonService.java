@@ -2,24 +2,24 @@ package org.esupportail.referentiel.ldap.services;
 
 import java.util.List;
 
+import org.esupportail.referentiel.conf.LdapAttributesConf;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.repositories.PersonRepository;
+import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.util.Streamable;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.Filter;
 import org.springframework.ldap.filter.HardcodedFilter;
-import org.springframework.ldap.filter.WhitespaceWildcardsFilter;
 import org.springframework.ldap.query.LdapQuery;
 import org.springframework.ldap.query.LdapQueryBuilder;
 import org.springframework.stereotype.Service;
 
-@Service
-public class PersonService {
+@Service(value="personService")
+public class PersonService implements LdapServiceInterface{
 	
 	
 	final private transient Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -38,8 +38,12 @@ public class PersonService {
 
 	@Autowired
 	private LdapTemplate ldapTemplate;
-	@Value("${app.ldap.dnPeople}")
+	
+	@Value("${app.ldap.attributes.baseDn}")
 	private String dnPeople;
+	
+	@Autowired
+	private LdapAttributesConf ldapAtributes;
 
 	/**
 	 * 
@@ -166,6 +170,14 @@ public class PersonService {
 
 	public void setStringFilterStaff(String stringFilterStaff) {
 		this.stringFilterStaff = stringFilterStaff;
+	}
+
+	public LdapAttributesConf getLdapAtributes() {
+		return ldapAtributes;
+	}
+
+	public void setLdapAtributes(LdapAttributesConf ldapAtributes) {
+		this.ldapAtributes = ldapAtributes;
 	}
 
 }

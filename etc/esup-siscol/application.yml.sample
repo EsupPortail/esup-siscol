@@ -31,16 +31,46 @@ server:
     include-stacktrace: always
    
 app:
-  server-url: http://localhost:8080/
+  server-url: http://localhost:8080/esup-siscol
+  server-version: 0.1.15
+  server-title: Client API SCLARITE REST
   ldap:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (eduPersonAffiliation=staff)
-    repoStringFilterStudent: (eduPersonAffiliation=student)
-    repoStringFilterStudentBySn: (&(eduPersonAffiliation=student)(sn={0}))
-    repoStringFilterStudentByUId: (&(eduPersonAffiliation=student)(uid={0}))
-    repoStringFilterStudentByNumEtu: (&(eduPersonAffiliation=student)(numlEtu={0}))
-    dnPeople: ou=people
+    
+    ####paramètres obsolètes à supprimer
+    ###repoStringFilterStudent: (eduPersonAffiliation=student)
+    ###repoStringFilterStudentBySn: (&(eduPersonAffiliation=student)(sn={0}))
+    ###repoStringFilterStudentByUId: (&(eduPersonAffiliation=student)(uid={0}))
+    ###repoStringFilterStudentByNumEtu: (&(eduPersonAffiliation=student)(numlEtu={0}))
+    ##dnPeople: ou=people
+    ##codeEtu: supannEtuId 
+    ##codeEtu: sn
+    attributes:
+                objectClass: Person
+                supannAliasLogin: supannAliasLogin
+                baseDn: ou=people
+                dn: dn
+                uid: uid
+                codEtu: supannEtuId
+                supannEtuId: supannEtuId
+                sn: sn
+                mail: mail
+                supannAutreMail: supannAutreMail
+                cn: cn
+                givenName: givenName
+                displayName: givenName
+                eduPersonPrimaryAffiliation: eduPersonPrimaryAffiliation
+                eduPersonAffiliation: eduPersonAffiliation
+                supannEntiteAffectation: supannEntiteAffectation
+                supannEntiteAffectationPrincipale: supannEntiteAffectationPrincipale
+                supannCivilite: supannCivilite
+                telephoneNumber: telephoneNumber
+                supannEtuCursusAnnee: supannEtuCursusAnnee
+                eduPersonOrgDN: eduPersonOrgDN
+                supannEmpId: supannEmpId
+                supannRefId: supannRefId
     
   apogee:
     startYearMonth: 09

@@ -2,12 +2,14 @@ package org.esupportail.referentiel.rest.ldap;
 
 import java.util.List;
 
+import org.esupportail.referentiel.conf.LdapAttributesConf;
 import org.esupportail.referentiel.ldap.entities.FormSearch;
 import org.esupportail.referentiel.ldap.entities.Person;
-import org.esupportail.referentiel.ldap.services.PersonService;
+import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,16 +25,20 @@ public class LdapController {
 	final private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	
-	@Value("${app.ldap.dnPeople}")
+	@Value("${app.ldap.attributes.baseDn}")
 	private String baseLdap;
 
 	@Autowired
-	PersonService personService;
+	@Qualifier("personServiceMapperMethod")
+	LdapServiceInterface personService;
+	
+	@Autowired
+	private LdapAttributesConf ldapAtributes;
 
 	@PostMapping("/person")
 	public List<Person> serachByForm(@RequestBody FormSearch member) {
 		logger.trace("serachByForm : " + member );
-		List<Person> list_person = personService.findPersonByFilter(member.formAsFliter());
+		List<Person> list_person = personService.findPersonByFilter(member.formAsFliter(ldapAtributes));
 		logger.trace(" Result serachByForm : " + list_person );
 		return list_person;
 	}
@@ -41,7 +47,7 @@ public class LdapController {
 	public List<Person> serachEnseigantByForm(@RequestBody FormSearch member) {
 		member.setAffiliation(null);
 		member.setPrimaryAffiliation(null);
-		List<Person> list_person = personService.findFacultyByFilter(member.formAsFliter());
+		List<Person> list_person = personService.findFacultyByFilter(member.formAsFliter(ldapAtributes));
 		return list_person;
 	}
 	
@@ -49,7 +55,7 @@ public class LdapController {
 	public List<Person> serachStudentByForm(@RequestBody FormSearch member) {
 		member.setAffiliation(null);
 		member.setPrimaryAffiliation(null);
-		List<Person> list_person = personService.findStudentByFilter(member.formAsFliter());
+		List<Person> list_person = personService.findStudentByFilter(member.formAsFliter(ldapAtributes));
 		return list_person;
 	}
 	
@@ -57,7 +63,7 @@ public class LdapController {
 	public List<Person> serachStaffByForm(@RequestBody FormSearch member) {
 		member.setAffiliation(null);
 		member.setPrimaryAffiliation(null);
-		List<Person> list_person = personService.findStaffByFilter(member.formAsFliter());
+		List<Person> list_person = personService.findStaffByFilter(member.formAsFliter(ldapAtributes));
 		return list_person;
 	}
 	
@@ -92,6 +98,14 @@ public class LdapController {
 
 	public void setBaseLdap(String baseLdap) {
 		this.baseLdap = baseLdap;
+	}
+
+	public LdapAttributesConf getLdapAtributes() {
+		return ldapAtributes;
+	}
+
+	public void setLdapAtributes(LdapAttributesConf ldapAtributes) {
+		this.ldapAtributes = ldapAtributes;
 	}
 
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Transient;
 
+import org.esupportail.referentiel.conf.LdapAttributesConf;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.filter.Filter;
@@ -95,6 +96,42 @@ public class FormSearch implements Serializable{
 		return filter;
 
 	}
+	
+	
+	public Filter formAsFliter(LdapAttributesConf ldapAtributes) {
+		AndFilter filter = new AndFilter();
+
+		if (id != null && !id.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getUid(), id);
+			filter.and(query);
+		}
+		if (supannAliasLogin != null && !supannAliasLogin.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getSupannAliasLogin(), supannAliasLogin);
+			filter.and(query);
+		}
+
+		if (nom != null && !nom.isEmpty()) {
+			Filter query = new WhitespaceWildcardsFilter(ldapAtributes.getSn(), nom);
+			filter.and(query);
+		}
+		if (mail != null && !mail.isEmpty()) {
+			Filter query = new WhitespaceWildcardsFilter(ldapAtributes.getMail(), mail);
+			filter.and(query);
+		}
+		if (prenom != null && !prenom.isEmpty()) {
+			Filter query = new WhitespaceWildcardsFilter(ldapAtributes.getGivenName(), prenom);
+			filter.and(query);
+		}
+		if (primaryAffiliation != null && !primaryAffiliation.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getEduPersonPrimaryAffiliation(), primaryAffiliation);
+			filter.and(query);
+		}
+		if (affiliation != null && !affiliation.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getEduPersonAffiliation(), affiliation);
+			filter.and(query);
+		}
+		return filter;
+	}
 
 	public String getId() {
 		return id;
@@ -158,5 +195,7 @@ public class FormSearch implements Serializable{
 	public void setSupannAliasLogin(String supannAliasLogin) {
 		this.supannAliasLogin = supannAliasLogin;
 	}
+
+	
 
 }
