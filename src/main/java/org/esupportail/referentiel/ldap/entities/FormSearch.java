@@ -5,16 +5,13 @@ import java.io.Serializable;
 import javax.persistence.Transient;
 
 import org.esupportail.referentiel.conf.LdapAttributesConf;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.filter.Filter;
 import org.springframework.ldap.filter.WhitespaceWildcardsFilter;
 
-
-
-public class FormSearch implements Serializable{
-
-	
+public class FormSearch implements Serializable {
 
 	/**
 	 * 
@@ -22,7 +19,9 @@ public class FormSearch implements Serializable{
 	private static final long serialVersionUID = -3312963806949481413L;
 
 	private String id;
-	
+
+	private String codEtu;
+
 	private String supannAliasLogin;
 
 	private String nom;
@@ -34,32 +33,32 @@ public class FormSearch implements Serializable{
 	private String primaryAffiliation;
 
 	private String affiliation;
-	
-	
 
 	public FormSearch() {
 		super();
+
 	}
-	
-	public FormSearch(String id,String supannAliasLogin, String nom, String mail, String prenom, String primaryAffiliation,
-			String affiliation) {
+
+	public FormSearch(String id, String supannAliasLogin, String nom, String mail,
+			String prenom, String primaryAffiliation, String affiliation) {
 		super();
-		this.supannAliasLogin=supannAliasLogin;
+		this.supannAliasLogin = supannAliasLogin;
 		this.id = id;
 		this.nom = nom;
 		this.mail = mail;
 		this.prenom = prenom;
 		this.primaryAffiliation = primaryAffiliation;
 		this.affiliation = affiliation;
+		
 	}
-	
+
 	public FormSearch(String nom, String prenom) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 
 	}
-	
+
 	@Transient
 	public Filter formAsFliter() {
 		AndFilter filter = new AndFilter();
@@ -68,6 +67,11 @@ public class FormSearch implements Serializable{
 			Filter query = new EqualsFilter("uid", id);
 			filter.and(query);
 		}
+		if (codEtu != null && !codEtu.isEmpty()) {
+			Filter query = new EqualsFilter("codEtu", codEtu);
+			filter.and(query);
+		}
+
 		if (supannAliasLogin != null && !supannAliasLogin.isEmpty()) {
 			Filter query = new EqualsFilter("supannAliasLogin", supannAliasLogin);
 			filter.and(query);
@@ -96,8 +100,7 @@ public class FormSearch implements Serializable{
 		return filter;
 
 	}
-	
-	
+
 	public Filter formAsFliter(LdapAttributesConf ldapAtributes) {
 		AndFilter filter = new AndFilter();
 
@@ -105,6 +108,11 @@ public class FormSearch implements Serializable{
 			Filter query = new EqualsFilter(ldapAtributes.getUid(), id);
 			filter.and(query);
 		}
+		if (codEtu != null && !codEtu.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getCodEtu(), codEtu);
+			filter.and(query);
+		}
+
 		if (supannAliasLogin != null && !supannAliasLogin.isEmpty()) {
 			Filter query = new EqualsFilter(ldapAtributes.getSupannAliasLogin(), supannAliasLogin);
 			filter.and(query);
@@ -181,13 +189,6 @@ public class FormSearch implements Serializable{
 		this.affiliation = affiliation;
 	}
 
-	@Override
-	public String toString() {
-
-		return "FormSearch [id=" + id + ", nom=" + nom + ", mail=" + mail + ", prenom=" + prenom
-				+ ", primaryAffiliation=" + primaryAffiliation + ", affiliation=" + affiliation + "]";
-	}
-
 	public String getSupannAliasLogin() {
 		return supannAliasLogin;
 	}
@@ -196,6 +197,20 @@ public class FormSearch implements Serializable{
 		this.supannAliasLogin = supannAliasLogin;
 	}
 
-	
+	public String getCodEtu() {
+		return codEtu;
+	}
 
+	public void setCodEtu(String codEtu) {
+		this.codEtu = codEtu;
+	}
+
+	@Override
+	public String toString() {
+		return "FormSearch [id=" + id + ", codEtu=" + codEtu + ", supannAliasLogin=" + supannAliasLogin + ", nom=" + nom
+				+ ", mail=" + mail + ", prenom=" + prenom + ", primaryAffiliation=" + primaryAffiliation
+				+ ", affiliation=" + affiliation + "]";
+	}
+
+	
 }

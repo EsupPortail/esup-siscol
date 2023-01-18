@@ -17,6 +17,8 @@ public interface LdapServiceInterface {
 	
 	public Person findBySupannAliasLogin(String supannAliasLogin);
 	
+	public Person findByCodEtu(String CodEtu);
+	
 	public List<Person> findPersonByFilter(Filter formAsFliter);
 	
 	public List<Person> findPersonByFilter(String filter, String base);

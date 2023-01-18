@@ -101,6 +101,14 @@ public class PersonService implements LdapServiceInterface{
 	
 	
 
+	@Override
+	public Person findByCodEtu(String CodEtu) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("non supporté ...");
+	}
+	
+	
+
 	/**
 	 * 
 	 * @param Filter filter
@@ -179,5 +187,6 @@ public class PersonService implements LdapServiceInterface{
 	public void setLdapAtributes(LdapAttributesConf ldapAtributes) {
 		this.ldapAtributes = ldapAtributes;
 	}
+
 
 }

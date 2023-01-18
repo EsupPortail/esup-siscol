@@ -139,6 +139,19 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 	}
 
 	@Override
+	public Person findByCodEtu(String CodEtu) {
+		try {
+			List<Person> persons = ldapTemplate.search(query().base(ldapAtributes.getBaseDn()).where("objectclass")
+					.is(ldapAtributes.getObjectClass()).and(ldapAtributes.getCodEtu()).is(CodEtu),
+					new PersonContextMapper(ldapAtributes));
+			return persons.get(0);
+		} catch (Exception e) {
+			logger.error("LDAP EXCEPTION ", e);
+			return null;
+		}
+	}
+
+	@Override
 	public Person findBySupannAliasLogin(String supannAliasLogin) {
 		try {
 			List<Person> persons = ldapTemplate.search(
@@ -210,8 +223,9 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 
 			person.setDisplayName(context.getStringAttribute(ldapAtributes.getDisplayName()));
 
-			person.setEduPersonPrimaryAffiliation(context.getStringAttribute(ldapAtributes.getEduPersonPrimaryAffiliation()));
-			
+			person.setEduPersonPrimaryAffiliation(
+					context.getStringAttribute(ldapAtributes.getEduPersonPrimaryAffiliation()));
+
 			if (context.getStringAttributes(ldapAtributes.getEduPersonAffiliation()) != null) {
 				person.setEduPersonAffiliation(
 						Arrays.asList(context.getStringAttributes(ldapAtributes.getEduPersonAffiliation())));

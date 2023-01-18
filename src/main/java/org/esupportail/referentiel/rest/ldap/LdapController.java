@@ -91,6 +91,17 @@ public class LdapController {
 	}
 	
 	
+	@GetMapping("/byCodEtu")
+	public Person findByCodEtu(@RequestParam(value = "codEtu") String codEtu,
+			@RequestParam(value = "base", defaultValue = "default") String base) {
+		logger.trace("LDAP findfindByCodEtu  : "+ base  + " : "+  codEtu);
+		if(base.equals("default")) {
+			base=this.baseLdap;
+		}
+		Person result = personService.findByCodEtu(codEtu);
+		return result;
+	}
+	
 	
 	public String getBaseLdap() {
 		return baseLdap;
