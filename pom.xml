@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail.referentiel</groupId>
 	<artifactId>esup-siscol</artifactId>
-	<version>0.1.16</version>
+	<version>0.1.17</version>
 
 	<packaging>war</packaging>
 
@@ -41,7 +41,8 @@
 		<dependency>
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
-			<version>63030</version>
+			<version>6.30.50</version>
+<!--			<version>63030</version>-->
 		</dependency>
 
 

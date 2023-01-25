@@ -38,7 +38,7 @@ import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ElementPedago
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.EtapeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO2;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.OffreFormationDTO3;
-import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauListeElementPedagogiDTO2;
+//import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauListeElementPedagogiDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauVersionDiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionEtapeDTO32;
@@ -867,37 +867,37 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		return listeEtapeInscriptions;
 	}
 
-	/**
-	 * 
-	 * @param codeEtp
-	 * @param versionEtp
-	 * @return LinkedHashMap<VersionDiplomeDTO3, List<ListeElementPedagogiDTO2>>
-	 */
-	@Deprecated
-	public LinkedHashMap<VersionDiplomeDTO3, List<ListeElementPedagogiDTO2>> recupereListeELPsParEtape(String codeEtp,
-			String versionEtp) {
-
-		LinkedHashMap<VersionDiplomeDTO3, List<ListeElementPedagogiDTO2>> elementPedagogiques = new LinkedHashMap<VersionDiplomeDTO3, List<ListeElementPedagogiDTO2>>();
-
-		List<DiplomeDTO3> diplomeDTOs = recupererListDiplomeDTO3(codeEtp, versionEtp);
-
-		for (DiplomeDTO3 diplomeDTO : diplomeDTOs) {
-			TableauVersionDiplomeDTO3 versionDiplomes = diplomeDTO.getListVersionDiplome();
-			for (VersionDiplomeDTO3 versionDiplome : versionDiplomes.getItem()) {
-
-//				ListeElementPedagogiDTO2[] elementPedagos = versionDiplome.getOffreFormation().getListEtape()[0]
-//						.getListVersionEtape()[0].getListListeElementPedagogi();
-				TableauListeElementPedagogiDTO2 elementPedagos = versionDiplome.getOffreFormation().getListEtape()
-						.getItem().get(0).getListVersionEtape().getItem().get(0).getListListeElementPedagogi();
-				elementPedagogiques.put(versionDiplome, elementPedagos.getItem());
-
-			}
-
-		}
-
-		// elementPedagogiques.put(etpins.getCodeEtp() + "", elpedago);
-		return elementPedagogiques;
-	}
+//	/**
+//	 * 
+//	 * @param codeEtp
+//	 * @param versionEtp
+//	 * @return LinkedHashMap<VersionDiplomeDTO3, List<ListeElementPedagogiDTO2>>
+//	 */
+//	@Deprecated
+//	public LinkedHashMap<VersionDiplomeDTO3, List<ListeElementPedagogiDTO2>> recupereListeELPsParEtape(String codeEtp,
+//			String versionEtp) {
+//
+//		LinkedHashMap<VersionDiplomeDTO3, List<ListeElementPedagogiDTO2>> elementPedagogiques = new LinkedHashMap<VersionDiplomeDTO3, List<ListeElementPedagogiDTO2>>();
+//
+//		List<DiplomeDTO3> diplomeDTOs = recupererListDiplomeDTO3(codeEtp, versionEtp);
+//
+//		for (DiplomeDTO3 diplomeDTO : diplomeDTOs) {
+//			TableauVersionDiplomeDTO3 versionDiplomes = diplomeDTO.getListVersionDiplome();
+//			for (VersionDiplomeDTO3 versionDiplome : versionDiplomes.getItem()) {
+//
+////				ListeElementPedagogiDTO2[] elementPedagos = versionDiplome.getOffreFormation().getListEtape()[0]
+////						.getListVersionEtape()[0].getListListeElementPedagogi();
+//				 TableauListeElementPedagogiDTO2 elementPedagos = versionDiplome.getOffreFormation().getListEtape()
+//						.getItem().get(0).getListVersionEtape().getItem().get(0).getListListeElementPedagogi();
+//				elementPedagogiques.put(versionDiplome, elementPedagos.getItem());
+//
+//			}
+//
+//		}
+//
+//		// elementPedagogiques.put(etpins.getCodeEtp() + "", elpedago);
+//		return elementPedagogiques;
+//	}
 
 	/**
 	 * 

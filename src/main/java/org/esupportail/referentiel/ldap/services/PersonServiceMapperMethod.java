@@ -155,7 +155,7 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 	public Person findBySupannAliasLogin(String supannAliasLogin) {
 		try {
 			List<Person> persons = ldapTemplate.search(
-					query().where("objectclass").is(ldapAtributes.getObjectClass())
+					query().base(ldapAtributes.getBaseDn()).where("objectclass").is(ldapAtributes.getObjectClass())
 							.and(ldapAtributes.getSupannAliasLogin()).is(supannAliasLogin),
 					new PersonContextMapper(ldapAtributes));
 			if (persons != null && !persons.isEmpty())
@@ -171,7 +171,7 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 	@Override
 	public List<Person> findPersonByFilter(Filter formAsFliter) {
 		logger.debug("formAsFliter : " + formAsFliter.toString());
-		List<Person> persons = ldapTemplate.search((query().filter(formAsFliter)),
+		List<Person> persons = ldapTemplate.search((query().base(ldapAtributes.getBaseDn()).filter(formAsFliter)),
 				new PersonContextMapper(ldapAtributes));
 		return persons;
 	}
