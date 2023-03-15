@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.AdministratifMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO2;
+import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO3;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantCritereDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantDTO2;
@@ -71,6 +72,16 @@ public class EtudiantMetierClient {
 	 */
 	@Autowired
 	private ReferentielMetierServiceInterface referentielMetierService;
+	
+	public void test(String cod, String annee) {
+		try {
+			List<InsAdmEtpDTO3> IAEtapesV3 = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
+			IAEtapesV3.get(0).getCursusAmg();
+		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	
 	/**
@@ -185,6 +196,31 @@ public class EtudiantMetierClient {
 
 		return tabInsAdmEtp;
 	}
+	
+	
+	/**
+	 * 
+	 * @param cod
+	 * @param annee
+	 * @return List<InsAdmEtpDTO3>
+	 */
+	public List<InsAdmEtpDTO3> recupererIAEtapesV3(String cod, String annee) {
+		List<InsAdmEtpDTO3> tabInsAdmEtp = null;
+
+		// serviceAdministratif.recupererIAEtapesV2(codEtu, annee, etatIAA, etatIAE);
+		try {
+			tabInsAdmEtp = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
+		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return tabInsAdmEtp;
+	}
+	
+	
+	
+	
 
 	/**
 	 * 

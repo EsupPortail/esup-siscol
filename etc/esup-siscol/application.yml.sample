@@ -33,20 +33,11 @@ server:
 app:
   server-url: http://localhost:8080/esup-siscol
   server-version: 0.1.15
-  server-title: Client API SCLARITE REST
+  server-title: Client API SCOLARITE REST
   ldap:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (eduPersonAffiliation=staff)
-    
-    ####paramètres obsolètes à supprimer
-    ###repoStringFilterStudent: (eduPersonAffiliation=student)
-    ###repoStringFilterStudentBySn: (&(eduPersonAffiliation=student)(sn={0}))
-    ###repoStringFilterStudentByUId: (&(eduPersonAffiliation=student)(uid={0}))
-    ###repoStringFilterStudentByNumEtu: (&(eduPersonAffiliation=student)(numlEtu={0}))
-    ##dnPeople: ou=people
-    ##codeEtu: supannEtuId 
-    ##codeEtu: sn
     attributes:
                 objectClass: Person
                 supannAliasLogin: supannAliasLogin
@@ -87,6 +78,37 @@ app:
       geographieMetier: http://ws.apogee.univ.fr:8080/aws/services/GeographieMetier
       referentielMetier: http://ws.apogee.univ.fr:8080/aws/services/ReferentielMetier
       offreFormationMetier: http://ws.apogee.univ.fr:8080/aws/services/OffreFormationMetier
+  pcscol:
+    codeStructure: ETAB00
+    codePeriode: PER-2020
+    accesstoken:
+      # Url de l'API du serveur OAuth Pgase pour la rcupration de l'access-token
+      casUrl: https://authn-app.bas-esup.pc-scol.fr/cas/v1/tickets
+      # Username et password pour s'authentifier auprs du serveur OAuth Pgase en tant qu'applicatif MDW
+      svcAcountLogin: svc-api
+      svcAcountPassword: password
+      # Dure en heure de conservation de l'access-token
+      duration: 6
+    # Code de l'tablissement dans Pgase
+    etablissement: ETAB00
+    # Base Url de l'API du module INS de Pgase (attention  conserver la structure de l'url d'exemple)
+    api:
+      # Base Url de l'API STAGE de Pgase (attention  conserver la structure de l'url d'exemple)
+      stage:
+        url: https://sta.pc-scol.fr/api/sta/v1
+      # Base Url de l'API MOF de Pgase
+      Mof:
+        url: https://mof.pc-scol.fr/api/v1/mof
+      # Base Url de l'API COF de Pgase
+      ref:
+          url: https://ref.pc-scol.fr/api/v1/ref
+    # Permet de cibler un dossier par dfaut. /!\ Attention /!\ A renseigner uniquement pour une dmonstration ou en phase de test/dveloppement.
+    demo:
+      codeapprenant: 000000001
+    # Liste des statuts des inscriptions  afficher dans la vue "Parcours" spars par des virgules
+    inscription:
+      statut: valide
+     
     
 credential:
   userscredential:

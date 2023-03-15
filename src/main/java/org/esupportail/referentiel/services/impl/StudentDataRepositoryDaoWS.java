@@ -27,6 +27,7 @@ import org.springframework.stereotype.Service;
 
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO2;
+import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO3;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.BlocageDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
@@ -93,6 +94,9 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	@Value("${app.apogee.codesRegimeInscriptionFC}")
 	private String codesRegimeInscriptionFC = "2;4;5";
 
+	public void cursusAmenage(final String codEtu) {
+		
+	}
 	/**
 	 * @param codEtu
 	 * @return le codInd pour le codEtu passé en paramètre
@@ -180,6 +184,12 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		List<InsAdmEtpDTO2> tabInsAdmEtp = etudiantMetierClient.recupererIAEtapesV2(cod, annee);
 		return tabInsAdmEtp;
 	}
+	
+	public List<InsAdmEtpDTO3> recupererIAEtapesV3(String cod, String annee) {
+		List<InsAdmEtpDTO3> tabInsAdmEtp = etudiantMetierClient.recupererIAEtapesV3(cod, annee);
+		return tabInsAdmEtp;
+	}
+	
 
 	/**
 	 * 
@@ -533,7 +543,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 						mainAddress = mainAddress + etudiantRef.getLibAd2() + " ";
 					}
 					if (etudiantRef.getLibAd3() != null) {
-						mainAddress = mainAddress + etudiantRef.getLibAd2();
+						mainAddress = mainAddress + etudiantRef.getLibAd3();
 					}
 				} else {
 					if (etudiantRef.getLibAd1() != null) {
@@ -774,10 +784,10 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	 * @return LinkedHashMap<String, String>
 	 */
 	public List<EtapeInscription> recupererEtapeInscriptionParEtudiantAnnee(String codEtud, String annee) {
-		List<InsAdmEtpDTO2> tabInsAdmEtp = recupererIAEtapesV2(codEtud, annee);
+		List<InsAdmEtpDTO3> tabInsAdmEtp = recupererIAEtapesV3(codEtud, annee);
 		List<EtapeInscription> listeEtapeInscriptions = new ArrayList<EtapeInscription>();
 
-		for (InsAdmEtpDTO2 insAdmEtp : tabInsAdmEtp) {
+		for (InsAdmEtpDTO3 insAdmEtp : tabInsAdmEtp) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("- Inscription Administrative -");
 				logger.debug("[codeEtape : " + insAdmEtp.getEtape().getCodeEtp() + ", codeVersionEtape : "
@@ -796,6 +806,10 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				etpins.setCodeComposante(insAdmEtp.getComposante().getCodComposante());
 				etpins.setLibComposante(insAdmEtp.getComposante().getLibComposante());
 				etpins.setTypeIns(DonneesStatic.TYPE_INS_ADMIN);
+				if(insAdmEtp.getCursusAmg()!=null) {
+					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getCodCurAmg());
+					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getLibCurAmg());
+				}
 
 				if (insAdmEtp.getDiplome() != null) {
 					// renseignement des infos du diplome
@@ -1116,7 +1130,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
 		// Recuperation des etapes auxquelles l'etudiant est inscrit administrativement
 		// (inscription admin etape en cours (E)) en fonction de l'annee en param
-		List<InsAdmEtpDTO2> tabInsAdmEtp = recupererIAEtapesV2(codEtud, annee);
+		List<InsAdmEtpDTO3> tabInsAdmEtp = recupererIAEtapesV3(codEtud, annee);
 		/**
 		 * TODO FC
 		 */
@@ -1134,7 +1148,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		List<ElementPedagogique> listeELPs = new ArrayList<ElementPedagogique>();
 		logger.debug("nbr Inscriptions Administratives : " + tabInsAdmEtp.size());
 		// recherche des Inscriptions Administratives payees de l'etudiant
-		for (InsAdmEtpDTO2 insAdmEtp : tabInsAdmEtp) {
+		for (InsAdmEtpDTO3 insAdmEtp : tabInsAdmEtp) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("- Inscription Administrative -");
 				logger.debug("[codeEtape : " + insAdmEtp.getEtape().getCodeEtp() + ", codeVersionEtape : "
@@ -1205,6 +1219,11 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				etpins.setCodeComposante(insAdmEtp.getComposante().getCodComposante());
 				etpins.setLibComposante(insAdmEtp.getComposante().getLibComposante());
 				etpins.setTypeIns(DonneesStatic.TYPE_INS_ADMIN);
+				
+				if(insAdmEtp.getCursusAmg()!=null) {
+					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getCodCurAmg());
+					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getLibCurAmg());
+				}
 
 				if (insAdmEtp.getDiplome() != null) {
 					// renseignement des infos du diplome

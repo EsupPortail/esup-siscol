@@ -82,6 +82,10 @@ public class EtapeInscription implements Serializable {
 	 * volumeHoraire.
 	 */
 	private String volumeHoraire = "";
+	
+	private String codeCursusAmenage="";
+	
+	private String libelleCursusAmenage="";
 
 	/**
 	 * @return the codeEtp
@@ -275,6 +279,18 @@ public class EtapeInscription implements Serializable {
 		} else if (!codVrsVet.equals(other.codVrsVet))
 			return false;
 		return true;
+	}
+	public String getLibelleCursusAmenage() {
+		return libelleCursusAmenage;
+	}
+	public void setLibelleCursusAmenage(String libelleCursusAmenage) {
+		this.libelleCursusAmenage = libelleCursusAmenage;
+	}
+	public String getCodeCursusAmenage() {
+		return codeCursusAmenage;
+	}
+	public void setCodeCursusAmenage(String codeCursusAmenage) {
+		this.codeCursusAmenage = codeCursusAmenage;
 	}
 	
 	

@@ -32,10 +32,19 @@ public class OpenApiConfig {
 	}
 
 	@Bean
+	public GroupedOpenApi psScolGroup() {
+		return GroupedOpenApi.builder().group("pcscol").addOperationCustomizer((operation, handlerMethod) -> {
+			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
+			return operation;
+		}).packagesToScan("org.esupportail.referentiel.rest.pcscol").build();
+	}
+
+	@Bean
 	public GroupedOpenApi all() {
 		return GroupedOpenApi.builder().group("all").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
-		}).packagesToScan("org.esupportail.referentiel.rest.ldap", "org.esupportail.referentiel.rest.apogee").build();
+		}).packagesToScan("org.esupportail.referentiel.rest.ldap", "org.esupportail.referentiel.rest.apogee",
+				"org.esupportail.referentiel.rest.pcscol").build();
 	}
 }
