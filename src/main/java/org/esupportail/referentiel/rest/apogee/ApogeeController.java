@@ -78,6 +78,15 @@ public class ApogeeController { // NO_UCD (unused code)
 		return student;
 	}
 	
+	@GetMapping("/listEtuParEtapeEtDiplome")
+	public List<String>   recupererListeEtuParEtpEtDiplome(String annee, String codeEtape, String versionEtape,
+			String codeDiplome, String versionDiplome) {
+		
+		List<String> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(annee,codeEtape,versionEtape,codeDiplome,versionDiplome);
+		return listeEtu;
+		
+	}
+	
 	
 
 	/**

@@ -30,10 +30,13 @@ import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO2;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO3;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantCritereDTO;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantCritereListeDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauDiplomes;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauEtapes;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TypeHebergementDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.WebBaseException_Exception;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
@@ -72,7 +75,7 @@ public class EtudiantMetierClient {
 	 */
 	@Autowired
 	private ReferentielMetierServiceInterface referentielMetierService;
-	
+
 	public void test(String cod, String annee) {
 		try {
 			List<InsAdmEtpDTO3> IAEtapesV3 = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
@@ -83,7 +86,6 @@ public class EtudiantMetierClient {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param code
@@ -196,8 +198,7 @@ public class EtudiantMetierClient {
 
 		return tabInsAdmEtp;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @param cod
@@ -217,10 +218,6 @@ public class EtudiantMetierClient {
 
 		return tabInsAdmEtp;
 	}
-	
-	
-	
-	
 
 	/**
 	 * 
@@ -309,10 +306,58 @@ public class EtudiantMetierClient {
 		try {
 			return etudiantMetierService.recupererListeEtudiants(parametres);
 		} catch (WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
+			// e.printStackTrace();
 		}
 		return null;
+	}
+
+	public List<String> recupererListeEtuParEtpEtDiplome(String annee, String codeEtp, String versionEtp,
+			String codeDipl, String verDipl) {
+		TableauEtapes etps = new TableauEtapes();
+		EtudiantCritereListeDTO dto = new EtudiantCritereListeDTO();
+		dto.setCode(codeEtp);
+		dto.getListVersion().add(versionEtp);
+		etps.getItem().add(dto);
+
+		TableauDiplomes diplomes = new TableauDiplomes();
+		EtudiantCritereListeDTO dtoDip = new EtudiantCritereListeDTO();
+		dtoDip.setCode(codeDipl);
+		dtoDip.getListVersion().add(verDipl);
+		diplomes.getItem().add(dtoDip);
+
+		EtudiantCritereDTO criteres = new EtudiantCritereDTO();
+		criteres.setAnnee(annee);
+		criteres.setListDiplomes(diplomes);
+		criteres.setListEtapes(etps);
+
+		criteres.setCodeCollectionELP(null);
+		criteres.setCodeCollectionVET(null);
+		criteres.setCodeEchInter(null);
+		criteres.setCodeGroupeELP(null);
+		criteres.setCodeGroupeVET(null);
+		criteres.setCodeRegimeInscrETP(null);
+		criteres.setEtatThese(null);
+		criteres.setMaintienInscrAutreEtab(null);
+		criteres.setObjetResultat(null);
+		criteres.setSensEchInter(null);
+		criteres.setTemPartInternational(null);
+		criteres.setTemValAcquisXP(null);
+		criteres.setTypeResultat(null);
+
+		logger.info("annee : {}, codeEtape : {}, versionEtape : {} ,codeDiplome : {}, versionDiplome : {}", annee, codeEtp, versionEtp, codeDipl,
+				verDipl);
+		List<EtudiantDTO2> resultat = recupererListeEtudiants(criteres);
+
+		List<String> listCodeEtu = new ArrayList<>();
+		if (resultat != null && !resultat.isEmpty()) {
+
+			resultat.forEach(r -> {
+				listCodeEtu.add(r.getCodEtu());
+			});
+		}
+
+		return listCodeEtu;
 	}
 
 	/**
