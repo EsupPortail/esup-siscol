@@ -185,8 +185,9 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 		List<Person> persons = new ArrayList<>();
 		try {
 			HardcodedFilter s_f = new HardcodedFilter(filter);
-			persons = ldapTemplate.search((query().countLimit(10).base(base).filter(s_f)),
+			persons = ldapTemplate.search((query().base(base).filter(s_f)),
 					new PersonContextMapper(ldapAtributes));
+			logger.info("NBR de entree pour {} est  {}" ,s_f.encode(), persons.size());
 		} catch (Exception e) {
 			logger.error("findPersonByFilter : " + filter + " error  :" + e.getMessage() + "  cause : "
 					+ e.getCause().getMessage());
