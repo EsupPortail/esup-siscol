@@ -3,6 +3,7 @@ package org.esupportail.referentiel.pcscol.mapper;
 import java.util.List;
 
 import org.esupportail.referentiel.beans.ElementPedagogique;
+import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.pcscol.model.sta.Apprenant;
@@ -147,7 +148,10 @@ public interface ApprenantEtuInfoAdmMapper {
 	@Mapping(target="codElp",source = "codeChemin")
 	@Mapping(target="codEtp",source = "supportStageId")
 	@Mapping(target="libElp",source = "libelleAffichage")
-	//@Mapping(target="nbrCrdElp",source = "ects")
+	@Mapping(target="nbrCrdElp",source = "ects")
 	public ElementPedagogique stagesApprenantToElementPedagogique(Stage stage);
+	
+	
+	public EtapeInscription stagesApprenantToEtapeInscription(Inscription inscription);
 
 }

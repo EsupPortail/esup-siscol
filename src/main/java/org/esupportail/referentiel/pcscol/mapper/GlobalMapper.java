@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ElementPedagogique;
+import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.pcscol.model.formation.Formation;
@@ -67,6 +68,8 @@ public class GlobalMapper {
 			String annee) {
 		List<Inscription> psScolIns = stagesApprenant.getInscriptions();
 		List<ElementPedagogique> listElps = new ArrayList<>();
+		List<EtapeInscription> listEtps=new ArrayList<>();
+		
 		psScolIns.forEach(ins -> {
 			if (ins.getPeriode()!=null && ins.getPeriode().getAnneeUniversitaire() != null) {
 
@@ -86,10 +89,14 @@ public class GlobalMapper {
 						elp.setCodVrsVet(ins.getSupportInscription().getSupportInscriptionId());
 
 					});
+					
 
 					/**
 					 * TODO
 					 */
+					
+					EtapeInscription etape=null;
+					listEtps.add(etape);
 
 				}
 
@@ -97,6 +104,8 @@ public class GlobalMapper {
 		});
 
 		apogeeMap.setListeELPs(listElps);
+		
+		apogeeMap.setListeEtapeInscriptions(listEtps);
 
 	}
 

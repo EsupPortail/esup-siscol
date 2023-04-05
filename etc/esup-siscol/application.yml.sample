@@ -61,7 +61,8 @@ app:
                 supannEtuCursusAnnee: supannEtuCursusAnnee
                 eduPersonOrgDN: eduPersonOrgDN
                 supannEmpId: supannEmpId
-                supannRefId: supannRefId
+                supannRefId: supannRefI
+                supannEtuEtape: supannEtuEtape
     
   apogee:
     startYearMonth: 09

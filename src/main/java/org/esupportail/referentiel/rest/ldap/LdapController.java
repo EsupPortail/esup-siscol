@@ -27,6 +27,12 @@ public class LdapController {
 	
 	@Value("${app.ldap.attributes.baseDn}")
 	private String baseLdap;
+	
+	@Value("${app.ldap.attributes.supannEntiteAffectation}")
+	private String supannEntiteAffectation;
+	
+	@Value("${app.ldap.attributes.supannEtuEtape}")
+	private String supannEtuEtape;
 
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
@@ -76,6 +82,32 @@ public class LdapController {
 			base=this.baseLdap;
 		}
 		List<Person> result = personService.findPersonByFilter(filter, base);
+		return result;
+	}
+	//{SIHAM}RAVU
+	//supannEntiteAffectation
+	@GetMapping("/EtuByComposante")
+	public List<Person> findByComposante(@RequestParam(value = "codeComposanteLdap", required = true,defaultValue = "{SIHAM}RAVU")
+			String codeEtape){
+		String  filter_base=this.supannEntiteAffectation+"=%s";
+		String filter=String.format(filter_base, codeEtape);
+		logger.trace("LDAP EtuByEtape  :  " +   filter);
+		
+		List<Person> result = personService.findPersonByFilter(filter, this.baseLdap);
+		
+		return result;
+	}
+	
+	
+	@GetMapping("/EtuByEtape")
+	public List<Person> findByEtape(@RequestParam(value = "codeEtapeLdap", required = true,defaultValue = "{UAI:0921436L}P1PSY - 201")
+			String codeEtape){
+		String  filter_base=this.supannEtuEtape+"=%s";
+		String filter=String.format(filter_base, codeEtape);
+		logger.trace("LDAP EtuByEtape  :  " +   filter);
+		
+		List<Person> result = personService.findPersonByFilter(filter, this.baseLdap);
+		
 		return result;
 	}
 	
