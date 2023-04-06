@@ -34,13 +34,17 @@ public class FormSearch implements Serializable {
 
 	private String affiliation;
 
+	private String supannEtuEtape;
+
+	private String supannEntiteAffectation;
+
 	public FormSearch() {
 		super();
 
 	}
 
-	public FormSearch(String id, String supannAliasLogin, String nom, String mail,
-			String prenom, String primaryAffiliation, String affiliation) {
+	public FormSearch(String id, String supannAliasLogin, String nom, String mail, String prenom,
+			String primaryAffiliation, String affiliation, String supannEtuEtape, String supannEntiteAffectation ) {
 		super();
 		this.supannAliasLogin = supannAliasLogin;
 		this.id = id;
@@ -49,7 +53,10 @@ public class FormSearch implements Serializable {
 		this.prenom = prenom;
 		this.primaryAffiliation = primaryAffiliation;
 		this.affiliation = affiliation;
+		this.supannEtuEtape=supannEtuEtape;
+		this.supannEntiteAffectation=supannEntiteAffectation;
 		
+
 	}
 
 	public FormSearch(String nom, String prenom) {
@@ -59,47 +66,7 @@ public class FormSearch implements Serializable {
 
 	}
 
-	@Transient
-	public Filter formAsFliter() {
-		AndFilter filter = new AndFilter();
-
-		if (id != null && !id.isEmpty()) {
-			Filter query = new EqualsFilter("uid", id);
-			filter.and(query);
-		}
-		if (codEtu != null && !codEtu.isEmpty()) {
-			Filter query = new EqualsFilter("codEtu", codEtu);
-			filter.and(query);
-		}
-
-		if (supannAliasLogin != null && !supannAliasLogin.isEmpty()) {
-			Filter query = new EqualsFilter("supannAliasLogin", supannAliasLogin);
-			filter.and(query);
-		}
-
-		if (nom != null && !nom.isEmpty()) {
-			Filter query = new WhitespaceWildcardsFilter("sn", nom);
-			filter.and(query);
-		}
-		if (mail != null && !mail.isEmpty()) {
-			Filter query = new WhitespaceWildcardsFilter("mail", mail);
-			filter.and(query);
-		}
-		if (prenom != null && !prenom.isEmpty()) {
-			Filter query = new WhitespaceWildcardsFilter("givenName", prenom);
-			filter.and(query);
-		}
-		if (primaryAffiliation != null && !primaryAffiliation.isEmpty()) {
-			Filter query = new EqualsFilter("eduPersonPrimaryAffiliation", primaryAffiliation);
-			filter.and(query);
-		}
-		if (affiliation != null && !affiliation.isEmpty()) {
-			Filter query = new EqualsFilter("eduPersonAffiliation", affiliation);
-			filter.and(query);
-		}
-		return filter;
-
-	}
+	
 
 	public Filter formAsFliter(LdapAttributesConf ldapAtributes) {
 		AndFilter filter = new AndFilter();
@@ -138,6 +105,16 @@ public class FormSearch implements Serializable {
 			Filter query = new EqualsFilter(ldapAtributes.getEduPersonAffiliation(), affiliation);
 			filter.and(query);
 		}
+
+		if (supannEtuEtape != null && !supannEtuEtape.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getSupannEtuEtape(), supannEtuEtape);
+			filter.and(query);
+		}
+		if (supannEntiteAffectation != null && !supannEntiteAffectation.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getSupannEntiteAffectation(), supannEntiteAffectation);
+			filter.and(query);
+		}
+
 		return filter;
 	}
 
@@ -205,12 +182,28 @@ public class FormSearch implements Serializable {
 		this.codEtu = codEtu;
 	}
 
+	public String getSupannEtuEtape() {
+		return supannEtuEtape;
+	}
+
+	public void setSupannEtuEtape(String supannEtuEtape) {
+		this.supannEtuEtape = supannEtuEtape;
+	}
+
+	public String getSupannEntiteAffectation() {
+		return supannEntiteAffectation;
+	}
+
+	public void setSupannEntiteAffectation(String supannEntiteAffectation) {
+		this.supannEntiteAffectation = supannEntiteAffectation;
+	}
+
 	@Override
 	public String toString() {
 		return "FormSearch [id=" + id + ", codEtu=" + codEtu + ", supannAliasLogin=" + supannAliasLogin + ", nom=" + nom
 				+ ", mail=" + mail + ", prenom=" + prenom + ", primaryAffiliation=" + primaryAffiliation
-				+ ", affiliation=" + affiliation + "]";
+				+ ", affiliation=" + affiliation + ", supannEtuEtape=" + supannEtuEtape + ", supannEntiteAffectation="
+				+ supannEntiteAffectation + "]";
 	}
 
-	
 }
