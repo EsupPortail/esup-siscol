@@ -91,6 +91,12 @@ public interface ApprenantEtuInfoAdmMapper {
 	
 	ApprenantEtuInfoAdmMapper Instance=Mappers.getMapper(ApprenantEtuInfoAdmMapper.class);
 	
+	
+	/**
+	 * 
+	 * @param app
+	 * @return
+	 */
 	@Mapping(target = "nomUsuel", source = "nomUsuel")
     @Mapping(target = "prenom1", source = "prenom")
 	@Mapping(target = "nomPatronymique", source="nomDeNaissance")
@@ -102,38 +108,26 @@ public interface ApprenantEtuInfoAdmMapper {
 	public EtudiantInfoAdm apprenantToEtudiantInfoAdm(Apprenant app);
 	
 	
-	
-
+	/**
+	 * 
+	 * @param app
+	 * @return
+	 */
+	@Mapping(target = "cod_ind", source="codeApprenant")
 	@Mapping(target = "nommarital", source = "nomUsuel")
-    @Mapping(target = "prenom", source = "prenom")
 	@Mapping(target = "nompatro", source="nomDeNaissance")
-	@Mapping(target="libAd1",source = "ligne1OuEtage")
-	//@Mapping(target="libAd1",source = "ligne4OuComplement")
-	@Mapping(target="libAd2",source = "ligne2OuBatiment")
-	@Mapping(target="libAd3",source = "ligne3OuVoie")
-	@Mapping(target="libAde",source="ligne5Etranger")
-	@Mapping(target="postalCode",source="codePostal")
-	@Mapping(target="town",source="commune")
-	@Mapping(target="country",source="pays")
-	@Mapping(target="codeSexe",source="genre")
+	@Mapping(target = "prenom", source = "prenom")
+	@Mapping(target=  "dateNais",source = "dateDeNaissance",dateFormat = "dd-MM-yyyy")
+	@Mapping(target=  "libAd1",source = "ligne3OuVoie")
+	@Mapping(target=  "libAd2",source = "ligne4OuComplement")
+	@Mapping(target=  "libAde",source="ligne5Etranger")
+	@Mapping(target=  "postalCode",source="codePostal")
+	@Mapping(target=  "town",source="commune")
+	@Mapping(target=  "country",source="pays")
+	@Mapping(target=  "codeSexe",source="genre")
+	@Mapping(target=  "phone",source="telephone")
+	@Mapping(target=  "portablePhone",source="telephone")
 	public EtudiantRef apprenantToEtudiantRef(Apprenant app);
-	
-
-	@Mapping(target = "nommarital", source = "stagesApprenant.apprenant.nomUsuel")
-    @Mapping(target = "prenom", source = "stagesApprenant.apprenant.prenom")
-	@Mapping(target = "nompatro", source="stagesApprenant.apprenant.nomDeNaissance")
-	@Mapping(target="libAd1",source = "stagesApprenant.apprenant.ligne1OuEtage")
-	//@Mapping(target="libAd1",source = "ligne4OuComplement")
-	@Mapping(target="libAd2",source = "stagesApprenant.apprenant.ligne2OuBatiment")
-	@Mapping(target="libAd3",source = "stagesApprenant.apprenant.ligne3OuVoie")
-	@Mapping(target="libAde",source="stagesApprenant.apprenant.ligne5Etranger")
-	@Mapping(target="postalCode",source="stagesApprenant.apprenant.codePostal")
-	@Mapping(target="town",source="stagesApprenant.apprenant.commune")
-	@Mapping(target="country",source="stagesApprenant.apprenant.pays")
-	@Mapping(target="codeSexe",source="stagesApprenant.apprenant.genre")
-	public EtudiantRef stagesApprenantToEtudiantRef(StagesApprenant stagesApprenant);
-	
-	
 	
 	
 	/**
@@ -151,7 +145,16 @@ public interface ApprenantEtuInfoAdmMapper {
 	@Mapping(target="nbrCrdElp",source = "ects")
 	public ElementPedagogique stagesApprenantToElementPedagogique(Stage stage);
 	
-	
+	/**
+	 * 
+	 * @param inscription
+	 * @return
+	 */
+	@Mapping(target="codeEtp",source="inscription.supportInscription.supportInscriptionId")
+	@Mapping(target="codeDiplome",source="inscription.supportInscription.codeChemin")
+	@Mapping(target="libWebVet",source="inscription.supportInscription.libelleAffichage")
+	@Mapping(target="regimeIns",source="inscription.supportInscription.codeRegimeInscription")
+	@Mapping(target="libRg",source="inscription.supportInscription.libelleRegimeInscription")
 	public EtapeInscription stagesApprenantToEtapeInscription(Inscription inscription);
 
 }

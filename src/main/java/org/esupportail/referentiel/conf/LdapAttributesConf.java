@@ -52,6 +52,10 @@ public class LdapAttributesConf {
 	private String supannEmpId="supannEmpId";
 
 	private String supannRefId="supannRefId";
+	
+	private String supannEtuEtape="supannEtuEtape";
+	
+	
 
 	public String getObjectClass() {
 		return objectClass;
@@ -235,6 +239,14 @@ public class LdapAttributesConf {
 
 	public void setSupannRefId(String supannRefId) {
 		this.supannRefId = supannRefId;
+	}
+
+	public String getSupannEtuEtape() {
+		return supannEtuEtape;
+	}
+
+	public void setSupannEtuEtape(String supannEtuEtape) {
+		this.supannEtuEtape = supannEtuEtape;
 	}
 
 }

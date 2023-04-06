@@ -60,9 +60,10 @@ public class Person implements Serializable {
 	
 	private List<String> supannEtuCursusAnnee;
 	
-	
 	private String eduPersonOrgDN;
-		
+	
+	private List<String> supannEtuEtape;
+	
 	@JsonIgnore
 	private String supannEmpId;
 	@JsonIgnore
@@ -247,7 +248,15 @@ public class Person implements Serializable {
 	public void setEduPersonOrgDN(String eduPersonOrgDN) {
 		this.eduPersonOrgDN = eduPersonOrgDN;
 	}
-	
+
+	public List<String> getSupannEtuEtape() {
+		return supannEtuEtape;
+	}
+
+	public void setSupannEtuEtape(List<String> supannEtuEtape) {
+		this.supannEtuEtape = supannEtuEtape;
+	}
+
 	
 	
 	

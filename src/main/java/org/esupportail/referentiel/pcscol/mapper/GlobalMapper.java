@@ -68,10 +68,10 @@ public class GlobalMapper {
 			String annee) {
 		List<Inscription> psScolIns = stagesApprenant.getInscriptions();
 		List<ElementPedagogique> listElps = new ArrayList<>();
-		List<EtapeInscription> listEtps=new ArrayList<>();
-		
+		List<EtapeInscription> listEtps = new ArrayList<>();
+
 		psScolIns.forEach(ins -> {
-			if (ins.getPeriode()!=null && ins.getPeriode().getAnneeUniversitaire() != null) {
+			if (ins.getPeriode() != null && ins.getPeriode().getAnneeUniversitaire() != null) {
 
 				String annUNivIns = String.valueOf(ins.getPeriode().getAnneeUniversitaire());
 				if (annUNivIns.equals(annee)) {
@@ -89,13 +89,12 @@ public class GlobalMapper {
 						elp.setCodVrsVet(ins.getSupportInscription().getSupportInscriptionId());
 
 					});
-					
 
 					/**
 					 * TODO
 					 */
-					
-					EtapeInscription etape=null;
+
+					EtapeInscription etape = ApprenantEtuInfoAdmMapper.Instance.stagesApprenantToEtapeInscription(ins);
 					listEtps.add(etape);
 
 				}
@@ -104,7 +103,7 @@ public class GlobalMapper {
 		});
 
 		apogeeMap.setListeELPs(listElps);
-		
+
 		apogeeMap.setListeEtapeInscriptions(listEtps);
 
 	}

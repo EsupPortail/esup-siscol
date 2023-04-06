@@ -23,7 +23,7 @@ public interface PcscolServiceI {
 	 * @param codeApprenant
 	 * @return
 	 */
-	public EtudiantRef lireEtudiantRef(String codeStructure, String codeApprenant);
+	public EtudiantRef lireEtudiantRef(String codeStructure, String codeApprenant, String annee);
 
 	/**
 	 * 

@@ -86,6 +86,10 @@ public class EtapeInscription implements Serializable {
 	private String codeCursusAmenage="";
 	
 	private String libelleCursusAmenage="";
+	
+	private String regimeIns;
+	
+	private String libRg;
 
 	/**
 	 * @return the codeEtp
@@ -291,6 +295,18 @@ public class EtapeInscription implements Serializable {
 	}
 	public void setCodeCursusAmenage(String codeCursusAmenage) {
 		this.codeCursusAmenage = codeCursusAmenage;
+	}
+	public String getRegimeIns() {
+		return regimeIns;
+	}
+	public void setRegimeIns(String regimeIns) {
+		this.regimeIns = regimeIns;
+	}
+	public String getLibRg() {
+		return libRg;
+	}
+	public void setLibRg(String libRg) {
+		this.libRg = libRg;
 	}
 	
 	

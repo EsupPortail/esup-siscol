@@ -13,6 +13,7 @@ import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.mapper.GlobalMapper;
 import org.esupportail.referentiel.pcscol.model.formation.Formation;
 import org.esupportail.referentiel.pcscol.model.formation.Structure;
+import org.esupportail.referentiel.pcscol.model.sta.Apprenant;
 import org.esupportail.referentiel.pcscol.model.sta.StagesApprenant;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,17 @@ public class ContextLoeaderTest {
 		});
 
 		// TODO: test validations
+	}
+	
+	@Test
+	public void lireListeAPPTest() throws ApiException {
+		StagesApprenant appStg = stagesApi.listerInscriptionsAvecStages(codeStructure, codeApprenant);
+		Apprenant app = appStg.getApprenant();
+		System.out.println(app);
+		appStg.getInscriptions().forEach(ins->{
+			System.out.println(ins.getSupportInscription());
+		});
+		
 	}
 
 }

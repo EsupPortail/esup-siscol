@@ -86,7 +86,7 @@ public class LdapController {
 	}
 	//{SIHAM}RAVU
 	//supannEntiteAffectation
-	@GetMapping("/EtuByComposante")
+	@GetMapping("/personByComposante")
 	public List<Person> findByComposante(@RequestParam(value = "codeComposanteLdap", required = true,defaultValue = "{SIHAM}RAVU")
 			String codeEtape){
 		String  filter_base=this.supannEntiteAffectation+"=%s";

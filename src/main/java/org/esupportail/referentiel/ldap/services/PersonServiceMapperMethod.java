@@ -185,9 +185,8 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 		List<Person> persons = new ArrayList<>();
 		try {
 			HardcodedFilter s_f = new HardcodedFilter(filter);
-			persons = ldapTemplate.search((query().base(base).filter(s_f)),
-					new PersonContextMapper(ldapAtributes));
-			logger.info("NBR de entree pour {} est  {}" ,s_f.encode(), persons.size());
+			persons = ldapTemplate.search((query().base(base).filter(s_f)), new PersonContextMapper(ldapAtributes));
+			logger.info("NBR de entree pour {} est  {}", s_f.encode(), persons.size());
 		} catch (Exception e) {
 			logger.error("findPersonByFilter : " + filter + " error  :" + e.getMessage() + "  cause : "
 					+ e.getCause().getMessage());
@@ -264,6 +263,10 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 			person.setSupannRefId(context.getStringAttribute(ldapAtributes.getSupannRefId()));
 
 			person.setTelephoneNumber(context.getStringAttribute(ldapAtributes.getTelephoneNumber()));
+
+			if (context.getStringAttributes(ldapAtributes.getSupannEtuEtape()) != null) {
+				person.setSupannEtuEtape(Arrays.asList(context.getStringAttributes(ldapAtributes.getSupannEtuEtape())));
+			}
 
 			// person.setDescription(context.getStringAttribute("description"));
 			return person;

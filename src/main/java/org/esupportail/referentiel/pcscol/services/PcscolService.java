@@ -78,7 +78,7 @@ public class PcscolService implements PcscolServiceI {
 	}
 
 	@Override
-	public EtudiantRef lireEtudiantRef(String codeStructure, String codeApprenant) {
+	public EtudiantRef lireEtudiantRef(String codeStructure, String codeApprenant, String annee) {
 		StagesApprenant stgApp = lireStagesApprenant(codeStructure, codeApprenant);
 		return lireEtudiantRef(stgApp);
 	}

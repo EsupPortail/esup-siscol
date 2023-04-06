@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import org.apache.logging.log4j.util.Strings;
 import org.esupportail.referentiel.beans.AdministrationApogee;
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ElementPedagogique;
@@ -95,8 +96,9 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	private String codesRegimeInscriptionFC = "2;4;5";
 
 	public void cursusAmenage(final String codEtu) {
-		
+
 	}
+
 	/**
 	 * @param codEtu
 	 * @return le codInd pour le codEtu passé en paramètre
@@ -184,12 +186,11 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		List<InsAdmEtpDTO2> tabInsAdmEtp = etudiantMetierClient.recupererIAEtapesV2(cod, annee);
 		return tabInsAdmEtp;
 	}
-	
+
 	public List<InsAdmEtpDTO3> recupererIAEtapesV3(String cod, String annee) {
 		List<InsAdmEtpDTO3> tabInsAdmEtp = etudiantMetierClient.recupererIAEtapesV3(cod, annee);
 		return tabInsAdmEtp;
 	}
-	
 
 	/**
 	 * 
@@ -466,7 +467,9 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		AdministrationApogee adminApogee = new AdministrationApogee();
 		adminApogee.setStatusApogee(true);
 		adminApogee.setRaison("");
-		etudiantRef.setCod_ind(cod_ind);
+		if (cod_ind != null) {
+			etudiantRef.setCod_ind(String.valueOf(cod_ind));
+		}
 
 		// etudiantRef.setIdentEtudiant(String.valueOf(etudiant.getCodEtu()));
 
@@ -806,7 +809,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				etpins.setCodeComposante(insAdmEtp.getComposante().getCodComposante());
 				etpins.setLibComposante(insAdmEtp.getComposante().getLibComposante());
 				etpins.setTypeIns(DonneesStatic.TYPE_INS_ADMIN);
-				if(insAdmEtp.getCursusAmg()!=null) {
+				if (insAdmEtp.getCursusAmg() != null) {
 					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getCodCurAmg());
 					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getLibCurAmg());
 				}
@@ -1219,8 +1222,8 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				etpins.setCodeComposante(insAdmEtp.getComposante().getCodComposante());
 				etpins.setLibComposante(insAdmEtp.getComposante().getLibComposante());
 				etpins.setTypeIns(DonneesStatic.TYPE_INS_ADMIN);
-				
-				if(insAdmEtp.getCursusAmg()!=null) {
+
+				if (insAdmEtp.getCursusAmg() != null) {
 					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getCodCurAmg());
 					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getLibCurAmg());
 				}

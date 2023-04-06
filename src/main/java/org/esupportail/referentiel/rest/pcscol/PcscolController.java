@@ -48,14 +48,14 @@ public class PcscolController {
 	}
 
 	@GetMapping("/etudiantRef")
-	public ResponseEntity<EtudiantRef> etudiantRef(@RequestParam(value = "codEtud") String codeEtud,
+	public ResponseEntity<EtudiantRef> etudiantRef(@RequestParam(value = "codEtud") String codeApprenant,
 			@RequestParam(value = "annee") String annee) throws URISyntaxException {
-		logger.debug("Charger etudiant  : {} period {}", codeEtud, annee);
-		if (codeEtud == null || annee == null || codeEtud.isBlank() || annee.isBlank()) {
+		logger.debug("Charger etudiant  : {} period {}", codeApprenant, annee);
+		if (codeApprenant == null || annee == null || codeApprenant.isBlank() || annee.isBlank()) {
 			logger.error("CodeEtu ou l'annee ne doit être null");
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "CodeEtu ou l'annee ne doit être null", null);
 		}
-		EtudiantRef result = pcscolService.lireEtudiantRef(codeEtud, annee);
+		EtudiantRef result = pcscolService.lireEtudiantRef( codeStructure,  codeApprenant,  annee);
 		return new ResponseEntity<EtudiantRef>(result, HttpStatus.OK);
 	}
 
@@ -72,8 +72,8 @@ public class PcscolController {
 	 * @return
 	 */
 	@GetMapping("/etapesByEtudiantAndAnnee")
-	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
-			@RequestParam(value = "annee") String annee) {
+	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud",defaultValue = "000000036") String codeEtud,
+			@RequestParam(value = "annee",defaultValue = "2020") String annee) {
 		//ApogeeMap map = studentDataRepositoryDaoWS.recupererEtapesByEtudiantAndAnnee(codeEtud, annee, "");
 		ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, annee);
 		return new ResponseEntity<ApogeeMap>(apogeeMap, HttpStatus.OK);
