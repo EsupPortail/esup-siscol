@@ -63,6 +63,9 @@ app:
                 supannEmpId: supannEmpId
                 supannRefId: supannRefId
                 supannEtuEtape: supannEtuEtape
+                supannEtuAnneeInscription: supannEtuAnneeInscription
+     			supannEtuInscription: supannEtuInscription
+                
     
   apogee:
     startYearMonth: 09

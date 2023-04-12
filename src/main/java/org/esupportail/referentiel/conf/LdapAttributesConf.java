@@ -55,6 +55,9 @@ public class LdapAttributesConf {
 	
 	private String supannEtuEtape="supannEtuEtape";
 	
+	private String supannEtuAnneeInscription ="supannEtuAnneeInscription";
+	
+	private String supannEtuInscription="supannEtuInscription";
 	
 
 	public String getObjectClass() {
@@ -247,6 +250,22 @@ public class LdapAttributesConf {
 
 	public void setSupannEtuEtape(String supannEtuEtape) {
 		this.supannEtuEtape = supannEtuEtape;
+	}
+
+	public String getSupannEtuAnneeInscription() {
+		return supannEtuAnneeInscription;
+	}
+
+	public void setSupannEtuAnneeInscription(String supannEtuAnneeInscription) {
+		this.supannEtuAnneeInscription = supannEtuAnneeInscription;
+	}
+
+	public String getSupannEtuInscription() {
+		return supannEtuInscription;
+	}
+
+	public void setSupannEtuInscription(String supannEtuInscription) {
+		this.supannEtuInscription = supannEtuInscription;
 	}
 
 }

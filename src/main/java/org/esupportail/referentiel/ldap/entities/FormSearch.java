@@ -38,13 +38,17 @@ public class FormSearch implements Serializable {
 
 	private String supannEntiteAffectation;
 
+	private String supannEtuAnneeInscription;
+
+	private String supannEtuInscription;
+
 	public FormSearch() {
 		super();
 
 	}
 
 	public FormSearch(String id, String supannAliasLogin, String nom, String mail, String prenom,
-			String primaryAffiliation, String affiliation, String supannEtuEtape, String supannEntiteAffectation ) {
+			String primaryAffiliation, String affiliation, String supannEtuEtape, String supannEntiteAffectation) {
 		super();
 		this.supannAliasLogin = supannAliasLogin;
 		this.id = id;
@@ -53,9 +57,8 @@ public class FormSearch implements Serializable {
 		this.prenom = prenom;
 		this.primaryAffiliation = primaryAffiliation;
 		this.affiliation = affiliation;
-		this.supannEtuEtape=supannEtuEtape;
-		this.supannEntiteAffectation=supannEntiteAffectation;
-		
+		this.supannEtuEtape = supannEtuEtape;
+		this.supannEntiteAffectation = supannEntiteAffectation;
 
 	}
 
@@ -65,8 +68,6 @@ public class FormSearch implements Serializable {
 		this.prenom = prenom;
 
 	}
-
-	
 
 	public Filter formAsFliter(LdapAttributesConf ldapAtributes) {
 		AndFilter filter = new AndFilter();
@@ -112,6 +113,15 @@ public class FormSearch implements Serializable {
 		}
 		if (supannEntiteAffectation != null && !supannEntiteAffectation.isEmpty()) {
 			Filter query = new EqualsFilter(ldapAtributes.getSupannEntiteAffectation(), supannEntiteAffectation);
+			filter.and(query);
+		}
+		if (supannEtuAnneeInscription != null && !supannEtuAnneeInscription.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getSupannEtuAnneeInscription(), supannEtuAnneeInscription);
+			filter.and(query);
+		}
+
+		if (supannEtuInscription != null && !supannEtuInscription.isEmpty()) {
+			Filter query = new EqualsFilter(ldapAtributes.getSupannEtuInscription(), supannEtuInscription);
 			filter.and(query);
 		}
 
@@ -204,6 +214,22 @@ public class FormSearch implements Serializable {
 				+ ", mail=" + mail + ", prenom=" + prenom + ", primaryAffiliation=" + primaryAffiliation
 				+ ", affiliation=" + affiliation + ", supannEtuEtape=" + supannEtuEtape + ", supannEntiteAffectation="
 				+ supannEntiteAffectation + "]";
+	}
+
+	public String getSupannEtuInscription() {
+		return supannEtuInscription;
+	}
+
+	public void setSupannEtuInscription(String supannEtuInscription) {
+		this.supannEtuInscription = supannEtuInscription;
+	}
+
+	public String getSupannEtuAnneeInscription() {
+		return supannEtuAnneeInscription;
+	}
+
+	public void setSupannEtuAnneeInscription(String supannEtuAnneeInscription) {
+		this.supannEtuAnneeInscription = supannEtuAnneeInscription;
 	}
 
 }
