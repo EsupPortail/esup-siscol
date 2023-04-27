@@ -1,9 +1,12 @@
 package org.esupportail.referentiel.services;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
+import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.EtabRef;
+import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.SignataireRef;
 
 
@@ -39,6 +42,13 @@ public interface StudentComponentRepositoryDao extends Serializable{
 	 * @return Map<String,String>
 	 */
 	public Map<String,String> getComposantesPrincipalesRef(String universityCode,Map<String,String> lesComposantes);
+	
+	/**
+	 * 
+	 * @param universityCode
+	 * @return
+	 */
+	List<DiplomeReduitDto> getListeDiplomeDTO(String universityCode);
 	
 	
 

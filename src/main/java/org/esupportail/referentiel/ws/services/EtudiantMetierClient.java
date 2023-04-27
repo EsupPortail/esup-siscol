@@ -312,8 +312,10 @@ public class EtudiantMetierClient {
 		return null;
 	}
 
-	public List<String> recupererListeEtuParEtpEtDiplome(String annee, String codeEtp, String versionEtp,
+	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String annee, String codeEtp, String versionEtp,
 			String codeDipl, String verDipl) {
+		
+			
 		TableauEtapes etps = new TableauEtapes();
 		EtudiantCritereListeDTO dto = new EtudiantCritereListeDTO();
 		dto.setCode(codeEtp);
@@ -348,16 +350,7 @@ public class EtudiantMetierClient {
 		logger.info("annee : {}, codeEtape : {}, versionEtape : {} ,codeDiplome : {}, versionDiplome : {}", annee, codeEtp, versionEtp, codeDipl,
 				verDipl);
 		List<EtudiantDTO2> resultat = recupererListeEtudiants(criteres);
-
-		List<String> listCodeEtu = new ArrayList<>();
-		if (resultat != null && !resultat.isEmpty()) {
-
-			resultat.forEach(r -> {
-				listCodeEtu.add(r.getCodEtu());
-			});
-		}
-
-		return listCodeEtu;
+		return resultat;
 	}
 
 	/**

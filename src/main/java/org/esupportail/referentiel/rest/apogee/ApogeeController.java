@@ -4,8 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import org.esupportail.referentiel.beans.ApogeeMap;
+import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeInscription;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantDTO2;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
@@ -42,7 +43,6 @@ public class ApogeeController { // NO_UCD (unused code)
 	@Value("@Value(${app.apogee.universityCode})")
 	private String universityCode;
 
-	
 	@GetMapping("/etudiantRef")
 	public ResponseEntity<EtudiantRef> getStudent(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee) {
@@ -69,25 +69,22 @@ public class ApogeeController { // NO_UCD (unused code)
 		ApogeeMap map = studentDataRepositoryDaoWS.recupererEtapesByEtudiantAndAnnee(codeEtud, annee, "");
 		return map;
 	}
-	
-	
-	
+
 	@GetMapping("/infosAdmEtu")
 	public EtudiantInfoAdm InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
 		EtudiantInfoAdm student = studentDataRepositoryDaoWS.recupererEtudiantInfoAdm(numEtud);
 		return student;
 	}
-	
+
 	@GetMapping("/listEtuParEtapeEtDiplome")
-	public List<String>   recupererListeEtuParEtpEtDiplome(String annee, String codeEtape, String versionEtape,
+	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String annee, String codeEtape, String versionEtape,
 			String codeDiplome, String versionDiplome) {
-		
-		List<String> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(annee,codeEtape,versionEtape,codeDiplome,versionDiplome);
+
+		List<EtudiantDTO2> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(annee, codeEtape, versionEtape,
+				codeDiplome, versionDiplome);
 		return listeEtu;
-		
+
 	}
-	
-	
 
 	/**
 	 * 
@@ -149,8 +146,20 @@ public class ApogeeController { // NO_UCD (unused code)
 	public Map<String, String> getEtapesRef() {
 		Map<String, String> ref = studentComponentRepositoryDao.getEtapesRef(universityCode);
 		return ref;
-
 	}
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@GetMapping("/diplomesReference")
+	public List<DiplomeReduitDto> getDiplomesRef() {
+		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(universityCode);
+		return ref;
+	}
+
+	
 
 	/**
 	 * 
