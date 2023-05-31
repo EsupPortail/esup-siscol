@@ -71,8 +71,7 @@ public class Person implements Serializable {
 	
 	private String supannEtuAnneeInscription;
 	
-	private List<String> supannEtuInscription;
-
+	
 	
 
 	public String getUid() {
@@ -269,16 +268,7 @@ public class Person implements Serializable {
 		this.supannEtuAnneeInscription = supannEtuAnneeInscription;
 	}
 
-	public  List<String> getSupannEtuInscription() {
-		return supannEtuInscription;
-	}
-
-	public void setSupannEtuInscription( List<String> supannEtuInscription) {
-		this.supannEtuInscription = supannEtuInscription;
-	}
-
-	
-	
+		
 	
 
 }

@@ -268,11 +268,6 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 				person.setSupannEtuEtape(Arrays.asList(context.getStringAttributes(ldapAtributes.getSupannEtuEtape())));
 			}
 
-			if (context.getStringAttributes(ldapAtributes.getSupannEtuInscription()) != null) {
-				person.setSupannEtuInscription(
-						Arrays.asList(context.getStringAttributes(ldapAtributes.getSupannEtuInscription())));
-			}
-
 			person.setSupannEtuAnneeInscription(
 					context.getStringAttribute(ldapAtributes.getSupannEtuAnneeInscription()));
 

@@ -38,6 +38,16 @@ app:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (eduPersonAffiliation=staff)
+    parametres:
+ 		
+		#laissez vide si vous n'utilisez pas de prefix
+		supannEtuEtapePrefix: "*" ## ou par exemple{UAI:0921436L} 
+
+		#false pour ignorer le version d'etape et le separateur dansla recherche LDAP
+		supannEtuEtapeExisteVetVersion: false
+		#laissez vide si n'existe pas, il faut mettre des espaces si ils existent
+		supannEtuEtapeSepVetVersion: " - "
+
     attributes:
                 objectClass: Person
                 supannAliasLogin: supannAliasLogin
@@ -64,8 +74,7 @@ app:
                 supannRefId: supannRefId
                 supannEtuEtape: supannEtuEtape
                 supannEtuAnneeInscription: supannEtuAnneeInscription
-     			supannEtuInscription: supannEtuInscription
-                
+                     			                
     
   apogee:
     startYearMonth: 09
