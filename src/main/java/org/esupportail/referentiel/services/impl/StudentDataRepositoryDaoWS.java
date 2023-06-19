@@ -708,6 +708,10 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	public LinkedHashMap<String, String> recupererEtapeVetsParEtudiantAnnee(String codEtud, String annee) {
 		List<InsAdmEtpDTO2> tabInsAdmEtp = recupererIAEtapesV2(codEtud, annee);
 		LinkedHashMap<String, String> lEtapeVet = new LinkedHashMap<String, String>();
+		if(tabInsAdmEtp==null || tabInsAdmEtp.isEmpty()) {
+			return lEtapeVet;
+		}
+		
 		for (InsAdmEtpDTO2 insAdmEtp : tabInsAdmEtp) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("- Inscription Administrative -");

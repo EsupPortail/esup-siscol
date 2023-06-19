@@ -85,12 +85,25 @@ app:
     temoinRecupAnnu : N
     
     urlService:
+    	##si vous n'utilisaez pas l'authentifaction ws, laissez les champs username et password vides
       administratifMetier: http://ws.apogee.univ.fr:8080/aws/services/AdministratifMetier
+      administratifMetierUserName:
+      administratifMetierPassword:
       etudiantMetier: http://ws.apogee.univ.fr:8080/aws/services/EtudiantMetier
+      etudiantMetierUserName:
+      etudiantMetierPassword:
       pedagogiqueMetier: http://ws.apogee.univ.fr:8080/aws/services/PedagogiqueMetier
+      pedagogiqueMetierUserName:
+      pedagogiqueMetierPassword:
       geographieMetier: http://ws.apogee.univ.fr:8080/aws/services/GeographieMetier
+      geographieMetierUserName:
+      geographieMetierPassword:
       referentielMetier: http://ws.apogee.univ.fr:8080/aws/services/ReferentielMetier
+      referentielMetierUserName:
+      referentielMetierPassword:
       offreFormationMetier: http://ws.apogee.univ.fr:8080/aws/services/OffreFormationMetier
+      offreFromationMetierUserName: 
+      offreFromationMetierPassword: 
   pcscol:
     codeStructure: ETAB00
     codePeriode: PER-2020

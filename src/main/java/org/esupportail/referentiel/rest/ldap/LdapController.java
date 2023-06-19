@@ -69,6 +69,9 @@ public class LdapController {
 	public List<Person> serachStudentByForm(@RequestBody FormSearch member) {
 		member.setAffiliation(null);
 		member.setPrimaryAffiliation(null);
+		member.setSupannEtuEtapePrefix(supannEtuEtapePrefix);
+		member.setSupannEtuEtapeExisteVetVersion(supannEtuEtapeExisteVetVersion);
+		member.setSupannEtuEtapeSepVetVersion(supannEtuEtapeSepVetVersion);
 		List<Person> list_person = personService.findStudentByFilter(member.formAsFliter(ldapAtributes));
 		return list_person;
 	}
