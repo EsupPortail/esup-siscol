@@ -31,18 +31,6 @@ public class LdapController {
 	@Value("${app.ldap.attributes.supannEntiteAffectation}")
 	private String supannEntiteAffectation;
 
-	@Value("${app.ldap.attributes.supannEtuEtape}")
-	private String supannEtuEtape;
-
-	@Value("${app.ldap.parametres.supannEtuEtapePrefix}")
-	private String supannEtuEtapePrefix;
-
-	@Value("${app.ldap.parametres.supannEtuEtapeSepVetVersion}")
-	private String supannEtuEtapeSepVetVersion;
-	
-	@Value("${app.ldap.parametres.supannEtuEtapeExisteVetVersion}")
-	private boolean supannEtuEtapeExisteVetVersion;
-
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
 	LdapServiceInterface personService;

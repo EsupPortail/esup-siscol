@@ -32,22 +32,22 @@ server:
    
 app:
   server-url: http://localhost:8080/esup-siscol
-  server-version: 1.0.11-SNAPSHOT
+  server-version: 1.0.12-SNAPSHOT
   server-title: Client API SCOLARITE REST
   ldap:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (eduPersonAffiliation=staff)
-    ##les parmas sont obsolètes, ont été utilisés pour des tests  
+    ##les paramètres ci-dessous commentés sont obsolètes 
     parametres:
  		
 		#laissez vide si vous n'utilisez pas de prefix
-		supannEtuEtapePrefix: "*" ## ou par exemple{UAI:0921436L} 
+		#supannEtuEtapePrefix: "*" ## ou par exemple{UAI:0921436L} 
 
 		#false pour ignorer le version d'etape et le separateur dansla recherche LDAP
-		supannEtuEtapeExisteVetVersion: false
+		#supannEtuEtapeExisteVetVersion: false
 		#laissez vide si n'existe pas, il faut mettre des espaces si ils existent
-		supannEtuEtapeSepVetVersion: " - "
+		#supannEtuEtapeSepVetVersion: " - "
 
     attributes:
                 objectClass: Person
