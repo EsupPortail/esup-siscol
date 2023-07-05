@@ -15,7 +15,6 @@ import org.springframework.ldap.filter.WhitespaceWildcardsFilter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 public class FormSearch implements Serializable {
 
 	/**
@@ -40,21 +39,6 @@ public class FormSearch implements Serializable {
 	private String affiliation;
 
 	private String supannEtuEtape;
-	
-	private String supannEtuEtapeVersion;
-	
-	@JsonIgnore
-	private String supannEtuEtapePrefix;
-
-	@JsonIgnore
-	private String supannEtuEtapeSepVetVersion;
-	
-	@JsonIgnore
-	private boolean supannEtuEtapeExisteVetVersion;
-	
-	
-	
-	
 
 	private String supannEntiteAffectation;
 
@@ -128,37 +112,9 @@ public class FormSearch implements Serializable {
 		}
 
 		if (supannEtuEtape != null && !supannEtuEtape.isEmpty()) {
-			
-			
-			String codeEtapeLdap = supannEtuEtape;
-			
-			
-			if (supannEtuEtapeExisteVetVersion) {
-				if (supannEtuEtapeVersion != null && !supannEtuEtapeVersion.isEmpty() && !supannEtuEtapeSepVetVersion.isBlank()) {
-					if (this.supannEtuEtapeSepVetVersion != null && !this.supannEtuEtapeSepVetVersion.isEmpty()
-							&& !this.supannEtuEtapeSepVetVersion.isBlank()) {
-						codeEtapeLdap = codeEtapeLdap + this.supannEtuEtapeSepVetVersion;
-					}
-					
-					codeEtapeLdap = codeEtapeLdap + supannEtuEtapeVersion;
-				}
-				
-			}
-			if (this.supannEtuEtapePrefix != null && !this.supannEtuEtapePrefix.isEmpty()
-					&& !this.supannEtuEtapePrefix.isBlank()) {
-				if (this.supannEtuEtapePrefix.equals("*")) {
-					Filter query = new LikeFilter(ldapAtributes.getSupannEtuEtape(), "*"+codeEtapeLdap);
-					filter.and(query);
-				}
-					
-			} else {
-				codeEtapeLdap=this.supannEtuEtapePrefix+codeEtapeLdap;
-				
-				Filter query = new EqualsFilter(ldapAtributes.getSupannEtuEtape(), codeEtapeLdap);
-				filter.and(query);
-			}
-		
-			
+			Filter query = new EqualsFilter(ldapAtributes.getSupannEtuEtape(), supannEtuEtape);
+			filter.and(query);
+
 		}
 		if (supannEntiteAffectation != null && !supannEntiteAffectation.isEmpty()) {
 			Filter query = new EqualsFilter(ldapAtributes.getSupannEntiteAffectation(), supannEntiteAffectation);
@@ -173,7 +129,7 @@ public class FormSearch implements Serializable {
 			Filter query = new EqualsFilter(ldapAtributes.getSupannEtuInscription(), supannEtuInscription);
 			filter.and(query);
 		}
-	
+		System.out.println(filter);
 		return filter;
 	}
 
@@ -273,48 +229,13 @@ public class FormSearch implements Serializable {
 		this.supannEtuAnneeInscription = supannEtuAnneeInscription;
 	}
 
-	public String getSupannEtuEtapeVersion() {
-		return supannEtuEtapeVersion;
-	}
-
-	public void setSupannEtuEtapeVersion(String supannEtuEtapeVersion) {
-		this.supannEtuEtapeVersion = supannEtuEtapeVersion;
-	}
-
-	public String getSupannEtuEtapePrefix() {
-		return supannEtuEtapePrefix;
-	}
-
-	public void setSupannEtuEtapePrefix(String supannEtuEtapePrefix) {
-		this.supannEtuEtapePrefix = supannEtuEtapePrefix;
-	}
-
-	public boolean isSupannEtuEtapeExisteVetVersion() {
-		return supannEtuEtapeExisteVetVersion;
-	}
-
-	public void setSupannEtuEtapeExisteVetVersion(boolean supannEtuEtapeExisteVetVersion) {
-		this.supannEtuEtapeExisteVetVersion = supannEtuEtapeExisteVetVersion;
-	}
-
-	public String getSupannEtuEtapeSepVetVersion() {
-		return supannEtuEtapeSepVetVersion;
-	}
-
-	public void setSupannEtuEtapeSepVetVersion(String supannEtuEtapeSepVetVersion) {
-		this.supannEtuEtapeSepVetVersion = supannEtuEtapeSepVetVersion;
-	}
-
 	@Override
 	public String toString() {
 		return "FormSearch [id=" + id + ", codEtu=" + codEtu + ", supannAliasLogin=" + supannAliasLogin + ", nom=" + nom
 				+ ", mail=" + mail + ", prenom=" + prenom + ", primaryAffiliation=" + primaryAffiliation
-				+ ", affiliation=" + affiliation + ", supannEtuEtape=" + supannEtuEtape + ", supannEtuEtapeVersion="
-				+ supannEtuEtapeVersion + ", supannEtuEtapePrefix=" + supannEtuEtapePrefix
-				+ ", supannEtuEtapeSepVetVersion=" + supannEtuEtapeSepVetVersion + ", supannEtuEtapeExisteVetVersion="
-				+ supannEtuEtapeExisteVetVersion + ", supannEntiteAffectation=" + supannEntiteAffectation
-				+ ", supannEtuAnneeInscription=" + supannEtuAnneeInscription + ", supannEtuInscription="
-				+ supannEtuInscription + "]";
+				+ ", affiliation=" + affiliation + ", supannEtuEtape=" + supannEtuEtape
+				+ ", supannEtuEtapeExisteVetVersion=" + supannEntiteAffectation + ", supannEtuAnneeInscription="
+				+ supannEtuAnneeInscription + ", supannEtuInscription=" + supannEtuInscription + "]";
 	}
-	
+
 }

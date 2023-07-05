@@ -32,12 +32,13 @@ server:
    
 app:
   server-url: http://localhost:8080/esup-siscol
-  server-version: 1.0.10-SNAPSHOT
+  server-version: 1.0.11-SNAPSHOT
   server-title: Client API SCOLARITE REST
   ldap:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (eduPersonAffiliation=staff)
+    ##les parmas sont obsolètes, ont été utilisés pour des tests  
     parametres:
  		
 		#laissez vide si vous n'utilisez pas de prefix

@@ -70,10 +70,6 @@ public class LdapController {
 	public List<Person> serachStudentByForm(@RequestBody FormSearch member) {
 		member.setAffiliation(null);
 		member.setPrimaryAffiliation(null);
-		member.setSupannEtuEtapePrefix(supannEtuEtapePrefix);
-		member.setSupannEtuEtapeExisteVetVersion(supannEtuEtapeExisteVetVersion);
-		member.setSupannEtuEtapeSepVetVersion(supannEtuEtapeSepVetVersion);
-		
 		Filter f = member.formAsFliter(ldapAtributes);
 		logger.debug(f.encode());
 
@@ -114,39 +110,39 @@ public class LdapController {
 		return result;
 	}
 
-	@GetMapping("/EtuByEtape")
-	public List<Person> findByEtape(
-			@RequestParam(value = "codeEtapeLdap", required = true, defaultValue = "J5DRTH") String codeEtape,
-			@RequestParam(value = "versionEtapeLdap", required = false) String versionEtapeLdap) {
-		String codeEtapeLdap = "";
-		if (this.supannEtuEtapePrefix != null && !this.supannEtuEtapePrefix.isEmpty()
-				&& !this.supannEtuEtapePrefix.isBlank()) {
-			codeEtapeLdap = this.supannEtuEtapePrefix + codeEtape;
-		} else {
-			codeEtapeLdap = codeEtape;
-		}
-		
-		if (supannEtuEtapeExisteVetVersion) {
-			if (versionEtapeLdap != null && !versionEtapeLdap.isEmpty() && !this.supannEtuEtapeSepVetVersion.isBlank()) {
-				if (this.supannEtuEtapeSepVetVersion != null && !this.supannEtuEtapeSepVetVersion.isEmpty()
-						&& !this.supannEtuEtapeSepVetVersion.isBlank()) {
-					codeEtapeLdap = codeEtapeLdap + this.supannEtuEtapeSepVetVersion;
-				}
-				
-				codeEtapeLdap = codeEtapeLdap + versionEtapeLdap;
-			}
-			
-		}
-		
-		
-		
-
-		String filter_base = this.supannEtuEtape + "=%s";
-		String filter = String.format(filter_base, codeEtapeLdap);
-		logger.debug("LDAP EtuByEtape  :  " + filter);
-		List<Person> result = personService.findPersonByFilter(filter, this.baseLdap);
-		return result;
-	}
+//	@GetMapping("/EtuByEtape")
+//	public List<Person> findByEtape(
+//			@RequestParam(value = "codeEtapeLdap", required = true, defaultValue = "J5DRTH") String codeEtape,
+//			@RequestParam(value = "versionEtapeLdap", required = false) String versionEtapeLdap) {
+//		String codeEtapeLdap = "";
+//		if (this.supannEtuEtapePrefix != null && !this.supannEtuEtapePrefix.isEmpty()
+//				&& !this.supannEtuEtapePrefix.isBlank()) {
+//			codeEtapeLdap = this.supannEtuEtapePrefix + codeEtape;
+//		} else {
+//			codeEtapeLdap = codeEtape;
+//		}
+//		
+//		if (supannEtuEtapeExisteVetVersion) {
+//			if (versionEtapeLdap != null && !versionEtapeLdap.isEmpty() && !this.supannEtuEtapeSepVetVersion.isBlank()) {
+//				if (this.supannEtuEtapeSepVetVersion != null && !this.supannEtuEtapeSepVetVersion.isEmpty()
+//						&& !this.supannEtuEtapeSepVetVersion.isBlank()) {
+//					codeEtapeLdap = codeEtapeLdap + this.supannEtuEtapeSepVetVersion;
+//				}
+//				
+//				codeEtapeLdap = codeEtapeLdap + versionEtapeLdap;
+//			}
+//			
+//		}
+//		
+//		
+//		
+//
+//		String filter_base = this.supannEtuEtape + "=%s";
+//		String filter = String.format(filter_base, codeEtapeLdap);
+//		logger.debug("LDAP EtuByEtape  :  " + filter);
+//		List<Person> result = personService.findPersonByFilter(filter, this.baseLdap);
+//		return result;
+//	}
 
 	@GetMapping("/bySupannAliasLogin")
 	public Person findBySupannAliasLogin(@RequestParam(value = "login") String supannAliasLogin,
