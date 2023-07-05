@@ -815,7 +815,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				etpins.setTypeIns(DonneesStatic.TYPE_INS_ADMIN);
 				if (insAdmEtp.getCursusAmg() != null) {
 					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getCodCurAmg());
-					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getLibCurAmg());
+					etpins.setLibelleCursusAmenage(insAdmEtp.getCursusAmg().getLibCurAmg());
 				}
 
 				if (insAdmEtp.getDiplome() != null) {
@@ -1229,7 +1229,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
 				if (insAdmEtp.getCursusAmg() != null) {
 					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getCodCurAmg());
-					etpins.setCodeCursusAmenage(insAdmEtp.getCursusAmg().getLibCurAmg());
+					etpins.setLibelleCursusAmenage(insAdmEtp.getCursusAmg().getLibCurAmg());
 				}
 
 				if (insAdmEtp.getDiplome() != null) {

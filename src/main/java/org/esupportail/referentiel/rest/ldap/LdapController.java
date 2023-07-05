@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.ldap.filter.Filter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,6 +73,10 @@ public class LdapController {
 		member.setSupannEtuEtapePrefix(supannEtuEtapePrefix);
 		member.setSupannEtuEtapeExisteVetVersion(supannEtuEtapeExisteVetVersion);
 		member.setSupannEtuEtapeSepVetVersion(supannEtuEtapeSepVetVersion);
+		
+		Filter f = member.formAsFliter(ldapAtributes);
+		logger.debug(f.encode());
+
 		List<Person> list_person = personService.findStudentByFilter(member.formAsFliter(ldapAtributes));
 		return list_person;
 	}
@@ -133,15 +138,13 @@ public class LdapController {
 			
 		}
 		
-
+		
 		
 
 		String filter_base = this.supannEtuEtape + "=%s";
 		String filter = String.format(filter_base, codeEtapeLdap);
-		logger.trace("LDAP EtuByEtape  :  " + filter);
-
+		logger.debug("LDAP EtuByEtape  :  " + filter);
 		List<Person> result = personService.findPersonByFilter(filter, this.baseLdap);
-
 		return result;
 	}
 

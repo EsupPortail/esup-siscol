@@ -130,14 +130,14 @@ public class FormSearch implements Serializable {
 		if (supannEtuEtape != null && !supannEtuEtape.isEmpty()) {
 			
 			
-			String codeEtapeLdap = "";
+			String codeEtapeLdap = supannEtuEtape;
 			
 			
 			if (supannEtuEtapeExisteVetVersion) {
 				if (supannEtuEtapeVersion != null && !supannEtuEtapeVersion.isEmpty() && !supannEtuEtapeSepVetVersion.isBlank()) {
 					if (this.supannEtuEtapeSepVetVersion != null && !this.supannEtuEtapeSepVetVersion.isEmpty()
 							&& !this.supannEtuEtapeSepVetVersion.isBlank()) {
-						codeEtapeLdap = supannEtuEtape + this.supannEtuEtapeSepVetVersion;
+						codeEtapeLdap = codeEtapeLdap + this.supannEtuEtapeSepVetVersion;
 					}
 					
 					codeEtapeLdap = codeEtapeLdap + supannEtuEtapeVersion;

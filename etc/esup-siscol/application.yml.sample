@@ -32,7 +32,7 @@ server:
    
 app:
   server-url: http://localhost:8080/esup-siscol
-  server-version: 1.0.8
+  server-version: 1.0.10-SNAPSHOT
   server-title: Client API SCOLARITE REST
   ldap:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
