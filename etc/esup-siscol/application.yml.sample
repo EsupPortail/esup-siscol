@@ -32,7 +32,7 @@ server:
    
 app:
   server-url: http://localhost:8080/esup-siscol
-  server-version: 1.0.12-SNAPSHOT
+  server-version: 1.0.13-SNAPSHOT
   server-title: Client API SCOLARITE REST
   ldap:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
@@ -103,8 +103,8 @@ app:
       referentielMetierUserName:
       referentielMetierPassword:
       offreFormationMetier: http://ws.apogee.univ.fr:8080/aws/services/OffreFormationMetier
-      offreFromationMetierUserName: 
-      offreFromationMetierPassword: 
+      offreFormationMetierUserName: 
+      offreFormationMetierPassword: 
   pcscol:
     codeStructure: ETAB00
     codePeriode: PER-2020

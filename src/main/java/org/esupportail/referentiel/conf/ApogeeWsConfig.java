@@ -88,10 +88,10 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	@Value("${app.apogee.urlService.offreFormationMetier}")
 	private String offreFormationMetierUrlService;
 	
-	@Value("${app.apogee.urlService.offreFromationMetierUserName}")
-	private String offreFromationMetierUserName;
-	@Value("${app.apogee.urlService.offreFromationMetierPassword}")
-	private String offreFromationMetierPassword;
+	@Value("${app.apogee.urlService.offreFormationMetierUserName}")
+	private String offreFormationMetierUserName;
+	@Value("${app.apogee.urlService.offreFormationMetierPassword}")
+	private String offreFormationMetierPassword;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -215,12 +215,12 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	@RequestScope
 	public OffreFormationMetierServiceInterface offreFormationMetier() {
 		
-		if (offreFromationMetierUserName != null && offreFromationMetierPassword != null) {
+		if (offreFormationMetierUserName != null && offreFormationMetierPassword != null) {
 			Authenticator auth = new Authenticator() {
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(offreFromationMetierUserName,
-							offreFromationMetierPassword.toCharArray());
+					return new PasswordAuthentication(offreFormationMetierUserName,
+							offreFormationMetierPassword.toCharArray());
 				}
 			};
 			Authenticator.setDefault(auth);
