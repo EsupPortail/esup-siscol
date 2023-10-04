@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import org.apache.logging.log4j.util.Strings;
 import org.esupportail.referentiel.beans.AdministrationApogee;
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ElementPedagogique;
@@ -27,13 +26,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
-import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO2;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO3;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.BlocageDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IndBacDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ComposanteCentreGestionDTO;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ElementPedagogiDTO22;
@@ -144,6 +143,19 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		return etudiant;
 
 	}
+	
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	@Override
+	public InfoAdmEtuDTO4 recupererInfosAdmEtuV4(String uid) {
+		InfoAdmEtuDTO4 etudiant = null;
+		etudiant = etudiantMetierClient.recupererInfosAdmEtuV4(uid);
+		return etudiant;
+
+	}
 
 	/**
 	 * 
@@ -174,18 +186,6 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		return coordonnees;
 	}
 
-	/**
-	 * Recuperation des etapes auxquelles l'etudiant est inscrit administrativement
-	 * (inscription admin etape en cours (E)) en fonction de l'annee en param
-	 * 
-	 * @param cod
-	 * @param annee
-	 * @return List<InsAdmEtpDTO2>
-	 */
-	public List<InsAdmEtpDTO2> recupererIAEtapesV2(String cod, String annee) {
-		List<InsAdmEtpDTO2> tabInsAdmEtp = etudiantMetierClient.recupererIAEtapesV2(cod, annee);
-		return tabInsAdmEtp;
-	}
 
 	public List<InsAdmEtpDTO3> recupererIAEtapesV3(String cod, String annee) {
 		List<InsAdmEtpDTO3> tabInsAdmEtp = etudiantMetierClient.recupererIAEtapesV3(cod, annee);
@@ -667,9 +667,9 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	 * @return LinkedHashMap<String, String>
 	 */
 	public LinkedHashMap<String, String> recupererEtapesParEtudiantAnnee(String codEtud, String annee) {
-		List<InsAdmEtpDTO2> tabInsAdmEtp = recupererIAEtapesV2(codEtud, annee);
+		List<InsAdmEtpDTO3> tabInsAdmEtp = recupererIAEtapesV3(codEtud, annee);
 		LinkedHashMap<String, String> lEtape = new LinkedHashMap<String, String>();
-		for (InsAdmEtpDTO2 insAdmEtp : tabInsAdmEtp) {
+		for (InsAdmEtpDTO3 insAdmEtp : tabInsAdmEtp) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("- Inscription Administrative -");
 				logger.debug("[codeEtape : " + insAdmEtp.getEtape().getCodeEtp() + ", codeVersionEtape : "
@@ -706,13 +706,13 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	 * @return LinkedHashMap<String, String>
 	 */
 	public LinkedHashMap<String, String> recupererEtapeVetsParEtudiantAnnee(String codEtud, String annee) {
-		List<InsAdmEtpDTO2> tabInsAdmEtp = recupererIAEtapesV2(codEtud, annee);
+		List<InsAdmEtpDTO3> tabInsAdmEtp = recupererIAEtapesV3(codEtud, annee);
 		LinkedHashMap<String, String> lEtapeVet = new LinkedHashMap<String, String>();
 		if(tabInsAdmEtp==null || tabInsAdmEtp.isEmpty()) {
 			return lEtapeVet;
 		}
 		
-		for (InsAdmEtpDTO2 insAdmEtp : tabInsAdmEtp) {
+		for (InsAdmEtpDTO3 insAdmEtp : tabInsAdmEtp) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("- Inscription Administrative -");
 				logger.debug("[codeEtape : " + insAdmEtp.getEtape().getCodeEtp() + ", codeVersionEtape : "
@@ -743,10 +743,10 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	 * @return LinkedHashMap<String, String>
 	 */
 	public LinkedHashMap<String, String> recupererComposantesParEtudiantAnnee(String codEtud, String annee) {
-		List<InsAdmEtpDTO2> tabInsAdmEtp = recupererIAEtapesV2(codEtud, annee);
+		List<InsAdmEtpDTO3> tabInsAdmEtp = recupererIAEtapesV3(codEtud, annee);
 		LinkedHashMap<String, String> lComposante = new LinkedHashMap<String, String>();
 
-		for (InsAdmEtpDTO2 insAdmEtp : tabInsAdmEtp) {
+		for (InsAdmEtpDTO3 insAdmEtp : tabInsAdmEtp) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("- Inscription Administrative -");
 				logger.debug("[codeEtape : " + insAdmEtp.getEtape().getCodeEtp() + ", codeVersionEtape : "

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.EtabRef;
-import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtapeReduiteDto;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.services.StudentComponentRepositoryDao;
@@ -91,6 +90,126 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 	 */
 	LinkedHashMap<String, String> mapComp = new LinkedHashMap<String, String>();
 
+	
+	
+	
+	/**
+	 * 
+	 * @param diplomeDTO3
+	 * @return
+	 */
+	private List<DiplomeReduitDto> mapDiplomeReduitDto(List<DiplomeDTO3> diplomeDTO3 ) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getListeDiplomeDTO - nbr Dipolme diplomeDTO3 = " + diplomeDTO3.size());
+		}
+		List<DiplomeReduitDto> diplomes = new ArrayList<>();
+		for (DiplomeDTO3 ld : diplomeDTO3) {
+
+			TableauVersionDiplomeDTO3 listVldi = ld.getListVersionDiplome();
+
+			for (VersionDiplomeDTO3 lvd : listVldi.getItem()) {
+				
+				DiplomeReduitDto diplomeRd = new DiplomeReduitDto();
+				diplomeRd.setCodeDiplome(ld.getCodDip());
+				diplomeRd.setVersionDiplome(String.valueOf(lvd.getCodVrsVdi()));
+				diplomeRd.setLibDiplome(lvd.getLibWebVdi());
+				diplomes.add(diplomeRd);
+				TableauEtapeDTO3 letapes = lvd.getOffreFormation().getListEtape();
+				for (EtapeDTO3 etp : letapes.getItem()) {
+					
+					etp.getListComposanteCentreGestion();
+					
+					TableauVersionEtapeDTO3 lverionEtps = etp.getListVersionEtape();
+
+					for (VersionEtapeDTO32 lverionEtp : lverionEtps.getItem()) {
+						EtapeReduiteDto erdto = new EtapeReduiteDto();
+						erdto.setCodeEtp(etp.getCodEtp());
+						erdto.setCodVrsVet(String.valueOf(lverionEtp.getCodVrsVet()));
+						erdto.setLibWebVet(lverionEtp.getLibWebVet());
+						diplomeRd.getListeEtapes().add(erdto);
+					}
+
+				}
+			}
+
+		}
+		return diplomes;
+	}
+	
+	
+	/**
+	 * retourne tous les diplomes avec les vets sans les elp
+	 * 
+	 * @param universityCode
+	 * @return
+	 */
+	private List<DiplomeDTO3> getListeListDiplomeVetAllDTO3(String universityCode) {
+		// Recuperation des etapes depuis Apogee, cod et lib
+		if (logger.isDebugEnabled()) {
+			logger.debug("getEtapesRef - universityCode = " + universityCode);
+		}
+
+		SECritereDTO2 param = new SECritereDTO2();
+
+		// Retrait du filtre sur l'annee pour permettre de rattacher les codes etape des
+		// annees autres que celle en cours
+		param.setTemOuvertRecrutement("O");
+		param.setCodEtp("tous");
+		param.setCodVrsVet("tous");
+		param.setCodDip("tous");
+		param.setCodVrsVdi("tous");
+		param.setCodElp("aucun");
+		List<DiplomeDTO3> diplomeDTO3 = null;
+		try {
+			diplomeDTO3 = offreFormationMetierService.recupererSEV3(param);
+			return diplomeDTO3;
+		} catch (gouv.education.apogee.commun.client.ws.OffreFormationMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	
+	/**
+	 * retourne tous les diplomes avec les vets sans les elp
+	 * 
+	 * @param universityCode
+	 * @return
+	 */
+	private List<DiplomeDTO3> getListeListDiplomeVetAllDTO3(String codComposante, String codeAnu) {
+		// Recuperation des etapes depuis Apogee, cod et lib
+		if (logger.isDebugEnabled()) {
+			logger.debug("getListeListDiplomeVetAllDTO3 - codComposante = " + codComposante);
+		}
+
+		SECritereDTO2 param = new SECritereDTO2();
+
+		// Retrait du filtre sur l'annee pour permettre de rattacher les codes etape des
+		// annees autres que celle en cours
+		param.setTemOuvertRecrutement("O");
+		param.setCodEtp("tous");
+		param.setCodVrsVet("tous");
+		param.setCodDip("tous");
+		param.setCodVrsVdi("tous");
+		param.setCodElp("aucun");
+		
+		param.setCodComposanteVdi(codComposante);
+		param.setCodAnu(codeAnu);
+		
+		List<DiplomeDTO3> diplomeDTO3 = null;
+		try {
+			diplomeDTO3 = offreFormationMetierService.recupererSEV3(param);
+			return diplomeDTO3;
+		} catch (gouv.education.apogee.commun.client.ws.OffreFormationMetier.WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+
+	}
+	
+		
 	/**
 	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getEtabRef(java.lang.String)
 	 */
@@ -186,81 +305,49 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 
 	}
 
-	
-	/**
-	 * retourne tous les diplomes avec les vets sans les elp
-	 * @param universityCode
-	 * @return
-	 */
-	private List<DiplomeDTO3> getListeListDiplomeVetAllDTO3(String universityCode) {
-		// Recuperation des etapes depuis Apogee, cod et lib
-		if (logger.isDebugEnabled()) {
-			logger.debug("getEtapesRef - universityCode = " + universityCode);
-		}
+	@Override
+	public List<DiplomeReduitDto> getListeDiplomeDTO(String universityCode, String codeEtap, String versionEtape) {
+		List<DiplomeReduitDto> listVDI = new ArrayList<DiplomeReduitDto>();
+		EtapeReduiteDto etp = new EtapeReduiteDto();
+		etp.setCodeEtp(codeEtap);
+		etp.setCodVrsVet(versionEtape);
+		List<DiplomeReduitDto> vdis = getListeDiplomeDTO(universityCode);
+		vdis.forEach(vdi -> {
 
-		SECritereDTO2 param = new SECritereDTO2();
+			if (vdi.getListeEtapes() != null && vdi.getListeEtapes().contains(etp)) {
+				listVDI.add(vdi);
+			}
+		});
 
-		// Retrait du filtre sur l'annee pour permettre de rattacher les codes etape des
-		// annees autres que celle en cours
-		param.setTemOuvertRecrutement("O");
-		param.setCodEtp("tous");
-		param.setCodVrsVet("tous");
-		param.setCodDip("tous");
-		param.setCodVrsVdi("tous");
-		param.setCodElp("aucun");
-		List<DiplomeDTO3> diplomeDTO3 = null;
-		try {
-			diplomeDTO3 = offreFormationMetierService.recupererSEV3(param);
-			return diplomeDTO3;
-		} catch (gouv.education.apogee.commun.client.ws.OffreFormationMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-
+		return listVDI;
 	}
 
+	
+	
+	@Override
+	@Cacheable("ListeDiplomeDTOByCompAnu")
+	public List<DiplomeReduitDto> getListeDiplomeDTO(String codComposante, String codeAnu) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("getListeDiplomeDTO - universityCode + codeAnu = " + codComposante + " : "+codeAnu );
+		}
+		List<DiplomeDTO3> diplomeDTO3 = getListeListDiplomeVetAllDTO3(codComposante,codeAnu);
+		List<DiplomeReduitDto> dtos = mapDiplomeReduitDto(diplomeDTO3);
+		return dtos;
+	}
+	
+
+	
+	
 	@Override
 	@Cacheable("ListeDiplomeDTO")
 	public List<DiplomeReduitDto> getListeDiplomeDTO(String universityCode) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getListeDiplomeDTO - universityCode = " + universityCode);
 		}
-
-		List<DiplomeReduitDto> diplomes = new ArrayList<>();
 		List<DiplomeDTO3> diplomeDTO3 = getListeListDiplomeVetAllDTO3(universityCode);
-		if (logger.isDebugEnabled()) {
-			logger.debug("getListeDiplomeDTO - nbr Dipolme diplomeDTO3 = " + diplomeDTO3.size());
-		}
-		for (DiplomeDTO3 ld : diplomeDTO3) {
-
-			TableauVersionDiplomeDTO3 listVldi = ld.getListVersionDiplome();
-
-			for (VersionDiplomeDTO3 lvd : listVldi.getItem()) {
-
-				DiplomeReduitDto diplomeRd = new DiplomeReduitDto();
-				diplomeRd.setCodeDiplome(ld.getCodDip());
-				diplomeRd.setVersionDiplome(String.valueOf(lvd.getCodVrsVdi()));
-				diplomeRd.setLibDiplome(lvd.getLibWebVdi());
-				diplomes.add(diplomeRd);
-				TableauEtapeDTO3 letapes = lvd.getOffreFormation().getListEtape();
-				for (EtapeDTO3 etp : letapes.getItem()) {
-
-					TableauVersionEtapeDTO3 lverionEtps = etp.getListVersionEtape();
-
-					for (VersionEtapeDTO32 lverionEtp : lverionEtps.getItem()) {
-						EtapeReduiteDto erdto = new EtapeReduiteDto();
-						erdto.setCodeEtp(etp.getCodEtp());
-						erdto.setCodVrsVet(String.valueOf(lverionEtp.getCodVrsVet()));
-						erdto.setLibWebVet(lverionEtp.getLibWebVet());
-						diplomeRd.getListeEtapes().add(erdto);
-					}
-
-				}
-			}
-
-		}
-		return diplomes;
+		List<DiplomeReduitDto> dtos = mapDiplomeReduitDto(diplomeDTO3);
+		return dtos;
+		
 	}
 
 	/**
@@ -328,7 +415,7 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		try {
 			lcomposante = referentielMetierService.recupererComposanteV2(composante, null);
 		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e1) {
-			// TODO Auto-generated catch block
+			logger.error(e1.getMessage() + " ++++"+ composante);
 			e1.printStackTrace();
 		}
 
@@ -416,7 +503,6 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		}
 	}
 
-	
 	/**
 	 * @return the startYearDay
 	 */

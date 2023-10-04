@@ -1,5 +1,7 @@
 package org.esupportail.referentiel.beans;
 
+import java.util.Objects;
+
 public class EtapeReduiteDto {
 
 	
@@ -32,6 +34,22 @@ public class EtapeReduiteDto {
 	}
 	public void setLibWebVet(String libWebVet) {
 		LibWebVet = libWebVet;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(codVrsVet, codeEtp);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EtapeReduiteDto other = (EtapeReduiteDto) obj;
+		return Objects.equals(codVrsVet, other.codVrsVet) && Objects.equals(codeEtp, other.codeEtp);
 	}
 	
 	

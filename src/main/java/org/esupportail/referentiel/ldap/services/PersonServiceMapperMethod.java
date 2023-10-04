@@ -160,8 +160,10 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 					new PersonContextMapper(ldapAtributes));
 			if (persons != null && !persons.isEmpty())
 				return persons.get(0);
-			else
+			else {
+				logger.info("La recherche n'a pas trouver de résultat pour  " + supannAliasLogin + " DN "+ ldapAtributes.getBaseDn());
 				return null;
+			}
 		} catch (Exception e) {
 			logger.error(" ", e.getCause(), e.getCause());
 			return null;

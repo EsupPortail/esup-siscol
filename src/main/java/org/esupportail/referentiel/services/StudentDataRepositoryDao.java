@@ -9,10 +9,10 @@ import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantRef;
 
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
-import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO2;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO3;
@@ -90,16 +90,6 @@ public interface StudentDataRepositoryDao extends Serializable {
 	public List<InsAdmAnuDTO2> recupererIAAnnuellesV2(String codeEtud, String annee);
 
 	/**
-	 * Recuperation des etapes auxquelles l'etudiant est inscrit administrativement
-	 * (inscription admin etape en cours (E)) en fonction de l'annee en param
-	 * 
-	 * @param cod
-	 * @param annee
-	 * @return List<InsAdmEtpDTO2>
-	 */
-	public List<InsAdmEtpDTO2> recupererIAEtapesV2(String cod, String annee);
-
-	/**
 	 * 
 	 * @param codeEtp
 	 * @param versionEtp
@@ -162,7 +152,9 @@ public interface StudentDataRepositoryDao extends Serializable {
 	 * @param codEtud
 	 * @param annee
 	 * @return LinkedHashMap<String, String>
+	 * 
 	 */
+	@Deprecated
 	public LinkedHashMap<String, String> recupererComposantesParEtudiantAnnee(String codEtud, String annee);
 
 	/**
@@ -202,5 +194,13 @@ public interface StudentDataRepositoryDao extends Serializable {
 	 * @return String Year
 	 */
 	public String getYear();
+	
+	/**
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	public InfoAdmEtuDTO4 recupererInfosAdmEtuV4(String uid);
+
 
 }

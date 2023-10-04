@@ -62,7 +62,7 @@ public class EtudiantEtpesTest {
 		dtoDip.getListVersion().add("201");
 		diplomes.getItem().add(dtoDip);
 
-		List<EtudiantDTO2> listEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(annee, codeVet, verVet, codeDip, verDip);
+		List<EtudiantDTO2> listEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome("",annee, codeVet, verVet, codeDip, verDip);
 		listEtu.forEach(r->{
 			System.out.println(r);
 		});

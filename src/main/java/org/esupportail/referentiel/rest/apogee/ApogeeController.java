@@ -77,10 +77,10 @@ public class ApogeeController { // NO_UCD (unused code)
 	}
 
 	@GetMapping("/listEtuParEtapeEtDiplome")
-	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String annee, String codeEtape, String versionEtape,
+	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtape, String versionEtape,
 			String codeDiplome, String versionDiplome) {
 
-		List<EtudiantDTO2> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(annee, codeEtape, versionEtape,
+		List<EtudiantDTO2> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(codeComposante,annee, codeEtape, versionEtape,
 				codeDiplome, versionDiplome);
 		return listeEtu;
 
@@ -158,6 +158,34 @@ public class ApogeeController { // NO_UCD (unused code)
 		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(universityCode);
 		return ref;
 	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@GetMapping("/diplomesReferenceParComposanteEtAnnee")
+	public List<DiplomeReduitDto> getDiplomesRefParComposanteEtAnnee(@RequestParam(value = "codeComposante",required = true)String codeComposante,
+			@RequestParam(value = "codeAnnee",required = true)String codeAnnee) {
+		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(codeComposante,codeAnnee);
+		return ref;
+	}
+	
+	
+
+	
+	/**
+	 * 
+	 * @return
+	 */
+	@GetMapping("/diplomesReferenceParEtape")
+	public List<DiplomeReduitDto> getDiplomesRef(@RequestParam(value = "codeEtape",required = true)String codeEtape, @RequestParam(value = "versionEtape",required = true)String versionEtape) {
+		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(universityCode,codeEtape,versionEtape);
+		return ref;
+	}
+	
 
 	
 

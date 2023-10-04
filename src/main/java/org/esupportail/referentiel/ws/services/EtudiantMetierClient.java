@@ -26,7 +26,6 @@ import org.springframework.stereotype.Service;
 
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.AdministratifMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
-import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO2;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO3;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantCritereDTO;
@@ -35,6 +34,7 @@ import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauDiplomes;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauEtapes;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TypeHebergementDTO;
@@ -183,32 +183,10 @@ public class EtudiantMetierClient {
 	 * 
 	 * @param cod
 	 * @param annee
-	 * @return List<InsAdmEtpDTO2>
-	 */
-	public List<InsAdmEtpDTO2> recupererIAEtapesV2(String cod, String annee) {
-		List<InsAdmEtpDTO2> tabInsAdmEtp = null;
-
-		// serviceAdministratif.recupererIAEtapesV2(codEtu, annee, etatIAA, etatIAE);
-		try {
-			tabInsAdmEtp = serviceAdministratif.recupererIAEtapesV2(cod, annee, "E", "E");
-		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return tabInsAdmEtp;
-	}
-
-	/**
-	 * 
-	 * @param cod
-	 * @param annee
 	 * @return List<InsAdmEtpDTO3>
 	 */
 	public List<InsAdmEtpDTO3> recupererIAEtapesV3(String cod, String annee) {
 		List<InsAdmEtpDTO3> tabInsAdmEtp = null;
-
-		// serviceAdministratif.recupererIAEtapesV2(codEtu, annee, etatIAA, etatIAE);
 		try {
 			tabInsAdmEtp = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
 		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
@@ -293,6 +271,22 @@ public class EtudiantMetierClient {
 		return null;
 	}
 
+	/**
+	 * 
+	 * @param codEtu
+	 * @return
+	 */
+	public InfoAdmEtuDTO4 recupererInfosAdmEtuV4(String codEtu) {
+		try {
+			return etudiantMetierService.recupererInfosAdmEtuV4(codEtu);
+		} catch (WebBaseException_Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -307,15 +301,13 @@ public class EtudiantMetierClient {
 			return etudiantMetierService.recupererListeEtudiants(parametres);
 		} catch (WebBaseException_Exception e) {
 			logger.error(e.getMessage());
-			// e.printStackTrace();
 		}
 		return null;
 	}
 
-	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String annee, String codeEtp, String versionEtp,
+	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtp, String versionEtp,
 			String codeDipl, String verDipl) {
-		
-			
+
 		TableauEtapes etps = new TableauEtapes();
 		EtudiantCritereListeDTO dto = new EtudiantCritereListeDTO();
 		dto.setCode(codeEtp);
@@ -332,6 +324,8 @@ public class EtudiantMetierClient {
 		criteres.setAnnee(annee);
 		criteres.setListDiplomes(diplomes);
 		criteres.setListEtapes(etps);
+		
+		criteres.getListComposante().add(codeComposante);
 
 		criteres.setCodeCollectionELP(null);
 		criteres.setCodeCollectionVET(null);
@@ -347,8 +341,8 @@ public class EtudiantMetierClient {
 		criteres.setTemValAcquisXP(null);
 		criteres.setTypeResultat(null);
 
-		logger.info("annee : {}, codeEtape : {}, versionEtape : {} ,codeDiplome : {}, versionDiplome : {}", annee, codeEtp, versionEtp, codeDipl,
-				verDipl);
+		logger.info("annee : {}, codeEtape : {}, versionEtape : {} ,codeDiplome : {}, versionDiplome : {}", annee,
+				codeEtp, versionEtp, codeDipl, verDipl);
 		List<EtudiantDTO2> resultat = recupererListeEtudiants(criteres);
 		return resultat;
 	}
