@@ -52,15 +52,6 @@ public interface StudentComponentRepositoryDao extends Serializable{
 	
 	/**
 	 * 
-	 * @param universityCode
-	 * @param codeEtap
-	 * @param versionEtape
-	 * @return
-	 */
-	public List<DiplomeReduitDto> getListeDiplomeDTO(String universityCode,String codeEtap, String versionEtape);
-	
-	/**
-	 * 
 	 * @param codComposante
 	 * @param codeAnu
 	 * @return

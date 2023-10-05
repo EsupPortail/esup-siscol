@@ -306,25 +306,6 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 	}
 
 	@Override
-	public List<DiplomeReduitDto> getListeDiplomeDTO(String universityCode, String codeEtap, String versionEtape) {
-		List<DiplomeReduitDto> listVDI = new ArrayList<DiplomeReduitDto>();
-		EtapeReduiteDto etp = new EtapeReduiteDto();
-		etp.setCodeEtp(codeEtap);
-		etp.setCodVrsVet(versionEtape);
-		List<DiplomeReduitDto> vdis = getListeDiplomeDTO(universityCode);
-		vdis.forEach(vdi -> {
-
-			if (vdi.getListeEtapes() != null && vdi.getListeEtapes().contains(etp)) {
-				listVDI.add(vdi);
-			}
-		});
-
-		return listVDI;
-	}
-
-	
-	
-	@Override
 	@Cacheable("ListeDiplomeDTOByCompAnu")
 	public List<DiplomeReduitDto> getListeDiplomeDTO(String codComposante, String codeAnu) {
 		if (logger.isDebugEnabled()) {

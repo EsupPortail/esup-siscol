@@ -172,23 +172,7 @@ public class ApogeeController { // NO_UCD (unused code)
 		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(codeComposante,codeAnnee);
 		return ref;
 	}
-	
-	
-
-	
-	/**
-	 * 
-	 * @return
-	 */
-	@GetMapping("/diplomesReferenceParEtape")
-	public List<DiplomeReduitDto> getDiplomesRef(@RequestParam(value = "codeEtape",required = true)String codeEtape, @RequestParam(value = "versionEtape",required = true)String versionEtape) {
-		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(universityCode,codeEtape,versionEtape);
-		return ref;
-	}
-	
-
-	
-
+		
 	/**
 	 * 
 	 * @return
