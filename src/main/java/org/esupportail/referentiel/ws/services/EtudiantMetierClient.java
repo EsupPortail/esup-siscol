@@ -17,12 +17,16 @@ package org.esupportail.referentiel.ws.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.esupportail.referentiel.beans.RegimeInscription;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.AdministratifMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
@@ -305,8 +309,62 @@ public class EtudiantMetierClient {
 		return null;
 	}
 
-	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtp, String versionEtp,
-			String codeDipl, String verDipl) {
+	/**
+	 * 
+	 * @param codeComposante
+	 * @param annee
+	 * @param codeEtp
+	 * @param versionEtp
+	 * @param codeDipl
+	 * @param verDipl
+	 * @param nom
+	 * @param prenom
+	 * @param codEtu
+	 * @return
+	 */
+	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtp,
+			String versionEtp, String codeDipl, String verDipl, String codEtu, String nom, String prenom) {
+		List<EtudiantDTO2> etudiants = recupererListeEtuParEtpEtDiplome(codeComposante, annee, codeEtp, versionEtp,
+				codeDipl, verDipl);
+		logger.debug("recupererListeEtuParEtpEtDiplome : {} {} {} {}  {} {}  ", codeComposante, annee, codeEtp,
+				versionEtp, codeDipl, verDipl);
+
+		if (StringUtils.hasText(codEtu)) {
+			logger.debug("recupererListeEtuParEtpEtDiplome filtre par codeEtu : " + codEtu);
+			Predicate<EtudiantDTO2> byNumEtu = etudiant -> etudiant.getCodEtu().equals(codEtu);
+			Stream<EtudiantDTO2> result = etudiants.stream().filter(byNumEtu);
+			return result.collect(Collectors.toList());
+		}
+
+		if (StringUtils.hasText(nom)) {
+			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Nom : " + nom);
+			Predicate<EtudiantDTO2> byName = etudiant -> etudiant.getNom().toUpperCase().contains(nom.toUpperCase());
+			Stream<EtudiantDTO2> result = etudiants.stream().filter(byName);
+			if (StringUtils.hasText(prenom)) {
+				logger.debug("recupererListeEtuParEtpEtDiplome filtre par prenom : " + prenom);
+				Predicate<EtudiantDTO2> byPrenom = etudiant -> !etudiant.getPrenom().toUpperCase()
+						.contains(prenom.toUpperCase());
+				Stream<EtudiantDTO2> resultByPrenom = result.dropWhile(byPrenom);
+				return resultByPrenom.collect(Collectors.toList());
+			}
+			return result.collect(Collectors.toList());
+		}
+
+		return etudiants;
+	}
+
+	/**
+	 * 
+	 * @param codeComposante
+	 * @param annee
+	 * @param codeEtp
+	 * @param versionEtp
+	 * @param codeDipl
+	 * @param verDipl
+	 * @return
+	 */
+	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtp,
+			String versionEtp, String codeDipl, String verDipl) {
 
 		TableauEtapes etps = new TableauEtapes();
 		EtudiantCritereListeDTO dto = new EtudiantCritereListeDTO();
@@ -324,7 +382,7 @@ public class EtudiantMetierClient {
 		criteres.setAnnee(annee);
 		criteres.setListDiplomes(diplomes);
 		criteres.setListEtapes(etps);
-		
+
 		criteres.getListComposante().add(codeComposante);
 
 		criteres.setCodeCollectionELP(null);

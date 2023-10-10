@@ -77,11 +77,19 @@ public class ApogeeController { // NO_UCD (unused code)
 	}
 
 	@GetMapping("/listEtuParEtapeEtDiplome")
-	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtape, String versionEtape,
-			String codeDiplome, String versionDiplome) {
+	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(
+			@RequestParam(value = "codeComposante", required = true) String codeComposante,
+			@RequestParam(value = "annee", required = true) String annee,
+			@RequestParam(value = "codeEtape", required = true) String codeEtape,
+			@RequestParam(value = "versionEtape", required = true) String versionEtape,
+			@RequestParam(value = "codeDiplome", required = true) String codeDiplome,
+			@RequestParam(value = "versionDiplome", required = true) String versionDiplome,
+			@RequestParam(value = "codEtu", required = false) String codEtu,
+			@RequestParam(value = "nom", required = false) String nom,
+			@RequestParam(value = "prenom", required = false) String prenom) {
 
-		List<EtudiantDTO2> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(codeComposante,annee, codeEtape, versionEtape,
-				codeDiplome, versionDiplome);
+		List<EtudiantDTO2> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(codeComposante, annee,
+				codeEtape, versionEtape, codeDiplome, versionDiplome,codEtu,nom,prenom);
 		return listeEtu;
 
 	}
@@ -147,8 +155,7 @@ public class ApogeeController { // NO_UCD (unused code)
 		Map<String, String> ref = studentComponentRepositoryDao.getEtapesRef(universityCode);
 		return ref;
 	}
-	
-	
+
 	/**
 	 * 
 	 * @return
@@ -158,21 +165,19 @@ public class ApogeeController { // NO_UCD (unused code)
 		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(universityCode);
 		return ref;
 	}
-	
-	
-	
-	
+
 	/**
 	 * 
 	 * @return
 	 */
 	@GetMapping("/diplomesReferenceParComposanteEtAnnee")
-	public List<DiplomeReduitDto> getDiplomesRefParComposanteEtAnnee(@RequestParam(value = "codeComposante",required = true)String codeComposante,
-			@RequestParam(value = "codeAnnee",required = true)String codeAnnee) {
-		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(codeComposante,codeAnnee);
+	public List<DiplomeReduitDto> getDiplomesRefParComposanteEtAnnee(
+			@RequestParam(value = "codeComposante", required = true) String codeComposante,
+			@RequestParam(value = "codeAnnee", required = true) String codeAnnee) {
+		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(codeComposante, codeAnnee);
 		return ref;
 	}
-		
+
 	/**
 	 * 
 	 * @return
