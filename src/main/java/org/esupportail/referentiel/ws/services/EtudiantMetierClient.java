@@ -21,7 +21,9 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.esupportail.referentiel.beans.EtudiantDTO2Ext;
 import org.esupportail.referentiel.beans.RegimeInscription;
+import org.esupportail.referentiel.mappers.ApogeeEtudiantMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -322,35 +324,50 @@ public class EtudiantMetierClient {
 	 * @param codEtu
 	 * @return
 	 */
-	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtp,
+	public List<EtudiantDTO2Ext> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtp,
 			String versionEtp, String codeDipl, String verDipl, String codEtu, String nom, String prenom) {
 		List<EtudiantDTO2> etudiants = recupererListeEtuParEtpEtDiplome(codeComposante, annee, codeEtp, versionEtp,
 				codeDipl, verDipl);
 		logger.debug("recupererListeEtuParEtpEtDiplome : {} {} {} {}  {} {}  ", codeComposante, annee, codeEtp,
 				versionEtp, codeDipl, verDipl);
 
+		List<EtudiantDTO2> etudiantsFiltres = null;
+
 		if (StringUtils.hasText(codEtu)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par codeEtu : " + codEtu);
 			Predicate<EtudiantDTO2> byNumEtu = etudiant -> etudiant.getCodEtu().equals(codEtu);
 			Stream<EtudiantDTO2> result = etudiants.stream().filter(byNumEtu);
-			return result.collect(Collectors.toList());
+			List<EtudiantDTO2> listEtudiantDto2 = result.collect(Collectors.toList());
+			List<EtudiantDTO2Ext> listEtudiantDto2ext = ApogeeEtudiantMapper.Instance
+					.etudiantDTO2ToEtudiantDTO2Ext(listEtudiantDto2);
+			etudiantsFiltres = result.collect(Collectors.toList());
 		}
 
-		if (StringUtils.hasText(nom)) {
+		else if (StringUtils.hasText(nom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Nom : " + nom);
 			Predicate<EtudiantDTO2> byName = etudiant -> etudiant.getNom().toUpperCase().contains(nom.toUpperCase());
 			Stream<EtudiantDTO2> result = etudiants.stream().filter(byName);
 			if (StringUtils.hasText(prenom)) {
-				logger.debug("recupererListeEtuParEtpEtDiplome filtre par prenom : " + prenom);
+				logger.debug("recupererListeEtuParEtpEtDiplome filtre par nom  +prenom : " + prenom);
 				Predicate<EtudiantDTO2> byPrenom = etudiant -> !etudiant.getPrenom().toUpperCase()
 						.contains(prenom.toUpperCase());
 				Stream<EtudiantDTO2> resultByPrenom = result.dropWhile(byPrenom);
-				return resultByPrenom.collect(Collectors.toList());
+				etudiantsFiltres = resultByPrenom.collect(Collectors.toList());
+			} else {
+				etudiantsFiltres = result.collect(Collectors.toList());
 			}
-			return result.collect(Collectors.toList());
+		} else if (StringUtils.hasText(prenom)) {
+			logger.debug("recupererListeEtuParEtpEtDiplome filtre par prenom : " + prenom);
+			Predicate<EtudiantDTO2> byPrenom = etudiant -> etudiant.getPrenom().toUpperCase()
+					.contains(prenom.toUpperCase());
+			Stream<EtudiantDTO2> resultParPrenom = etudiants.stream().filter(byPrenom);
+			etudiantsFiltres = resultParPrenom.collect(Collectors.toList());
 		}
 
-		return etudiants;
+		if (etudiantsFiltres != null) {
+			return ApogeeEtudiantMapper.Instance.etudiantDTO2ToEtudiantDTO2Ext(etudiantsFiltres);
+		} else
+			return ApogeeEtudiantMapper.Instance.etudiantDTO2ToEtudiantDTO2Ext(etudiants);
 	}
 
 	/**

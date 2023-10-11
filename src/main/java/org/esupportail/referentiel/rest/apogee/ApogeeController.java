@@ -9,13 +9,17 @@ import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeInscription;
+import org.esupportail.referentiel.beans.EtudiantDTO2Ext;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.SignataireRef;
+import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
+import org.esupportail.referentiel.mappers.ApoggeeLdapEtudiant;
 import org.esupportail.referentiel.services.StudentComponentRepositoryDao;
 import org.esupportail.referentiel.services.impl.StudentDataRepositoryDaoWS;
 import org.esupportail.referentiel.ws.services.EtudiantMetierClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +43,10 @@ public class ApogeeController { // NO_UCD (unused code)
 
 	@Autowired
 	StudentComponentRepositoryDao studentComponentRepositoryDao;
+	
+	@Autowired
+	@Qualifier("personServiceMapperMethod")
+	LdapServiceInterface personService;
 
 	@Value("@Value(${app.apogee.universityCode})")
 	private String universityCode;
@@ -77,7 +85,7 @@ public class ApogeeController { // NO_UCD (unused code)
 	}
 
 	@GetMapping("/listEtuParEtapeEtDiplome")
-	public List<EtudiantDTO2> recupererListeEtuParEtpEtDiplome(
+	public List<EtudiantDTO2Ext> recupererListeEtuParEtpEtDiplome(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "annee", required = true) String annee,
 			@RequestParam(value = "codeEtape", required = true) String codeEtape,
@@ -88,8 +96,10 @@ public class ApogeeController { // NO_UCD (unused code)
 			@RequestParam(value = "nom", required = false) String nom,
 			@RequestParam(value = "prenom", required = false) String prenom) {
 
-		List<EtudiantDTO2> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(codeComposante, annee,
+		List<EtudiantDTO2Ext> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(codeComposante, annee,
 				codeEtape, versionEtape, codeDiplome, versionDiplome,codEtu,nom,prenom);
+		ApoggeeLdapEtudiant apoggeeLdapEtudiant=new ApoggeeLdapEtudiant(personService);
+		apoggeeLdapEtudiant.MappMailEtudiant(listeEtu);
 		return listeEtu;
 
 	}
