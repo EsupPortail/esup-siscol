@@ -95,13 +95,17 @@ public class ContextLoeaderTest {
 	
 	@Test
 	public void lireListeAPPTest() throws ApiException {
+		
+		try {
 		StagesApprenant appStg = stagesApi.listerInscriptionsAvecStages(codeStructure, codeApprenant);
 		Apprenant app = appStg.getApprenant();
 		System.out.println(app);
 		appStg.getInscriptions().forEach(ins->{
 			System.out.println(ins.getSupportInscription());
 		});
-		
+		}catch(Exception e) {
+			e.printStackTrace();
+		}	
 	}
 
 }

@@ -349,12 +349,13 @@ public class EtudiantMetierClient {
 			Stream<EtudiantDTO2> result = etudiants.stream().filter(byName);
 			if (StringUtils.hasText(prenom)) {
 				logger.debug("recupererListeEtuParEtpEtDiplome filtre par nom  +prenom : " + prenom);
-				Predicate<EtudiantDTO2> byPrenom = etudiant -> !etudiant.getPrenom().toUpperCase()
+				Predicate<EtudiantDTO2> byPrenom = etudiant -> etudiant.getPrenom().toUpperCase()
 						.contains(prenom.toUpperCase());
-				Stream<EtudiantDTO2> resultByPrenom = result.dropWhile(byPrenom);
+				Stream<EtudiantDTO2> resultByPrenom = result.filter(byPrenom);
 				etudiantsFiltres = resultByPrenom.collect(Collectors.toList());
 			} else {
 				etudiantsFiltres = result.collect(Collectors.toList());
+				
 			}
 		} else if (StringUtils.hasText(prenom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par prenom : " + prenom);
