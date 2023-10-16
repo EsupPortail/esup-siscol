@@ -12,7 +12,7 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 
 @Configuration
 @OpenAPIDefinition(servers = {
-		@Server(url = "${app.server-url:/}") }, info = @Info(title = "${app.server-title}", version = "${app.server-version}"))
+		@Server(url = "${app.server-url:/}") }, info = @Info(title = "${app.server-title}", version = "${server-version}"))
 public class OpenApiConfig {
 
 	@Bean

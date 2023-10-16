@@ -337,13 +337,8 @@ public class EtudiantMetierClient {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par codeEtu : " + codEtu);
 			Predicate<EtudiantDTO2> byNumEtu = etudiant -> etudiant.getCodEtu().equals(codEtu);
 			Stream<EtudiantDTO2> result = etudiants.stream().filter(byNumEtu);
-			List<EtudiantDTO2> listEtudiantDto2 = result.collect(Collectors.toList());
-			List<EtudiantDTO2Ext> listEtudiantDto2ext = ApogeeEtudiantMapper.Instance
-					.etudiantDTO2ToEtudiantDTO2Ext(listEtudiantDto2);
 			etudiantsFiltres = result.collect(Collectors.toList());
-		}
-
-		else if (StringUtils.hasText(nom)) {
+		} else if (StringUtils.hasText(nom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Nom : " + nom);
 			Predicate<EtudiantDTO2> byName = etudiant -> etudiant.getNom().toUpperCase().contains(nom.toUpperCase());
 			Stream<EtudiantDTO2> result = etudiants.stream().filter(byName);
@@ -355,7 +350,7 @@ public class EtudiantMetierClient {
 				etudiantsFiltres = resultByPrenom.collect(Collectors.toList());
 			} else {
 				etudiantsFiltres = result.collect(Collectors.toList());
-				
+
 			}
 		} else if (StringUtils.hasText(prenom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par prenom : " + prenom);

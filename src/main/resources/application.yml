@@ -5,3 +5,5 @@ spring:
     - file:///etc/esup-siscol/application.yml
 logging:
   config: file:/etc/esup-siscol/logback.xml
+
+server-version: 1.0.19
