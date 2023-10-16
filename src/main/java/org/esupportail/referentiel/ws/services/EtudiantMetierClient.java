@@ -330,22 +330,32 @@ public class EtudiantMetierClient {
 				codeDipl, verDipl);
 		logger.debug("recupererListeEtuParEtpEtDiplome : {} {} {} {}  {} {}  ", codeComposante, annee, codeEtp,
 				versionEtp, codeDipl, verDipl);
+		Predicate<EtudiantDTO2> byNumEtu = etudiant -> etudiant.getCodEtu().equals(codEtu);
+		Predicate<EtudiantDTO2> byPrenom = etudiant -> etudiant.getPrenom().toUpperCase()
+				.contains(prenom.toUpperCase());
+		Predicate<EtudiantDTO2> byName = etudiant -> etudiant.getNom().toUpperCase().contains(nom.toUpperCase());
 
 		List<EtudiantDTO2> etudiantsFiltres = null;
 
 		if (StringUtils.hasText(codEtu)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par codeEtu : " + codEtu);
-			Predicate<EtudiantDTO2> byNumEtu = etudiant -> etudiant.getCodEtu().equals(codEtu);
 			Stream<EtudiantDTO2> result = etudiants.stream().filter(byNumEtu);
 			etudiantsFiltres = result.collect(Collectors.toList());
+			if (StringUtils.hasText(nom)) {
+				Stream<EtudiantDTO2> result_ByName = etudiantsFiltres.stream().filter(byName);
+				etudiantsFiltres = result_ByName.collect(Collectors.toList());
+				if (StringUtils.hasText(prenom)) {
+					Stream<EtudiantDTO2> result_ByPrenom = etudiantsFiltres.stream().filter(byPrenom);
+					etudiantsFiltres = result_ByPrenom.collect(Collectors.toList());
+				}
+
+			}
 		} else if (StringUtils.hasText(nom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Nom : " + nom);
-			Predicate<EtudiantDTO2> byName = etudiant -> etudiant.getNom().toUpperCase().contains(nom.toUpperCase());
+
 			Stream<EtudiantDTO2> result = etudiants.stream().filter(byName);
 			if (StringUtils.hasText(prenom)) {
 				logger.debug("recupererListeEtuParEtpEtDiplome filtre par nom  +prenom : " + prenom);
-				Predicate<EtudiantDTO2> byPrenom = etudiant -> etudiant.getPrenom().toUpperCase()
-						.contains(prenom.toUpperCase());
 				Stream<EtudiantDTO2> resultByPrenom = result.filter(byPrenom);
 				etudiantsFiltres = resultByPrenom.collect(Collectors.toList());
 			} else {
@@ -354,8 +364,6 @@ public class EtudiantMetierClient {
 			}
 		} else if (StringUtils.hasText(prenom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par prenom : " + prenom);
-			Predicate<EtudiantDTO2> byPrenom = etudiant -> etudiant.getPrenom().toUpperCase()
-					.contains(prenom.toUpperCase());
 			Stream<EtudiantDTO2> resultParPrenom = etudiants.stream().filter(byPrenom);
 			etudiantsFiltres = resultParPrenom.collect(Collectors.toList());
 		}
