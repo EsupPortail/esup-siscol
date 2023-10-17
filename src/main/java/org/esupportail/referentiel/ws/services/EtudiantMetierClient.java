@@ -350,6 +350,11 @@ public class EtudiantMetierClient {
 				}
 
 			}
+			else if(StringUtils.hasText(prenom)) {
+				Stream<EtudiantDTO2> result_ByPrenom = etudiantsFiltres.stream().filter(byPrenom);
+				etudiantsFiltres = result_ByPrenom.collect(Collectors.toList());
+			} 
+			
 		} else if (StringUtils.hasText(nom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Nom : " + nom);
 
