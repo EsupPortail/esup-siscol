@@ -6,4 +6,4 @@ spring:
 logging:
   config: file:/etc/esup-siscol/logback.xml
 
-server-version: 1.0.21
+server-version: 1.0.22
