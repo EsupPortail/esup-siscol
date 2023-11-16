@@ -29,26 +29,26 @@ public class PcscolConfig {
 	@Value("${app.pcscol.accesstoken.duration}")
 	private long duration = 6;
 
-	@Bean
-	@SessionScope
-	public StagesApi stagesApi() {
+    @Bean
+    @SessionScope
+    StagesApi stagesApi() {
 		String token = accessTokenService.getToken();
 		StagesApi stagesApi = new StagesApi(apiClient(apiSta, token));
 		return stagesApi;
 	}
 
-	@Bean
-	@SessionScope
-	public StructuresApi structuresApi() {
+    @Bean
+    @SessionScope
+    StructuresApi structuresApi() {
 		String token = accessTokenService.getToken();
 		StructuresApi structuresApi = new StructuresApi(apiClient(apiMof, token));
 		return structuresApi;
 
 	}
 
-	@Bean
-	@SessionScope
-	public FormationsApi formationsApi() {
+    @Bean
+    @SessionScope
+    FormationsApi formationsApi() {
 		String token = accessTokenService.getToken();
 		FormationsApi structuresApi = new FormationsApi(apiClient(apiMof, token));
 		return structuresApi;

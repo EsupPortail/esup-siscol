@@ -40,7 +40,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
-import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO2;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO3;
 
@@ -87,7 +87,7 @@ public class TestEtudiantMetier {
 
 	@Test
 	public void testgetinfosAdmEtu() {
-		InfoAdmEtuDTO3 student = studentDataRepositoryDaoWS.recupererInfosAdmEtuV3(numEtud);
+		InfoAdmEtuDTO4 student = studentDataRepositoryDaoWS.recupererInfosAdmEtuV4(numEtud);
 		System.out.println(student.getNomPatronymique());
 		System.out.println(student.getAnneePremiereInscEtb());
 		assertEquals("BOOP", student.getNomPatronymique());

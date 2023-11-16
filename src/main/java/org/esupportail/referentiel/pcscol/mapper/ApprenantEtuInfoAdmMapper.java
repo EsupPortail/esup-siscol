@@ -11,6 +11,8 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValueMappingStrategy;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -98,8 +100,8 @@ public interface ApprenantEtuInfoAdmMapper {
 	@Mapping(target = "codeEtp", source = "inscription.supportInscription.supportInscriptionId")
 	@Mapping(target = "codeDiplome", source = "inscription.supportInscription.codeChemin")
 	@Mapping(target = "libWebVet", source = "inscription.supportInscription.libelleAffichage")
-	@Mapping(target = "regimeIns", source = "inscription.supportInscription.codeRegimeInscription")
-	@Mapping(target = "libRg", source = "inscription.supportInscription.libelleRegimeInscription")
+	@Mapping(target = "regimeIns", source = "inscription.supportInscription.codeRegimeInscription",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+	@Mapping(target = "libRg", source = "inscription.supportInscription.libelleRegimeInscription",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	public EtapeInscription stagesApprenantToEtapeInscription(Inscription inscription);
 
 }

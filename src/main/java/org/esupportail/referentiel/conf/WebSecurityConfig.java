@@ -49,9 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // NO_UCD 
 		auth.authenticationProvider(authProvider);
 	}
 
-	
-	@Bean
-	public CorsFilter corsFilter() {
+
+    @Bean
+    CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);

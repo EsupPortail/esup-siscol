@@ -9,21 +9,13 @@ import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.util.Base64;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.handler.MessageContext;
-
-import org.junit.jupiter.api.Test;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
 
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantMetierServiceInterfaceService;
-import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.WebBaseException_Exception;
 import reactor.core.publisher.Mono;
 
@@ -71,7 +63,7 @@ public class WSTestAuth {
 		
 		System.out.println(clientMetier);
 		try {
-			InfoAdmEtuDTO3 info = clientMetier.recupererInfosAdmEtuV3("35006817");
+			InfoAdmEtuDTO4 info = clientMetier.recupererInfosAdmEtuV4("35006817");
 			
 			
 			System.out.println(info.getNomPatronymique());

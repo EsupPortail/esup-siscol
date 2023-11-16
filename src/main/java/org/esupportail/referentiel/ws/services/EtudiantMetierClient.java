@@ -39,7 +39,6 @@ import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantCritereList
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
-import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauDiplomes;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauEtapes;
@@ -257,23 +256,6 @@ public class EtudiantMetierClient {
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.upond.apogeews.dao.referentiel.services.interfaces.
-	 * EtudiantMetierServiceInterfaceCustom#recupererInfosAdmEtu(java.lang. String)
-	 */
-
-	public InfoAdmEtuDTO3 recupererInfosAdmEtuV3(String codEtu) {
-		try {
-			return etudiantMetierService.recupererInfosAdmEtuV3(codEtu);
-		} catch (WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return null;
 	}
 

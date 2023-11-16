@@ -11,7 +11,6 @@ import org.esupportail.referentiel.beans.EtudiantRef;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
-import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO2;
@@ -51,13 +50,7 @@ public interface StudentDataRepositoryDao extends Serializable {
 	 */
 	public String recupererCodIndParCodEtu(String codEtu);
 
-	/**
-	 * 
-	 * @param uid
-	 * @return InfoAdmEtuDTO2
-	 */
-	public InfoAdmEtuDTO3 recupererInfosAdmEtuV3(String uid);
-
+	
 	/**
 	 * 
 	 * @param uid

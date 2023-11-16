@@ -15,36 +15,43 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 		@Server(url = "${app.server-url:/}") }, info = @Info(title = "${app.server-title}", version = "${server-version}"))
 public class OpenApiConfig {
 
-	@Bean
-	public GroupedOpenApi usersGroup() {
+    @Bean
+    GroupedOpenApi usersGroup() {
 		return GroupedOpenApi.builder().group("apogee").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
 		}).packagesToScan("org.esupportail.referentiel.rest.apogee").build();
 	}
 
-	@Bean
-	public GroupedOpenApi ldapGroup() {
+    @Bean
+    GroupedOpenApi ldapGroup() {
 		return GroupedOpenApi.builder().group("ldap").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
 		}).packagesToScan("org.esupportail.referentiel.rest.ldap").build();
 	}
 
-	@Bean
-	public GroupedOpenApi psScolGroup() {
+    @Bean
+    GroupedOpenApi psScolGroup() {
 		return GroupedOpenApi.builder().group("pcscol").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
 		}).packagesToScan("org.esupportail.referentiel.rest.pcscol").build();
 	}
 
-	@Bean
-	public GroupedOpenApi all() {
+    @Bean
+    GroupedOpenApi all() {
 		return GroupedOpenApi.builder().group("all").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
 		}).packagesToScan("org.esupportail.referentiel.rest.ldap", "org.esupportail.referentiel.rest.apogee",
 				"org.esupportail.referentiel.rest.pcscol").build();
+	}
+    @Bean
+    GroupedOpenApi generiqueSIGroup() {
+		return GroupedOpenApi.builder().group("generiqueSI").addOperationCustomizer((operation, handlerMethod) -> {
+			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
+			return operation;
+		}).packagesToScan("org.esupportail.referentiel.rest.generiqueSI").build();
 	}
 }

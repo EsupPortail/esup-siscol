@@ -30,8 +30,7 @@ import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmEtpDTO3;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.BlocageDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
-import gouv.education.apogee.commun.client.ws.EtudiantMetier.IndBacDTO;
-import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO3;
+import gouv.education.apogee.commun.client.ws.EtudiantMetier.IndBacDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ComposanteCentreGestionDTO;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
@@ -131,19 +130,6 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		return codEtu;
 	}
 
-	/**
-	 * 
-	 * @param uid
-	 * @return InfoAdmEtuDTO2
-	 */
-	@Override
-	public InfoAdmEtuDTO3 recupererInfosAdmEtuV3(String uid) {
-		InfoAdmEtuDTO3 etudiant = null;
-		etudiant = etudiantMetierClient.recupererInfosAdmEtuV3(uid);
-		return etudiant;
-
-	}
-	
 	/**
 	 * 
 	 * @param uid
@@ -315,7 +301,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		if (etudiant == null) {
 			throw new RuntimeException("ÉCHEC de LE RÉCUPÉRATION DE L'ÉTUDIANT ");
 		}
-		InfoAdmEtuDTO3 apogeeinfosAdmDTO2 = recupererInfosAdmEtuV3(etudiant.getCodEtu().toString());
+		InfoAdmEtuDTO4 apogeeinfosAdmDTO2 = recupererInfosAdmEtuV4(etudiant.getCodEtu().toString());
 
 		// etudiantInfoAdm.setCodInd(etudiant.getCodInd());
 		etudiantInfoAdm.setEmailAnnuaire(etudiant.getEmailAnnuaire());
@@ -393,7 +379,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		}
 		if (apogeeinfosAdmDTO2.getListeBacs() != null) {
 			String bacs = "";
-			for (IndBacDTO bac : apogeeinfosAdmDTO2.getListeBacs().getItem()) {
+			for (IndBacDTO2 bac : apogeeinfosAdmDTO2.getListeBacs().getItem()) {
 				if (!bacs.isBlank())
 					bacs = bacs + ";";
 				bacs = bacs + bac.getCodBac() + ":" + bac.getLibelleBac() + ":" + bac.getAnneeObtentionBac();
@@ -441,7 +427,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		IdentifiantsEtudiantDTO2 etudiant = recupererIdentifiantsEtudiantDTO2(codeEtu);
 
 		// Recuperation des infos de l'etudiant dans Apogee
-		InfoAdmEtuDTO3 infosAdmEtu = recupererInfosAdmEtuV3(etudiant.getCodEtu().toString());
+		InfoAdmEtuDTO4 infosAdmEtu = recupererInfosAdmEtuV4(etudiant.getCodEtu().toString());
 
 		// Ajout des variables d'annee (pour permettre la modif d'anciennes conventions)
 		String anneeCourante = "";
