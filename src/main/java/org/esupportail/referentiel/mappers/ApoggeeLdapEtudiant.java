@@ -22,9 +22,10 @@ public class ApoggeeLdapEtudiant {
 	}
 
 	public void MappMailEtudiant(List<EtudiantDTO2Ext> etudiantsExt) {
-		etudiantsExt.forEach(etu -> {
-			MappMailEtudiant(etu);
-		});
+		if (etudiantsExt != null)
+			etudiantsExt.forEach(etu -> {
+				MappMailEtudiant(etu);
+			});
 	}
 
 }

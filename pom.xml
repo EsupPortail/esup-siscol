@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail.referentiel</groupId>
 	<artifactId>esup-siscol</artifactId>
-	<version>1.0.23</version>
+	<version>1.0.24</version>
 	<packaging>war</packaging>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -31,13 +31,16 @@
 			<scope>provided</scope>
 		</dependency>
 		<!-- mettre la version du client apogee installée -->
-		<!-- exemple mvn install:install-file -Dfile=apo-webservices-client62070.jar 
-			-DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client -Dversion=62070 
+		<!-- exemple mvn install:install-file
+		-Dfile=apo-webservices-client62070.jar 
+			-DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client
+		-Dversion=62070 
 			-Dpackaging=jar le version dans ce cas c'est la 62070 -->
 		<dependency>
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
-			<version>6.40.01</version>
+			<version>6.40.30</version>
+			<!--			<version>6.40.01</version>-->
 			<!--			<version>6.30.50</version>-->
 			<!--			<version>63030</version>-->
 		</dependency>
@@ -226,7 +229,7 @@
 			<version>${org.mapstruct.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.zalando/problem -->
-	
+
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
