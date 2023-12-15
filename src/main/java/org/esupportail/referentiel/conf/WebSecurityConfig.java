@@ -1,6 +1,5 @@
 package org.esupportail.referentiel.conf;
 
-
 import org.esupportail.referentiel.security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +14,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // NO_UCD (unused code)
@@ -29,19 +26,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // NO_UCD 
 
 		http
 				// HTTP Basic authentication
-				.httpBasic().and().authorizeRequests().antMatchers(HttpMethod.GET, "/supann/**")
-				.hasAnyAuthority("USER", "ADMIN").antMatchers(HttpMethod.POST, "/ldap/**")
-				.hasAnyAuthority("USER", "ADMIN").antMatchers(HttpMethod.GET, "/apogee/**").hasAnyAuthority("USER", "ADMIN").and()
-				.csrf().disable().formLogin().disable();
+				.httpBasic().and().authorizeRequests()
+				/* GET */
+				.antMatchers(HttpMethod.GET, "/cache/**", "/supann/**", "/apogee/**").hasAnyAuthority("USER", "ADMIN")
+				/* POST */
+				.antMatchers(HttpMethod.POST, "/ldap/**").hasAnyAuthority("USER", "ADMIN")
+				/* misc */
+				.and().csrf().disable().formLogin().disable();
 
-				http.authorizeRequests().
-				antMatchers("/registration", "/js/**", "/css/**", "/img/**", "/webjars/**").permitAll()
-				.anyRequest().hasAnyAuthority("ADMIN","USER")
-	
-				.and().formLogin().loginPage("/login").permitAll()
-				.and().logout().invalidateHttpSession(true).clearAuthentication(true)
-				.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login?logout")
-				.permitAll();
+		http.authorizeRequests().antMatchers("/registration", "/js/**", "/css/**", "/img/**", "/webjars/**").permitAll()
+				.anyRequest().hasAnyAuthority("ADMIN", "USER")
+
+				.and().formLogin().loginPage("/login").permitAll().and().logout().invalidateHttpSession(true)
+				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login?logout").permitAll();
 	}
 
 	@Override
@@ -49,9 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // NO_UCD 
 		auth.authenticationProvider(authProvider);
 	}
 
-
-    @Bean
-    CorsFilter corsFilter() {
+	@Bean
+	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
@@ -64,9 +61,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // NO_UCD 
 		config.addAllowedMethod("DELETE");
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
-
 	}
-	
-
-	      
 }
