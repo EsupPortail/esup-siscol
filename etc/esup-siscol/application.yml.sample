@@ -162,6 +162,7 @@ credential:
 cache:
     # Chargement au demarrage des caches
     onStartup:
+        # Active ou non, par defaut : false
         enabled: true
     # Time-To-Live du cache temporaire, en minutes, par defaut : 60 [minutes]
     #ttl-tmp:
