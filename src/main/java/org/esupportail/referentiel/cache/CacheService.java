@@ -8,6 +8,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.cache.Cache;
 import javax.cache.CacheManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 @SuppressWarnings("serial")
 public class CacheService implements Serializable {
+	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private transient CacheManager cacheManager;
@@ -70,7 +73,6 @@ public class CacheService implements Serializable {
 					entry.setSize(1);
 				}
 				entries.add(entry);
-				System.out.println(entry);
 			});
 
 		});
@@ -105,9 +107,21 @@ public class CacheService implements Serializable {
 	 * @param entry
 	 * @return les entrées de cache invalidées
 	 */
-	public List<CacheEntry> invalidEntry(final CacheEntry entry) {
+	public List<CacheEntry> invalidateEntry(final CacheEntry entry) {
 		cacheManager.getCache(entry.getCache()).remove(entry.getKey());
 		return getCacheEntries();
 	}
 
+	/**
+	 * Invalidation de tous les caches.
+	 */
+	public void invalidateAllCaches() {
+		logger.debug("Invalidation of caches.");
+		cacheManager.getCacheNames().forEach(cacheName -> {
+			logger.debug("Invalidation of cache {}.", cacheName);
+			invalidateCache(new CacheEntry(cacheName));
+			logger.debug("Cache {} invalidated.", cacheName);
+		});
+		logger.debug("Caches invalidated.");
+	}
 }

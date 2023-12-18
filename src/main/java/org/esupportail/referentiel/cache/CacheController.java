@@ -78,11 +78,8 @@ public class CacheController {
 	 */
 	public void loadCacheEtapes() {
 		logger.debug("Loading cache for apogeeController/EtapesRef.");
-		/* Ajout en cache des étapes */
-		cacheService.putCache(CacheConfig.PERMANENT,
-				"org.esupportail.referentiel.services.impl.StudentComponentRepositoryDaoWS#getEtapesRef#@Value("
-						+ universityCode + ")",
-				studentComponentRepositoryDao.getEtapesRef(universityCode));
+		/* Appel à getEtapesRef pour mise en cache des étapes */
+		studentComponentRepositoryDao.getEtapesRef(universityCode);
 		logger.debug("Cache for apogeeController/EtapesRef loaded.");
 	}
 
@@ -90,11 +87,6 @@ public class CacheController {
 	 * Invalidation des caches.
 	 */
 	public void invalidateCaches() {
-		logger.debug("Invalidating cache {}.", CacheConfig.TMP);
-		cacheService.invalidateCache(new CacheEntry(CacheConfig.TMP));
-		logger.debug("Cache {} invalidated.", CacheConfig.TMP);
-		logger.debug("Invalidating cache {}.", CacheConfig.PERMANENT);
-		cacheService.invalidateCache(new CacheEntry(CacheConfig.PERMANENT));
-		logger.debug("Cache {} invalidated.", CacheConfig.PERMANENT);
+		cacheService.invalidateAllCaches();
 	}
 }
