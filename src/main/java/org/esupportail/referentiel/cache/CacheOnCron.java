@@ -8,6 +8,12 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+/**
+ * Cron pour la gestion des caches.
+ *
+ * @author Matthieu Manginot - Université de Lorraine
+ *
+ */
 @Service
 @EnableScheduling
 @ConditionalOnProperty(name = "cache.scheduling.enabled", matchIfMissing = true)

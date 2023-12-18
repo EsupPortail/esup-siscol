@@ -25,6 +25,8 @@ public class CacheService implements Serializable {
 	private transient CacheManager cacheManager;
 
 	/**
+	 * Liste des caches.
+	 *
 	 * @return les caches disponibles
 	 */
 	public List<CacheEntry> getCaches() {
@@ -46,6 +48,8 @@ public class CacheService implements Serializable {
 	}
 
 	/**
+	 * Liste des entrées de cache.
+	 *
 	 * @return les entrées de cache
 	 */
 	public List<CacheEntry> getCacheEntries() {
@@ -85,6 +89,8 @@ public class CacheService implements Serializable {
 	}
 
 	/**
+	 * Invalide un cache.
+	 *
 	 * @param cache
 	 * @return les caches invalidés
 	 */
@@ -94,6 +100,8 @@ public class CacheService implements Serializable {
 	}
 
 	/**
+	 * Invalide une entrée de cache.
+	 *
 	 * @param entry
 	 * @return les entrées de cache invalidées
 	 */

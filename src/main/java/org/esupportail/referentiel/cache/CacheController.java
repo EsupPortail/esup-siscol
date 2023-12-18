@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller de gestion des caches.
+ *
+ * @author Kevin Hergalant - Université de Lorraine
+ * @author Matthieu Manginot - Université de Lorraine
+ *
+ */
 @RestController
 @RequestMapping("cache")
 public class CacheController {
@@ -24,6 +31,11 @@ public class CacheController {
 	@Value("${app.apogee.universityCode}")
 	private transient String universityCode;
 
+	/**
+	 * API de rechargement complet des caches (invalidation puis chargement).
+	 *
+	 * @return {@link HttpStatus#OK}
+	 */
 	@GetMapping("/reload")
 	public ResponseEntity<Object> reload() {
 		invalidateCaches();
@@ -31,12 +43,22 @@ public class CacheController {
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
+	/**
+	 * API de chargement des caches.
+	 *
+	 * @return {@link HttpStatus#OK}
+	 */
 	@GetMapping("/load")
 	public ResponseEntity<Object> load() {
 		loadCaches();
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 
+	/**
+	 * API d'invalidation des caches.
+	 *
+	 * @return {@link HttpStatus#OK}
+	 */
 	@GetMapping("/invalidate")
 	public ResponseEntity<Object> invalid() {
 		invalidateCaches();

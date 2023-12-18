@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 /**
  * Configuration du cache.
  *
+ * @author Kevin Hergalant - Université de Lorraine
  * @author Matthieu Manginot - Université de Lorraine
  */
 @EnableCaching
@@ -38,6 +39,11 @@ public class CacheConfig extends CachingConfigurerSupport {
 	@Value("${cache.ttl-permanent:0}")
 	private long ttlPermanent;
 
+	/**
+	 * Instanciation du manager de caches.
+	 *
+	 * @return manager
+	 */
 	@Bean
 	public JCacheManagerCustomizer jCacheManagerCustomizer() {
 		return cacheManager -> {

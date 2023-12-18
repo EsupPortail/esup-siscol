@@ -8,6 +8,12 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Service;
 
+/**
+ * Classe exécutée au démarrage pour charger les caches.
+ *
+ * @author Matthieu Manginot - Université de Lorraine
+ *
+ */
 @Service
 public class CacheOnStartup implements ApplicationListener<ApplicationReadyEvent> {
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
