@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantDTO2;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
@@ -36,19 +35,19 @@ import io.swagger.v3.oas.annotations.Operation;
 public class ApogeeController { // NO_UCD (unused code)
 
 	@Autowired
-	EtudiantMetierClient etudiantMetierClient;
+	private EtudiantMetierClient etudiantMetierClient;
 
 	@Autowired
-	StudentDataRepositoryDaoWS studentDataRepositoryDaoWS;
+	private StudentDataRepositoryDaoWS studentDataRepositoryDaoWS;
 
 	@Autowired
-	StudentComponentRepositoryDao studentComponentRepositoryDao;
-	
+	private StudentComponentRepositoryDao studentComponentRepositoryDao;
+
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
-	LdapServiceInterface personService;
+	private LdapServiceInterface personService;
 
-	@Value("@Value(${app.apogee.universityCode})")
+	@Value("${app.apogee.universityCode}")
 	private String universityCode;
 
 	@GetMapping("/etudiantRef")
@@ -61,12 +60,11 @@ public class ApogeeController { // NO_UCD (unused code)
 	@Operation(summary = "Récupérer les années d'inscription d'un étudiant")
 	@GetMapping("/anneesIa")
 	public List<String> recupererAnneesIa(@RequestParam(value = "codEtud") String codeEtud) {
-		List<String> annees = studentDataRepositoryDaoWS.recupererAnneesIa(codeEtud);
-		return annees;
+		return studentDataRepositoryDaoWS.recupererAnneesIa(codeEtud);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param codeEtud
 	 * @param annee
 	 * @return
@@ -74,14 +72,12 @@ public class ApogeeController { // NO_UCD (unused code)
 	@GetMapping("/etapesByEtudiantAndAnnee")
 	public ApogeeMap etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee) {
-		ApogeeMap map = studentDataRepositoryDaoWS.recupererEtapesByEtudiantAndAnnee(codeEtud, annee, "");
-		return map;
+		return studentDataRepositoryDaoWS.recupererEtapesByEtudiantAndAnnee(codeEtud, annee, "");
 	}
 
 	@GetMapping("/infosAdmEtu")
 	public EtudiantInfoAdm InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
-		EtudiantInfoAdm student = studentDataRepositoryDaoWS.recupererEtudiantInfoAdm(numEtud);
-		return student;
+		return studentDataRepositoryDaoWS.recupererEtudiantInfoAdm(numEtud);
 	}
 
 	@GetMapping("/listEtuParEtapeEtDiplome")
@@ -97,15 +93,14 @@ public class ApogeeController { // NO_UCD (unused code)
 			@RequestParam(value = "prenom", required = false) String prenom) {
 
 		List<EtudiantDTO2Ext> listeEtu = etudiantMetierClient.recupererListeEtuParEtpEtDiplome(codeComposante, annee,
-				codeEtape, versionEtape, codeDiplome, versionDiplome,codEtu,nom,prenom);
-		ApoggeeLdapEtudiant apoggeeLdapEtudiant=new ApoggeeLdapEtudiant(personService);
+				codeEtape, versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
+		ApoggeeLdapEtudiant apoggeeLdapEtudiant = new ApoggeeLdapEtudiant(personService);
 		apoggeeLdapEtudiant.MappMailEtudiant(listeEtu);
 		return listeEtu;
-
 	}
 
 	/**
-	 * 
+	 *
 	 * @param codeEtud
 	 * @param annee
 	 * @return
@@ -113,13 +108,11 @@ public class ApogeeController { // NO_UCD (unused code)
 	@GetMapping("/studentEtapeVets")
 	public LinkedHashMap<String, String> studentEtapeVets(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee) {
-		LinkedHashMap<String, String> lEtapeInscriptions = studentDataRepositoryDaoWS
-				.recupererEtapeVetsParEtudiantAnnee(codeEtud, annee);
-		return lEtapeInscriptions;
+		return studentDataRepositoryDaoWS.recupererEtapeVetsParEtudiantAnnee(codeEtud, annee);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param codEtud
 	 * @param annee
 	 * @return List<EtapeInscription>
@@ -127,12 +120,11 @@ public class ApogeeController { // NO_UCD (unused code)
 	@GetMapping("/studentListeEtapeInscription")
 	public List<EtapeInscription> studentListeEtapesInscription(@RequestParam(value = "codEtud") String codEtud,
 			@RequestParam(value = "annee") String annee) {
-		List<EtapeInscription> l = studentDataRepositoryDaoWS.recupererEtapeInscriptionParEtudiantAnnee(codEtud, annee);
-		return l;
+		return studentDataRepositoryDaoWS.recupererEtapeInscriptionParEtudiantAnnee(codEtud, annee);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param codeEtape
 	 * @param versionEtape
 	 * @return List<ElementPedagogique>
@@ -140,75 +132,65 @@ public class ApogeeController { // NO_UCD (unused code)
 	@GetMapping("/studentListeElpStage")
 	public List<ElementPedagogique> studentListeElpStage(@RequestParam(value = "codeEtape") String codeEtape,
 			@RequestParam(value = "versionEtape") String versionEtape) {
-		List<ElementPedagogique> l = studentDataRepositoryDaoWS.recupererListeElpsStageParEtape(codeEtape,
-				versionEtape);
-		return l;
+		return studentDataRepositoryDaoWS.recupererListeElpsStageParEtape(codeEtape, versionEtape);
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@GetMapping("/etablissementReference")
 	public EtabRef etablissementReference() {
-		EtabRef etabRef = studentComponentRepositoryDao.getEtabRef(universityCode);
-		return etabRef;
+		return studentComponentRepositoryDao.getEtabRef(universityCode);
 
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@GetMapping("/etapesReference")
 	public Map<String, String> getEtapesRef() {
-		Map<String, String> ref = studentComponentRepositoryDao.getEtapesRef(universityCode);
-		return ref;
+		return studentComponentRepositoryDao.getEtapesRef(universityCode);
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@GetMapping("/diplomesReference")
 	public List<DiplomeReduitDto> getDiplomesRef() {
-		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(universityCode);
-		return ref;
+		return studentComponentRepositoryDao.getListeDiplomeDTO(universityCode);
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@GetMapping("/diplomesReferenceParComposanteEtAnnee")
 	public List<DiplomeReduitDto> getDiplomesRefParComposanteEtAnnee(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "codeAnnee", required = true) String codeAnnee) {
-		List<DiplomeReduitDto> ref = studentComponentRepositoryDao.getListeDiplomeDTO(codeComposante, codeAnnee);
-		return ref;
+		return studentComponentRepositoryDao.getListeDiplomeDTO(codeComposante, codeAnnee);
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	@GetMapping("/composantesPrincipalesRef")
 	public Map<String, String> composantesPrincipalesRef() {
-		Map<String, String> ref = studentComponentRepositoryDao.getComposantesPrincipalesRef(universityCode, null);
-		return ref;
-
+		return studentComponentRepositoryDao.getComposantesPrincipalesRef(universityCode, null);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param composante
 	 * @return
 	 */
 	@GetMapping("/composanteSignaitaireRef")
 	public SignataireRef signaitaireRef(@RequestParam(value = "composante", defaultValue = "SCO") String composante) {
-		SignataireRef ref = studentComponentRepositoryDao.getSigCompoRef(universityCode, composante);
-		return ref;
-
+		return studentComponentRepositoryDao.getSigCompoRef(universityCode, composante);
 	}
 
 	public String getUniversityCode() {
@@ -218,5 +200,4 @@ public class ApogeeController { // NO_UCD (unused code)
 	public void setUniversityCode(String universityCode) {
 		this.universityCode = universityCode;
 	}
-
 }

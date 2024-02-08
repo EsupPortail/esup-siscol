@@ -3,7 +3,6 @@ package org.esupportail.referentiel.conf;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -15,40 +14,49 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 		@Server(url = "${app.server-url:/}") }, info = @Info(title = "${app.server-title}", version = "${server-version}"))
 public class OpenApiConfig {
 
-    @Bean
-    GroupedOpenApi usersGroup() {
+	@Bean
+	GroupedOpenApi usersGroup() {
 		return GroupedOpenApi.builder().group("apogee").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
 		}).packagesToScan("org.esupportail.referentiel.rest.apogee").build();
 	}
 
-    @Bean
-    GroupedOpenApi ldapGroup() {
+	@Bean
+	GroupedOpenApi ldapGroup() {
 		return GroupedOpenApi.builder().group("ldap").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
 		}).packagesToScan("org.esupportail.referentiel.rest.ldap").build();
 	}
 
-    @Bean
-    GroupedOpenApi psScolGroup() {
+	@Bean
+	GroupedOpenApi psScolGroup() {
 		return GroupedOpenApi.builder().group("pcscol").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
 		}).packagesToScan("org.esupportail.referentiel.rest.pcscol").build();
 	}
 
-    @Bean
-    GroupedOpenApi all() {
+	@Bean
+	GroupedOpenApi cacheGroup() {
+		return GroupedOpenApi.builder().group("cache").addOperationCustomizer((operation, handlerMethod) -> {
+			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
+			return operation;
+		}).packagesToScan("org.esupportail.referentiel.cache").build();
+	}
+
+	@Bean
+	GroupedOpenApi all() {
 		return GroupedOpenApi.builder().group("all").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;
 		}).packagesToScan("org.esupportail.referentiel.rest.ldap", "org.esupportail.referentiel.rest.apogee",
-				"org.esupportail.referentiel.rest.pcscol").build();
+				"org.esupportail.referentiel.rest.pcscol", "org.esupportail.referentiel.cache").build();
 	}
-    @Bean
-    GroupedOpenApi generiqueSIGroup() {
+
+	@Bean
+	GroupedOpenApi generiqueSIGroup() {
 		return GroupedOpenApi.builder().group("generiqueSI").addOperationCustomizer((operation, handlerMethod) -> {
 			operation.addSecurityItem(new SecurityRequirement().addList("basicScheme"));
 			return operation;

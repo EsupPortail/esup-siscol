@@ -9,10 +9,10 @@ import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeReduiteDto;
 import org.esupportail.referentiel.beans.SignataireRef;
+import org.esupportail.referentiel.cache.CacheConfig;
 import org.esupportail.referentiel.services.StudentComponentRepositoryDao;
 import org.esupportail.referentiel.utils.DonneesStatic;
 import org.slf4j.Logger;
-//import org.esupportail.apogee.services.remote.ReadEnseignement;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -35,39 +35,37 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.SignataireWSSign
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.VariableAppliWSEtabRefDTO;
 
 /**
- * 
+ *
  * Acces au composantes du personnel personnalise.
  *
  */
-
 @SuppressWarnings("serial")
 @Service
 public class StudentComponentRepositoryDaoWS implements StudentComponentRepositoryDao {
-
 	/**
-	 * 
+	 *
 	 */
 	@Autowired
 	protected ReferentielMetierServiceInterface referentielMetierService;
 	/**
-	 * 
+	 *
 	 */
 	@Autowired
 	protected EtudiantMetierServiceInterface etudiantMetierService;
 	/**
-	 * 
+	 *
 	 */
 	@Autowired
 	protected AdministratifMetierServiceInterface serviceAdministratif;
 
 	/**
-	 * 
+	 *
 	 */
 	@Autowired
 	protected OffreFormationMetierServiceInterface offreFormationMetierService;
 
 	/**
-	 * 
+	 *
 	 */
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -88,17 +86,14 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 	/**
 	 * mapComp.
 	 */
-	LinkedHashMap<String, String> mapComp = new LinkedHashMap<String, String>();
+	public LinkedHashMap<String, String> mapComp = new LinkedHashMap<String, String>();
 
-	
-	
-	
 	/**
-	 * 
+	 *
 	 * @param diplomeDTO3
 	 * @return
 	 */
-	private List<DiplomeReduitDto> mapDiplomeReduitDto(List<DiplomeDTO3> diplomeDTO3 ) {
+	private List<DiplomeReduitDto> mapDiplomeReduitDto(List<DiplomeDTO3> diplomeDTO3) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getListeDiplomeDTO - nbr Dipolme diplomeDTO3 = " + diplomeDTO3.size());
 		}
@@ -108,7 +103,7 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 			TableauVersionDiplomeDTO3 listVldi = ld.getListVersionDiplome();
 
 			for (VersionDiplomeDTO3 lvd : listVldi.getItem()) {
-				
+
 				DiplomeReduitDto diplomeRd = new DiplomeReduitDto();
 				diplomeRd.setCodeDiplome(ld.getCodDip());
 				diplomeRd.setVersionDiplome(String.valueOf(lvd.getCodVrsVdi()));
@@ -116,9 +111,9 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 				diplomes.add(diplomeRd);
 				TableauEtapeDTO3 letapes = lvd.getOffreFormation().getListEtape();
 				for (EtapeDTO3 etp : letapes.getItem()) {
-					
+
 					etp.getListComposanteCentreGestion();
-					
+
 					TableauVersionEtapeDTO3 lverionEtps = etp.getListVersionEtape();
 
 					for (VersionEtapeDTO32 lverionEtp : lverionEtps.getItem()) {
@@ -135,11 +130,10 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		}
 		return diplomes;
 	}
-	
-	
+
 	/**
 	 * retourne tous les diplomes avec les vets sans les elp
-	 * 
+	 *
 	 * @param universityCode
 	 * @return
 	 */
@@ -170,10 +164,10 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		}
 
 	}
-	
+
 	/**
 	 * retourne tous les diplomes avec les vets sans les elp
-	 * 
+	 *
 	 * @param universityCode
 	 * @return
 	 */
@@ -193,10 +187,10 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		param.setCodDip("tous");
 		param.setCodVrsVdi("tous");
 		param.setCodElp("aucun");
-		
+
 		param.setCodComposanteVdi(codComposante);
 		param.setCodAnu(codeAnu);
-		
+
 		List<DiplomeDTO3> diplomeDTO3 = null;
 		try {
 			diplomeDTO3 = offreFormationMetierService.recupererSEV3(param);
@@ -208,11 +202,11 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		}
 
 	}
-	
-		
+
 	/**
 	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getEtabRef(java.lang.String)
 	 */
+	@Override
 	public EtabRef getEtabRef(String universityCode) {
 		String nomEtabRef = "";
 		String adresseEtabRef = "";
@@ -306,21 +300,18 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 	}
 
 	@Override
-	@Cacheable("ListeDiplomeDTOByCompAnu")
+	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public List<DiplomeReduitDto> getListeDiplomeDTO(String codComposante, String codeAnu) {
 		if (logger.isDebugEnabled()) {
-			logger.debug("getListeDiplomeDTO - universityCode + codeAnu = " + codComposante + " : "+codeAnu );
+			logger.debug("getListeDiplomeDTO - universityCode + codeAnu = " + codComposante + " : " + codeAnu);
 		}
-		List<DiplomeDTO3> diplomeDTO3 = getListeListDiplomeVetAllDTO3(codComposante,codeAnu);
+		List<DiplomeDTO3> diplomeDTO3 = getListeListDiplomeVetAllDTO3(codComposante, codeAnu);
 		List<DiplomeReduitDto> dtos = mapDiplomeReduitDto(diplomeDTO3);
 		return dtos;
 	}
-	
 
-	
-	
 	@Override
-	@Cacheable("ListeDiplomeDTO")
+	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public List<DiplomeReduitDto> getListeDiplomeDTO(String universityCode) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("getListeDiplomeDTO - universityCode = " + universityCode);
@@ -328,13 +319,14 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		List<DiplomeDTO3> diplomeDTO3 = getListeListDiplomeVetAllDTO3(universityCode);
 		List<DiplomeReduitDto> dtos = mapDiplomeReduitDto(diplomeDTO3);
 		return dtos;
-		
+
 	}
 
 	/**
 	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getEtapesRef(java.lang.String)
 	 */
-	@Cacheable("Etapes")
+	@Override
+	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public LinkedHashMap<String, String> getEtapesRef(String universityCode) {
 		// Recuperation des etapes depuis Apogee, cod et lib
 		if (logger.isDebugEnabled()) {
@@ -387,6 +379,7 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getSigCompoRef(java.lang.String,
 	 *      java.lang.String)
 	 */
+	@Override
 	public SignataireRef getSigCompoRef(String universityCode, String composante) {
 		SignataireRef sigRef = new SignataireRef();
 
@@ -396,7 +389,7 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		try {
 			lcomposante = referentielMetierService.recupererComposanteV2(composante, null);
 		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e1) {
-			logger.error(e1.getMessage() + " ++++"+ composante);
+			logger.error(e1.getMessage() + " ++++" + composante);
 			e1.printStackTrace();
 		}
 
@@ -433,7 +426,8 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 	 * @see org.esupportail.pstage.dao.referentiel.StudentComponentRepositoryDao#getComposantesPrincipalesRef(java.lang.String,
 	 *      java.util.Map)
 	 */
-	@Cacheable("Composantes")
+	@Override
+	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public Map<String, String> getComposantesPrincipalesRef(String universityCode, Map<String, String> lesComposantes) {
 
 		if (logger.isDebugEnabled()) {

@@ -229,7 +229,20 @@
 			<version>${org.mapstruct.version}</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.zalando/problem -->
-
+		<!-- Gestion du cache -->
+		<dependency>
+			<groupId>org.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jcache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.cache</groupId>
+			<artifactId>cache-api</artifactId>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>

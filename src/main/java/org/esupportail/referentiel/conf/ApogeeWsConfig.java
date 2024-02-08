@@ -5,17 +5,12 @@ import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 
-import javax.xml.ws.BindingProvider;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.context.annotation.RequestScope;
-import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClient.RequestHeadersUriSpec;
 
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.AdministratifMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.AdministratifMetierServiceInterfaceService;
@@ -87,7 +82,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 
 	@Value("${app.apogee.urlService.offreFormationMetier}")
 	private String offreFormationMetierUrlService;
-	
+
 	@Value("${app.apogee.urlService.offreFormationMetierUserName}")
 	private String offreFormationMetierUserName;
 	@Value("${app.apogee.urlService.offreFormationMetierPassword}")
@@ -102,9 +97,8 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		log.debug(getEtudiantMetierUrlService());
 	}
 
-    @Bean
-    @RequestScope
-    EtudiantMetierServiceInterface etudiantMetier() {
+	@Bean
+	public EtudiantMetierServiceInterface etudiantMetier() {
 
 		if (etudiantMetierUserName != null && etudiantMetierPassword != null) {
 			Authenticator auth = new Authenticator() {
@@ -123,9 +117,8 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		return clientMetier;
 	}
 
-    @Bean("administratifMetier")
-    @RequestScope
-    AdministratifMetierServiceInterface administratifMetier() {
+	@Bean("administratifMetier")
+	public AdministratifMetierServiceInterface administratifMetier() {
 
 		if (administratifMetierUserName != null && administratifMetierPassword != null) {
 			Authenticator auth = new Authenticator() {
@@ -146,9 +139,8 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 
 	}
 
-    @Bean("pedagogiqueMetier")
-    @RequestScope
-    PedagogiqueMetierServiceInterface pedagogiqueMetier() {
+	@Bean("pedagogiqueMetier")
+	PedagogiqueMetierServiceInterface pedagogiqueMetier() {
 
 		if (pedagogiqueMetierUserName != null && pedagogiqueMetierPassword != null) {
 			Authenticator auth = new Authenticator() {
@@ -167,31 +159,27 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		return clientMetier;
 	}
 
-    @Bean
-    @RequestScope
-    GeographieMetierServiceInterface geographieMetier() {
-		
+	@Bean
+	public GeographieMetierServiceInterface geographieMetier() {
+
 		if (geographieMetierUserName != null && geographieMetierPassword != null) {
 			Authenticator auth = new Authenticator() {
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(geographieMetierUserName,
-							geographieMetierPassword.toCharArray());
+					return new PasswordAuthentication(geographieMetierUserName, geographieMetierPassword.toCharArray());
 				}
 			};
 			Authenticator.setDefault(auth);
 		}
 
-		
 		URL wsdlLocation = wsdlLocation(geographieMetierUrlService);
 		GeographieMetierServiceInterfaceService client = new GeographieMetierServiceInterfaceService(wsdlLocation);
 		GeographieMetierServiceInterface clientMetier = client.getGeographieMetier();
 		return clientMetier;
 	}
 
-    @Bean
-    @RequestScope
-    ReferentielMetierServiceInterface referentielMetier() {
+	@Bean
+	ReferentielMetierServiceInterface referentielMetier() {
 		if (referentielMetierUserName != null && referentielMetierPassword != null) {
 			Authenticator auth = new Authenticator() {
 				@Override
@@ -202,19 +190,16 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 			};
 			Authenticator.setDefault(auth);
 		}
-		
-		
-		log.debug("Instanciation ReferentielMetierServiceInterface @RequestScope ");
+
 		URL wsdlLocation = wsdlLocation(referentielMetierUrlService);
 		ReferentielMetierServiceInterfaceService client = new ReferentielMetierServiceInterfaceService(wsdlLocation);
 		ReferentielMetierServiceInterface clientMetier = client.getReferentielMetier();
 		return clientMetier;
 	}
 
-    @Bean
-    @RequestScope
-    OffreFormationMetierServiceInterface offreFormationMetier() {
-		
+	@Bean
+	OffreFormationMetierServiceInterface offreFormationMetier() {
+
 		if (offreFormationMetierUserName != null && offreFormationMetierPassword != null) {
 			Authenticator auth = new Authenticator() {
 				@Override
@@ -225,12 +210,12 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 			};
 			Authenticator.setDefault(auth);
 		}
-		
+
 		URL wsdlLocation = wsdlLocation(offreFormationMetierUrlService);
 		OffreFormationMetierServiceInterfaceService client = new OffreFormationMetierServiceInterfaceService(
 				wsdlLocation);
 		OffreFormationMetierServiceInterface clientMetier = client.getOffreFormationMetier();
-		
+
 		return clientMetier;
 	}
 
@@ -239,7 +224,6 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		try {
 			wsdlLocation = new URL(url);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			log.error("etudiantMetierUrlService wsdlLocation :", e);
 		}
 		return wsdlLocation;
@@ -292,6 +276,4 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 	public void setOffreFormationMetierUrlService(String offreFormationMetierUrlService) {
 		this.offreFormationMetierUrlService = offreFormationMetierUrlService;
 	}
-
-
 }

@@ -154,3 +154,31 @@ credential:
     referentiel:
       - USER_APOGEE
       - ADMIN
+
+# Configuration du cache [Bloc optionnel]
+# Fonctionnement par defaut
+# - Aucun cache au demarrage
+# - Aucun cron
+cache:
+    # Chargement au demarrage des caches
+    onStartup:
+        # Active ou non, par defaut : false
+        enabled: true
+    # Time-To-Live du cache temporaire, en minutes, par defaut : 60 [minutes]
+    #ttl-tmp:
+    # Time-To-Live du cache permanent, en heures, par defaut : 0 [heures]
+    # Si 0, aucune limite de temps
+    #ttl-permanent:
+    # Cron pour un rechargement periodique des caches
+    scheduling:
+        # Active ou non, par defaut : false
+        enabled: false
+        # Expression cron, par defaut : aucune
+        cron: 0 0 7-22 * * *
+
+logging:
+    level:
+        org:
+            springframework:
+                # Affichage des logs Spring pour le cache 
+                cache: TRACE
