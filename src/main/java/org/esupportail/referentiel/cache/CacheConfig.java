@@ -70,7 +70,8 @@ public class CacheConfig extends CachingConfigurerSupport {
 			sbKey.append(target.getClass().getName());
 			sbKey.append("#" + method.getName());
 			for (final Object param : params) {
-				sbKey.append("#" + param.toString());
+				if (param != null)
+					sbKey.append("#" + param.toString());
 			}
 			return sbKey.toString();
 		};

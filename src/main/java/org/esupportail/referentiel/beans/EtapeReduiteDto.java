@@ -1,10 +1,12 @@
 package org.esupportail.referentiel.beans;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class EtapeReduiteDto {
+public class EtapeReduiteDto implements Serializable{
 
 	
+	private static final long serialVersionUID = 3416544090904851306L;
 	/**
 	 * code etape.
 	 */

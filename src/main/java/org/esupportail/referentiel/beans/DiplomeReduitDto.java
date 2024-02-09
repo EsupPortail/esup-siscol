@@ -1,9 +1,12 @@
 package org.esupportail.referentiel.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiplomeReduitDto {
+public class DiplomeReduitDto implements Serializable{
+
+	private static final long serialVersionUID = -35214904723469627L;
 
 	/**
 	 * codeDiplome.

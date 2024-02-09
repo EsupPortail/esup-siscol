@@ -1204,7 +1204,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				// logger.debug("TypeIns pour l'etape : "+ insAdmEtp.getEtape().getCodeEtp() +"
 				// :: " + etpins.get);
 
-				recupererEtapeInscription(insAdmEtp.getEtape().getCodeEtp(), insAdmEtp.getEtape().getVersionEtp());
+				//recupererEtapeInscription(insAdmEtp.getEtape().getCodeEtp(), insAdmEtp.getEtape().getVersionEtp());
 
 				etpins.setCodeEtp(insAdmEtp.getEtape().getCodeEtp());
 				etpins.setCodVrsVet(insAdmEtp.getEtape().getVersionEtp());
@@ -1225,8 +1225,8 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 					etpins.setLibDiplome(insAdmEtp.getDiplome().getLibLongDiplome());
 					String versDiplome = insAdmEtp.getDiplome().getVersionDiplome();
 					etpins.setVersionDiplome(versDiplome);
-					List<ElementPedagogique> ll = recupererListeElpsStageParEtape(etpins.getCodeEtp(),
-							etpins.getCodVrsVet());
+//					List<ElementPedagogique> ll = recupererListeElpsStageParEtape(etpins.getCodeEtp(),
+//							etpins.getCodVrsVet());
 
 					try {
 
