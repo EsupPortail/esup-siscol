@@ -25,7 +25,7 @@ import gouv.education.apogee.commun.client.ws.PedagogiqueMetier.PedagogiqueMetie
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterfaceService;
 
-@Configuration
+//@Configuration
 public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code)
 
 	private static final Logger log = LoggerFactory.getLogger(ApogeeWsConfig.class);
@@ -97,7 +97,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		log.debug(getEtudiantMetierUrlService());
 	}
 
-	@Bean
+	//@Bean
 	public EtudiantMetierServiceInterface etudiantMetier() {
 
 		if (etudiantMetierUserName != null && etudiantMetierPassword != null) {
@@ -117,7 +117,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		return clientMetier;
 	}
 
-	@Bean("administratifMetier")
+	//@Bean("administratifMetier")
 	public AdministratifMetierServiceInterface administratifMetier() {
 
 		if (administratifMetierUserName != null && administratifMetierPassword != null) {
@@ -139,7 +139,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 
 	}
 
-	@Bean("pedagogiqueMetier")
+	//@Bean("pedagogiqueMetier")
 	PedagogiqueMetierServiceInterface pedagogiqueMetier() {
 
 		if (pedagogiqueMetierUserName != null && pedagogiqueMetierPassword != null) {
@@ -159,7 +159,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		return clientMetier;
 	}
 
-	@Bean
+	//@Bean
 	public GeographieMetierServiceInterface geographieMetier() {
 
 		if (geographieMetierUserName != null && geographieMetierPassword != null) {
@@ -178,7 +178,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		return clientMetier;
 	}
 
-	@Bean
+	//@Bean
 	ReferentielMetierServiceInterface referentielMetier() {
 		if (referentielMetierUserName != null && referentielMetierPassword != null) {
 			Authenticator auth = new Authenticator() {
@@ -197,7 +197,7 @@ public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code
 		return clientMetier;
 	}
 
-	@Bean
+	//@Bean
 	OffreFormationMetierServiceInterface offreFormationMetier() {
 
 		if (offreFormationMetierUserName != null && offreFormationMetierPassword != null) {
