@@ -111,6 +111,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 			wsdlLocation = new URL(wsdlUrl);
 			etudiantMetierService = new EtudiantMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
+			log.error(e.getMessage());
 			etudiantMetierService = new EtudiantMetierServiceInterfaceService();
 		}
 		EtudiantMetierServiceInterface etudiantMetierServiceInterface = etudiantMetierService.getEtudiantMetier();
@@ -135,6 +136,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 			wsdlLocation = new URL(wsdlUrl);
 			administratifMetierService = new AdministratifMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
+			log.error(e.getMessage());
 			administratifMetierService = new AdministratifMetierServiceInterfaceService();
 		}
 		AdministratifMetierServiceInterface administratifMetierServiceInterface = administratifMetierService
@@ -159,6 +161,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 			wsdlLocation = new URL(wsdlUrl);
 			pedagogiqueMetierService = new PedagogiqueMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
+			log.error(e.getMessage());
 			pedagogiqueMetierService = new PedagogiqueMetierServiceInterfaceService();
 		}
 		PedagogiqueMetierServiceInterface pedagogiqueMetierServiceInterface = pedagogiqueMetierService
@@ -182,6 +185,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 			wsdlLocation = new URL(wsdlUrl);
 			geographieMetierService = new GeographieMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
+			log.error(e.getMessage());
 			geographieMetierService = new GeographieMetierServiceInterfaceService();
 		}
 		GeographieMetierServiceInterface geographieMetierServiceInterface = geographieMetierService
@@ -204,6 +208,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 			wsdlLocation = new URL(wsdlUrl);
 			referentielMetierService = new ReferentielMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
+			log.error(e.getMessage());
 			referentielMetierService = new ReferentielMetierServiceInterfaceService();
 		}
 		ReferentielMetierServiceInterface referentielMetierServiceInterface = referentielMetierService

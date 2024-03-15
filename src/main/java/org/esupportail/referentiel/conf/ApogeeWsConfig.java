@@ -25,7 +25,7 @@ import gouv.education.apogee.commun.client.ws.PedagogiqueMetier.PedagogiqueMetie
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterfaceService;
 
-//@Configuration
+@Deprecated
 public class ApogeeWsConfig implements InitializingBean { // NO_UCD (unused code)
 
 	private static final Logger log = LoggerFactory.getLogger(ApogeeWsConfig.class);
