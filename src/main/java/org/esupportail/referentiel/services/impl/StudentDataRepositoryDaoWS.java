@@ -314,6 +314,11 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		etudiantInfoAdm.setCodEtu(String.valueOf(etudiant.getCodEtu()));
 
 		etudiantInfoAdm.setCodInd((String.valueOf(etudiant.getCodInd())));
+		
+		etudiantInfoAdm.setSexEtatCivil(apogeeinfosAdmDTO2.getSexEtatCivil());
+		
+		etudiantInfoAdm.setPrenomEtatCivil(apogeeinfosAdmDTO2.getPrenomEtatCivil());
+		
 		if (apogeeinfosAdmDTO2.getHandicap() != null) {
 			etudiantInfoAdm.setHandicap((apogeeinfosAdmDTO2.getHandicap().getLibThp()));
 		}
@@ -459,10 +464,14 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
 		// etudiantRef.setIdentEtudiant(String.valueOf(etudiant.getCodEtu()));
 
+		etudiantRef.setSexEtatCivil(infosAdmEtu.getSexEtatCivil());
+		
+		etudiantRef.setPrenomEtatCivil(infosAdmEtu.getPrenomEtatCivil());
 		// recuperation du nom, prenom
 		if (infosAdmEtu.getNomPatronymique() != null) {
 			etudiantRef.setNompatro(infosAdmEtu.getNomPatronymique());
 		}
+		
 		if (infosAdmEtu.getNomUsuel() != null) {
 			etudiantRef.setNommarital(infosAdmEtu.getNomUsuel());
 		}
@@ -477,6 +486,8 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		if (infosAdmEtu.getDateNaissance() != null) {
 			etudiantRef.setDateNais(Utils.dateFromLocalDateTime(infosAdmEtu.getDateNaissance()));
 		}
+		
+		
 
 		// recherche des informations etudiant dans APOGEE
 		if (cod_ind != null) {

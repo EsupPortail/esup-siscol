@@ -33,6 +33,10 @@ public class EtudiantRef implements Serializable {
 	private String nommarital = "";
 	private String prenom = "";
 	private String mail = "";
+	
+	private String prenomEtatCivil;
+	
+	private String sexEtatCivil;
 
 	// adresse permanente etudiant
 	private String mainAddress = "";
@@ -204,6 +208,18 @@ public class EtudiantRef implements Serializable {
 	}
 	public void setAnneesInscriptionFC(List<String> anneesInscriptionFC) {
 		this.anneesInscriptionFC = anneesInscriptionFC;
+	}
+	public String getPrenomEtatCivil() {
+		return prenomEtatCivil;
+	}
+	public void setPrenomEtatCivil(String prenomEtatCivil) {
+		this.prenomEtatCivil = prenomEtatCivil;
+	}
+	public String getSexEtatCivil() {
+		return sexEtatCivil;
+	}
+	public void setSexEtatCivil(String sexEtatCivil) {
+		this.sexEtatCivil = sexEtatCivil;
 	}
 
 	

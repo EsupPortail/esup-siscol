@@ -54,8 +54,8 @@ import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplom
 @ActiveProfiles("test")
 public class TestEtudiantMetier {
 
-	String numEtud = "35006817";
-	String anneeEncours = "2020";
+	String numEtud = "230005";
+	String anneeEncours = "2023";
 
 	@Autowired
 	EtudiantMetierClient etudiantMetierClient;
@@ -90,8 +90,12 @@ public class TestEtudiantMetier {
 		InfoAdmEtuDTO4 student = studentDataRepositoryDaoWS.recupererInfosAdmEtuV4(numEtud);
 		System.out.println(student.getNomPatronymique());
 		System.out.println(student.getAnneePremiereInscEtb());
-		assertEquals("BOOP", student.getNomPatronymique());
+		assertEquals("DEVE", student.getNomPatronymique());
 		System.out.println(student.getDepartementNaissance().getLibDept());
+		System.out.println(student.getSexEtatCivil());
+		System.out.println(student.getPrenomEtatCivil());
+		
+		
 
 	}
 

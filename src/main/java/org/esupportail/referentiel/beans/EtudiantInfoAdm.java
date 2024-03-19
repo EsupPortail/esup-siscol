@@ -18,6 +18,9 @@ private String handicap;
 	private String prenom2;
 	private String nomPatronymique;
 	
+	private String prenomEtatCivil;
+	private String sexEtatCivil;
+	
 	private String nationaliteDTO;
 	
 	private String dateNaissance;
@@ -224,6 +227,18 @@ private String handicap;
 	}
 	public void setLibelleCPAM(String libelleCPAM) {
 		this.libelleCPAM = libelleCPAM;
+	}
+	public String getPrenomEtatCivil() {
+		return prenomEtatCivil;
+	}
+	public void setPrenomEtatCivil(String prenomEtatCivil) {
+		this.prenomEtatCivil = prenomEtatCivil;
+	}
+	public String getSexEtatCivil() {
+		return sexEtatCivil;
+	}
+	public void setSexEtatCivil(String sexEtatCivil) {
+		this.sexEtatCivil = sexEtatCivil;
 	}
 
 	
