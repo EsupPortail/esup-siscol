@@ -137,9 +137,12 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	 */
 	@Override
 	public InfoAdmEtuDTO4 recupererInfosAdmEtuV4(String uid) {
-		InfoAdmEtuDTO4 etudiant = null;
-		etudiant = etudiantMetierClient.recupererInfosAdmEtuV4(uid);
-		return etudiant;
+		try {
+			 InfoAdmEtuDTO4 etudiant = etudiantMetierClient.recupererInfosAdmEtuV4(uid);
+			return etudiant;
+		} catch (Exception e) {
+			throw new RuntimeException(" recupererInfosAdmEtuV4 : ECHEC DE LA RECUERATION DE L'ETUDIANT : " + uid + " ->" + e.getMessage());
+		}
 
 	}
 
@@ -171,7 +174,6 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				this.temoinRecupAnnu);
 		return coordonnees;
 	}
-
 
 	public List<InsAdmEtpDTO3> recupererIAEtapesV3(String cod, String annee) {
 		List<InsAdmEtpDTO3> tabInsAdmEtp = etudiantMetierClient.recupererIAEtapesV3(cod, annee);
@@ -314,11 +316,11 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		etudiantInfoAdm.setCodEtu(String.valueOf(etudiant.getCodEtu()));
 
 		etudiantInfoAdm.setCodInd((String.valueOf(etudiant.getCodInd())));
-		
+
 		etudiantInfoAdm.setSexEtatCivil(apogeeinfosAdmDTO2.getSexEtatCivil());
-		
+
 		etudiantInfoAdm.setPrenomEtatCivil(apogeeinfosAdmDTO2.getPrenomEtatCivil());
-		
+
 		if (apogeeinfosAdmDTO2.getHandicap() != null) {
 			etudiantInfoAdm.setHandicap((apogeeinfosAdmDTO2.getHandicap().getLibThp()));
 		}
@@ -430,9 +432,18 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
 		// Recherche l'etudiant dans Apogee
 		IdentifiantsEtudiantDTO2 etudiant = recupererIdentifiantsEtudiantDTO2(codeEtu);
+		if(etudiant==null) {
+			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : "+ codeEtu);
+		}
 
 		// Recuperation des infos de l'etudiant dans Apogee
+		
+		logger.info("RECUPERATION DE INFOS_ADM de L'ETUDIANT : "+ etudiant.getCodEtu().toString());
+		
 		InfoAdmEtuDTO4 infosAdmEtu = recupererInfosAdmEtuV4(etudiant.getCodEtu().toString());
+		if(infosAdmEtu==null) {
+			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : "+ etudiant.getCodEtu().toString());
+		}
 
 		// Ajout des variables d'annee (pour permettre la modif d'anciennes conventions)
 		String anneeCourante = "";
@@ -465,13 +476,13 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		// etudiantRef.setIdentEtudiant(String.valueOf(etudiant.getCodEtu()));
 
 		etudiantRef.setSexEtatCivil(infosAdmEtu.getSexEtatCivil());
-		
+
 		etudiantRef.setPrenomEtatCivil(infosAdmEtu.getPrenomEtatCivil());
 		// recuperation du nom, prenom
 		if (infosAdmEtu.getNomPatronymique() != null) {
 			etudiantRef.setNompatro(infosAdmEtu.getNomPatronymique());
 		}
-		
+
 		if (infosAdmEtu.getNomUsuel() != null) {
 			etudiantRef.setNommarital(infosAdmEtu.getNomUsuel());
 		}
@@ -486,8 +497,6 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		if (infosAdmEtu.getDateNaissance() != null) {
 			etudiantRef.setDateNais(Utils.dateFromLocalDateTime(infosAdmEtu.getDateNaissance()));
 		}
-		
-		
 
 		// recherche des informations etudiant dans APOGEE
 		if (cod_ind != null) {
@@ -705,10 +714,10 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	public LinkedHashMap<String, String> recupererEtapeVetsParEtudiantAnnee(String codEtud, String annee) {
 		List<InsAdmEtpDTO3> tabInsAdmEtp = recupererIAEtapesV3(codEtud, annee);
 		LinkedHashMap<String, String> lEtapeVet = new LinkedHashMap<String, String>();
-		if(tabInsAdmEtp==null || tabInsAdmEtp.isEmpty()) {
+		if (tabInsAdmEtp == null || tabInsAdmEtp.isEmpty()) {
 			return lEtapeVet;
 		}
-		
+
 		for (InsAdmEtpDTO3 insAdmEtp : tabInsAdmEtp) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("- Inscription Administrative -");
@@ -790,7 +799,10 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	public List<EtapeInscription> recupererEtapeInscriptionParEtudiantAnnee(String codEtud, String annee) {
 		List<InsAdmEtpDTO3> tabInsAdmEtp = recupererIAEtapesV3(codEtud, annee);
 		List<EtapeInscription> listeEtapeInscriptions = new ArrayList<EtapeInscription>();
-
+		if (tabInsAdmEtp == null || tabInsAdmEtp.isEmpty()) {
+			logger.error("List<InsAdmEtpDTO3> tabInsAdmEtp  est " + tabInsAdmEtp);
+			return null;
+		}
 		for (InsAdmEtpDTO3 insAdmEtp : tabInsAdmEtp) {
 			if (logger.isDebugEnabled()) {
 				logger.debug("- Inscription Administrative -");
@@ -1215,7 +1227,8 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				// logger.debug("TypeIns pour l'etape : "+ insAdmEtp.getEtape().getCodeEtp() +"
 				// :: " + etpins.get);
 
-				//recupererEtapeInscription(insAdmEtp.getEtape().getCodeEtp(), insAdmEtp.getEtape().getVersionEtp());
+				// recupererEtapeInscription(insAdmEtp.getEtape().getCodeEtp(),
+				// insAdmEtp.getEtape().getVersionEtp());
 
 				etpins.setCodeEtp(insAdmEtp.getEtape().getCodeEtp());
 				etpins.setCodVrsVet(insAdmEtp.getEtape().getVersionEtp());

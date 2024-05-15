@@ -18,6 +18,8 @@ import org.esupportail.referentiel.mappers.ApoggeeLdapEtudiant;
 import org.esupportail.referentiel.services.StudentComponentRepositoryDao;
 import org.esupportail.referentiel.services.impl.StudentDataRepositoryDaoWS;
 import org.esupportail.referentiel.ws.services.EtudiantMetierClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +35,8 @@ import io.swagger.v3.oas.annotations.Operation;
 @RestController
 @RequestMapping("apogee")
 public class ApogeeController { // NO_UCD (unused code)
+
+	final private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private EtudiantMetierClient etudiantMetierClient;
@@ -77,7 +81,12 @@ public class ApogeeController { // NO_UCD (unused code)
 
 	@GetMapping("/infosAdmEtu")
 	public EtudiantInfoAdm InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
-		return studentDataRepositoryDaoWS.recupererEtudiantInfoAdm(numEtud);
+		try {
+			return studentDataRepositoryDaoWS.recupererEtudiantInfoAdm(numEtud);
+		} catch (Exception e) {
+			logger.error("erreur lors de la récupération InfosAdmEtuV2 pour : " + numEtud + " -> "+ e.getMessage());
+			return null;
+		}
 	}
 
 	@GetMapping("/listEtuParEtapeEtDiplome")

@@ -130,11 +130,11 @@ public class EtudiantMetierClient {
 					numINE, numBoursier, codOPI, nom, prenom, dateNaiss, temoinRecupAnnu);
 			return etudiant;
 		} catch (WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("recupererIdentifiantsEtudiantV2 : " + codEtu + " -> "+ e.getMessage());
+			return null;
 		}
-		// TODO Auto-generated method stub
-		return null;
+		
+		
 	}
 
 	/**
@@ -195,8 +195,8 @@ public class EtudiantMetierClient {
 		try {
 			tabInsAdmEtp = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
 		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("recupererIAEtapesV3  code :  " +  cod  +"\t  annee "+ ": "+ annee+ " : " +  e.getMessage() );
+			//e.printStackTrace();
 		}
 
 		return tabInsAdmEtp;
@@ -268,11 +268,11 @@ public class EtudiantMetierClient {
 		try {
 			return etudiantMetierService.recupererInfosAdmEtuV4(codEtu);
 		} catch (WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("ECHEC DE LA RECUERATION DE L'ETUDIANT : " + codEtu + " ->" +e.getMessage());
+		//	e.printStackTrace();
+			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : " + codEtu + " ->" +e.getMessage());
 		}
-		return null;
-
+		
 	}
 
 	/*

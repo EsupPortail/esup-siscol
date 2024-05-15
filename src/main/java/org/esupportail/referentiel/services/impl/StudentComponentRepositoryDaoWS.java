@@ -196,8 +196,7 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 			diplomeDTO3 = offreFormationMetierService.recupererSEV3(param);
 			return diplomeDTO3;
 		} catch (gouv.education.apogee.commun.client.ws.OffreFormationMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("getListeListDiplomeVetAllDTO3 - codComposante = " + codComposante +  "\t annee = "+  codeAnu+ "  ->"+  e.getMessage());
 			return null;
 		}
 
@@ -306,6 +305,10 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 			logger.debug("getListeDiplomeDTO - universityCode + codeAnu = " + codComposante + " : " + codeAnu);
 		}
 		List<DiplomeDTO3> diplomeDTO3 = getListeListDiplomeVetAllDTO3(codComposante, codeAnu);
+		if (diplomeDTO3==null) {
+			logger.error("ECHEC DE LA RÉCUPERATIO DES DIPLOME DE LA  "+codComposante + " annee "+codeAnu );
+			return null;
+		}
 		List<DiplomeReduitDto> dtos = mapDiplomeReduitDto(diplomeDTO3);
 		return dtos;
 	}
