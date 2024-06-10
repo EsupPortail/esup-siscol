@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail.referentiel</groupId>
 	<artifactId>esup-siscol</artifactId>
-	<version>1.0.28</version>
+	<version>1.0.28-pcscol</version>
 	<packaging>war</packaging>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -40,7 +40,7 @@
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
 			<version>6.50.00</version>
-<!--			<version>6.40.70</version>-->
+			<!--			<version>6.40.70</version>-->
 			<!--			<version>6.40.01</version>-->
 			<!--			<version>6.30.50</version>-->
 			<!--			<version>63030</version>-->
@@ -243,7 +243,18 @@
 			<groupId>javax.cache</groupId>
 			<artifactId>cache-api</artifactId>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
