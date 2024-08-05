@@ -41,7 +41,7 @@ public interface PcscolServiceI {
 	 * @param codeStructure
 	 * @return
 	 */
-	public Map<String, String> lireMapStructures(String codeStructure);
+	public Map<String, String> lireMapStructures();
 	
 	/**
 	 * recherche des Inscriptions Administratives et Inscriptions Pedagogiques.

@@ -27,13 +27,13 @@ import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("generiqueSI")
-public class GeneriqueSIController implements GeneriqueSIControllerInterface{
+public class GeneriqueSIController implements GeneriqueSIControllerInterface {
 
 	@Value("@Value(${app.apogee.universityCode})")
 	private String universityCode;
 
 	@GetMapping("/etudiantRef")
-	public ResponseEntity<EtudiantRef> getStudent(@RequestParam(value = "codEtud") String codeEtud,
+	public ResponseEntity<EtudiantRef> getEtudiantRef(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee) {
 		EtudiantRef e = new EtudiantRef();
 		return new ResponseEntity<EtudiantRef>(e, HttpStatus.OK);
@@ -41,9 +41,9 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 
 	@Operation(summary = "Récupérer les années d'inscription d'un étudiant")
 	@GetMapping("/anneesIa")
-	public List<String> recupererAnneesIa(@RequestParam(value = "codEtud") String codeEtud) {
+	public ResponseEntity<List<String>> recupererAnneesIa(@RequestParam(value = "codEtud") String codeEtud) {
 		List<String> annees = new ArrayList<String>();
-		return annees;
+		return new ResponseEntity<>(annees, HttpStatus.OK);
 	}
 
 	/**
@@ -53,20 +53,20 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return
 	 */
 	@GetMapping("/etapesByEtudiantAndAnnee")
-	public ApogeeMap etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
+	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee) {
 		ApogeeMap map = new ApogeeMap();
-		return map;
+		return new ResponseEntity<ApogeeMap>(map, HttpStatus.OK);
 	}
 
 	@GetMapping("/infosAdmEtu")
-	public EtudiantInfoAdm InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
+	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
 		EtudiantInfoAdm student = new EtudiantInfoAdm();
-		return student;
+		return new ResponseEntity<>(student, HttpStatus.OK);
 	}
 
 	@GetMapping("/listEtuParEtapeEtDiplome")
-	public List<EtudiantDTO2Ext> recupererListeEtuParEtpEtDiplome(
+	public ResponseEntity<List<EtudiantDTO2Ext>> recupererListeEtuParEtpEtDiplome(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "annee", required = true) String annee,
 			@RequestParam(value = "codeEtape", required = true) String codeEtape,
@@ -78,7 +78,7 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 			@RequestParam(value = "prenom", required = false) String prenom) {
 
 		List<EtudiantDTO2Ext> listeEtu = new ArrayList<EtudiantDTO2Ext>();
-		return listeEtu;
+		return new ResponseEntity<>(listeEtu, HttpStatus.OK);
 
 	}
 
@@ -89,10 +89,10 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return
 	 */
 	@GetMapping("/studentEtapeVets")
-	public LinkedHashMap<String, String> studentEtapeVets(@RequestParam(value = "codEtud") String codeEtud,
-			@RequestParam(value = "annee") String annee) {
+	public ResponseEntity<LinkedHashMap<String, String>> studentEtapeVets(
+			@RequestParam(value = "codEtud") String codeEtud, @RequestParam(value = "annee") String annee) {
 		LinkedHashMap<String, String> lEtapeInscriptions = new LinkedHashMap<String, String>();
-		return lEtapeInscriptions;
+		return new ResponseEntity<>(lEtapeInscriptions, HttpStatus.OK);
 	}
 
 	/**
@@ -102,10 +102,10 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return List<EtapeInscription>
 	 */
 	@GetMapping("/studentListeEtapeInscription")
-	public List<EtapeInscription> studentListeEtapesInscription(@RequestParam(value = "codEtud") String codEtud,
-			@RequestParam(value = "annee") String annee) {
+	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(
+			@RequestParam(value = "codEtud") String codEtud, @RequestParam(value = "annee") String annee) {
 		List<EtapeInscription> l = new ArrayList<EtapeInscription>();
-		return l;
+		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 
 	/**
@@ -115,10 +115,11 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return List<ElementPedagogique>
 	 */
 	@GetMapping("/studentListeElpStage")
-	public List<ElementPedagogique> studentListeElpStage(@RequestParam(value = "codeEtape") String codeEtape,
+	public ResponseEntity<List<ElementPedagogique>> studentListeElpStage(
+			@RequestParam(value = "codeEtape") String codeEtape,
 			@RequestParam(value = "versionEtape") String versionEtape) {
 		List<ElementPedagogique> l = new ArrayList<ElementPedagogique>();
-		return l;
+		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 
 	/**
@@ -126,9 +127,9 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return
 	 */
 	@GetMapping("/etablissementReference")
-	public EtabRef etablissementReference() {
+	public ResponseEntity<EtabRef> etablissementReference() {
 		EtabRef etabRef = new EtabRef();
-		return etabRef;
+		return new ResponseEntity<>(etabRef, HttpStatus.OK);
 
 	}
 
@@ -137,9 +138,9 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return
 	 */
 	@GetMapping("/etapesReference")
-	public Map<String, String> getEtapesRef() {
+	public ResponseEntity<Map<String, String>> getEtapesRef() {
 		Map<String, String> ref = new HashMap<String, String>();
-		return ref;
+		return new ResponseEntity<Map<String, String>>(ref, HttpStatus.OK);
 	}
 
 	/**
@@ -147,9 +148,9 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return
 	 */
 	@GetMapping("/diplomesReference")
-	public List<DiplomeReduitDto> getDiplomesRef() {
+	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRef() {
 		List<DiplomeReduitDto> ref = new ArrayList<DiplomeReduitDto>();
-		return ref;
+		return new ResponseEntity<>(ref, HttpStatus.OK);
 	}
 
 	/**
@@ -157,11 +158,11 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return
 	 */
 	@GetMapping("/diplomesReferenceParComposanteEtAnnee")
-	public List<DiplomeReduitDto> getDiplomesRefParComposanteEtAnnee(
+	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "codeAnnee", required = true) String codeAnnee) {
 		List<DiplomeReduitDto> ref = new ArrayList<DiplomeReduitDto>();
-		return ref;
+		return new ResponseEntity<>(ref, HttpStatus.OK);
 	}
 
 	/**
@@ -169,9 +170,9 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return
 	 */
 	@GetMapping("/composantesPrincipalesRef")
-	public Map<String, String> composantesPrincipalesRef() {
+	public ResponseEntity<Map<String, String>> composantesPrincipalesRef() {
 		Map<String, String> ref = new HashMap<String, String>();
-		return ref;
+		return new ResponseEntity<Map<String, String>>(ref, HttpStatus.OK);
 
 	}
 
@@ -181,9 +182,10 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface{
 	 * @return
 	 */
 	@GetMapping("/composanteSignaitaireRef")
-	public SignataireRef signaitaireRef(@RequestParam(value = "composante", defaultValue = "SCO") String composante) {
+	public ResponseEntity<SignataireRef> signaitaireRef(
+			@RequestParam(value = "composante", defaultValue = "SCO") String composante) {
 		SignataireRef ref = new SignataireRef();
-		return ref;
+		return new ResponseEntity<>(ref, HttpStatus.OK);
 
 	}
 
