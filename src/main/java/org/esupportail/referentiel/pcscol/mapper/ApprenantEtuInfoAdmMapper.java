@@ -1,5 +1,7 @@
 package org.esupportail.referentiel.pcscol.mapper;
 
+import java.util.List;
+
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
@@ -11,7 +13,6 @@ import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValueMappingStrategy;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
@@ -103,5 +104,8 @@ public interface ApprenantEtuInfoAdmMapper {
 	@Mapping(target = "regimeIns", source = "inscription.supportInscription.codeRegimeInscription",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	@Mapping(target = "libRg", source = "inscription.supportInscription.libelleRegimeInscription",nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	public EtapeInscription stagesApprenantToEtapeInscription(Inscription inscription);
+	
+	public List<EtapeInscription> stagesApprenantToEtapeInscription(List<Inscription> inscriptions);
+	
 
 }

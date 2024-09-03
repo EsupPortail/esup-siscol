@@ -90,6 +90,8 @@ public class EtapeInscription implements Serializable {
 	private String regimeIns;
 	
 	private String libRg;
+	
+	private String statutInscription;
 
 	/**
 	 * @return the codeEtp
@@ -307,6 +309,22 @@ public class EtapeInscription implements Serializable {
 	}
 	public void setLibRg(String libRg) {
 		this.libRg = libRg;
+	}
+	@Override
+	public String toString() {
+		return "EtapeInscription [codeComposante=" + codeComposante + ", libComposante=" + libComposante + ", codeEtp="
+				+ codeEtp + ", codVrsVet=" + codVrsVet + ", LibWebVet=" + LibWebVet + ", typeIns=" + typeIns
+				+ ", codeDiplome=" + codeDiplome + ", versionDiplome=" + versionDiplome + ", libDiplome=" + libDiplome
+				+ ", codCursusLmd=" + codCursusLmd + ", codFinalite=" + codFinalite + ", libFinalite=" + libFinalite
+				+ ", volumeHoraire=" + volumeHoraire + ", codeCursusAmenage=" + codeCursusAmenage
+				+ ", libelleCursusAmenage=" + libelleCursusAmenage + ", regimeIns=" + regimeIns + ", libRg=" + libRg
+				+ "]";
+	}
+	public String getStatutInscription() {
+		return statutInscription;
+	}
+	public void setStatutInscription(String statutInscription) {
+		this.statutInscription = statutInscription;
 	}
 	
 	

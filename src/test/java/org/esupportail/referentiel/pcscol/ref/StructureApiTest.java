@@ -57,7 +57,7 @@ public class StructureApiTest {
 		List<Structure> response = structureApi.lireListeStructures();
 
 		response.forEach(s -> {
-			System.out.println(s.getParent());
+			System.out.println(s.getCode()+","+s.getDenominationPrincipale());
 		});
 	}
 

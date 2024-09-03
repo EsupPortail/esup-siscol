@@ -221,6 +221,16 @@ public class EtudiantRef implements Serializable {
 	public void setSexEtatCivil(String sexEtatCivil) {
 		this.sexEtatCivil = sexEtatCivil;
 	}
+	@Override
+	public String toString() {
+		return "EtudiantRef [cod_ind=" + cod_ind + ", nompatro=" + nompatro + ", nommarital=" + nommarital + ", prenom="
+				+ prenom + ", mail=" + mail + ", prenomEtatCivil=" + prenomEtatCivil + ", sexEtatCivil=" + sexEtatCivil
+				+ ", mainAddress=" + mainAddress + ", postalCode=" + postalCode + ", town=" + town + ", country="
+				+ country + ", phone=" + phone + ", portablePhone=" + portablePhone + ", mailPerso=" + mailPerso
+				+ ", codePays=" + codePays + ", libAd1=" + libAd1 + ", libAd2=" + libAd2 + ", libAd3=" + libAd3
+				+ ", libAde=" + libAde + ", codeSexe=" + codeSexe + ", dateNais=" + dateNais + ", libelleCPAM="
+				+ libelleCPAM + ", anneesInscriptionFC=" + anneesInscriptionFC + "]";
+	}
 
 	
 

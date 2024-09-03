@@ -15,16 +15,20 @@ package org.esupportail.referentiel.pcscol.odf;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.esupportail.referentiel.Siscol;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+import org.esupportail.referentiel.pcscol.config.PcscolConfig;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.odf.model.TypeObjetMaquette;
+import org.esupportail.referentiel.pcscol.services.AccessTokenService;
 import org.esupportail.referentiel.pcscol.services.OffreFormationService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,27 +39,50 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 /**
  * API tests for StructureApi
  */
-@ContextConfiguration(classes = { Siscol.class })
-@SpringBootTest
-@SpringJUnitConfig
+//@ContextConfiguration(classes = { Siscol.class })
+//@SpringBootTest
+//@SpringJUnitConfig
 @ActiveProfiles("test")
 public class MaquetteApiTest {
 
-	@Autowired
+//	@Autowired
 	ObjetsMaquetteApi objetsMaquetteApi;
-	@Autowired
+	//@Autowired
 	EspacesApi espacesApi;
-	@Autowired
+	//@Autowired
 	OffreFormationService offreFormationService;
 
 	@Autowired
 	PcscolService pcScoleService;
+	
+	
+	 public MaquetteApiTest() {
+		PcscolConfig config =new PcscolConfig();
+		AccessTokenService accessTokenService=new AccessTokenService();
+		accessTokenService.setCasUrl("https://authn-app.test-partenaires-odf.pc-scol.fr/cas/v1/tickets");
+		accessTokenService.setSvcAcountLogin("svc-api");
+		accessTokenService.setSvcAcountPassword("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		config.setAccessTokenService(accessTokenService);
+		config.setApiRef("https://ref.test-partenaires-odf.pc-scol.fr/api/v1/ref");
+		config.setApiODF("https://odf.test-partenaires-odf.pc-scol.fr/api/odf/v1");
+		offreFormationService=new OffreFormationService();
+		offreFormationService.setMutualise(false);
+		offreFormationService.setPiaActif(true);
+		offreFormationService.setValideSeulement(true);
+		
+		offreFormationService.setEspacesApi(config.espacesApi());
+		offreFormationService.setObjetsMaquetteApi(config.objetsMaquetteApi());
+		
+		
+		
+	}
 
 	String strId = "14f54729-4db4-4341-8af6-47e276fe3058";
 	String codeStructure = "ETAB00";
 
 	@Test
 	public void rechercherObjetMaquetteTest() throws ApiException {
+		
 
 		Map<String, String> test = offreFormationService.rechercherObjetMaquetteFormation(codeStructure, "PER-2021");
 		for (String s : test.keySet()) {
@@ -64,6 +91,7 @@ public class MaquetteApiTest {
 	}
 	@Test
 	public void rechercherObjetMaquetteObjetFormaion() throws ApiException {
+		
 
 		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,   "PER-2021");
 		for (String s : test.keySet()) {
@@ -72,8 +100,20 @@ public class MaquetteApiTest {
 	}
 
 	@Test
-	public void rechercherObjetMaquetteEnfantTest() throws ApiException {
-		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,"ca7806c7-2ed5-482b-91bf-314da11ef829");
+	public void rechercherObjetMaquetteObjetFormationUE() throws ApiException {
+
+		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormationUE(codeStructure,   "PER-2021");
+		for (String s : test.keySet()) {
+			System.out.println(s + " : " + test.get(s));
+		}
+	}
+
+
+
+
+	@Test
+	public void rechercherObjetMaquetteVET() throws ApiException {
+		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,"PER-2021");
 
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
@@ -83,17 +123,38 @@ public class MaquetteApiTest {
 	}
 	@Test
 	public void testRechcercheParCode() throws ApiException {
-		List<ObjetMaquetteSummary> maquette = offreFormationService.rechercheObjetMaquetteSummary(codeStructure, "LIC-PHY-L1", "PER-2021");
+		//List<ObjetMaquetteSummary> maquette = offreFormationService.rechercheObjetMaquetteSummary(codeStructure, "LIC-PHY-L1", "PER-2021");
+		List<ObjetMaquetteSummary> maquette = offreFormationService.rechercheObjetMaquetteSummary(codeStructure, "JJM1EM", "PER-2020");
 		System.out.println(maquette);
+	}
+	
+	@Test
+	public void recherchDescripteurMaquettes() {
+		
+		List<UUID> ids=new ArrayList<UUID>();
+		ids.add(UUID.fromString("5fe1ef87-23c2-46f2-8c4b-ce3892c66a8a"));
+		List<ObjetMaquetteDetail> response = offreFormationService.recherchDescripteurMaquettes(codeStructure, ids);
+		System.out.println(response);
 	}
 
 	@Test
 	public void testChecherEnfants() throws ApiException {
 		List<String> ids = new ArrayList<>();
 		//ids.add("0aeb0a77-9e60-413c-966c-023f722467a7");
-		ids.add("ff97d1e7-6b60-40bb-872d-6f3aab73215c");
+		//ids.add("ff97d1e7-6b60-40bb-872d-6f3aab73215c");
+		//ids.add("12754b3a-f4e5-4e9c-8ae4-107cd5f15802");
+		ids.add("0fc62ef0-623b-4ad7-ade5-aaaf03699148");
+		
 		List<ObjetMaquetteSummary> response = offreFormationService.rechercherObjetMaquetteParUUIDS(codeStructure, ids,
 				null);
+		System.out.println(response);
+	}
+	
+	
+	@Test
+	public void testUeMaquette() throws ApiException {
+		ObjetMaquetteDetail response = offreFormationService.recherchDescripteurMaquette(codeStructure,
+				"12754b3a-f4e5-4e9c-8ae4-107cd5f15802");
 		System.out.println(response);
 	}
 
@@ -103,7 +164,9 @@ public class MaquetteApiTest {
 		// ids.add("0aeb0a77-9e60-413c-966c-023f722467a7");
 		// ids.add("0a169da2-1d42-4d9a-ad1e-1686f18f9fb4");
 		ObjetMaquetteDetail response = offreFormationService.recherchDescripteurMaquette(codeStructure,
-				"c300cd12-4de4-47ff-bbb8-7d82072e252b");
+				"3ffc75d8-d95e-4b7c-8408-265749b0a023");
+		
+		//c300cd12-4de4-47ff-bbb8-7d82072e252b
 		// ObjetMaquetteDetail response =
 		// offreFormationService.recherchDescripteurMaquette(codeStructure,
 		// "0a169da2-1d42-4d9a-ad1e-1686f18f9fb4");
@@ -128,5 +191,17 @@ public class MaquetteApiTest {
 		}
 
 	}
+	@Test
+	public void rechercherObjetMaquetteObjetFormationStage() throws ApiException {
+		List<ObjetMaquetteDetail> response = offreFormationService.rechercherObjetMaquetteObjetFormationStage(codeStructure,  "PER-2021");
+		System.out.println(response);
+	}
+
+	//            chemin: [0dbe9735-272b-4aa8-bd25-4d815b21b118, 
+							//e668eeed-7d02-4967-83d3-6b28a0f06c1d, 
+							//5c2bd2c5-6912-40a9-93a5-048ccc9232d9, 
+							//268cb0a8-4dd2-4f82-a9f7-daf69cee77a4, 
+							//5056adb9-0290-448c-a2ef-220791cd324e, 
+							//0f41747a-bb10-4ed2-83c0-296996ca1c34]
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
+import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtabRef;
@@ -59,7 +60,7 @@ public interface GeneriqueSIControllerInterface {
 	 * @param prenom
 	 * @return
 	 */
-	public ResponseEntity<List<EtudiantDTO2Ext>> recupererListeEtuParEtpEtDiplome(
+	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "annee", required = true) String annee,
 			@RequestParam(value = "codeEtape", required = true) String codeEtape,

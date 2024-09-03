@@ -4,9 +4,11 @@ import java.net.URI;
 import java.time.Duration;
 
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
+import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
+import org.esupportail.referentiel.pcscol.ins.model.Inscription;
 import org.esupportail.referentiel.pcscol.invoker.ApiClient;
 import org.esupportail.referentiel.pcscol.services.AccessTokenService;
 import org.slf4j.Logger;
@@ -27,6 +29,10 @@ public class PcscolConfig {
 
 	@Value("${app.pcscol.api.odf.url}")
 	private String apiODF;
+	
+	@Value("${app.pcscol.api.ins.url}")
+	private String apiIns;
+
 
 	@Autowired
 	private AccessTokenService accessTokenService;
@@ -36,7 +42,7 @@ public class PcscolConfig {
 
 	@Bean
 	@SessionScope
-	StructureApi structureApi() {
+	public StructureApi structureApi() {
 		try {
 			String token = accessTokenService.getToken();
 			StructureApi structuresApi = new StructureApi(apiClient(apiRef, token));
@@ -50,7 +56,7 @@ public class PcscolConfig {
 
 	@Bean
 	@SessionScope
-	MaquettesApi maquetteApi() {
+	public MaquettesApi maquetteApi() {
 		try {
 			String token = accessTokenService.getToken();
 			MaquettesApi api = new MaquettesApi(apiClient(apiODF, token));
@@ -63,7 +69,7 @@ public class PcscolConfig {
 
 	@Bean
 	@SessionScope
-	ObjetsMaquetteApi objetsMaquetteApi() {
+	public ObjetsMaquetteApi objetsMaquetteApi() {
 		try {
 			String token = accessTokenService.getToken();
 			ObjetsMaquetteApi api = new ObjetsMaquetteApi(apiClient(apiODF, token));
@@ -77,7 +83,7 @@ public class PcscolConfig {
 	
 	@Bean
 	@SessionScope
-	EspacesApi espacesApi() {
+	public EspacesApi espacesApi() {
 		try {
 			String token = accessTokenService.getToken();
 			EspacesApi api = new EspacesApi(apiClient(apiODF, token));
@@ -87,8 +93,20 @@ public class PcscolConfig {
 			return new EspacesApi();
 		}
 	}
+	@Bean
+	@SessionScope
+	public InscriptionsApi inscriptionsApi() {
+		try {
+			String token = accessTokenService.getToken();
+			InscriptionsApi api=new InscriptionsApi(apiClient(apiIns,token));
+			return api ;
+			
+		}catch(Exception e) {
+			return new InscriptionsApi();
+		}
+	}
 
-	public ApiClient apiClient(String url, String token) {
+	private ApiClient apiClient(String url, String token) {
 		ApiClient apiClientIns = new ApiClient();
 		URI baseURI = URI.create(url);
 		String scheme = baseURI.getScheme();
@@ -132,5 +150,23 @@ public class PcscolConfig {
 	public void setApiRef(String apiRef) {
 		this.apiRef = apiRef;
 	}
+
+	public String getApiODF() {
+		return apiODF;
+	}
+
+	public void setApiODF(String apiODF) {
+		this.apiODF = apiODF;
+	}
+
+	public String getApiIns() {
+		return apiIns;
+	}
+
+	public void setApiIns(String apiIns) {
+		this.apiIns = apiIns;
+	}
+	
+	
 
 }

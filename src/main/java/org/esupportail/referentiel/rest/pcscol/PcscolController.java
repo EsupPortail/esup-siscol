@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
+import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtabRef;
@@ -43,15 +44,18 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	String codeStructure = "ETAB00";
 
 	@Value("${app.pcscol.codePeriode}")
-
 	String codePeriode = "PER-2020";
 
+	@Value("${app.pcscol.codesPeriodesChargementFormations}")
+	String codesPeriodesChargementFormations = "PER-2022";
+
 	/**
-	 * 
+	 * TODO PROBLEME DE PERIODE si la periode n'est pas précisée par defaut 19
 	 */
 	@GetMapping("/etapesReference")
 	public ResponseEntity<Map<String, String>> getEtapesRef() {
-		Map<String, String> ref = pcscolService.lireMapFormations(codeStructure, codePeriode, false, false);
+		Map<String, String> ref = pcscolService.lireMapFormations(codeStructure, codesPeriodesChargementFormations,
+				false, false);
 		return new ResponseEntity<Map<String, String>>(ref, HttpStatus.OK);
 
 	}
@@ -90,7 +94,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	@GetMapping("/etapesByEtudiantAndAnnee")
 	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(
 			@RequestParam(value = "codEtud", defaultValue = "000000036") String codeEtud,
-			@RequestParam(value = "annee", defaultValue = "2020") String annee) {
+			@RequestParam(defaultValue = "2020") String annee) {
 		// ApogeeMap map =
 		// studentDataRepositoryDaoWS.recupererEtapesByEtudiantAndAnnee(codeEtud, annee,
 		// "");
@@ -105,8 +109,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	@Operation(summary = "Récupérer les années d'inscription d'un étudiant")
 	@GetMapping("/anneesIa")
 	public ResponseEntity<List<String>> recupererAnneesIa(String codeEtud) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> list = pcscolService.recupererAnneesIa(codeStructure,codeEtud);
+		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
 	/**
@@ -115,7 +119,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	@GetMapping("/infosAdmEtu")
 	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
 		// TODO
-		EtudiantInfoAdm student = new EtudiantInfoAdm();
+		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
 		return new ResponseEntity<>(student, HttpStatus.OK);
 	}
 
@@ -123,7 +127,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 * 
 	 */
 	@GetMapping("/listEtuParEtapeEtDiplome")
-	public ResponseEntity<List<EtudiantDTO2Ext>> recupererListeEtuParEtpEtDiplome(
+	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "annee", required = true) String annee,
 			@RequestParam(value = "codeEtape", required = true) String codeEtape,
@@ -135,7 +139,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 			@RequestParam(value = "prenom", required = false) String prenom) {
 
 		// TODO
-		List<EtudiantDTO2Ext> listeEtu = new ArrayList<EtudiantDTO2Ext>();
+		List<ApprenantDto> listeEtu = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, annee, codeEtape,
+				versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
 		return new ResponseEntity<>(listeEtu, HttpStatus.OK);
 
 	}
@@ -150,7 +155,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	public ResponseEntity<LinkedHashMap<String, String>> studentEtapeVets(
 			@RequestParam(value = "codEtud") String codeEtud, @RequestParam(value = "annee") String annee) {
 		// TODO
-		LinkedHashMap<String, String> lEtapeInscriptions = new LinkedHashMap<String, String>();
+		LinkedHashMap<String, String> lEtapeInscriptions = pcscolService.studentEtapeVets(codeStructure, codeEtud,
+				annee);
 		return new ResponseEntity<>(lEtapeInscriptions, HttpStatus.OK);
 	}
 
@@ -162,9 +168,10 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/studentListeEtapeInscription")
 	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(
-			@RequestParam(value = "codEtud") String codEtud, @RequestParam(value = "annee") String annee) {
+			@RequestParam(value = "codEtud", defaultValue = "000000001") String codEtud,
+			@RequestParam(value = "annee", defaultValue = "PER-2020") String annee) {
 		// TODO
-		List<EtapeInscription> l = new ArrayList<EtapeInscription>();
+		List<EtapeInscription> l = pcscolService.etapeInscription(codeStructure, codEtud, annee);
 		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 
@@ -200,7 +207,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/diplomesReference")
 	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRef() {
-		List<DiplomeReduitDto> ref = new ArrayList<DiplomeReduitDto>();
+		List<DiplomeReduitDto> ref = pcscolService.diplomeRef(codeStructure, codesPeriodesChargementFormations);
 		return new ResponseEntity<>(ref, HttpStatus.OK);
 	}
 
@@ -223,8 +230,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/composanteSignaitaireRef")
 	public ResponseEntity<SignataireRef> signaitaireRef(
-			@RequestParam(value = "composante", defaultValue = "SCO") String composante) {
-		SignataireRef ref = new SignataireRef();
+			@RequestParam(value = "composante", defaultValue = "ETAB00") String composante) {
+		SignataireRef ref = pcscolService.signaitaireRef(composante);
 		return new ResponseEntity<>(ref, HttpStatus.OK);
 
 	}

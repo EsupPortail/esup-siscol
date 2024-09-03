@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
+import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeInscription;
-import org.esupportail.referentiel.beans.EtudiantDTO2Ext;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.SignataireRef;
@@ -66,7 +66,7 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface {
 	}
 
 	@GetMapping("/listEtuParEtapeEtDiplome")
-	public ResponseEntity<List<EtudiantDTO2Ext>> recupererListeEtuParEtpEtDiplome(
+	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "annee", required = true) String annee,
 			@RequestParam(value = "codeEtape", required = true) String codeEtape,
@@ -77,7 +77,7 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface {
 			@RequestParam(value = "nom", required = false) String nom,
 			@RequestParam(value = "prenom", required = false) String prenom) {
 
-		List<EtudiantDTO2Ext> listeEtu = new ArrayList<EtudiantDTO2Ext>();
+		List<ApprenantDto> listeEtu = new ArrayList<ApprenantDto>();
 		return new ResponseEntity<>(listeEtu, HttpStatus.OK);
 
 	}
