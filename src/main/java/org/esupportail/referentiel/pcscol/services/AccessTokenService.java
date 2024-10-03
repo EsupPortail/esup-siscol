@@ -32,7 +32,7 @@ public class AccessTokenService {
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Value("${app.pcscol.accesstoken.casUrl}")
-	private String casUrl = "https://authn-app.bas-esup.pc-scol.fr/cas/v1/tickets";
+	private String casUrl ;
 
 	@Value("${app.pcscol.accesstoken.svcAcountLogin}")
 	private String svcAcountLogin = "";

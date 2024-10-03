@@ -6,10 +6,13 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
+import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
@@ -32,14 +35,14 @@ import org.esupportail.referentiel.pcscol.ins.model.TriInscription;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.mapper.ApprenantEtuInfoAdmMapperInterface;
 import org.esupportail.referentiel.pcscol.mapper.OdfDtoMapperInterface;
-import org.esupportail.referentiel.pcscol.model.sta.StagesApprenant;
+import org.esupportail.referentiel.pcscol.odf.model.Enfant;
+import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -61,6 +64,9 @@ public class PcscolService implements PcscolServiceI {
 	private EspacesApi espacesApi;
 	@Autowired
 	private OffreFormationService offreFormationService;
+
+	@Autowired
+	private ChcService chcService;
 
 	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String annee) {
 
@@ -110,13 +116,21 @@ public class PcscolService implements PcscolServiceI {
 		ApogeeMap apogeeMap = new ApogeeMap();
 		List<EtapeInscription> etapeInscriptions = etapeInscription(codeStructure, codeApprenant, annee);
 		apogeeMap.setListeEtapeInscriptions(etapeInscriptions);
+		try {
+			List<ElementPedagogique> lelps = chcService.lirelisteElementPedagogiqueStageApprenant(codeApprenant,
+					codeStructure);
+			if (lelps != null) {
+				List<ElementPedagogique> filterdlElps = lelps.stream()
+						.filter(e -> e.getCodVrsVet().equalsIgnoreCase(annee)).collect(Collectors.toList());
+				apogeeMap.setListeELPs(filterdlElps);
+			}
+
+		} catch (ApiException e) {
+			logger.error(e.getMessage());
+		}
 
 		return apogeeMap;
 
-	}
-
-	public StagesApprenant lireStagesApprenant(String codeStructure, String codeApprenant) {
-		return new StagesApprenant();
 	}
 
 	@Override
@@ -128,7 +142,7 @@ public class PcscolService implements PcscolServiceI {
 					.apprenantToEtudiantInfoAdm(app.getApprenant());
 			return info;
 		} catch (ApiException e) {
-			logger.error(" lireEtudiantInfoAdm : ", codeStructure, codeApprenant,e.getMessage(), e.getCode());
+			logger.error(" lireEtudiantInfoAdm : ", codeStructure, codeApprenant, e.getMessage(), e.getCode());
 		}
 
 		return null;
@@ -147,17 +161,6 @@ public class PcscolService implements PcscolServiceI {
 			e.printStackTrace();
 		}
 		return new EtudiantRef();
-	}
-
-	public EtudiantInfoAdm lireEtudiantInfoAdm(StagesApprenant stgApp) {
-		if (stgApp.getApprenant() == null) {
-			return null;
-		}
-		// Apprenant app = stgApp.getApprenant();
-		// EtudiantInfoAdm etu =
-		// ApprenantEtuInfoAdmMapper.Instance.apprenantToEtudiantInfoAdm(app);
-		return null;
-
 	}
 
 	/**
@@ -210,13 +213,16 @@ public class PcscolService implements PcscolServiceI {
 	public List<DiplomeReduitDto> diplomeRef(String codeStructure, String codesPeriodesChargementFormations) {
 
 		List<String> listCodePeriode = codePeriodeFromPeriodes(codeStructure, codesPeriodesChargementFormations);
-
+		logger.debug("listCodePeriode: {}", listCodePeriode);
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<ObjetMaquetteSummary>();
 
 		listCodePeriode.forEach(codePeiode -> {
 			try {
+
 				List<ObjetMaquetteSummary> diplomes = offreFormationService
 						.rechercherObjetMaquetteDiplomeReferences(codeStructure, codePeiode);
+				logger.debug("nbr diplomes {}", diplomes.size());
+
 				objetMaquetteSummaries.addAll(diplomes);
 			} catch (ApiException e) {
 				// TODO Auto-generated catch block
@@ -224,8 +230,39 @@ public class PcscolService implements PcscolServiceI {
 			}
 		});
 
-		List<DiplomeReduitDto> diplomes = OdfDtoMapperInterface.Instance
-				.diplomeReduitDtoFromObjetMaquetteSummary(objetMaquetteSummaries);
+		List<ObjetMaquetteDetail> objetMaquetteDetails = new ArrayList<ObjetMaquetteDetail>();
+
+		List<DiplomeReduitDto> diplomes = new ArrayList<DiplomeReduitDto>();
+
+		objetMaquetteSummaries.forEach(f -> {
+
+			try {
+
+				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, f.getId());
+				UUID idEspace = objectMaqette.getEspace();
+				// possibilite d'avoir un espace different ???
+
+				if (!objectMaqette.getEnfants().isEmpty()) {
+					System.out.println(objectMaqette.getEnfants() + "+++++++++++++++++++++");
+					Enfant enfant = objectMaqette.getEnfants().get(0);
+
+					ObjetMaquetteDetail objectMaqette2 = objetsMaquetteApi.lireObjetMaquette(codeStructure,
+							UUID.fromString(enfant.getId()));
+					System.out.println(objectMaqette2 + "+++++++++++++++++++++");
+				}
+				/**
+				 * TODO gestion des espaces
+				 */
+				DiplomeReduitDto diplome = OdfDtoMapperInterface.Instance
+						.diplomeReduitDtoFromObjetMaquette(objectMaqette);
+				Espace esp = espacesApi.lireEspace(codeStructure, idEspace);
+				diplome.setVersionDiplome(esp.getCode());
+				diplomes.add(diplome);
+
+			} catch (ApiException e) {
+				logger.error(e.getMessage() + " : " + e.getCode());
+			}
+		});
 
 		return diplomes;
 	}
@@ -295,7 +332,7 @@ public class PcscolService implements PcscolServiceI {
 		 * StatutInscriptionVoeu
 		 */
 		List<StatutInscriptionVoeu> statutsInscription = new ArrayList<StatutInscriptionVoeu>();
-		//statutsInscription.add(StatutInscriptionVoeu.VALIDE);
+		// statutsInscription.add(StatutInscriptionVoeu.VALIDE);
 		// statutsInscription.add(StatutInscriptionVoeu.ANNULEE);
 		List<StatutPiecesVoeu> statutsPieces = new ArrayList<StatutPiecesVoeu>();
 		List<StatutPaiementVoeu> statutsPaiement = new ArrayList<StatutPaiementVoeu>();
@@ -321,21 +358,20 @@ public class PcscolService implements PcscolServiceI {
 		return new ArrayList<Inscription>();
 
 	}
-	
-	public List<String> recupererAnneesIa(String codeStructure,String codeEtud){
-		List<String> annaeeIa=new ArrayList<String>();
+
+	public List<String> recupererAnneesIa(String codeStructure, String codeEtud) {
+		List<String> annaeeIa = new ArrayList<String>();
 		List<Inscription> ins = lireInscriptions(codeStructure, null, null, null, null, codeEtud);
-		ins.forEach(i->{
+		ins.forEach(i -> {
 			annaeeIa.add(i.getVoeu().getCible().getPeriode().getCode());
 		});
 		return annaeeIa;
 	}
-	
-	
+
 	public SignataireRef signaitaireRef(String composante) {
 		try {
 			Structure response = structureApi.lireStructure(composante);
-			SignataireRef sign=new SignataireRef();
+			SignataireRef sign = new SignataireRef();
 			sign.setNomSignataireComposante(response.getResponsable().getNom());
 			sign.setQualiteSignataire(response.getResponsable().getTitre());
 			return sign;

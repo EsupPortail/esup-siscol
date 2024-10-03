@@ -51,11 +51,10 @@ public class OffreFormationService {
 		// ( String codeStructure, Pageable pageable, String r, TypeEspace type, Boolean
 		// actif)
 		PagedEspaces espaces = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, true);
-		logger.debug("Espaces :  " + espaces);
+		logger.debug("nbr d'Espaces pour le code   "  +r +" :" +espaces.getTotalElements());
 		return espaces.getItems();
 
 	}
-
 
 	/**
 	 * 
@@ -119,22 +118,27 @@ public class OffreFormationService {
 	 * @param racine
 	 * @param typeObjetFormation
 	 * @param espace
-	 * @param newParam           TODO
+	 * @param newParam           TODO cheraga
 	 * @return
 	 * @throws ApiException
 	 */
 	public List<ObjetMaquetteSummary> rechercheObjetMaquetteSummary(String codeStructure,
 			List<TypeObjetMaquette> typeObjetMaquette, Boolean racine, String typeObjetFormation, List<UUID> ids,
 			String espace) throws ApiException {
+		
+		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{},{},{} ,{} )",codeStructure,typeObjetMaquette,racine,typeObjetFormation,ids,espace);
 		List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<>();
 		Pageable pageable = new Pageable();
 		pageable.setPage(0);
 		pageable.setTaille(20);
 		String r = null;
+		logger.debug("codeStructure: {}, pageable: {}, r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",codeStructure, pageable, r,
+				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
+				mutualise);
 		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
 				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
 				mutualise);
-
+			
 		if (response == null || response.getItems() == null) {
 			logger.info("rechercheObjetMaquetteSummary vide : " + codeStructure + " : " + espace);
 			return objetMaquetteSummaries;
@@ -154,7 +158,7 @@ public class OffreFormationService {
 
 		return objetMaquetteSummaries;
 	}
-	
+
 	/**
 	 * 
 	 * @param codeStructure
@@ -229,14 +233,13 @@ public class OffreFormationService {
 	 * @param espace
 	 * @return
 	 */
-	public List<String> rechercherIDSObjetFormationAnnee(String codeStructure,String espace){
-		
-		TypeObjetMaquette type=TypeObjetMaquette.OBJET_FORMATION;
-		boolean racine=false;
-		String typeObjetFormation="ANNEE";
+	public List<String> rechercherIDSObjetFormationAnnee(String codeStructure, String espace) {
+
+		TypeObjetMaquette type = TypeObjetMaquette.OBJET_FORMATION;
+		boolean racine = false;
+		String typeObjetFormation = "ANNEE";
 		try {
-			return rechercherIdObjetMaquette( codeStructure,  type,  racine,
-					 typeObjetFormation,  espace);
+			return rechercherIdObjetMaquette(codeStructure, type, racine, typeObjetFormation, espace);
 		} catch (ApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -266,7 +269,7 @@ public class OffreFormationService {
 		allObjetMaquetteDetail.forEach(f -> {
 
 			try {
-				System.out.println(f.getId());
+			
 				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, f.getId());
 				UUID idEspace = objectMaqette.getEspace();
 				// possibilite d'avoir un espace different ???
@@ -274,7 +277,7 @@ public class OffreFormationService {
 				 * TODO gestion des espaces
 				 */
 				Espace esp = espacesApi.lireEspace(codeStructure, idEspace);
-				System.out.println(objectMaqette.getCode() + ":" + f.getTypeObjetFormation());
+				
 				mapVDI.put(f.getCode() + "," + esp.getCode(), f.getLibelle());
 
 			} catch (ApiException e) {
@@ -297,12 +300,18 @@ public class OffreFormationService {
 	public List<ObjetMaquetteSummary> rechercherObjetMaquetteDiplomeReferences(String codeStructure, String periode)
 			throws ApiException {
 		List<TypeObjetMaquette> tom = new ArrayList<TypeObjetMaquette>();
-
-		UUID idPeriode = checherPeriodeParCode(codeStructure, periode).get(0).getId();
-		tom.add(TypeObjetMaquette.FORMATION);
-		List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure, tom, true,
-				null, null, idPeriode.toString());
-		return allObjetMaquetteDetail;
+		logger.debug("Recherche de diplomes pour la periode : "+periode);
+		List<Espace> espaces = checherPeriodeParCode(codeStructure, periode);
+		if (espaces != null && !espaces.isEmpty()) {
+			UUID idPeriode = espaces.get(0).getId();
+			tom.add(TypeObjetMaquette.FORMATION);
+			List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure, tom, false,
+					null, null, idPeriode.toString());
+			logger.debug(periode+" nbr diplomes : "+ allObjetMaquetteDetail.size());
+			return allObjetMaquetteDetail;
+		}
+		else 
+			return new ArrayList<ObjetMaquetteSummary>();
 	}
 
 	// rechercherObjetMaquetteFormation
@@ -311,6 +320,7 @@ public class OffreFormationService {
 	 * @param codeStructure
 	 * @return
 	 * @throws ApiException
+	 * cheraga
 	 */
 	public Map<String, String> rechercherObjetMaquetteFormation(String codeStructure, String periode)
 			throws ApiException {
@@ -328,10 +338,15 @@ public class OffreFormationService {
 	 */
 	public Map<String, String> rechercherObjetMaquetteObjetFormation(String codeStructure, String periode)
 			throws ApiException {
-		UUID idPeriode = checherPeriodeParCode(codeStructure, periode).get(0).getId();
-
-		return rechercherObjetMaquette(codeStructure, TypeObjetMaquette.OBJET_FORMATION, false, "ANNEE",
-				idPeriode.toString());
+		
+		List<Espace> espaces = checherPeriodeParCode(codeStructure, periode);
+		if (espaces != null && !espaces.isEmpty()) {
+			UUID idPeriode = checherPeriodeParCode(codeStructure, periode).get(0).getId();
+			return rechercherObjetMaquette(codeStructure, TypeObjetMaquette.OBJET_FORMATION, false, "ANNEE",
+					idPeriode.toString());
+		}
+		logger.debug(" Espace null pour la periode "+periode);
+		return new HashMap<String, String>();
 	}
 
 	/**
@@ -373,7 +388,7 @@ public class OffreFormationService {
 
 						DescripteursObjetFormation om = (DescripteursObjetFormation) objetMaquetteDetail
 								.getDescripteursObjetMaquette();
-						if (!om.getStage()) {
+						if (om.getStage()) {
 							listObjetMaquetteDetail.add(objetMaquetteDetail);
 						}
 					}
@@ -418,9 +433,10 @@ public class OffreFormationService {
 				uids.add(UUID.fromString(id));
 			});
 		}
-		System.out.println(ids);
+		
 		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
-		String typeObjetFormation = null;
+		// typeObjetFormation [UE, PARCOURS-TYPE, SEMESTRE, ANNEE, ENS, EC]
+		String typeObjetFormation = "ENS";
 		Boolean racine = true;
 
 		// ids.add(UUID.fromString("0aeb0a77-9e60-413c-966c-023f722467a7"));
@@ -458,7 +474,7 @@ public class OffreFormationService {
 	public void setValideSeulement(Boolean valideSeulement) {
 		this.valideSeulement = valideSeulement;
 	}
-	
+
 	public EspacesApi getEspacesApi() {
 		return espacesApi;
 	}
@@ -486,6 +502,5 @@ public class OffreFormationService {
 	public Boolean getValideSeulement() {
 		return valideSeulement;
 	}
-
 
 }

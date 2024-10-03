@@ -6,10 +6,8 @@ import java.util.List;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
-import org.esupportail.referentiel.pcscol.config.PcscolConfig;
 import org.esupportail.referentiel.pcscol.ins.model.Apprenant;
 import org.esupportail.referentiel.pcscol.ins.model.ApprenantEtInscriptions;
-import org.esupportail.referentiel.pcscol.ins.model.CibleInscription;
 import org.esupportail.referentiel.pcscol.ins.model.InscriptionComplete;
 import org.esupportail.referentiel.pcscol.ins.model.Inscriptions;
 import org.esupportail.referentiel.pcscol.ins.model.Periode;
@@ -20,30 +18,16 @@ import org.esupportail.referentiel.pcscol.ins.model.StatutPiecesVoeu;
 import org.esupportail.referentiel.pcscol.ins.model.TriInscription;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.mapper.ApprenantEtuInfoAdmMapperInterface;
-import org.esupportail.referentiel.pcscol.services.AccessTokenService;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class InscriptionTest {
 
+	@Autowired
 	InscriptionsApi insApi;
 	
 
-	public InscriptionTest() {
-
-		PcscolConfig config = new PcscolConfig();
-		AccessTokenService accessTokenService = new AccessTokenService();
-		accessTokenService.setCasUrl("https://authn-app.test-partenaires-odf.pc-scol.fr/cas/v1/tickets");
-		accessTokenService.setSvcAcountLogin("svc-api");
-		accessTokenService.setSvcAcountPassword("*********************");
-		config.setAccessTokenService(accessTokenService);
-		config.setApiIns("https://ins.test-partenaires-odf.pc-scol.fr/api/v5/ins");
-
-		insApi = config.inscriptionsApi();
-
-	}
+	
 
 	@Test
 	public void testInsEtApp() throws ApiException {

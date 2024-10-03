@@ -55,28 +55,13 @@ public class MaquetteApiTest {
 	@Autowired
 	PcscolService pcScoleService;
 	
+	//https://pegase-swagger-ui.partenaires.pc-scol.fr/
+	/**
+	 * https://odf.partenaires.pc-scol.fr/api/odf/v1
+	 */
 	
-	 public MaquetteApiTest() {
-		PcscolConfig config =new PcscolConfig();
-		AccessTokenService accessTokenService=new AccessTokenService();
-		accessTokenService.setCasUrl("https://authn-app.test-partenaires-odf.pc-scol.fr/cas/v1/tickets");
-		accessTokenService.setSvcAcountLogin("svc-api");
-		accessTokenService.setSvcAcountPassword("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		config.setAccessTokenService(accessTokenService);
-		config.setApiRef("https://ref.test-partenaires-odf.pc-scol.fr/api/v1/ref");
-		config.setApiODF("https://odf.test-partenaires-odf.pc-scol.fr/api/odf/v1");
-		offreFormationService=new OffreFormationService();
-		offreFormationService.setMutualise(false);
-		offreFormationService.setPiaActif(true);
-		offreFormationService.setValideSeulement(true);
-		
-		offreFormationService.setEspacesApi(config.espacesApi());
-		offreFormationService.setObjetsMaquetteApi(config.objetsMaquetteApi());
-		
-		
-		
-	}
-
+	
+	
 	String strId = "14f54729-4db4-4341-8af6-47e276fe3058";
 	String codeStructure = "ETAB00";
 

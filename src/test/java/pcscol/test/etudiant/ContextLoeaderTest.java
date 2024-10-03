@@ -1,13 +1,7 @@
 package pcscol.test.etudiant;
 
-import java.util.List;
-
 import org.esupportail.referentiel.Siscol;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
-import org.esupportail.referentiel.pcscol.model.formation.Formation;
-import org.esupportail.referentiel.pcscol.model.formation.Structure;
-import org.esupportail.referentiel.pcscol.model.sta.Apprenant;
-import org.esupportail.referentiel.pcscol.model.sta.StagesApprenant;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;

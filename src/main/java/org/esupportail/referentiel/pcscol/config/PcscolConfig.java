@@ -3,12 +3,12 @@ package org.esupportail.referentiel.pcscol.config;
 import java.net.URI;
 import java.time.Duration;
 
+import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
-import org.esupportail.referentiel.pcscol.ins.model.Inscription;
 import org.esupportail.referentiel.pcscol.invoker.ApiClient;
 import org.esupportail.referentiel.pcscol.services.AccessTokenService;
 import org.slf4j.Logger;
@@ -32,6 +32,9 @@ public class PcscolConfig {
 	
 	@Value("${app.pcscol.api.ins.url}")
 	private String apiIns;
+	
+	@Value("${app.pcscol.api.chc.url}")
+	private String apiChcV6;
 
 
 	@Autowired
@@ -40,6 +43,21 @@ public class PcscolConfig {
 	@Value("${app.pcscol.accesstoken.duration}")
 	private long duration = 6;
 
+	
+	@Bean
+	@SessionScope
+	public CursusDcaApi cursusDcaApi() {
+		try {
+			String token = accessTokenService.getToken();
+			CursusDcaApi structuresApi = new CursusDcaApi(apiClient(apiChcV6, token));
+			return structuresApi;
+		} catch (Exception e) {
+			logger.error(e.getMessage() + " :" + e.getMessage());
+			return new CursusDcaApi();
+		}
+		
+	}
+	
 	@Bean
 	@SessionScope
 	public StructureApi structureApi() {
@@ -165,6 +183,14 @@ public class PcscolConfig {
 
 	public void setApiIns(String apiIns) {
 		this.apiIns = apiIns;
+	}
+
+	public String getApiChcV6() {
+		return apiChcV6;
+	}
+
+	public void setApiChcV6(String apiChcV6) {
+		this.apiChcV6 = apiChcV6;
 	}
 	
 	

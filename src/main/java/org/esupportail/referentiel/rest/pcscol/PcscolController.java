@@ -109,7 +109,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	@Operation(summary = "Récupérer les années d'inscription d'un étudiant")
 	@GetMapping("/anneesIa")
 	public ResponseEntity<List<String>> recupererAnneesIa(String codeEtud) {
-		List<String> list = pcscolService.recupererAnneesIa(codeStructure,codeEtud);
+		List<String> list = pcscolService.recupererAnneesIa(codeStructure, codeEtud);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
@@ -128,12 +128,12 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/listEtuParEtapeEtDiplome")
 	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
-			@RequestParam(value = "codeComposante", required = true) String codeComposante,
-			@RequestParam(value = "annee", required = true) String annee,
-			@RequestParam(value = "codeEtape", required = true) String codeEtape,
-			@RequestParam(value = "versionEtape", required = true) String versionEtape,
-			@RequestParam(value = "codeDiplome", required = true) String codeDiplome,
-			@RequestParam(value = "versionDiplome", required = true) String versionDiplome,
+			@RequestParam(value = "codeComposante", required = true,defaultValue = "ETAB00") String codeComposante,
+			@RequestParam(value = "annee", required = true,defaultValue = "PER-2020") String annee,
+			@RequestParam(value = "codeEtape", required = true,defaultValue = "None") String codeEtape,
+			@RequestParam(value = "versionEtape", required = true,defaultValue = "None") String versionEtape,
+			@RequestParam(value = "codeDiplome", required = true,defaultValue = "JJ-M-ENT") String codeDiplome,
+			@RequestParam(value = "versionDiplome", required = true,defaultValue = "PER-2020") String versionDiplome,
 			@RequestParam(value = "codEtu", required = false) String codEtu,
 			@RequestParam(value = "nom", required = false) String nom,
 			@RequestParam(value = "prenom", required = false) String prenom) {
@@ -153,7 +153,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/studentEtapeVets")
 	public ResponseEntity<LinkedHashMap<String, String>> studentEtapeVets(
-			@RequestParam(value = "codEtud") String codeEtud, @RequestParam(value = "annee") String annee) {
+			@RequestParam(value = "codEtud", defaultValue = "000000001") String codeEtud,
+			@RequestParam(value = "annee", defaultValue = "PER-2020") String annee) {
 		// TODO
 		LinkedHashMap<String, String> lEtapeInscriptions = pcscolService.studentEtapeVets(codeStructure, codeEtud,
 				annee);
