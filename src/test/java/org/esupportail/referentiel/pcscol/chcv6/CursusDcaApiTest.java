@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.esupportail.referentiel.Siscol;
 import org.esupportail.referentiel.beans.ElementPedagogique;
+import org.esupportail.referentiel.pcscol.chcv6.model.CursusDCA;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
+import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.services.ChcService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +32,20 @@ public class CursusDcaApiTest {
 	 * @throws ApiException if the Api call fails
 	 */
 	@Test
-	public void lireCusrsuApprenantTest() throws ApiException {
+	public void lirelisteElementPedagogiqueStageApprenantTest() throws ApiException {
 		String codeApprenant = "000000001";
 		String codStructure = "ETAB00";
 		List<ElementPedagogique> response = chcService.lirelisteElementPedagogiqueStageApprenant(codeApprenant,
 				codStructure);
+		System.out.println(response);
+
+	}
+
+	@Test
+	public void lireCusrsuApprenantTest() throws ApiException {
+		String codeApprenant = "000000001";
+		String codStructure = "ETAB00";
+		List<CursusDCA> response = chcService.lireCusrsuApprenant(codeApprenant);
 		System.out.println(response);
 
 	}

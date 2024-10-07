@@ -24,6 +24,8 @@ import org.esupportail.referentiel.pcscol.config.PcscolConfig;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
+import org.esupportail.referentiel.pcscol.odf.model.Pageable;
+import org.esupportail.referentiel.pcscol.odf.model.PagedObjetMaquetteSummaries;
 import org.esupportail.referentiel.pcscol.odf.model.TypeObjetMaquette;
 import org.esupportail.referentiel.pcscol.services.AccessTokenService;
 import org.esupportail.referentiel.pcscol.services.OffreFormationService;
@@ -39,46 +41,44 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 /**
  * API tests for StructureApi
  */
-//@ContextConfiguration(classes = { Siscol.class })
-//@SpringBootTest
-//@SpringJUnitConfig
+@ContextConfiguration(classes = { Siscol.class })
+@SpringBootTest
+@SpringJUnitConfig
 @ActiveProfiles("test")
 public class MaquetteApiTest {
 
-//	@Autowired
+	@Autowired
 	ObjetsMaquetteApi objetsMaquetteApi;
-	//@Autowired
+	@Autowired
 	EspacesApi espacesApi;
-	//@Autowired
+	@Autowired
 	OffreFormationService offreFormationService;
 
 	@Autowired
 	PcscolService pcScoleService;
-	
-	//https://pegase-swagger-ui.partenaires.pc-scol.fr/
+
+	// https://pegase-swagger-ui.partenaires.pc-scol.fr/
 	/**
 	 * https://odf.partenaires.pc-scol.fr/api/odf/v1
 	 */
-	
-	
-	
+
 	String strId = "14f54729-4db4-4341-8af6-47e276fe3058";
 	String codeStructure = "ETAB00";
 
 	@Test
 	public void rechercherObjetMaquetteTest() throws ApiException {
-		
 
 		Map<String, String> test = offreFormationService.rechercherObjetMaquetteFormation(codeStructure, "PER-2021");
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
 		}
 	}
+
 	@Test
 	public void rechercherObjetMaquetteObjetFormaion() throws ApiException {
-		
 
-		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,   "PER-2021");
+		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,
+				"PER-2021");
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
 		}
@@ -87,36 +87,38 @@ public class MaquetteApiTest {
 	@Test
 	public void rechercherObjetMaquetteObjetFormationUE() throws ApiException {
 
-		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormationUE(codeStructure,   "PER-2021");
+		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormationUE(codeStructure,
+				"PER-2021");
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
 		}
 	}
-
-
-
 
 	@Test
 	public void rechercherObjetMaquetteVET() throws ApiException {
-		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,"PER-2021");
+		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,
+				"PER-2021");
 
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
-			
-			
+
 		}
 	}
+
 	@Test
 	public void testRechcercheParCode() throws ApiException {
-		//List<ObjetMaquetteSummary> maquette = offreFormationService.rechercheObjetMaquetteSummary(codeStructure, "LIC-PHY-L1", "PER-2021");
-		List<ObjetMaquetteSummary> maquette = offreFormationService.rechercheObjetMaquetteSummary(codeStructure, "JJM1EM", "PER-2020");
+		// List<ObjetMaquetteSummary> maquette =
+		// offreFormationService.rechercheObjetMaquetteSummary(codeStructure,
+		// "LIC-PHY-L1", "PER-2021");
+		List<ObjetMaquetteSummary> maquette = offreFormationService.rechercheObjetMaquetteSummary(codeStructure,
+				"JJM1EM", "PER-2020");
 		System.out.println(maquette);
 	}
-	
+
 	@Test
 	public void recherchDescripteurMaquettes() {
-		
-		List<UUID> ids=new ArrayList<UUID>();
+
+		List<UUID> ids = new ArrayList<UUID>();
 		ids.add(UUID.fromString("5fe1ef87-23c2-46f2-8c4b-ce3892c66a8a"));
 		List<ObjetMaquetteDetail> response = offreFormationService.recherchDescripteurMaquettes(codeStructure, ids);
 		System.out.println(response);
@@ -125,21 +127,48 @@ public class MaquetteApiTest {
 	@Test
 	public void testChecherEnfants() throws ApiException {
 		List<String> ids = new ArrayList<>();
-		//ids.add("0aeb0a77-9e60-413c-966c-023f722467a7");
-		//ids.add("ff97d1e7-6b60-40bb-872d-6f3aab73215c");
-		//ids.add("12754b3a-f4e5-4e9c-8ae4-107cd5f15802");
+		// ids.add("0aeb0a77-9e60-413c-966c-023f722467a7");
+		// ids.add("ff97d1e7-6b60-40bb-872d-6f3aab73215c");
+		// ids.add("12754b3a-f4e5-4e9c-8ae4-107cd5f15802");
 		ids.add("0fc62ef0-623b-4ad7-ade5-aaaf03699148");
-		
+
 		List<ObjetMaquetteSummary> response = offreFormationService.rechercherObjetMaquetteParUUIDS(codeStructure, ids,
 				null);
 		System.out.println(response);
 	}
-	
-	
+
 	@Test
 	public void testUeMaquette() throws ApiException {
 		ObjetMaquetteDetail response = offreFormationService.recherchDescripteurMaquette(codeStructure,
 				"12754b3a-f4e5-4e9c-8ae4-107cd5f15802");
+		System.out.println(response);
+	}
+
+	@Test
+	public void tetOMP() throws ApiException {
+
+		/**
+		 * public PagedObjetMaquetteSummaries rechercherObjetMaquette( String
+		 * codeStructure, Pageable pageable, String r, String espace,
+		 * List<TypeObjetMaquette> typeObjetMaquette, Boolean racine, String
+		 * typeObjetFormation, List<UUID> ids, Boolean piaSeulement, Boolean piaActif,
+		 * Boolean valideSeulement, Boolean mutualise) throws ApiExceptio
+		 */
+		Pageable pageable = new Pageable();
+		String r = null;
+		String espace = null;
+		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
+		Boolean racine = null;
+		String typeObjetFormation = null;
+		List<UUID> ids = new ArrayList<UUID>();
+		Boolean piaSeulement = null;
+		Boolean piaActif = null;
+		Boolean valideSeulement = null;
+		Boolean mutualise = null;
+		ids.add(UUID.fromString("34afb0f0-5aa8-4454-b1d4-de69f6a548c3"));
+
+		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r, espace, typeObjetMaquette, racine,
+				typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement, mutualise);
 		System.out.println(response);
 	}
 
@@ -149,9 +178,9 @@ public class MaquetteApiTest {
 		// ids.add("0aeb0a77-9e60-413c-966c-023f722467a7");
 		// ids.add("0a169da2-1d42-4d9a-ad1e-1686f18f9fb4");
 		ObjetMaquetteDetail response = offreFormationService.recherchDescripteurMaquette(codeStructure,
-				"3ffc75d8-d95e-4b7c-8408-265749b0a023");
-		
-		//c300cd12-4de4-47ff-bbb8-7d82072e252b
+				"34afb0f0-5aa8-4454-b1d4-de69f6a548c3");
+
+		// c300cd12-4de4-47ff-bbb8-7d82072e252b
 		// ObjetMaquetteDetail response =
 		// offreFormationService.recherchDescripteurMaquette(codeStructure,
 		// "0a169da2-1d42-4d9a-ad1e-1686f18f9fb4");
@@ -161,32 +190,36 @@ public class MaquetteApiTest {
 		System.out.println(response.getCode() + ": " + response.getDescripteursObjetMaquette());
 		System.out.println(response.getContextes());
 		System.out.println(response.getEnfants());
-		if(response.getEnfants()!=null) {
-			response.getEnfants().forEach(enfant->{
+		if (response.getEnfants() != null) {
+			response.getEnfants().forEach(enfant -> {
 				try {
-					ObjetMaquetteDetail  responseEnfant = offreFormationService.recherchDescripteurMaquette(codeStructure, enfant.getId());
-					System.out.println(responseEnfant.getId()+" : "+responseEnfant.getTypeObjetMaquette()+ " :");
-					System.out.println(responseEnfant.getDescripteursObjetMaquette().getLibelle()+" : "+responseEnfant.getTypeObjetMaquette()+ " :");
+					ObjetMaquetteDetail responseEnfant = offreFormationService
+							.recherchDescripteurMaquette(codeStructure, enfant.getId());
+					System.out.println(responseEnfant.getId() + " : " + responseEnfant.getTypeObjetMaquette() + " :");
+					System.out.println(responseEnfant.getDescripteursObjetMaquette().getLibelle() + " : "
+							+ responseEnfant.getTypeObjetMaquette() + " :");
 					System.out.println("++++++++++++++++++++++++++++++");
 				} catch (ApiException e) {
 					// TODO Auto-generated catch block
-					System.out.println(enfant.getId()+ "\t\t" +e.getCode());
+					System.out.println(enfant.getId() + "\t\t" + e.getCode());
 				}
 			});
 		}
 
 	}
+
 	@Test
 	public void rechercherObjetMaquetteObjetFormationStage() throws ApiException {
-		List<ObjetMaquetteDetail> response = offreFormationService.rechercherObjetMaquetteObjetFormationStage(codeStructure,  "PER-2021");
+		List<ObjetMaquetteDetail> response = offreFormationService
+				.rechercherObjetMaquetteObjetFormationStage(codeStructure, "PER-2021");
 		System.out.println(response);
 	}
 
-	//            chemin: [0dbe9735-272b-4aa8-bd25-4d815b21b118, 
-							//e668eeed-7d02-4967-83d3-6b28a0f06c1d, 
-							//5c2bd2c5-6912-40a9-93a5-048ccc9232d9, 
-							//268cb0a8-4dd2-4f82-a9f7-daf69cee77a4, 
-							//5056adb9-0290-448c-a2ef-220791cd324e, 
-							//0f41747a-bb10-4ed2-83c0-296996ca1c34]
+	// chemin: [0dbe9735-272b-4aa8-bd25-4d815b21b118,
+	// e668eeed-7d02-4967-83d3-6b28a0f06c1d,
+	// 5c2bd2c5-6912-40a9-93a5-048ccc9232d9,
+	// 268cb0a8-4dd2-4f82-a9f7-daf69cee77a4,
+	// 5056adb9-0290-448c-a2ef-220791cd324e,
+	// 0f41747a-bb10-4ed2-83c0-296996ca1c34]
 
 }
