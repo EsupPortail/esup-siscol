@@ -49,9 +49,6 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
 	String codesPeriodesChargementFormations = "PER-2022";
 
-	/**
-	 * TODO PROBLEME DE PERIODE si la periode n'est pas précisée par defaut 19
-	 */
 	@GetMapping("/etapesReference")
 	public ResponseEntity<Map<String, String>> getEtapesRef() {
 		Map<String, String> ref = pcscolService.lireMapFormations(codeStructure, codesPeriodesChargementFormations,
@@ -118,7 +115,6 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/infosAdmEtu")
 	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
-		// TODO
 		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
 		return new ResponseEntity<>(student, HttpStatus.OK);
 	}
@@ -182,7 +178,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 * @param versionEtape
 	 * @return List<ElementPedagogique>
 	 */
-	@GetMapping("/studentListeElpStage")
+	//@GetMapping("/studentListeElpStage")
 	public ResponseEntity<List<ElementPedagogique>> studentListeElpStage(
 			@RequestParam(value = "codeEtape") String codeEtape,
 			@RequestParam(value = "versionEtape") String versionEtape) {
@@ -191,6 +187,16 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 
+	@GetMapping("/studentListeElpStage")
+	public ResponseEntity<List<ElementPedagogique>> studentListeElpStageTest(
+			@RequestParam(value = "codeEtape") String codeEtape,
+			@RequestParam(value = "versionEtape") String versionEtape) {
+		// TODO
+		List<ElementPedagogique> l = new ArrayList<ElementPedagogique>();
+		return new ResponseEntity<>(l, HttpStatus.OK);
+	}
+
+	
 	/**
 	 * 
 	 * @return
@@ -220,7 +226,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "codeAnnee", required = true) String codeAnnee) {
-		List<DiplomeReduitDto> ref = new ArrayList<DiplomeReduitDto>();
+		List<DiplomeReduitDto> ref = pcscolService.diplomeRef(codeComposante, codeAnnee);
 		return new ResponseEntity<>(ref, HttpStatus.OK);
 	}
 

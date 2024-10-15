@@ -348,7 +348,10 @@ public class PcscolService implements PcscolServiceI {
 			Inscriptions listInscriptions = inscriptionsApi.listerInscriptionsValidees(codeStructure,
 					statutsInscription, statutsPieces, statutsPaiement, tri, rechercheIne, recherche, periode,
 					objetMaquette, nomOuPrenom, nomDeNaissance, prenom, codeApprenant, ine, statutsIne, limit);
-			System.out.println(listInscriptions.getTotalElements());
+			/**
+			 * TODO 
+			 */
+			logger.debug("TotalElements : {}",listInscriptions.getTotalElements());
 			List<Inscription> resultats = listInscriptions.getResultats();
 			return resultats;
 		} catch (ApiException e) {

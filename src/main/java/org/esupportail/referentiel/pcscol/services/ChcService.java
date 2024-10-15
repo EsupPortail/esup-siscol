@@ -7,11 +7,16 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.esupportail.referentiel.beans.ElementPedagogique;
+import org.esupportail.referentiel.pcscol.api.ArbresApi;
 import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApiCHC;
+import org.esupportail.referentiel.pcscol.chcv6.model.ArbreLecture;
+import org.esupportail.referentiel.pcscol.chcv6.model.ArbreObjetFormation;
 import org.esupportail.referentiel.pcscol.chcv6.model.CursusDCA;
 import org.esupportail.referentiel.pcscol.chcv6.model.LignePedagogiqueDCA;
+import org.esupportail.referentiel.pcscol.chcv6.model.ObjetMaquette;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
@@ -34,7 +39,11 @@ public class ChcService {
 	@Autowired
 	private CursusDcaApi cursusDcaApi;
 	@Autowired
+	private ArbresApi arbresApi;
+	@Autowired
 	private ObjetsMaquetteApi objetsMaquetteApi;
+	@Autowired
+	private ObjetsMaquetteApiCHC objetsMaquetteApiCHC;
 	@Autowired
 	private EspacesApi espacesApi;
 
@@ -53,6 +62,39 @@ public class ChcService {
 	Boolean piaActif = null;
 	Boolean valideSeulement = false;
 	Boolean mutualise = null;
+
+	public ArbreLecture arbrePourUneFormation(String codeStructure, String codePeriode, String codeFormation) {
+		try {
+			ArbreLecture response = arbresApi.arbrePourUneFormation(codeStructure, codePeriode, codeFormation);
+			return response;
+		} catch (ApiException e) {
+			logger.error(e.getMessage());
+			return null;
+		}
+	}
+
+	public List<ArbreObjetFormation> listeObjetFormationFromArbreObjetFormation(String codeStructure, String codePeriode,
+			String codeFormation) {
+		ArbreLecture arbreLecture = arbrePourUneFormation(codeStructure, codePeriode, codeFormation);
+		return arbreLecture.getFormationArbre().getListeObjetFormation();
+	}
+	
+	/**
+	 * TODO erreur de lecture
+	 * @param codeStructure
+	 * @param codePeriode
+	 * @return
+	 */
+	
+	public List<ObjetMaquette>  lireListeFormationAll(String codeStructure, String codePeriode) {
+		try {
+			List<ObjetMaquette> response = objetsMaquetteApiCHC.lireListeFormationAll(codeStructure, codePeriode);
+			return response;
+		} catch (ApiException e) {
+			logger.error(e.getMessage());
+			return null;
+		}
+	}
 
 	public List<ElementPedagogique> lirelisteElementPedagogiqueStageApprenant(String codeApprenant,
 			String codeStructure) throws ApiException {
@@ -170,8 +212,8 @@ public class ChcService {
 		List<ObjetMaquetteSummary> itemsObjetMaquetteSummaries = new ArrayList<>();
 		lignePedagogiqueDCARec(cursus.getCodeStructure(), racinePeda, lignes, itemsObjetMaquetteSummaries,
 				espaceUUID.toString());
-		logger.info("nbr itemsObjetMaquetteSummaries {} pour le cursus (code formation) {}", itemsObjetMaquetteSummaries.size(),
-				cursus.getFormation().getCode());
+		logger.info("nbr itemsObjetMaquetteSummaries {} pour le cursus (code formation) {}",
+				itemsObjetMaquetteSummaries.size(), cursus.getFormation().getCode());
 
 		List<UUID> uuids = new ArrayList<UUID>();
 		itemsObjetMaquetteSummaries.forEach(e -> {
@@ -208,7 +250,7 @@ public class ChcService {
 					}
 				} catch (ApiException e1) {
 					// TODO Auto-generated catch block
-					logger.error("lignePedagogiqueDCARec {} {} ","",e1.getMessage());
+					logger.error("lignePedagogiqueDCARec {} {} ", "", e1.getMessage());
 				}
 				lignePedagogiqueDCARec(codeStructure, e, lignes, itemsObjetMaquetteSummaries, espace);
 			});

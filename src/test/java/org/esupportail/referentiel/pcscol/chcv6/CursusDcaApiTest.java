@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.esupportail.referentiel.Siscol;
 import org.esupportail.referentiel.beans.ElementPedagogique;
+import org.esupportail.referentiel.pcscol.chcv6.model.ArbreLecture;
 import org.esupportail.referentiel.pcscol.chcv6.model.CursusDCA;
+import org.esupportail.referentiel.pcscol.chcv6.model.ObjetMaquette;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.services.ChcService;
@@ -49,5 +51,22 @@ public class CursusDcaApiTest {
 		System.out.println(response);
 
 	}
+	
+	@Test
+	public void lireCusrsuTest() throws ApiException {
+		String codStructure = "ETAB00";
+		String codePeriod="PER-2020";
+		 List<ObjetMaquette> response = chcService.lireListeFormationAll(codStructure, codePeriod);
+		System.out.println(response.size());
+		
+		response.forEach(o->{
+			System.out.println(o.getFormation().getCode()+ ":"+o.getFormation().getType()+" :"+o.getCodePeriode());
+			System.out.println("o.getCodeChemin() : "+o.getCodeChemin());
+			ArbreLecture arbre = chcService.arbrePourUneFormation(codStructure, o.getCodePeriode(),o.getFormation().getCode());
+			System.out.println(arbre);
+		});
+		
+	}
+
 
 }

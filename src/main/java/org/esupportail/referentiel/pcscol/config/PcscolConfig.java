@@ -3,11 +3,13 @@ package org.esupportail.referentiel.pcscol.config;
 import java.net.URI;
 import java.time.Duration;
 
+import org.esupportail.referentiel.pcscol.api.ArbresApi;
 import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApiCHC;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiClient;
 import org.esupportail.referentiel.pcscol.services.AccessTokenService;
@@ -43,6 +45,34 @@ public class PcscolConfig {
 	@Value("${app.pcscol.accesstoken.duration}")
 	private long duration = 6;
 
+		
+	@Bean
+	@SessionScope
+	public ObjetsMaquetteApiCHC objetsMaquetteApiCHC() {
+		try {
+			String token = accessTokenService.getToken();
+			ObjetsMaquetteApiCHC arbreApi = new ObjetsMaquetteApiCHC(apiClient(apiChcV6, token));
+			return arbreApi;
+		} catch (Exception e) {
+			logger.error(e.getMessage() + " :" + e.getMessage());
+			return new ObjetsMaquetteApiCHC();
+		}
+	}
+	
+	@Bean
+	@SessionScope
+	public ArbresApi ArbresApi() {
+		try {
+			String token = accessTokenService.getToken();
+			ArbresApi arbreApi = new ArbresApi(apiClient(apiChcV6, token));
+			return arbreApi;
+		} catch (Exception e) {
+			logger.error(e.getMessage() + " :" + e.getMessage());
+			return new ArbresApi();
+		}
+	}
+	
+	
 	
 	@Bean
 	@SessionScope

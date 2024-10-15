@@ -1,5 +1,7 @@
 package org.esupportail.referentiel.beans;
 
+import java.util.Objects;
+
 /**
  * 
  */
@@ -59,5 +61,26 @@ public class ApprenantDto {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(codEtu, dateNaissance, mail, nom, numeroIne, prenom);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ApprenantDto other = (ApprenantDto) obj;
+		return Objects.equals(codEtu, other.codEtu) && Objects.equals(dateNaissance, other.dateNaissance)
+				&& Objects.equals(mail, other.mail) && Objects.equals(nom, other.nom)
+				&& Objects.equals(numeroIne, other.numeroIne) && Objects.equals(prenom, other.prenom);
+	}
+	
+	
 
 }
