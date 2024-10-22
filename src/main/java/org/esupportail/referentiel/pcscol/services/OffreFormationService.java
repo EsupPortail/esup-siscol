@@ -7,10 +7,12 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
+import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
+import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetFormation;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
@@ -37,6 +39,9 @@ public class OffreFormationService {
 	private ObjetsMaquetteApi objetsMaquetteApi;
 
 	@Autowired
+	private MaquettesApi maquettesApi;
+
+	@Autowired
 	private PcscolService pcScoleService;
 	private Boolean piaActif = null;
 	private Boolean piaSeulement = null;
@@ -51,9 +56,19 @@ public class OffreFormationService {
 		// ( String codeStructure, Pageable pageable, String r, TypeEspace type, Boolean
 		// actif)
 		PagedEspaces espaces = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, true);
-		logger.debug("nbr d'Espaces pour le code   "  +r +" :" +espaces.getTotalElements());
+		logger.debug("nbr d'Espaces pour le code   " + r + " :" + espaces.getTotalElements());
 		return espaces.getItems();
 
+	}
+
+	public MaquetteStructure lireMaquette(String codeStructure, String idMaquette) {
+		try {
+			MaquetteStructure response = maquettesApi.lireStructureMaquette(codeStructure, UUID.fromString(idMaquette));
+			return response;
+		} catch (ApiException e) {
+			logger.error(e.getMessage());
+			return null;
+		}
 	}
 
 	/**
@@ -125,20 +140,22 @@ public class OffreFormationService {
 	public List<ObjetMaquetteSummary> rechercheObjetMaquetteSummary(String codeStructure,
 			List<TypeObjetMaquette> typeObjetMaquette, Boolean racine, String typeObjetFormation, List<UUID> ids,
 			String espace) throws ApiException {
-		
-		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{},{},{} ,{} )",codeStructure,typeObjetMaquette,racine,typeObjetFormation,ids,espace);
+
+		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{},{},{} ,{} )", codeStructure, typeObjetMaquette, racine,
+				typeObjetFormation, ids, espace);
 		List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<>();
 		Pageable pageable = new Pageable();
 		pageable.setPage(0);
 		pageable.setTaille(20);
 		String r = null;
-		logger.debug("codeStructure: {}, pageable: {}, r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",codeStructure, pageable, r,
-				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
-				mutualise);
+		logger.debug(
+				"codeStructure: {}, pageable: {}, r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
+				codeStructure, pageable, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement,
+				piaActif, valideSeulement, mutualise);
 		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
 				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
 				mutualise);
-			
+
 		if (response == null || response.getItems() == null) {
 			logger.info("rechercheObjetMaquetteSummary vide : " + codeStructure + " : " + espace);
 			return objetMaquetteSummaries;
@@ -269,16 +286,74 @@ public class OffreFormationService {
 		allObjetMaquetteDetail.forEach(f -> {
 
 			try {
-			
+
 				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, f.getId());
+
 				UUID idEspace = objectMaqette.getEspace();
 				// possibilite d'avoir un espace different ???
 				/**
 				 * TODO gestion des espaces
 				 */
 				Espace esp = espacesApi.lireEspace(codeStructure, idEspace);
-				
+				System.out.println(esp.getId());
 				mapVDI.put(f.getCode() + "," + esp.getCode(), f.getLibelle());
+
+			} catch (ApiException e) {
+				logger.error(e.getMessage() + " : " + e.getCode());
+			}
+		});
+
+		return mapVDI;
+
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param type
+	 * @param racine
+	 * @param typeObjetFormation
+	 * @param espace
+	 * @return
+	 * @throws ApiException
+	 */
+	public Map<String, String> rechercherObjetMaquettePointInscriptionAdministratif(String codeStructure,
+			TypeObjetMaquette type, boolean racine, String typeObjetFormation, String espace) throws ApiException {
+
+		Map<String, String> mapVDI = new HashMap<>();
+		List<TypeObjetMaquette> tom = new ArrayList<TypeObjetMaquette>();
+		tom.add(type);
+		List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure, tom, null,
+				typeObjetFormation, null, espace);
+
+		allObjetMaquetteDetail.forEach(f -> {
+
+			try {
+
+				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, f.getId());
+				objectMaqette.getContextes().forEach(c -> {
+
+					if (c.getPointInscriptionAdministrative() != null) {
+						if (c.getPointInscriptionAdministrative().getActif()) {
+							UUID idEspace = objectMaqette.getEspace();
+							// possibilite d'avoir un espace different ???
+							/**
+							 * TODO gestion des espaces
+							 */
+							Espace esp;
+							try {
+								esp = espacesApi.lireEspace(codeStructure, idEspace);
+
+								mapVDI.put(f.getCode() + "," + esp.getCode(), f.getLibelle());
+							} catch (ApiException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+
+						}
+					}
+
+				});
 
 			} catch (ApiException e) {
 				logger.error(e.getMessage() + " : " + e.getCode());
@@ -299,18 +374,25 @@ public class OffreFormationService {
 	 */
 	public List<ObjetMaquetteSummary> rechercherObjetMaquetteDiplomeReferences(String codeStructure, String periode)
 			throws ApiException {
-		List<TypeObjetMaquette> tom = new ArrayList<TypeObjetMaquette>();
-		logger.debug("Recherche de diplomes pour la periode : "+periode);
+
+		logger.debug("Recherche de diplomes pour la periode : " + periode);
+
+		List<TypeObjetMaquette> typesObjetMaquette = new ArrayList<TypeObjetMaquette>();
+
+		boolean racine = false;
+		String typeObjetFormation = null;
+		List<UUID> ids = null;
+
 		List<Espace> espaces = checherPeriodeParCode(codeStructure, periode);
 		if (espaces != null && !espaces.isEmpty()) {
 			UUID idPeriode = espaces.get(0).getId();
-			tom.add(TypeObjetMaquette.FORMATION);
-			List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure, tom, false,
-					null, null, idPeriode.toString());
-			logger.debug(periode+" nbr diplomes : "+ allObjetMaquetteDetail.size());
+			typesObjetMaquette.add(TypeObjetMaquette.FORMATION);
+
+			List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure,
+					typesObjetMaquette, racine, typeObjetFormation, ids, idPeriode.toString());
+			logger.debug(periode + " nbr diplomes : " + allObjetMaquetteDetail.size());
 			return allObjetMaquetteDetail;
-		}
-		else 
+		} else
 			return new ArrayList<ObjetMaquetteSummary>();
 	}
 
@@ -319,8 +401,7 @@ public class OffreFormationService {
 	 * 
 	 * @param codeStructure
 	 * @return
-	 * @throws ApiException
-	 * cheraga
+	 * @throws ApiException cheraga
 	 */
 	public Map<String, String> rechercherObjetMaquetteFormation(String codeStructure, String periode)
 			throws ApiException {
@@ -338,14 +419,14 @@ public class OffreFormationService {
 	 */
 	public Map<String, String> rechercherObjetMaquetteObjetFormation(String codeStructure, String periode)
 			throws ApiException {
-		
+
 		List<Espace> espaces = checherPeriodeParCode(codeStructure, periode);
 		if (espaces != null && !espaces.isEmpty()) {
 			UUID idPeriode = checherPeriodeParCode(codeStructure, periode).get(0).getId();
 			return rechercherObjetMaquette(codeStructure, TypeObjetMaquette.OBJET_FORMATION, false, "ANNEE",
 					idPeriode.toString());
 		}
-		logger.debug(" Espace null pour la periode "+periode);
+		logger.debug(" Espace null pour la periode " + periode);
 		return new HashMap<String, String>();
 	}
 
@@ -433,7 +514,7 @@ public class OffreFormationService {
 				uids.add(UUID.fromString(id));
 			});
 		}
-		
+
 		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
 		// typeObjetFormation [UE, PARCOURS-TYPE, SEMESTRE, ANNEE, ENS, EC]
 		String typeObjetFormation = "ENS";

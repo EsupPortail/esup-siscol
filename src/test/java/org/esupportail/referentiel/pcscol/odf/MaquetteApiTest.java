@@ -184,11 +184,15 @@ public class MaquetteApiTest {
 		// ObjetMaquetteDetail response =
 		// offreFormationService.recherchDescripteurMaquette(codeStructure,
 		// "0a169da2-1d42-4d9a-ad1e-1686f18f9fb4");
-		if (response.getTypeObjetMaquette().getValue().equals(TypeObjetMaquette.FORMATION)) {
-
-		}
-		System.out.println(response.getCode() + ": " + response.getDescripteursObjetMaquette());
-		System.out.println(response.getContextes());
+//		if (response.getTypeObjetMaquette().getValue().equals(TypeObjetMaquette.FORMATION)) {
+				System.out.println("-----------"+response.getTypeObjetMaquette().getValue());
+//		}
+//		System.out.println(response.getCode() + ": " + response.getDescripteursObjetMaquette());
+//		response.getContextes().forEach(contxt->{
+//			System.out.println("+++++++++"+contxt.getPointInscriptionAdministrative());
+//		});
+		
+		
 		System.out.println(response.getEnfants());
 		if (response.getEnfants() != null) {
 			response.getEnfants().forEach(enfant -> {
@@ -198,7 +202,8 @@ public class MaquetteApiTest {
 					System.out.println(responseEnfant.getId() + " : " + responseEnfant.getTypeObjetMaquette() + " :");
 					System.out.println(responseEnfant.getDescripteursObjetMaquette().getLibelle() + " : "
 							+ responseEnfant.getTypeObjetMaquette() + " :");
-					System.out.println("++++++++++++++++++++++++++++++");
+					
+					System.out.println("++++++++++++++++++++++++++++++"+responseEnfant.getContextes().get(0).getPointInscriptionAdministrative());
 				} catch (ApiException e) {
 					// TODO Auto-generated catch block
 					System.out.println(enfant.getId() + "\t\t" + e.getCode());

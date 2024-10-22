@@ -192,7 +192,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 			@RequestParam(value = "codeEtape") String codeEtape,
 			@RequestParam(value = "versionEtape") String versionEtape) {
 		// TODO
-		List<ElementPedagogique> l = new ArrayList<ElementPedagogique>();
+		List<ElementPedagogique> l = pcscolService.studentListeElpStage(codeStructure, codeEtape, versionEtape);
 		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 

@@ -3,6 +3,7 @@ package org.esupportail.referentiel.pcscol.mapper;
 import java.util.List;
 
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
+import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.mapstruct.Mapper;
@@ -28,5 +29,9 @@ public interface OdfDtoMapperInterface {
 	public DiplomeReduitDto diplomeReduitDtoFromObjetMaquette(ObjetMaquetteDetail objetMaquetteSummary);
 
 	public List<DiplomeReduitDto> diplomeReduitDtoFromObjetMaquette(List<ObjetMaquetteDetail> objetMaquetteSummary);
+	
+	
+	
+	public ElementPedagogique elementPedagogiqueFromObjetMaquetteDetail(ObjetMaquetteDetail objetMaquetteDetail);
 
 }

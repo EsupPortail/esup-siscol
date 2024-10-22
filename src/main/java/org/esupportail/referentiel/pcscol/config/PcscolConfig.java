@@ -48,7 +48,7 @@ public class PcscolConfig {
 		
 	@Bean
 	@SessionScope
-	public ObjetsMaquetteApiCHC objetsMaquetteApiCHC() {
+	ObjetsMaquetteApiCHC objetsMaquetteApiCHC() {
 		try {
 			String token = accessTokenService.getToken();
 			ObjetsMaquetteApiCHC arbreApi = new ObjetsMaquetteApiCHC(apiClient(apiChcV6, token));
@@ -61,7 +61,7 @@ public class PcscolConfig {
 	
 	@Bean
 	@SessionScope
-	public ArbresApi ArbresApi() {
+	ArbresApi arbresApi() {
 		try {
 			String token = accessTokenService.getToken();
 			ArbresApi arbreApi = new ArbresApi(apiClient(apiChcV6, token));
@@ -74,9 +74,11 @@ public class PcscolConfig {
 	
 	
 	
-	@Bean
-	@SessionScope
-	public CursusDcaApi cursusDcaApi() {
+
+
+    @Bean
+    @SessionScope
+    CursusDcaApi cursusDcaApi() {
 		try {
 			String token = accessTokenService.getToken();
 			CursusDcaApi structuresApi = new CursusDcaApi(apiClient(apiChcV6, token));
@@ -87,10 +89,10 @@ public class PcscolConfig {
 		}
 		
 	}
-	
-	@Bean
-	@SessionScope
-	public StructureApi structureApi() {
+
+    @Bean
+    @SessionScope
+    StructureApi structureApi() {
 		try {
 			String token = accessTokenService.getToken();
 			StructureApi structuresApi = new StructureApi(apiClient(apiRef, token));
@@ -102,9 +104,9 @@ public class PcscolConfig {
 
 	}
 
-	@Bean
-	@SessionScope
-	public MaquettesApi maquetteApi() {
+    @Bean
+    @SessionScope
+    MaquettesApi maquetteApi() {
 		try {
 			String token = accessTokenService.getToken();
 			MaquettesApi api = new MaquettesApi(apiClient(apiODF, token));
@@ -115,9 +117,9 @@ public class PcscolConfig {
 		}
 	}
 
-	@Bean
-	@SessionScope
-	public ObjetsMaquetteApi objetsMaquetteApi() {
+    @Bean
+    @SessionScope
+    ObjetsMaquetteApi objetsMaquetteApi() {
 		try {
 			String token = accessTokenService.getToken();
 			ObjetsMaquetteApi api = new ObjetsMaquetteApi(apiClient(apiODF, token));
@@ -127,11 +129,11 @@ public class PcscolConfig {
 			return new ObjetsMaquetteApi();
 		}
 	}
-	
-	
-	@Bean
-	@SessionScope
-	public EspacesApi espacesApi() {
+
+
+    @Bean
+    @SessionScope
+    EspacesApi espacesApi() {
 		try {
 			String token = accessTokenService.getToken();
 			EspacesApi api = new EspacesApi(apiClient(apiODF, token));
@@ -141,9 +143,10 @@ public class PcscolConfig {
 			return new EspacesApi();
 		}
 	}
-	@Bean
-	@SessionScope
-	public InscriptionsApi inscriptionsApi() {
+
+    @Bean
+    @SessionScope
+    InscriptionsApi inscriptionsApi() {
 		try {
 			String token = accessTokenService.getToken();
 			InscriptionsApi api=new InscriptionsApi(apiClient(apiIns,token));

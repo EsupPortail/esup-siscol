@@ -59,12 +59,16 @@ public class CursusDcaApiTest {
 		 List<ObjetMaquette> response = chcService.lireListeFormationAll(codStructure, codePeriod);
 		System.out.println(response.size());
 		
-		response.forEach(o->{
-			System.out.println(o.getFormation().getCode()+ ":"+o.getFormation().getType()+" :"+o.getCodePeriode());
-			System.out.println("o.getCodeChemin() : "+o.getCodeChemin());
-			ArbreLecture arbre = chcService.arbrePourUneFormation(codStructure, o.getCodePeriode(),o.getFormation().getCode());
-			System.out.println(arbre);
-		});
+		ObjetMaquette o1 = response.get(0);
+		ArbreLecture arbre = chcService.arbrePourUneFormation(codStructure, o1.getCodePeriode(),o1.getFormation().getCode());
+		System.out.println(arbre.getFormationArbre());
+		
+//		response.forEach(o->{
+//			System.out.println(o.getFormation().getCode()+ ":"+o.getFormation().getType()+" :"+o.getCodePeriode());
+//			System.out.println("o.getCodeChemin() : "+o.getCodeChemin());
+//			ArbreLecture arbre = chcService.arbrePourUneFormation(codStructure, o.getCodePeriode(),o.getFormation().getCode());
+//			System.out.println(arbre);
+//		});
 		
 	}
 

@@ -19,6 +19,7 @@ import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
+import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
 import org.esupportail.referentiel.pcscol.ins.model.Apprenant;
@@ -35,8 +36,12 @@ import org.esupportail.referentiel.pcscol.ins.model.TriInscription;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.mapper.ApprenantEtuInfoAdmMapperInterface;
 import org.esupportail.referentiel.pcscol.mapper.OdfDtoMapperInterface;
+import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
+import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetMaquette;
 import org.esupportail.referentiel.pcscol.odf.model.Enfant;
+import org.esupportail.referentiel.pcscol.odf.model.EnfantsStructure;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
+import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
@@ -210,8 +215,8 @@ public class PcscolService implements PcscolServiceI {
 	 * @param codesPeriodesChargementFormations
 	 * @return
 	 */
-	public List<DiplomeReduitDto> diplomeRef(String codeStructure, String codesPeriodesChargementFormations) {
-
+	public List<ObjetMaquetteSummary> allObjetMaquetteSummariesFromPeriodes(String codeStructure,
+			String codesPeriodesChargementFormations) {
 		List<String> listCodePeriode = codePeriodeFromPeriodes(codeStructure, codesPeriodesChargementFormations);
 		logger.debug("listCodePeriode: {}", listCodePeriode);
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<ObjetMaquetteSummary>();
@@ -229,27 +234,24 @@ public class PcscolService implements PcscolServiceI {
 				e.printStackTrace();
 			}
 		});
+		return objetMaquetteSummaries;
+	}
 
-		List<ObjetMaquetteDetail> objetMaquetteDetails = new ArrayList<ObjetMaquetteDetail>();
-
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param codesPeriodesChargementFormations
+	 * @return
+	 */
+	public List<DiplomeReduitDto> diplomeRef(String codeStructure, String codesPeriodesChargementFormations) {
+		final List<ObjetMaquetteSummary> objetMaquetteSummaries = allObjetMaquetteSummariesFromPeriodes(codeStructure,
+				codesPeriodesChargementFormations);
 		List<DiplomeReduitDto> diplomes = new ArrayList<DiplomeReduitDto>();
-
 		objetMaquetteSummaries.forEach(f -> {
-
 			try {
 
 				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, f.getId());
 				UUID idEspace = objectMaqette.getEspace();
-				// possibilite d'avoir un espace different ???
-
-				if (!objectMaqette.getEnfants().isEmpty()) {
-					System.out.println(objectMaqette.getEnfants() + "+++++++++++++++++++++");
-					Enfant enfant = objectMaqette.getEnfants().get(0);
-
-					ObjetMaquetteDetail objectMaqette2 = objetsMaquetteApi.lireObjetMaquette(codeStructure,
-							UUID.fromString(enfant.getId()));
-					System.out.println(objectMaqette2 + "+++++++++++++++++++++");
-				}
 				/**
 				 * TODO gestion des espaces
 				 */
@@ -259,12 +261,137 @@ public class PcscolService implements PcscolServiceI {
 				diplome.setVersionDiplome(esp.getCode());
 				diplomes.add(diplome);
 
+				// possibilite d'avoir un espace different ???
+				System.out.println("-------------------------------");
+				if (!objectMaqette.getEnfants().isEmpty()) {
+					// System.out.println(objectMaqette.getEnfants() + "+++++++++++++++++++++");
+					MaquetteStructure maquetteStructure = offreFormationService.lireMaquette(codeStructure,
+							f.getId().toString());
+
+					// System.out.println(maquetteStructure);
+					List<EnfantsStructure> enfants = listeEnfantsObjectMaquettePia(maquetteStructure);
+
+					// Enfant enfant = objectMaqette.getEnfants().get(0);
+					ObjetMaquetteDetail objectMaqette2 = objetsMaquetteApi.lireObjetMaquette(codeStructure,
+							enfants.get(0).getObjetMaquette().getId());
+					System.out.println(objectMaqette2.getCode() + "-----------------");
+				}
+
 			} catch (ApiException e) {
 				logger.error(e.getMessage() + " : " + e.getCode());
 			}
 		});
 
 		return diplomes;
+	}
+
+	/**
+	 * 
+	 * @param maquetteStructure
+	 * @return
+	 */
+	public List<EnfantsStructure> listeEnfantsObjectMaquettePia(MaquetteStructure maquetteStructure) {
+		final List<EnfantsStructure> listeEnfantPia = new ArrayList<EnfantsStructure>();
+
+		List<EnfantsStructure> enfants = maquetteStructure.getRacine().getEnfants();
+		enfants.forEach(e -> {
+			if (e.getObjetMaquette().getPia() != null) {
+				listeEnfantPia.add(e);
+			}
+		});
+		return listeEnfantPia;
+	}
+
+	public List<ElementPedagogique> studentListeElpStage(String codeStructure, String codeEtape, String versionEtape) {
+
+		List<ElementPedagogique> l = new ArrayList<ElementPedagogique>();
+		try {
+			List<ObjetMaquetteSummary> objetMaquetteSummaries = offreFormationService
+					.rechercheObjetMaquetteSummary(codeStructure, codeEtape, versionEtape);
+			ObjetMaquetteSummary objetMaquetteSummary = objetMaquetteSummaries.get(0);
+			UUID id = objetMaquetteSummary.getId();
+			List<ObjetMaquetteDetail> llStage = listeEnfantsObjectMaquetteStage(codeStructure, id.toString());
+			llStage.forEach(e -> {
+				ElementPedagogique elp = new ElementPedagogique();
+				elp.setCodElp(e.getCode());
+				elp.setLibElp(e.getDescripteursObjetMaquette().getLibelle());
+				
+				DescripteursObjetFormation dom = (DescripteursObjetFormation) e.getDescripteursObjetMaquette();
+				
+				elp.setTemElpTypeStage(String.valueOf(dom.getStage()));
+				if (dom.getNature() != null)
+					elp.setLibNatureElp(dom.getNature().getType());
+				elp.setCodEtp(objetMaquetteSummary.getCode());
+				elp.setCodVrsVet(versionEtape);
+				elp.setNbrCrdElp(dom.getEcts());
+				l.add(elp);
+			});
+		} catch (ApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return l;
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param idMaquetteStructure
+	 * @return
+	 */
+	public List<ObjetMaquetteDetail> listeEnfantsObjectMaquetteStage(String codeStructure, String idMaquetteStructure) {
+		MaquetteStructure maquetteStructure = offreFormationService.lireMaquette(codeStructure, idMaquetteStructure);
+
+		List<ObjetMaquetteDetail> listeEnfantsStage = listeEnfantsObjectMaquetteStage(codeStructure,
+				maquetteStructure.getRacine().getEnfants());
+		return listeEnfantsStage;
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param enfantsStructure
+	 * @return
+	 */
+	public List<ObjetMaquetteDetail> listeEnfantsObjectMaquetteStage(String codeStructure,
+			List<EnfantsStructure> enfantsStructure) {
+		List<ObjetMaquetteDetail> stagesObjectMaquette = new ArrayList<ObjetMaquetteDetail>();
+		enfantsStructure.forEach(e -> {
+			listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette);
+		});
+		return stagesObjectMaquette;
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param enfantStructure
+	 * @param stagesObjectMaquette
+	 */
+	public void listeEnfantsObjectMaquetteStage(String codeStructure, EnfantsStructure enfantStructure,
+			List<ObjetMaquetteDetail> stagesObjectMaquette) {
+
+		try {
+
+			ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure,
+					enfantStructure.getObjetMaquette().getId());
+			DescripteursObjetFormation dom = (DescripteursObjetFormation) objectMaqette.getDescripteursObjetMaquette();
+			if (dom.getStage() != null && dom.getStage())
+				stagesObjectMaquette.add(objectMaqette);
+		} catch (ApiException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassCastException e2) {
+			logger.warn(e2.getMessage());
+		}
+
+		List<EnfantsStructure> enfants = enfantStructure.getObjetMaquette().getEnfants();
+
+		enfants.forEach(e -> {
+			listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette);
+		});
+
 	}
 
 	/**
@@ -285,9 +412,10 @@ public class PcscolService implements PcscolServiceI {
 
 	public List<ApprenantDto> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtape,
 			String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom, String prenom) {
+		/**
+		 * TODO versionEtape codeEtape
+		 */
 
-		// lireInscriptions(codeStructure, objetMaquette, periode, nomDeNaissance,
-		// prenom, codeApprenant)
 		return lireApprenantDtoFromInscriptions(codeComposante, codeDiplome, annee, nom, prenom, codEtu);
 	}
 
@@ -349,9 +477,9 @@ public class PcscolService implements PcscolServiceI {
 					statutsInscription, statutsPieces, statutsPaiement, tri, rechercheIne, recherche, periode,
 					objetMaquette, nomOuPrenom, nomDeNaissance, prenom, codeApprenant, ine, statutsIne, limit);
 			/**
-			 * TODO 
+			 * TODO
 			 */
-			logger.debug("TotalElements : {}",listInscriptions.getTotalElements());
+			logger.debug("TotalElements : {}", listInscriptions.getTotalElements());
 			List<Inscription> resultats = listInscriptions.getResultats();
 			return resultats;
 		} catch (ApiException e) {
