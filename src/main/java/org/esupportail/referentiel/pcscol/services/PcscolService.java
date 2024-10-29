@@ -16,6 +16,7 @@ import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
+import org.esupportail.referentiel.beans.RegimeInscription;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
@@ -72,6 +73,8 @@ public class PcscolService implements PcscolServiceI {
 
 	@Autowired
 	private ChcService chcService;
+	@Autowired
+	private EspaceService espaceService;
 
 	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String annee) {
 
@@ -117,22 +120,48 @@ public class PcscolService implements PcscolServiceI {
 	}
 
 	@Override
-	public ApogeeMap recupererIaIpParEtudiantAnnee(String codeStructure, String codeApprenant, String annee) {
+	public ApogeeMap recupererIaIpParEtudiantAnnee(String codeStructure, String codeApprenant, String codePeriode) {
 		ApogeeMap apogeeMap = new ApogeeMap();
-		List<EtapeInscription> etapeInscriptions = etapeInscription(codeStructure, codeApprenant, annee);
+		/**
+		 * TODO regime
+		 */
+
+		List<String> codesPeriodes = new ArrayList<String>();
+		codesPeriodes.add(codePeriode);
+		List<EtapeInscription> etapeInscriptions = etapeInscription(codeStructure, codeApprenant, codePeriode);
+		List<RegimeInscription> regimesInscriptions = new ArrayList<RegimeInscription>();
 		apogeeMap.setListeEtapeInscriptions(etapeInscriptions);
 		try {
 			List<ElementPedagogique> lelps = chcService.lirelisteElementPedagogiqueStageApprenant(codeApprenant,
 					codeStructure);
 			if (lelps != null) {
 				List<ElementPedagogique> filterdlElps = lelps.stream()
-						.filter(e -> e.getCodVrsVet().equalsIgnoreCase(annee)).collect(Collectors.toList());
+						.filter(e -> e.getCodVrsVet().equalsIgnoreCase(codePeriode)).collect(Collectors.toList());
 				apogeeMap.setListeELPs(filterdlElps);
 			}
 
 		} catch (ApiException e) {
 			logger.error(e.getMessage());
 		}
+
+		apogeeMap.getListeEtapeInscriptions().forEach(etp -> {
+
+			List<String> listeAnnee = espaceService.anneeUnivFromEsapces(codeStructure, codesPeriodes);
+			etp.getRegimeIns();
+			etp.getLibRg();
+			etp.getTypeIns();
+			RegimeInscription regime = new RegimeInscription();
+			if (listeAnnee != null && !listeAnnee.isEmpty())
+				regime.setAnnee(listeAnnee.get(0));
+			regime.setCodRegIns(etp.getRegimeIns());
+			//regime.setCodRegIns(etp.get)
+			regime.setLicRegIns(etp.getRegimeIns());
+			regime.setRegimeIns(etp.getRegimeIns());
+			regime.setLibRg(etp.getLibRg());
+			regimesInscriptions.add(regime);
+
+		});
+		apogeeMap.setRegimeInscription(regimesInscriptions);
 
 		return apogeeMap;
 
@@ -310,14 +339,15 @@ public class PcscolService implements PcscolServiceI {
 					.rechercheObjetMaquetteSummary(codeStructure, codeEtape, versionEtape);
 			ObjetMaquetteSummary objetMaquetteSummary = objetMaquetteSummaries.get(0);
 			UUID id = objetMaquetteSummary.getId();
-			List<ObjetMaquetteDetail> llStage = listeEnfantsObjectMaquetteStage(codeStructure, id.toString());
+			List<ObjetMaquetteDetail> llStage = offreFormationService.listeEnfantsObjectMaquetteStage(codeStructure,
+					id.toString());
 			llStage.forEach(e -> {
 				ElementPedagogique elp = new ElementPedagogique();
 				elp.setCodElp(e.getCode());
 				elp.setLibElp(e.getDescripteursObjetMaquette().getLibelle());
-				
+
 				DescripteursObjetFormation dom = (DescripteursObjetFormation) e.getDescripteursObjetMaquette();
-				
+
 				elp.setTemElpTypeStage(String.valueOf(dom.getStage()));
 				if (dom.getNature() != null)
 					elp.setLibNatureElp(dom.getNature().getType());
@@ -332,66 +362,6 @@ public class PcscolService implements PcscolServiceI {
 		}
 
 		return l;
-	}
-
-	/**
-	 * 
-	 * @param codeStructure
-	 * @param idMaquetteStructure
-	 * @return
-	 */
-	public List<ObjetMaquetteDetail> listeEnfantsObjectMaquetteStage(String codeStructure, String idMaquetteStructure) {
-		MaquetteStructure maquetteStructure = offreFormationService.lireMaquette(codeStructure, idMaquetteStructure);
-
-		List<ObjetMaquetteDetail> listeEnfantsStage = listeEnfantsObjectMaquetteStage(codeStructure,
-				maquetteStructure.getRacine().getEnfants());
-		return listeEnfantsStage;
-	}
-
-	/**
-	 * 
-	 * @param codeStructure
-	 * @param enfantsStructure
-	 * @return
-	 */
-	public List<ObjetMaquetteDetail> listeEnfantsObjectMaquetteStage(String codeStructure,
-			List<EnfantsStructure> enfantsStructure) {
-		List<ObjetMaquetteDetail> stagesObjectMaquette = new ArrayList<ObjetMaquetteDetail>();
-		enfantsStructure.forEach(e -> {
-			listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette);
-		});
-		return stagesObjectMaquette;
-	}
-
-	/**
-	 * 
-	 * @param codeStructure
-	 * @param enfantStructure
-	 * @param stagesObjectMaquette
-	 */
-	public void listeEnfantsObjectMaquetteStage(String codeStructure, EnfantsStructure enfantStructure,
-			List<ObjetMaquetteDetail> stagesObjectMaquette) {
-
-		try {
-
-			ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure,
-					enfantStructure.getObjetMaquette().getId());
-			DescripteursObjetFormation dom = (DescripteursObjetFormation) objectMaqette.getDescripteursObjetMaquette();
-			if (dom.getStage() != null && dom.getStage())
-				stagesObjectMaquette.add(objectMaqette);
-		} catch (ApiException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (ClassCastException e2) {
-			logger.warn(e2.getMessage());
-		}
-
-		List<EnfantsStructure> enfants = enfantStructure.getObjetMaquette().getEnfants();
-
-		enfants.forEach(e -> {
-			listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette);
-		});
-
 	}
 
 	/**

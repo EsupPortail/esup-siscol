@@ -31,7 +31,7 @@ public class Ldif {
 		String periode = null;
 		String nomDeNaissance = null;
 		String prenom = null;
-		String codeApprenant = null;
+		String codeApprenant = "000000250";
 		List<ApprenantDto> result = pcscolService.lireApprenantDtoFromInscriptions(codeStructure, objetMaquette, periode, nomDeNaissance, prenom,
 				codeApprenant);
 		System.out.println("+++++++++++++"+result.size());

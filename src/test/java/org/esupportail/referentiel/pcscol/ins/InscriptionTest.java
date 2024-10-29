@@ -3,6 +3,7 @@ package org.esupportail.referentiel.pcscol.ins;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.esupportail.referentiel.Siscol;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
@@ -20,7 +21,14 @@ import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.mapper.ApprenantEtuInfoAdmMapperInterface;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+@ContextConfiguration(classes = { Siscol.class })
+@SpringBootTest
+@SpringJUnitConfig
+@ActiveProfiles("test")
 public class InscriptionTest {
 
 	@Autowired
@@ -91,8 +99,8 @@ public class InscriptionTest {
 		List<TriInscription> tri = null;
 		String rechercheIne = null;
 		String recherche = null;
-		String periode = "PER-2021";
-		String objetMaquette = "LP-PROD-ANIMALE";
+		String periode = "PER-2024";
+		String objetMaquette = null;
 		String nomOuPrenom = null;
 		String nomDeNaissance = null;
 		String prenom = null;
@@ -107,8 +115,8 @@ public class InscriptionTest {
 					prenom, codeApprenant, ine, statutsIne, limit);
 			System.out.println(list.getTotalElements());
 			list.getResultats().forEach(i -> {
-				System.out.println(i.getMeta().getCodeApprenant());
-				System.out.println(i);
+				System.out.println(i.getMeta().getCodeApprenant()+": "+i.getVoeu().getCible().getPeriode().getCode());
+				//System.out.println(i);
 			});
 		} catch (ApiException e) {
 			// TODO Auto-generated catch block

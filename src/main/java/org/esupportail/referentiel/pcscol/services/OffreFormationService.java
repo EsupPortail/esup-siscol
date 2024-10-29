@@ -11,6 +11,7 @@ import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
+import org.esupportail.referentiel.pcscol.odf.model.EnfantsStructure;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetFormation;
@@ -526,6 +527,96 @@ public class OffreFormationService {
 				typeObjetMaquette, racine, typeObjetFormation, uids, espace);
 
 		return allObjetMaquetteDetail;
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param codeEtape
+	 * @param versionEtape
+	 * @return
+	 */
+	public List<ObjetMaquetteDetail> objetsMaquetteDetailFromCode(String codeStructure, String codeEtape,
+			String versionEtape) {
+		List<ObjetMaquetteSummary> objetMaquetteSummaries;
+		List<ObjetMaquetteDetail> llObjetMaquetteDetail = new ArrayList<ObjetMaquetteDetail>();
+		try {
+			objetMaquetteSummaries = rechercheObjetMaquetteSummary(codeStructure, codeEtape, versionEtape);
+			ObjetMaquetteSummary objetMaquetteSummary = null;
+			for (ObjetMaquetteSummary oms : objetMaquetteSummaries) {
+				if (oms.getCode().equalsIgnoreCase(codeEtape)) {
+					objetMaquetteSummary = oms;
+					break;
+				}
+			}
+			UUID id = objetMaquetteSummary.getId();
+			llObjetMaquetteDetail = listeEnfantsObjectMaquetteStage(codeStructure, id.toString());
+		} catch (ApiException e) {
+			// TODO Auto-generated catch block
+			logger.error(e.getMessage());
+		}
+		return llObjetMaquetteDetail;
+
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param idMaquetteStructure
+	 * @return
+	 */
+	public List<ObjetMaquetteDetail> listeEnfantsObjectMaquetteStage(String codeStructure, String idMaquetteStructure) {
+		MaquetteStructure maquetteStructure = lireMaquette(codeStructure, idMaquetteStructure);
+
+		List<ObjetMaquetteDetail> listeEnfantsStage = listeEnfantsObjectMaquetteStage(codeStructure,
+				maquetteStructure.getRacine().getEnfants());
+		return listeEnfantsStage;
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param enfantsStructure
+	 * @return
+	 */
+	public List<ObjetMaquetteDetail> listeEnfantsObjectMaquetteStage(String codeStructure,
+			List<EnfantsStructure> enfantsStructure) {
+		List<ObjetMaquetteDetail> stagesObjectMaquette = new ArrayList<ObjetMaquetteDetail>();
+		enfantsStructure.forEach(e -> {
+			listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette);
+		});
+		return stagesObjectMaquette;
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param enfantStructure
+	 * @param stagesObjectMaquette
+	 */
+	public void listeEnfantsObjectMaquetteStage(String codeStructure, EnfantsStructure enfantStructure,
+			List<ObjetMaquetteDetail> stagesObjectMaquette) {
+
+		try {
+
+			ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure,
+					enfantStructure.getObjetMaquette().getId());
+			DescripteursObjetFormation dom = (DescripteursObjetFormation) objectMaqette.getDescripteursObjetMaquette();
+			if (dom.getStage() != null && dom.getStage())
+				stagesObjectMaquette.add(objectMaqette);
+		} catch (ApiException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ClassCastException e2) {
+			logger.warn(e2.getMessage());
+		}
+
+		List<EnfantsStructure> enfants = enfantStructure.getObjetMaquette().getEnfants();
+
+		enfants.forEach(e -> {
+			listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette);
+		});
+
 	}
 
 	public void setEspacesApi(EspacesApi espacesApi) {

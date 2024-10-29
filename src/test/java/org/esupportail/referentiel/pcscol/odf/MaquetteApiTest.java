@@ -22,10 +22,13 @@ import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.config.PcscolConfig;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
+import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;
+import org.esupportail.referentiel.pcscol.odf.model.PagedEspaces;
 import org.esupportail.referentiel.pcscol.odf.model.PagedObjetMaquetteSummaries;
+import org.esupportail.referentiel.pcscol.odf.model.TypeEspace;
 import org.esupportail.referentiel.pcscol.odf.model.TypeObjetMaquette;
 import org.esupportail.referentiel.pcscol.services.AccessTokenService;
 import org.esupportail.referentiel.pcscol.services.OffreFormationService;
@@ -64,6 +67,27 @@ public class MaquetteApiTest {
 
 	String strId = "14f54729-4db4-4341-8af6-47e276fe3058";
 	String codeStructure = "ETAB00";
+
+	@Test
+	public void testEspaces() {
+		List<Espace> espaces = new ArrayList<Espace>();
+
+		Pageable pageable = new Pageable();
+		pageable.setTaille(50);
+		String r = null;
+		TypeEspace type = null;
+		Boolean actif = true;
+		try {
+			PagedEspaces response = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, actif);
+			espaces = response.getItems();
+			espaces.forEach(e -> {
+				System.out.println(e);
+			});
+		} catch (ApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	@Test
 	public void rechercherObjetMaquetteTest() throws ApiException {
@@ -167,8 +191,9 @@ public class MaquetteApiTest {
 		Boolean mutualise = null;
 		ids.add(UUID.fromString("34afb0f0-5aa8-4454-b1d4-de69f6a548c3"));
 
-		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r, espace, typeObjetMaquette, racine,
-				typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement, mutualise);
+		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
+				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
+				mutualise);
 		System.out.println(response);
 	}
 
@@ -185,14 +210,13 @@ public class MaquetteApiTest {
 		// offreFormationService.recherchDescripteurMaquette(codeStructure,
 		// "0a169da2-1d42-4d9a-ad1e-1686f18f9fb4");
 //		if (response.getTypeObjetMaquette().getValue().equals(TypeObjetMaquette.FORMATION)) {
-				System.out.println("-----------"+response.getTypeObjetMaquette().getValue());
+		System.out.println("-----------" + response.getTypeObjetMaquette().getValue());
 //		}
 //		System.out.println(response.getCode() + ": " + response.getDescripteursObjetMaquette());
 //		response.getContextes().forEach(contxt->{
 //			System.out.println("+++++++++"+contxt.getPointInscriptionAdministrative());
 //		});
-		
-		
+
 		System.out.println(response.getEnfants());
 		if (response.getEnfants() != null) {
 			response.getEnfants().forEach(enfant -> {
@@ -202,8 +226,9 @@ public class MaquetteApiTest {
 					System.out.println(responseEnfant.getId() + " : " + responseEnfant.getTypeObjetMaquette() + " :");
 					System.out.println(responseEnfant.getDescripteursObjetMaquette().getLibelle() + " : "
 							+ responseEnfant.getTypeObjetMaquette() + " :");
-					
-					System.out.println("++++++++++++++++++++++++++++++"+responseEnfant.getContextes().get(0).getPointInscriptionAdministrative());
+
+					System.out.println("++++++++++++++++++++++++++++++"
+							+ responseEnfant.getContextes().get(0).getPointInscriptionAdministrative());
 				} catch (ApiException e) {
 					// TODO Auto-generated catch block
 					System.out.println(enfant.getId() + "\t\t" + e.getCode());
