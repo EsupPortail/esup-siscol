@@ -7,12 +7,9 @@ import java.util.List;
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
-import org.esupportail.referentiel.beans.ElementPedagogique;
-import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeInscription;
-import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
-import org.esupportail.referentiel.beans.SignataireRef;
+import org.esupportail.referentiel.pcscol.ins.model.Inscription;
 import org.esupportail.referentiel.pcscol.ins.model.Periode;
 import org.esupportail.referentiel.pcscol.services.EspaceService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
@@ -23,6 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PcscolControllerAdapter {
@@ -78,7 +76,7 @@ public class PcscolControllerAdapter {
 	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(String codeEtud, String annee) {
 		// generique
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
-		logger.debug("{} {}  {}","etapesByEtudiantAndAnnee", " => nbr d'esapces ", espaces.size());
+		logger.debug("{} {}  {}", "etapesByEtudiantAndAnnee", " => nbr d'esapces ", espaces.size());
 
 		/**
 		 * TODO relation annee periode ??
@@ -108,25 +106,37 @@ public class PcscolControllerAdapter {
 
 	/**
 	 * 
+	 * @param codeComposante
+	 * @param annee
+	 * @param codeEtape
+	 * @param versionEtape
+	 * @param codeDiplome
+	 * @param versionDiplome
+	 * @param codEtu
+	 * @param nom
+	 * @param prenom
+	 * @return
 	 */
-
-	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(String numEtud) {
-		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
-		return new ResponseEntity<>(student, HttpStatus.OK);
-	}
-
-	/**
-	 * 
-	 */
-
 	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee,
 			String codeEtape, String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom,
 			String prenom) {
 
 		// TODO
-		List<ApprenantDto> listeEtu = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, annee, codeEtape,
-				versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
-		return new ResponseEntity<>(listeEtu, HttpStatus.OK);
+		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
+		List<ApprenantDto> apprenantDtos=new ArrayList<ApprenantDto>();
+		
+		if (periodes != null && !periodes.isEmpty()) {
+			periodes.forEach(p -> {
+				List<ApprenantDto> ins = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, p.getCode(), codeEtape,
+						versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
+						
+				if (ins != null && !ins.isEmpty()) {
+					apprenantDtos.addAll(ins);
+				}
+			});
+		}
+		
+		return new ResponseEntity<>(apprenantDtos, HttpStatus.OK);
 
 	}
 
@@ -162,31 +172,51 @@ public class PcscolControllerAdapter {
 	 */
 	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(String codEtud, String annee) {
 		// TODO
-		List<EtapeInscription> l = pcscolService.etapeInscription(codeStructure, codEtud, annee);
-		return new ResponseEntity<>(l, HttpStatus.OK);
+		List<EtapeInscription> etapeInscriptions = new ArrayList<EtapeInscription>();
+		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
+		if (espaces != null && !espaces.isEmpty()) {
+			espaces.forEach(espace -> {
+				List<EtapeInscription> etps = pcscolService.etapeInscription(codeStructure, codEtud, espace.getCode());
+				etapeInscriptions.addAll(etps);
+			});
+
+		}
+
+		// 22
+		// List<EtapeInscription> l = pcscolService.etapeInscription(codeStructure,
+		// codEtud, annee);
+		return new ResponseEntity<>(etapeInscriptions, HttpStatus.OK);
 	}
 
 	/**
 	 * 
+	 * @param codeComposante
+	 * @param annee
 	 * @return
 	 */
 	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(String codeComposante,
-			String codeAnnee) {
-		List<DiplomeReduitDto> ref = pcscolService.diplomeRef(codeComposante, codeAnnee);
-		return new ResponseEntity<>(ref, HttpStatus.OK);
+			String annee) {
+
+		List<DiplomeReduitDto> diplomeReduitDtos = new ArrayList<DiplomeReduitDto>();
+
+		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
+
+		if (espaces != null && !espaces.isEmpty()) {
+
+			espaces.forEach(e -> {
+				List<DiplomeReduitDto> ref = pcscolService.diplomeRef(codeComposante, e.getCode());
+				if (ref != null)
+					diplomeReduitDtos.addAll(ref);
+
+			});
+
+		}
+
+		return new ResponseEntity<>(diplomeReduitDtos, HttpStatus.OK);
 	}
 
-	/**
-	 * 
-	 * @param composante
-	 * @return
-	 */
-	public ResponseEntity<SignataireRef> signaitaireRef(String composante) {
-		SignataireRef ref = pcscolService.signaitaireRef(composante);
-		return new ResponseEntity<>(ref, HttpStatus.OK);
-
-	}
-
+	
+	
 	public PcscolService getPcscolService() {
 		return pcscolService;
 	}

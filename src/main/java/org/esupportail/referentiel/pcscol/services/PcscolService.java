@@ -14,6 +14,7 @@ import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtapeInscription;
+import org.esupportail.referentiel.beans.EtapeReduiteDto;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.RegimeInscription;
@@ -154,7 +155,7 @@ public class PcscolService implements PcscolServiceI {
 			if (listeAnnee != null && !listeAnnee.isEmpty())
 				regime.setAnnee(listeAnnee.get(0));
 			regime.setCodRegIns(etp.getRegimeIns());
-			//regime.setCodRegIns(etp.get)
+			// regime.setCodRegIns(etp.get)
 			regime.setLicRegIns(etp.getRegimeIns());
 			regime.setRegimeIns(etp.getRegimeIns());
 			regime.setLibRg(etp.getLibRg());
@@ -291,7 +292,7 @@ public class PcscolService implements PcscolServiceI {
 				diplomes.add(diplome);
 
 				// possibilite d'avoir un espace different ???
-				System.out.println("-------------------------------");
+
 				if (!objectMaqette.getEnfants().isEmpty()) {
 					// System.out.println(objectMaqette.getEnfants() + "+++++++++++++++++++++");
 					MaquetteStructure maquetteStructure = offreFormationService.lireMaquette(codeStructure,
@@ -301,9 +302,31 @@ public class PcscolService implements PcscolServiceI {
 					List<EnfantsStructure> enfants = listeEnfantsObjectMaquettePia(maquetteStructure);
 
 					// Enfant enfant = objectMaqette.getEnfants().get(0);
-					ObjetMaquetteDetail objectMaqette2 = objetsMaquetteApi.lireObjetMaquette(codeStructure,
-							enfants.get(0).getObjetMaquette().getId());
-					System.out.println(objectMaqette2.getCode() + "-----------------");
+
+					if (enfants != null && !enfants.isEmpty()) {
+
+						enfants.forEach(e -> {
+
+							ObjetMaquetteDetail objectMaqette2;
+							try {
+								objectMaqette2 = objetsMaquetteApi.lireObjetMaquette(codeStructure,
+										e.getObjetMaquette().getId());
+								logger.debug("{}", objectMaqette2);
+								EtapeReduiteDto etp = new EtapeReduiteDto();
+								etp.setCodeEtp(objectMaqette2.getCode());
+								/**
+								 * TODO recupere le codePeriode
+								 */
+								etp.setCodVrsVet(esp.getCode());
+								etp.setLibWebVet(objectMaqette2.getDescripteursObjetMaquette().getLibelle());
+								diplome.getListeEtapes().add(etp);
+							} catch (ApiException e1) {
+								logger.error("{}", e1.getMessage());
+							}
+
+						});
+
+					}
 				}
 
 			} catch (ApiException e) {
@@ -380,14 +403,19 @@ public class PcscolService implements PcscolServiceI {
 
 	}
 
-	public List<ApprenantDto> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtape,
-			String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom, String prenom) {
+	public List<ApprenantDto> recupererListeEtuParEtpEtDiplome(String codeComposante, String codePeriode,
+			String codeEtape, String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom,
+			String prenom) {
 		/**
 		 * TODO versionEtape codeEtape
 		 */
 
-		return lireApprenantDtoFromInscriptions(codeComposante, codeDiplome, annee, nom, prenom, codEtu);
+		return lireApprenantDtoFromInscriptions(codeComposante, codeDiplome, codePeriode, nom, prenom, codEtu);
 	}
+	
+	
+	
+	
 
 	/**
 	 * 
@@ -407,6 +435,22 @@ public class PcscolService implements PcscolServiceI {
 
 	}
 
+	public List<Inscription> lireInscriptionsByAnnee(String codeStructure, String objetMaquette, String annee,
+			String nomDeNaissance, String prenom, String codeApprenant) {
+		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
+		List<Inscription> inscriptions = new ArrayList<Inscription>();
+		if (periodes != null && !periodes.isEmpty()) {
+			periodes.forEach(p -> {
+				List<Inscription> ins = lireInscriptions(codeStructure, objetMaquette, p.getCode(), nomDeNaissance,
+						prenom, codeApprenant);
+				if (ins != null && !ins.isEmpty()) {
+					inscriptions.addAll(ins);
+				}
+			});
+		}
+		return inscriptions;
+	}
+
 	/**
 	 * 
 	 * @param codeStructure
@@ -420,6 +464,10 @@ public class PcscolService implements PcscolServiceI {
 
 	public List<Inscription> lireInscriptions(String codeStructure, String objetMaquette, String periode,
 			String nomDeNaissance, String prenom, String codeApprenant) {
+
+		logger.debug(
+				"codeStructure : {},  objetMaquette: {}, periode : {}, nomDeNaissance : {},  prenom : {},  codeApprenant : {}",
+				codeStructure, objetMaquette, periode, nomDeNaissance, prenom, codeApprenant);
 
 		if (codeApprenant != null && !codeApprenant.isBlank()) {
 			nomDeNaissance = null;

@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import io.netty.handler.codec.http.HttpContentEncoder.Result;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
@@ -105,9 +106,10 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 		// ApogeeMap map =
 		// studentDataRepositoryDaoWS.recupererEtapesByEtudiantAndAnnee(codeEtud, annee,
 		// "");
-		//ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, annee);
+		// ApogeeMap apogeeMap =
+		// pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, annee);
 		ResponseEntity<ApogeeMap> result = pcscolControllerAdapter.etapesByEtudiantAndAnnee(codeEtud, annee);
-		//return new ResponseEntity<ApogeeMap>(apogeeMap, HttpStatus.OK);
+		// return new ResponseEntity<ApogeeMap>(apogeeMap, HttpStatus.OK);
 		return result;
 	}
 
@@ -150,10 +152,11 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 			@RequestParam(value = "prenom", required = false) String prenom) {
 
 		// TODO
-		List<ApprenantDto> listeEtu = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, annee, codeEtape,
-				versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
-		return new ResponseEntity<>(listeEtu, HttpStatus.OK);
-
+//		List<ApprenantDto> listeEtu = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, annee, codeEtape,
+//				versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
+//		return new ResponseEntity<>(listeEtu, HttpStatus.OK);
+		ResponseEntity<List<ApprenantDto>> listeDtos = pcscolControllerAdapter.recupererListeEtuParEtpEtDiplome(codeComposante, annee, codeEtape, versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
+		return listeDtos;
 	}
 
 	/**
@@ -166,12 +169,13 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	public ResponseEntity<LinkedHashMap<String, String>> studentEtapeVets(String codeEtud, String annee) {
 		// TODO
 
-		ResponseEntity<LinkedHashMap<String, String>> lEtapeInscriptions = pcscolControllerAdapter.studentEtapeVets(codeEtud, annee);
+		ResponseEntity<LinkedHashMap<String, String>> lEtapeInscriptions = pcscolControllerAdapter
+				.studentEtapeVets(codeEtud, annee);
 //		LinkedHashMap<String, String> lEtapeInscriptions = pcscolService.studentEtapeVets(codeStructure, codeEtud,
 //				annee);
-		//return new ResponseEntity<>(lEtapeInscriptions, HttpStatus.OK);
+		// return new ResponseEntity<>(lEtapeInscriptions, HttpStatus.OK);
 		return lEtapeInscriptions;
-		
+
 	}
 
 	/**
@@ -183,10 +187,14 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	@GetMapping("/studentListeEtapeInscription")
 	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(
 			@RequestParam(value = "codEtud", defaultValue = "000000001") String codEtud,
-			@RequestParam(value = "annee", defaultValue = "PER-2020") String annee) {
+			@RequestParam(value = "annee", defaultValue = "2020") String annee) {
 		// TODO
-		List<EtapeInscription> l = pcscolService.etapeInscription(codeStructure, codEtud, annee);
-		return new ResponseEntity<>(l, HttpStatus.OK);
+		// List<EtapeInscription> l = pcscolService.etapeInscription(codeStructure,
+		// codEtud, annee);
+		ResponseEntity<List<EtapeInscription>> result = pcscolControllerAdapter.studentListeEtapesInscription(codEtud,
+				annee);
+		// return new ResponseEntity<>(l, HttpStatus.OK);
+		return result;
 	}
 
 	/**
@@ -230,8 +238,13 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "codeAnnee", required = true) String codeAnnee) {
-		List<DiplomeReduitDto> ref = pcscolService.diplomeRef(codeComposante, codeAnnee);
-		return new ResponseEntity<>(ref, HttpStatus.OK);
+
+		ResponseEntity<List<DiplomeReduitDto>> response = pcscolControllerAdapter
+				.getDiplomesRefParComposanteEtAnnee(codeComposante, codeAnnee);
+		return response;
+
+//		List<DiplomeReduitDto> ref = pcscolService.diplomeRef(codeComposante, codeAnnee);
+//		return new ResponseEntity<>(ref, HttpStatus.OK);
 	}
 
 	/**
