@@ -30,6 +30,28 @@ vim application.yml
 vim logback.xml 
 
 ```
+
+# Les branches
+Pour visualiser la branche de travail
+
+```
+git status
+```
+
+Pour visualiser toute les branches (locales et distantes)
+
+```
+git branch -a 
+```
+
+Pour changer de banche et se mettre sur la branche esup-siscol-dev-pgase par exemple
+
+```
+git checkout esup-siscol-dev-pgase
+```
+
+# Paramétrage 
+
 La première partie LDAP : renseigner les paramtères LDAP 
 
 	ldap:
@@ -59,7 +81,44 @@ La deuxiéme  partie  concerne les urls APOGEE
       referentielMetier: http://ws.uni.fr:8080/aws/services/ReferentielMetier
       offreFormationMetier: http://ws.uni.fr:8080/aws/services/OffreFormationMetier
 
-La troisième Partie
+
+La troisième Partie PcScol
+
+	pcscol:
+           codeStructure: ETAB00
+           codePeriode: PER-2020
+           codesPeriodesChargementFormations: PER-2021, PER-2022, PER-2023, PER-2024, PER-2018, ..
+           accesstoken:
+                      casUrl: https://authn-app.xxxxxxxx.pc-scol.fr/cas/v1/tickets
+                      # Username et password pour s'authentifier auprs du serveur OAuth Pgase en tant qu'applicatif MDW
+                      svcAcountLogin: svc-api
+                      svcAcountPassword: ******************
+                      # Dure en heure de conservation de l'access-token
+                      duration: 6
+           # Code de l'tablissement dans Pgase
+           etablissement: ETAB00
+           # Base Url de l'API du module INS de Pgase (attention  conserver la structure de l'url d'exemple)
+           api:
+               # Base Url de l'API CHC de Pgase
+               chc:
+                   url: https://chc.xxxxxxxxx.pc-scol.fr/api/chc/v6
+               # Base Url de l'API ODF de Pgase
+               odf:
+                   url: https://odf.xxxxxxxxx.pc-scol.fr/api/odf/v1
+               # Base Url de l'API COF de Pgase
+               ref:
+                   url: https://ref.xxxxxxxxx.pc-scol.fr/api/v1/ref
+               ins:
+                   url: https://ins.xxxxxxxxx.pc-scol.fr/api/v5/ins
+           # Permet de cibler un dossier par dfaut. /!\ Attention /!\ A renseigner uniquement pour une dmonstration ou en phase de test/dveloppement.
+           demo:
+                codeapprenant: 000000001
+                 # Liste des statuts des inscriptions  afficher dans la vue "Parcours" spars par des virgules
+           inscription:
+                      statut: valide
+	
+
+La quatriéme Partie
 
 	credential:
 		userscredential:
