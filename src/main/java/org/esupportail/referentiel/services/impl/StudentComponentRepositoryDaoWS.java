@@ -15,6 +15,7 @@ import org.esupportail.referentiel.utils.DonneesStatic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,7 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.VariableAppliWSE
  * Acces au composantes du personnel personnalise.
  *
  */
+@ConditionalOnProperty(name = "app.mode_apogee")
 @SuppressWarnings("serial")
 @Service
 public class StudentComponentRepositoryDaoWS implements StudentComponentRepositoryDao {

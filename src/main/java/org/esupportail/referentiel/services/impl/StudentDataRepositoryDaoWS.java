@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
@@ -47,6 +48,7 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.ComposanteDTO3;
 /**
  * Acces donnees etudiant
  */
+@ConditionalOnProperty(name = "app.mode_apogee")
 @Service
 public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 

@@ -9,7 +9,6 @@ import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantRef;
-import org.esupportail.referentiel.pcscol.ins.model.Inscription;
 import org.esupportail.referentiel.pcscol.ins.model.Periode;
 import org.esupportail.referentiel.pcscol.services.EspaceService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
@@ -17,12 +16,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@ConditionalOnProperty(name = "app.mode_pegase")
 public class PcscolControllerAdapter {
 
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -123,13 +123,14 @@ public class PcscolControllerAdapter {
 
 		// TODO
 		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
+		System.out.println("ins++++++++++"+periodes);
 		List<ApprenantDto> apprenantDtos=new ArrayList<ApprenantDto>();
 		
 		if (periodes != null && !periodes.isEmpty()) {
 			periodes.forEach(p -> {
 				List<ApprenantDto> ins = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, p.getCode(), codeEtape,
 						versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
-						
+					System.out.println("ins++++++++++"+ins);	
 				if (ins != null && !ins.isEmpty()) {
 					apprenantDtos.addAll(ins);
 				}

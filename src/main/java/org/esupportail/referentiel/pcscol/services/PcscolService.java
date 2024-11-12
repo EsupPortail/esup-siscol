@@ -21,7 +21,6 @@ import org.esupportail.referentiel.beans.RegimeInscription;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
-import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
 import org.esupportail.referentiel.pcscol.ins.model.Apprenant;
@@ -39,8 +38,6 @@ import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.mapper.ApprenantEtuInfoAdmMapperInterface;
 import org.esupportail.referentiel.pcscol.mapper.OdfDtoMapperInterface;
 import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
-import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetMaquette;
-import org.esupportail.referentiel.pcscol.odf.model.Enfant;
 import org.esupportail.referentiel.pcscol.odf.model.EnfantsStructure;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
@@ -50,11 +47,13 @@ import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
 @Service
 @SessionScope
+@ConditionalOnProperty(name = "app.mode_pegase")
 public class PcscolService implements PcscolServiceI {
 
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());

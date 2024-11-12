@@ -7,15 +7,12 @@ import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.ins.model.Periode;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
-import org.esupportail.referentiel.pcscol.odf.model.Espace;
-import org.esupportail.referentiel.pcscol.odf.model.Pageable;
-import org.esupportail.referentiel.pcscol.odf.model.PagedEspaces;
-
-import org.esupportail.referentiel.pcscol.odf.model.TypeEspace;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Service
+@ConditionalOnProperty(name = "app.mode_pegase")
 public class EspaceService {
 
 	@Autowired

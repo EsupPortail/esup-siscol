@@ -1,7 +1,6 @@
 package org.esupportail.referentiel.pcscol.services;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +9,6 @@ import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.SignataireRef;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public interface PcscolServiceI {
 

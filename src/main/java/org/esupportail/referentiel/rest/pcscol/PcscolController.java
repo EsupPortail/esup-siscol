@@ -1,6 +1,5 @@
 package org.esupportail.referentiel.rest.pcscol;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeInscription;
-import org.esupportail.referentiel.beans.EtudiantDTO2Ext;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.SignataireRef;
@@ -21,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,11 +28,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import io.netty.handler.codec.http.HttpContentEncoder.Result;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("pcscol")
+@ConditionalOnProperty(name = "app.mode_pegase")
 public class PcscolController implements GeneriqueSIControllerInterface {
 
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());

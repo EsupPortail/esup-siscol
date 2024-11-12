@@ -14,7 +14,6 @@ import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
 import org.esupportail.referentiel.pcscol.odf.model.EnfantsStructure;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
-import org.esupportail.referentiel.pcscol.odf.model.ObjetFormation;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;
@@ -25,9 +24,11 @@ import org.esupportail.referentiel.pcscol.odf.model.TypeObjetMaquette;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Service
+@ConditionalOnProperty(name = "app.mode_pegase")
 public class OffreFormationService {
 
 	@Autowired

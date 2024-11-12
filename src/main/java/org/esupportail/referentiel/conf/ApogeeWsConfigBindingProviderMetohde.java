@@ -1,8 +1,6 @@
 package org.esupportail.referentiel.conf;
 
-import java.net.Authenticator;
 import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
 import java.net.URL;
 
 import javax.xml.ws.BindingProvider;
@@ -11,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,6 +26,7 @@ import gouv.education.apogee.commun.client.ws.PedagogiqueMetier.PedagogiqueMetie
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterfaceService;
 
+@ConditionalOnProperty(name = "app.mode_apogee")
 @Configuration
 public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { // NO_UCD (unused code)
 

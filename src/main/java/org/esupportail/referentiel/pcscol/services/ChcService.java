@@ -29,9 +29,11 @@ import org.esupportail.referentiel.pcscol.odf.model.TypeObjetMaquette;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 @Service
+@ConditionalOnProperty(name = "app.mode_pegase")
 public class ChcService {
 
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
