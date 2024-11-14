@@ -48,7 +48,7 @@ public class InscriptionTest {
 
 	@Test
 	public void testInsEtAppIns() throws ApiException {
-		ApprenantEtInscriptions app = insApi.lireInscriptions("ETAB00", "000000001");
+		ApprenantEtInscriptions app = insApi.lireInscriptions("ETAB00", "000000249");
 		Apprenant appInfo = app.getApprenant();
 		List<InscriptionComplete> inscriptions = app.getInscriptions();
 

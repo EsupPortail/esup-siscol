@@ -48,11 +48,22 @@ Pour changer de banche et se mettre sur la branche esup-siscol-dev-pgase par exe
 
 ```
 git checkout esup-siscol-dev-pgase
+mvn clean install
 ```
+le war est généré dans le répertoire target/
 
-# Paramétrage 
+# Paramétrage :
+Le fichier esup-siscol/etc/esup-siscol/application.yml.sample est à copier dans /etc/esup-siscol/application.yml et paramétrer
 
-La première partie LDAP : renseigner les paramtères LDAP 
+## Mode de fonctionnement :
+pour activer ou désactiver un apogee/pegase mettre la valeur à true ou à false,
+ 
+	app:
+		mode_apogee: true
+		mode_pegase: true
+ 
+
+## La partie LDAP : renseigner les paramtères LDAP 
 
 	ldap:
     	urls: 
@@ -72,7 +83,7 @@ La première partie LDAP : renseigner les paramtères LDAP
                 etc ...
 
 
-La deuxiéme  partie  concerne les urls APOGEE
+## La partie  APOGEE
 
 	  administratifMetier: http://ws.uni.fr:8080/aws/services/AdministratifMetier
       tudiantMetier: http://ws.uni.fr:8080/aws/services/EtudiantMetier
@@ -82,7 +93,7 @@ La deuxiéme  partie  concerne les urls APOGEE
       offreFormationMetier: http://ws.uni.fr:8080/aws/services/OffreFormationMetier
 
 
-La troisième Partie PcScol
+## La Partie PcScol
 
 	pcscol:
            codeStructure: ETAB00
@@ -118,7 +129,7 @@ La troisième Partie PcScol
                       statut: valide
 	
 
-La quatriéme Partie
+## Définition du mot de passe d'accés au service
 
 	credential:
 		userscredential:
@@ -127,7 +138,7 @@ La quatriéme Partie
       			password: {password}
 
 
-
+## Version Apogee
  il faut ajouter  la bonne dépendance ({mettre la version}) dans le pom.xml	 
 			
 				<dependency>
@@ -158,24 +169,12 @@ mvn  spring-boot:run
 
 ## en mode Tomcat:
 ```
-cp target/esup-siscol-0.1.11.jar {path}/tomcat/webapps
-unzip esup-siscol-0.1.11.jar -d esup-siscol
-cd esup-siscol/WEB-INF/classes/
-cp application.yml.sample application.yml
+cp target/esup-siscol-0.1.11.war {path}/tomcat/webapps/esup-siscol.war
 ```
 dans le fichier application.yml configurer la partie LDAP, apogee (urls de services) et userscredential
 
 
 
-## en mode java (alternative)
- ***Attention***  à adapter selon le fonctionnement de chaque établissement,
-- The `etc` directory contains the configuration files and directories that need to be copied to `/etc/apogee/config`. --example usage : 
-
-```bash
-cd path/esup-siscol
-./cp -r etc/esup-siscol/ /etc/esup-siscol/
-java -server  -noverify -Xmx2048M -jar target/esup-siscol{version}.jar  --spring.config.location=/etc/esup-siscol/
-```
 
 ### Clear Maven Cache
 
@@ -196,7 +195,7 @@ Same strategy applies to Windows too, provided you switch `$HOME` to its equival
 ## Executable WAR
 
 ```bash
-java -server  -noverify -Xmx2048M -jar target/esup-siscol{version}.jar --spring.config.location=etc/esup-siscol/
+java -server  -noverify -Xmx2048M -jar target/esup-siscol{version}.jar
 ```
 
 ## External
