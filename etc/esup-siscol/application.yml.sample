@@ -2,12 +2,11 @@
 spring:
  ldap:
     urls: 
-    - ldap://annuaire.fr:389
-    username: cn=admin,dc=ehess,dc=fr
+    - ldap://annuaire.univ.fr:389
+    username: cn=admin,dc=univ,dc=fr
     password: ********
     base: dc=univ,dc=fr
      
- 
       
 springdoc:
   version: '@springdoc.version@'
@@ -33,32 +32,24 @@ server:
     include-stacktrace: always
    
 app:
+  mode_apogee: true 
+  mode_pegase: true
         
   server-url: http://localhost:8080 
   server-version: 1.0.18 
   server-title: Client API SCOLARITE REST
   ldap:
-    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=acheraga))
+    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=uiduser))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (|(eduPersonAffiliation=employee)(eduPersonAffiliation=faculty))
-    ## les paramètres ci-dessous commentés sont obsolètes
-    #parametres:
-      #{UAI:0921436L}P1PSY - 201
-      #supannEtuEtapePrefix: "{UAI:0921434J}" ##{UAI:0921436L} 
-      #laissez vide si vous n'utilisez pas de prefix
-      # supannEtuEtapePrefix: "*" ## ou par exemple{UAI:0921436L} 
-
-      #false pour ignorer le version d'etape et le separateur dansla recherche LDAP
-      # supannEtuEtapeExisteVetVersion: true 
-      #supannEtuEtapeExisteVetVersion: true 
-      #laissez vide si n'existe pas, il faut mettre des espaces si ils existent
-      #supannEtuEtapeSepVetVersion: " - " 
+	   
     attributes:
      objectClass: Person
      supannAliasLogin: uid 
      baseDn: ou=people
      dn: dn
      uid: uid
+                  #codEtu: sn
      codEtu: supannEtuId
      supannEtuId: supannEtuId
      sn: sn
@@ -87,34 +78,35 @@ app:
     # valeurs possible TOUS N O#
     temoinRecupAnnu : N 
     urlService:
-      administratifMetier: http://{server/wsapogee}/wsapogee/services/AdministratifMetier
+      #administratifMetier: http://univ.fr:8080/wsapogee/services/AdministratifMetier
+      administratifMetier: http://univ.fr:8080/wsapogee/services/AdministratifMetier
       administratifMetierUserName: user
-      administratifMetierPassword: *******
-      etudiantMetier: http://{server/wsapogee}/services/EtudiantMetier
+      administratifMetierPassword: *********
+      etudiantMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/EtudiantMetier
       etudiantMetierUserName: user
-      etudiantMetierPassword: *******
-      pedagogiqueMetier: http://{server/wsapogee}/services/PedagogiqueMetier
+      etudiantMetierPassword: ***********
+      pedagogiqueMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/PedagogiqueMetier
       pedagogiqueMetierUserName: user
-      pedagogiqueMetierPassword: *******
-      geographieMetier: http://{server/wsapogee}/services/GeographieMetier
+      pedagogiqueMetierPassword: **********
+      geographieMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/GeographieMetier
       geographieMetierUserName: user
-      geographieMetierPassword: *******
-      referentielMetier: http://{server/wsapogee}/services/ReferentielMetier
+      geographieMetierPassword: ********
+      referentielMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/ReferentielMetier
       referentielMetierUserName: user
-      referentielMetierPassword: ********
-      offreFormationMetier: http://{server/wsapogee}/services/OffreFormationMetier
+      referentielMetierPassword: *********
+      offreFormationMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/OffreFormationMetier
       offreFormationMetierUserName: user
-      offreFormationMetierPassword: ********
+      offreFormationMetierPassword: **********
   pcscol:
     codeStructure: ETAB00
     codePeriode: PER-2020
     codesPeriodesChargementFormations: PER-2021, PER-2022, PER-2023, PER-2024, PER-2018, PER-2019, PER-2020, PER-2020-21
     accesstoken:
       # Url de l'API du serveur OAuth Pgase pour la rcupration de l'access-token
-      casUrl: https://{cas-server-pcscol}/cas/v1/tickets
+      casUrl: https://authn-app.univ.pc-scol.fr/cas/v1/tickets
       # Username et password pour s'authentifier auprs du serveur OAuth Pgase en tant qu'applicatif MDW
       svcAcountLogin: svc-api
-      svcAcountPassword: {password}
+      svcAcountPassword: **************
       # Dure en heure de conservation de l'access-token
       duration: 6
     # Code de l'tablissement dans Pgase
@@ -123,15 +115,15 @@ app:
     api:
       # Base Url de l'API CHC de Pgase
       chc:
-        url: https://chc.{server.pc-scol.fr}/api/chc/v6
+        url: https://chc.partenaires.pc-scol.fr/api/chc/v6
       # Base Url de l'API ODF de Pgase
       odf: 
-        url: https://odf.{server.pc-scol.fr}/api/odf/v1
+        url: https://odf.partenaires.pc-scol.fr/api/odf/v1
       # Base Url de l'API COF de Pgase
       ref: 
-          url: https://{server.pc-scol.fr}/api/v1/ref
+          url: https://ref.partenaires.pc-scol.fr/api/v1/ref
       ins:
-          url: https://{server.pc-scol.fr}/api/v5/ins
+          url: https://ins.partenaires.pc-scol.fr/api/v5/ins
     # Permet de cibler un dossier par dfaut. /!\ Attention /!\ A renseigner uniquement pour une dmonstration ou en phase de test/dveloppement.
     demo:
       codeapprenant: 000000001
@@ -144,7 +136,7 @@ credential:
   userscredential:
     root:
       username: root
-      password: {siscol_password}
+      password: *******
       roles:
         - ADMIN
         - USER
@@ -166,8 +158,8 @@ cache:
     # Chargement au demarrage des caches
     onStartup:
         # Active ou non, par defaut : false
-        enabled: true
-        #enabled: false
+        #enabled: true
+        enabled: false
     # Time-To-Live du cache temporaire, en minutes, par defaut : 60 [minutes]
     #ttl-tmp:
     # Time-To-Live du cache permanent, en heures, par defaut : 0 [heures]
@@ -179,3 +171,4 @@ cache:
         enabled: false
         # Expression cron, par defaut : aucune
         cron: 0 0 7-22 * * *
+
