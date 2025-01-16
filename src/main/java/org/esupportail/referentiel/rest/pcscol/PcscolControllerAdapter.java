@@ -37,7 +37,10 @@ public class PcscolControllerAdapter {
 	String codePeriode = "PER-2020";
 
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
-	String codesPeriodesChargementFormations = "PER-2022";
+	String codesPeriodesChargementFormations;
+	
+	
+	
 
 	@Autowired
 	private EspaceService espaceService;
@@ -82,8 +85,13 @@ public class PcscolControllerAdapter {
 		 * TODO relation annee periode ??
 		 */
 		if (espaces != null && !espaces.isEmpty()) {
-			String espacesFictif = espaces.get(0).getCode();
-			ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, espacesFictif);
+			
+			List<String> code_espaces=new ArrayList<String>();
+			espaces.forEach(e->{
+				code_espaces.add(e.getCode());
+			});
+			
+			ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, code_espaces);
 			return new ResponseEntity<ApogeeMap>(apogeeMap, HttpStatus.OK);
 		}
 		return ResponseEntity.badRequest().build();
@@ -123,14 +131,14 @@ public class PcscolControllerAdapter {
 
 		// TODO
 		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
-		System.out.println("ins++++++++++"+periodes);
+		
 		List<ApprenantDto> apprenantDtos=new ArrayList<ApprenantDto>();
 		
 		if (periodes != null && !periodes.isEmpty()) {
 			periodes.forEach(p -> {
 				List<ApprenantDto> ins = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, p.getCode(), codeEtape,
 						versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
-					System.out.println("ins++++++++++"+ins);	
+					logger.debug("recupererListeEtuParEtpEtDiplome : "+ins);	
 				if (ins != null && !ins.isEmpty()) {
 					apprenantDtos.addAll(ins);
 				}

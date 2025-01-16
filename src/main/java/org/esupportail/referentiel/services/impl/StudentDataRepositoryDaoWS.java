@@ -1381,7 +1381,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		apogeeMap.setStudentsEtapesVetsPedago(lEtapeVetPedago);
 		apogeeMap.setListeEtapeInscriptions(listeEtapeInscriptions);
 		// apogeeMap.setStudentStudys(lComposante);
-		apogeeMap.setElementPedagogiques(elementPedagogiques);
+		
 		apogeeMap.setListeELPs(listeELPs);
 
 		if (logger.isDebugEnabled()) {

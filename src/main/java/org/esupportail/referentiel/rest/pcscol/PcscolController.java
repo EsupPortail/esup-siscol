@@ -44,10 +44,12 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	String codeStructure = "ETAB00";
 
 	@Value("${app.pcscol.codePeriode}")
-	String codePeriode = "PER-2020";
+	String codePeriode;
 
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
-	String codesPeriodesChargementFormations = "PER-2022";
+	String codesPeriodesChargementFormations ;
+	
+	
 
 	@Autowired
 	PcscolControllerAdapter pcscolControllerAdapter;

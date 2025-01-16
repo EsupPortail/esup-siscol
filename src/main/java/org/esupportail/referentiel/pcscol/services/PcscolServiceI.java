@@ -52,7 +52,7 @@ public interface PcscolServiceI {
 	 * @param codEtud
 	 * @return ApogeeMap
 	 */
-	public ApogeeMap recupererIaIpParEtudiantAnnee(String codeStructure, String codeApprenant, String annee);
+	public ApogeeMap recupererIaIpParEtudiantAnnee(String codeStructure, String codeApprenant, List<String> annee);
 	
 	
 	public List<String> recupererAnneesIa(String codeStructure,String codeEtud);

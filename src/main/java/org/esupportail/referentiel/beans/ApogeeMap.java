@@ -40,12 +40,6 @@ public class ApogeeMap {
 	 */
 	private LinkedHashMap <String,String> StudentStudys;
 	
-	/**
-	 * map des elements pedagogiques.
-	 */
-	@Deprecated
-	@JsonIgnore
-	private LinkedHashMap <String,ElementPedagogique> elementPedagogiques;	
 	
 	/**
 	 * liste des elements pedagogiques.
@@ -72,7 +66,7 @@ public class ApogeeMap {
 		StudentSteps = new LinkedHashMap<String, String>();
 		StudentsEtapesVets = new LinkedHashMap<String, String>();
 		StudentsEtapesVetsPedago = new LinkedHashMap<String, String>();
-		elementPedagogiques = new LinkedHashMap<String, ElementPedagogique>();
+		
 		listeELPs = new ArrayList<ElementPedagogique>();
 		listeEtapeInscriptions = new ArrayList<EtapeInscription>();
 		setStudentStudys(new LinkedHashMap<String, String>());
@@ -115,19 +109,7 @@ public class ApogeeMap {
 			LinkedHashMap<String, String> studentsEtapesVetsPedago) {
 		StudentsEtapesVetsPedago = studentsEtapesVetsPedago;
 	}
-	/**
-	 * @return the elementPedagogiques
-	 */
-	public LinkedHashMap<String, ElementPedagogique> getElementPedagogiques() {
-		return elementPedagogiques;
-	}
-	/**
-	 * @param elementPedagogiques the elementPedagogiques to set
-	 */
-	public void setElementPedagogiques(
-			LinkedHashMap<String, ElementPedagogique> elementPedagogiques) {
-		this.elementPedagogiques = elementPedagogiques;
-	}
+	
 	/**
 	 * @return the listeELPs
 	 */

@@ -139,7 +139,7 @@ public class TestEtudiantMetier {
 		System.out.println(map.getStudentsEtapesVets().get("P1PSY"));
 		System.out.println(map.getListeELPs());
 		System.out.println(map.getStudentSteps());
-		System.out.println(map.getElementPedagogiques());
+
 
 	}
 

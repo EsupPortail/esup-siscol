@@ -119,24 +119,29 @@ public class PcscolService implements PcscolServiceI {
 		return lEtapeInscriptions;
 	}
 
-	@Override
-	public ApogeeMap recupererIaIpParEtudiantAnnee(String codeStructure, String codeApprenant, String codePeriode) {
+	public ApogeeMap recupererIaIpParEtudiantAnnee(String codeStructure, String codeApprenant,
+			List<String> codesPeriodes) {
 		ApogeeMap apogeeMap = new ApogeeMap();
 		/**
 		 * TODO regime
 		 */
+		List<EtapeInscription> etapeInscriptions = new ArrayList<EtapeInscription>();
 
-		List<String> codesPeriodes = new ArrayList<String>();
-		codesPeriodes.add(codePeriode);
-		List<EtapeInscription> etapeInscriptions = etapeInscription(codeStructure, codeApprenant, codePeriode);
+		codesPeriodes.forEach(codePeriode -> {
+			List<EtapeInscription> etapeInscriptionsPartiel = etapeInscription(codeStructure, codeApprenant,
+					codePeriode);
+			etapeInscriptions.addAll(etapeInscriptionsPartiel);
+		});
+
 		List<RegimeInscription> regimesInscriptions = new ArrayList<RegimeInscription>();
 		apogeeMap.setListeEtapeInscriptions(etapeInscriptions);
 		try {
 			List<ElementPedagogique> lelps = chcService.lirelisteElementPedagogiqueStageApprenant(codeApprenant,
 					codeStructure);
 			if (lelps != null) {
+
 				List<ElementPedagogique> filterdlElps = lelps.stream()
-						.filter(e -> e.getCodVrsVet().equalsIgnoreCase(codePeriode)).collect(Collectors.toList());
+						.filter(e -> codesPeriodes.contains(e.getCodVrsVet())).collect(Collectors.toList());
 				apogeeMap.setListeELPs(filterdlElps);
 			}
 
@@ -293,11 +298,9 @@ public class PcscolService implements PcscolServiceI {
 				// possibilite d'avoir un espace different ???
 
 				if (!objectMaqette.getEnfants().isEmpty()) {
-					// System.out.println(objectMaqette.getEnfants() + "+++++++++++++++++++++");
 					MaquetteStructure maquetteStructure = offreFormationService.lireMaquette(codeStructure,
 							f.getId().toString());
 
-					// System.out.println(maquetteStructure);
 					List<EnfantsStructure> enfants = listeEnfantsObjectMaquettePia(maquetteStructure);
 
 					// Enfant enfant = objectMaqette.getEnfants().get(0);
@@ -411,10 +414,6 @@ public class PcscolService implements PcscolServiceI {
 
 		return lireApprenantDtoFromInscriptions(codeComposante, codeDiplome, codePeriode, nom, prenom, codEtu);
 	}
-	
-	
-	
-	
 
 	/**
 	 * 

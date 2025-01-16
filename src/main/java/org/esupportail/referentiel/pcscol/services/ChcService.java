@@ -75,20 +75,21 @@ public class ChcService {
 		}
 	}
 
-	public List<ArbreObjetFormation> listeObjetFormationFromArbreObjetFormation(String codeStructure, String codePeriode,
-			String codeFormation) {
+	public List<ArbreObjetFormation> listeObjetFormationFromArbreObjetFormation(String codeStructure,
+			String codePeriode, String codeFormation) {
 		ArbreLecture arbreLecture = arbrePourUneFormation(codeStructure, codePeriode, codeFormation);
 		return arbreLecture.getFormationArbre().getListeObjetFormation();
 	}
-	
+
 	/**
 	 * TODO erreur de lecture
+	 * 
 	 * @param codeStructure
 	 * @param codePeriode
 	 * @return
 	 */
-	
-	public List<ObjetMaquette>  lireListeFormationAll(String codeStructure, String codePeriode) {
+
+	public List<ObjetMaquette> lireListeFormationAll(String codeStructure, String codePeriode) {
 		try {
 			List<ObjetMaquette> response = objetsMaquetteApiCHC.lireListeFormationAll(codeStructure, codePeriode);
 			return response;
@@ -101,8 +102,6 @@ public class ChcService {
 	public List<ElementPedagogique> lirelisteElementPedagogiqueStageApprenant(String codeApprenant,
 			String codeStructure) throws ApiException {
 		List<CursusDCA> response = cursusDcaApi.lireCusrsuApprenant(codeApprenant);
-
-		System.out.println(response);
 
 		List<ElementPedagogique> listeElementPedagogique = new ArrayList<ElementPedagogique>();
 		response.forEach(cursus -> {
@@ -175,15 +174,17 @@ public class ChcService {
 	 */
 	public List<ElementPedagogique> listeElementPedagogiqueStageFromCursus(CursusDCA cursus, String codeStructure) {
 		List<ElementPedagogique> listeElementPedagogique = listeElementPedagogiqueFromCursus(cursus, codeStructure);
-
+		
 		try {
 			Stream<ElementPedagogique> resultFiltre = listeElementPedagogique.stream()
 					.filter(e -> e.getTemElpTypeStage().equalsIgnoreCase("true"));
 
 			listeElementPedagogique = resultFiltre.collect(Collectors.toList());
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		logger.debug("{}",listeElementPedagogique);
 		return listeElementPedagogique;
 	}
 
