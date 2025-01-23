@@ -321,7 +321,7 @@ public class OffreFormationService {
 				 * TODO gestion des espaces
 				 */
 				Espace esp = espaceService.getEspacesApi().lireEspace(codeStructure, idEspace);
-				mapVDI.put(f.getCode() + "," + esp.getCode(), f.getLibelle());
+				mapVDI.put(f.getCode() + ";" + esp.getCode(), f.getLibelle());
 
 			} catch (ApiException e) {
 				logger.error(e.getMessage() + " : " + e.getCode());
@@ -369,7 +369,7 @@ public class OffreFormationService {
 							try {
 								esp = espaceService.getEspacesApi().lireEspace(codeStructure, idEspace);
 
-								mapVDI.put(f.getCode() + "," + esp.getCode(), f.getLibelle());
+								mapVDI.put(f.getCode() + ";" + esp.getCode(), f.getLibelle());
 							} catch (ApiException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
