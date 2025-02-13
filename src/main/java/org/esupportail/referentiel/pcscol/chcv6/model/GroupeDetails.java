@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   GroupeDetails.JSON_PROPERTY_CODE_TYPE,
   GroupeDetails.JSON_PROPERTY_LISTE_ENSEIGNANT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class GroupeDetails {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -96,7 +96,7 @@ public class GroupeDetails {
    * Le code du groupe
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -120,7 +120,7 @@ public class GroupeDetails {
    * Le libellé court du groupe
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -144,7 +144,7 @@ public class GroupeDetails {
    * Le libellé long du groupe
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {
@@ -168,7 +168,7 @@ public class GroupeDetails {
    * groupe est-il hors offre de formation
    * @return horsOffreFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_HORS_OFFRE_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getHorsOffreFormation() {
@@ -192,7 +192,7 @@ public class GroupeDetails {
    * la description du groupe
    * @return description
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDescription() {
@@ -216,7 +216,7 @@ public class GroupeDetails {
    * la liste de diffusion associée au groupe
    * @return listeDiffusion
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_DIFFUSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getListeDiffusion() {
@@ -240,7 +240,7 @@ public class GroupeDetails {
    * capacité du groupe
    * @return capacite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CAPACITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getCapacite() {
@@ -264,7 +264,7 @@ public class GroupeDetails {
    * la capacité est-elle bloquante?
    * @return capaciteBloquante
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CAPACITE_BLOQUANTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getCapaciteBloquante() {
@@ -288,7 +288,7 @@ public class GroupeDetails {
    * nombre de places réservées
    * @return placesReservees
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLACES_RESERVEES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPlacesReservees() {
@@ -312,7 +312,7 @@ public class GroupeDetails {
    * le groupe est-il planifiable?
    * @return planifiable
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLANIFIABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getPlanifiable() {
@@ -336,7 +336,7 @@ public class GroupeDetails {
    * Est-ce que le groupe est actif ?
    * @return actif
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ACTIF)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getActif() {
@@ -360,7 +360,7 @@ public class GroupeDetails {
    * Le code type de groupe
    * @return codeType
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeType() {
@@ -392,7 +392,7 @@ public class GroupeDetails {
    * la liste des codes métier des \&quot;personnes\&quot; associées au groupe
    * @return listeEnseignant
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LISTE_ENSEIGNANT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<String> getListeEnseignant() {

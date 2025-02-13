@@ -51,7 +51,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Structure.JSON_PROPERTY_SOUS_STRUCTURES,
   Structure.JSON_PROPERTY_EST_STRUCTURE_MERE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Structure {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -125,7 +125,7 @@ public class Structure {
    * Code Interne Pégase de l&#39;établissement (choisi par l&#39;établissement) - Clé fonctionnelle
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -149,7 +149,7 @@ public class Structure {
    * id Référentiel Externe de pegase
    * @return codeReferentielExterne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_REFERENTIEL_EXTERNE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeReferentielExterne() {
@@ -173,7 +173,7 @@ public class Structure {
    * Code national de l&#39;établissement d&#39;enseignement supérieur, fourni par le ministère
    * @return codeUai
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_UAI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeUai() {
@@ -197,7 +197,7 @@ public class Structure {
    * Libellé court
    * @return denominationPrincipale
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DENOMINATION_PRINCIPALE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDenominationPrincipale() {
@@ -221,7 +221,7 @@ public class Structure {
    * Libellé long
    * @return denominationComplementaire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DENOMINATION_COMPLEMENTAIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDenominationComplementaire() {
@@ -245,7 +245,7 @@ public class Structure {
    * Libellé affichage
    * @return appellationOfficielle
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_APPELLATION_OFFICIELLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAppellationOfficielle() {
@@ -269,7 +269,7 @@ public class Structure {
    * Commentaire
    * @return commentaire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMMENTAIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCommentaire() {
@@ -293,7 +293,7 @@ public class Structure {
    * Date du début de la validité de la structure
    * @return dateDebutValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebutValidite() {
@@ -317,7 +317,7 @@ public class Structure {
    * Date de la fin de la validité de la structure
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateFinValidite() {
@@ -341,7 +341,7 @@ public class Structure {
    * Témoin de la visibilité
    * @return temoinVisible
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TEMOIN_VISIBLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTemoinVisible() {
@@ -365,7 +365,7 @@ public class Structure {
    * Le sigle de l&#39;UAI
    * @return sigleUai
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SIGLE_UAI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getSigleUai() {
@@ -389,7 +389,7 @@ public class Structure {
    * Le type de l&#39;UAI
    * @return typeUaiCode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_UAI_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTypeUaiCode() {
@@ -413,7 +413,7 @@ public class Structure {
    * Le libellé de type de l&#39;UAI
    * @return typeUaiLibelle
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_UAI_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTypeUaiLibelle() {
@@ -437,7 +437,7 @@ public class Structure {
    * Le code de la Categorie Juridique
    * @return categorieJuridiqueCode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CATEGORIE_JURIDIQUE_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCategorieJuridiqueCode() {
@@ -461,7 +461,7 @@ public class Structure {
    * Le libellé de la Categorie Juridique
    * @return categorieJuridiqueLibelle
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CATEGORIE_JURIDIQUE_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCategorieJuridiqueLibelle() {
@@ -485,7 +485,7 @@ public class Structure {
    * Get adresse
    * @return adresse
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ADRESSE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Adresse getAdresse() {
@@ -509,7 +509,7 @@ public class Structure {
    * Get responsable
    * @return responsable
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_RESPONSABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Responsable getResponsable() {
@@ -533,7 +533,7 @@ public class Structure {
    * Le code de la structure parente
    * @return parent
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PARENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getParent() {
@@ -565,7 +565,7 @@ public class Structure {
    * Get sousStructures
    * @return sousStructures
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SOUS_STRUCTURES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<Structure> getSousStructures() {
@@ -589,7 +589,7 @@ public class Structure {
    * témoin structure mère
    * @return estStructureMere
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_STRUCTURE_MERE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstStructureMere() {

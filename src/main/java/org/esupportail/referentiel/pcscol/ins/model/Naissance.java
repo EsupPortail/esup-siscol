@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Naissance.JSON_PROPERTY_LIBELLE_DEUXIEME_NATIONALITE,
   Naissance.JSON_PROPERTY_DATE_D_OBTENTION_DE_LA_DEUXIEME_NATIONALITE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Naissance {
   public static final String JSON_PROPERTY_DATE_DE_NAISSANCE = "dateDeNaissance";
   private String dateDeNaissance;
@@ -86,7 +86,7 @@ public class Naissance {
    * La date de naissance au format AAAA-MM-JJ
    * @return dateDeNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDateDeNaissance() {
@@ -110,7 +110,7 @@ public class Naissance {
    * Le code pays du pays de naissance issu de la nomenclature Pays et Nationalités Ex : 100 &#x3D; France 
    * @return paysDeNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAYS_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPaysDeNaissance() {
@@ -134,7 +134,7 @@ public class Naissance {
    * Le libelle du pays de naissance issu de la nomenclature Pays et Nationalités Ex : 100 &#x3D; France 
    * @return libellePaysDeNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_PAYS_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibellePaysDeNaissance() {
@@ -158,7 +158,7 @@ public class Naissance {
    * Le code INSEE de la commune de naissance en France Ex : 67482 &#x3D; Strasbourg 
    * @return communeDeNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMMUNE_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCommuneDeNaissance() {
@@ -182,7 +182,7 @@ public class Naissance {
    * Le code INSEE de la commune de naissance en France Ex : 67482 &#x3D; Strasbourg 
    * @return libelleCommuneDeNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COMMUNE_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCommuneDeNaissance() {
@@ -206,7 +206,7 @@ public class Naissance {
    * La commune de naissance à l&#39;étranger
    * @return communeDeNaissanceEtranger
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMMUNE_DE_NAISSANCE_ETRANGER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCommuneDeNaissanceEtranger() {
@@ -230,7 +230,7 @@ public class Naissance {
    * Le code pays associé à la nationalité issu de la nomenclature Pays et Nationalités
    * @return nationalite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NATIONALITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNationalite() {
@@ -254,7 +254,7 @@ public class Naissance {
    * Le libelle pays associé à la nationalité issu de la nomenclature Pays et Nationalités
    * @return libelleNationalite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_NATIONALITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleNationalite() {
@@ -278,7 +278,7 @@ public class Naissance {
    * Le code pays associé à la deuxième nationalité issu de la nomenclature Pays et Nationalités
    * @return deuxiemeNationalite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DEUXIEME_NATIONALITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDeuxiemeNationalite() {
@@ -302,7 +302,7 @@ public class Naissance {
    * Le libelle pays associé à la deuxième nationalité issu de la nomenclature Pays et Nationalités
    * @return libelleDeuxiemeNationalite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_DEUXIEME_NATIONALITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleDeuxiemeNationalite() {
@@ -326,7 +326,7 @@ public class Naissance {
    * La date d&#39;obtention de la deuxième nationalité au format AAAA-MM-JJ
    * @return dateDObtentionDeLaDeuxiemeNationalite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_D_OBTENTION_DE_LA_DEUXIEME_NATIONALITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDateDObtentionDeLaDeuxiemeNationalite() {

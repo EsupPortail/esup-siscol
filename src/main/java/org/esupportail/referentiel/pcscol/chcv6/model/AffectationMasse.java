@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   AffectationMasse.JSON_PROPERTY_GESTIONNAIRE,
   AffectationMasse.JSON_PROPERTY_TYPE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationMasse {
   public static final String JSON_PROPERTY_ID = "id";
   private String id;
@@ -124,7 +124,7 @@ public class AffectationMasse {
    * L&#39;identifiant technique du job executé
    * @return id
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getId() {
@@ -148,7 +148,7 @@ public class AffectationMasse {
    * code de l&#39;objet maquette
    * @return codeObjetMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeObjetMaquette() {
@@ -172,7 +172,7 @@ public class AffectationMasse {
    * libelle court de l&#39;objet maquette
    * @return libelleCourtOM
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT_O_M)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourtOM() {
@@ -196,7 +196,7 @@ public class AffectationMasse {
    * code chemin
    * @return codeChemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeChemin() {
@@ -220,7 +220,7 @@ public class AffectationMasse {
    * Get etat
    * @return etat
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ETAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public EtatEnum getEtat() {
@@ -244,7 +244,7 @@ public class AffectationMasse {
    * Date de début de traitement
    * @return dateDebut
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebut() {
@@ -268,7 +268,7 @@ public class AffectationMasse {
    * Date de fin de traitement
    * @return dateFin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateFin() {
@@ -292,7 +292,7 @@ public class AffectationMasse {
    * gestionnaire
    * @return gestionnaire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_GESTIONNAIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getGestionnaire() {
@@ -316,7 +316,7 @@ public class AffectationMasse {
    * Le type du traitement
    * @return type
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getType() {

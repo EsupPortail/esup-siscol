@@ -52,7 +52,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Bac.JSON_PROPERTY_ETABLISSEMENT_LIBRE,
   Bac.JSON_PROPERTY_DETAIL_TITRE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Bac {
   public static final String JSON_PROPERTY_TITRE_ACCES = "titreAcces";
   private String titreAcces;
@@ -135,7 +135,7 @@ public class Bac {
    * Le titre d&#39;accès du baccalaureat ou équivalent
    * @return titreAcces
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TITRE_ACCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTitreAcces() {
@@ -159,7 +159,7 @@ public class Bac {
    * L&#39;annee d&#39;obtention du baccalaureat ou équivalent
    * @return anneeObtention
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_OBTENTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAnneeObtention() {
@@ -183,7 +183,7 @@ public class Bac {
    * Le code de la série du baccalauréat ou équivalent issu de la nomenclature Séries du baccalauréat et équivalences  Codes de la nomenclature sur 6 caractères. Préfixe des codes : BAC 
    * @return serie
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SERIE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getSerie() {
@@ -207,7 +207,7 @@ public class Bac {
    * Le libelle de la série du baccalauréat ou équivalent issu de la nomenclature Séries du baccalauréat et équivalences 
    * @return libelleSerie
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_SERIE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleSerie() {
@@ -231,7 +231,7 @@ public class Bac {
    * Le code de la première spécialité du nouveau baccalaureat (NBGE) issu de la nomenclature Specialités Bac Général 
    * @return premiereSpecialiteBac
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PREMIERE_SPECIALITE_BAC)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPremiereSpecialiteBac() {
@@ -255,7 +255,7 @@ public class Bac {
    * Le libelle de la première spécialité du nouveau baccalaureat (NBGE) issu de la nomenclature Specialités Bac Général 
    * @return libellePremiereSpecialiteBac
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_PREMIERE_SPECIALITE_BAC)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibellePremiereSpecialiteBac() {
@@ -279,7 +279,7 @@ public class Bac {
    * Le code de la deuxième spécialité du nouveau baccalaureat (NBGE) issu de la nomenclature Specialités Bac Général 
    * @return deuxiemeSpecialiteBac
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DEUXIEME_SPECIALITE_BAC)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDeuxiemeSpecialiteBac() {
@@ -303,7 +303,7 @@ public class Bac {
    * Le libelle de la deuxième spécialité du nouveau baccalaureat (NBGE) issu de la nomenclature Specialités Bac Général 
    * @return libelleDeuxiemeSpecialiteBac
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_DEUXIEME_SPECIALITE_BAC)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleDeuxiemeSpecialiteBac() {
@@ -327,7 +327,7 @@ public class Bac {
    * Le code de la mention du candidat issu de la nomenclature des Mentions obtenues au baccalauréat  Codes de la nomenclature sur 6 caractères. Préfixe des codes : MEN 
    * @return mention
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MENTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getMention() {
@@ -351,7 +351,7 @@ public class Bac {
    * Le libelle de la mention du candidat issu de la nomenclature des Mentions obtenues au baccalauréat 
    * @return libelleMention
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_MENTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleMention() {
@@ -375,7 +375,7 @@ public class Bac {
    * Le type de l&#39;établissement dans lequel le diplôme a été obtenu  Les valeurs &#x60;F&#x60; ou &#x60;E&#x60; sont acceptées: * la valeur &#x60;F&#x60; correspond au type établissement d&#39;un établissement   français en France, * la valeur &#x60;E&#x60; correspond au type établissement d&#39;un établissement français   à l&#39;étranger ou d&#39;un établissement étranger. 
    * @return typeEtablissement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_ETABLISSEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTypeEtablissement() {
@@ -399,7 +399,7 @@ public class Bac {
    * Le code du pays délivrant le diplôme issu de la nomenclature Pays et nationalités. 
    * @return pays
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAYS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPays() {
@@ -423,7 +423,7 @@ public class Bac {
    * Le libelle du pays délivrant le diplôme issu de la nomenclature Pays et nationalités. 
    * @return libellePays
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_PAYS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibellePays() {
@@ -447,7 +447,7 @@ public class Bac {
    * Le code du département de l&#39;établissement dans lequel le diplôme a été obtenu issu de la nomenclature Départements.  Codes de la nomenclature sur 3 caractères. Ex : 001 &#x3D; AIN 
    * @return departement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DEPARTEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDepartement() {
@@ -471,7 +471,7 @@ public class Bac {
    * Le libelle du département de l&#39;établissement dans lequel le diplôme a été obtenu issu de la nomenclature Départements. 
    * @return libelleDepartement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_DEPARTEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleDepartement() {
@@ -495,7 +495,7 @@ public class Bac {
    * Le numéro UAI de l&#39;établissement dans lequel le diplôme a été obtenu issu de la nomenclature Etablissements français.  Codes de la nomenclature &#x3D; code UAI 
    * @return etablissement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ETABLISSEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getEtablissement() {
@@ -519,7 +519,7 @@ public class Bac {
    * le code INE de l&#39;étudiant
    * @return ine
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_INE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getIne() {
@@ -543,7 +543,7 @@ public class Bac {
    * Get statutIne
    * @return statutIne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_STATUT_INE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public StatutIne getStatutIne() {
@@ -567,7 +567,7 @@ public class Bac {
    * Valorisé si il y a eu une erreur lors de la vérification du numéro INE, et si un code erreur est disponible 
    * @return codeErreurIne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_ERREUR_INE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeErreurIne() {
@@ -591,7 +591,7 @@ public class Bac {
    * Valorisé si il y a eu une erreur lors de la vérification du numéro INE 
    * @return messageErreurIne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MESSAGE_ERREUR_INE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getMessageErreurIne() {
@@ -615,7 +615,7 @@ public class Bac {
    * Date de la dernière vérification INES 
    * @return dateDernierAppelInes
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DERNIER_APPEL_INES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDernierAppelInes() {
@@ -639,7 +639,7 @@ public class Bac {
    * Etablissement en saisie libre dans le cas - d&#39;un Titre admis en dispense, - ou par équivalence du baccalauréat, - ou d&#39;un Titre étranger, - ou baccalauréat international. 
    * @return etablissementLibre
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ETABLISSEMENT_LIBRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getEtablissementLibre() {
@@ -663,7 +663,7 @@ public class Bac {
    * Précision du titre admis en dispense du baccalauréat (texte libre).  Valeur demandée lorsque l’on choisit le type ou série « 0032/Titre français admis en dispense » pour un titre d’accès à l’enseignement supérieur « TITRE admis en dispense ou par équivalence du baccalauréat ». 
    * @return detailTitre
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DETAIL_TITRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDetailTitre() {

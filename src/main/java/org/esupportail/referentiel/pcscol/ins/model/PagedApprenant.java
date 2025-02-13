@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PagedApprenant.JSON_PROPERTY_TAILLE,
   PagedApprenant.JSON_PROPERTY_PAGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class PagedApprenant {
   public static final String JSON_PROPERTY_ITEMS = "items";
   private List<Apprenant> items = new ArrayList<>();
@@ -72,7 +72,7 @@ public class PagedApprenant {
    * Get items
    * @return items
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ITEMS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<Apprenant> getItems() {
@@ -96,7 +96,7 @@ public class PagedApprenant {
    * Nombre total de d&#39;enregistrements existants en base 
    * @return totalElements
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TOTAL_ELEMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Long getTotalElements() {
@@ -120,7 +120,7 @@ public class PagedApprenant {
    * Nombre de pages totales existantes 
    * @return totalPages
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TOTAL_PAGES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getTotalPages() {
@@ -144,7 +144,7 @@ public class PagedApprenant {
    * Nombre d&#39;enregistrements demandés par page 
    * @return taille
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TAILLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getTaille() {
@@ -168,7 +168,7 @@ public class PagedApprenant {
    * Numéro de la page retournée (commence à 0) 
    * @return page
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPage() {

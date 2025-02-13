@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /** Descripteurs du contexte */
 @JsonPropertyOrder({DescripteursContexte.JSON_PROPERTY_TYPE_OBJET_MAQUETTE})
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -67,7 +67,7 @@ public class DescripteursContexte {
      *
      * @return typeObjetMaquette
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public TypeObjetMaquette getTypeObjetMaquette() {

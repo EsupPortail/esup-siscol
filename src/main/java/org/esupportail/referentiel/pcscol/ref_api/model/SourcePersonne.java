@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SourcePersonne.JSON_PROPERTY_DATE_DEBUT_VALIDITE,
   SourcePersonne.JSON_PROPERTY_DATE_FIN_VALIDITE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class SourcePersonne {
   public static final String JSON_PROPERTY_IDENTIFIANT_PERSONNE = "identifiantPersonne";
   private String identifiantPersonne;
@@ -59,7 +59,7 @@ public class SourcePersonne {
    * Identifiant de la personne
    * @return identifiantPersonne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_IDENTIFIANT_PERSONNE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getIdentifiantPersonne() {
@@ -83,7 +83,7 @@ public class SourcePersonne {
    * Source de la personne (GRHUM, SINAPS, LDAP, SIRH,...)
    * @return basePersonne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_BASE_PERSONNE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getBasePersonne() {
@@ -107,7 +107,7 @@ public class SourcePersonne {
    * Date du début de la validité
    * @return dateDebutValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebutValidite() {
@@ -131,7 +131,7 @@ public class SourcePersonne {
    * Date de la fin de la validité
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateFinValidite() {

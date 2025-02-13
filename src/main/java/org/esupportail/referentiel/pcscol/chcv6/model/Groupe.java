@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Groupe.JSON_PROPERTY_LISTE_DIFFUSION,
   Groupe.JSON_PROPERTY_CAPACITE_ACCUEIL
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class Groupe {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -66,7 +66,7 @@ public class Groupe {
    * code de ce groupe
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -90,7 +90,7 @@ public class Groupe {
    * libelle court de ce groupe
    * @return libelleCourt
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourt() {
@@ -114,7 +114,7 @@ public class Groupe {
    * libelle long de ce groupe
    * @return libelleLong
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleLong() {
@@ -138,7 +138,7 @@ public class Groupe {
    * description de ce groupe
    * @return description
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDescription() {
@@ -162,7 +162,7 @@ public class Groupe {
    * liste de diffusion relative à ce groupe
    * @return listeDiffusion
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_DIFFUSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getListeDiffusion() {
@@ -186,7 +186,7 @@ public class Groupe {
    * Get capaciteAccueil
    * @return capaciteAccueil
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CAPACITE_ACCUEIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public GroupeCapaciteAccueil getCapaciteAccueil() {

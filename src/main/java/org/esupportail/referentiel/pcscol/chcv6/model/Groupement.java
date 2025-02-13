@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Groupement.JSON_PROPERTY_CODE_NATURE,
   Groupement.JSON_PROPERTY_MUTUALISE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class Groupement {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -62,7 +62,7 @@ public class Groupement {
    * Le code du groupement - identifiant unique
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -86,7 +86,7 @@ public class Groupement {
    * Le libellé court
    * @return libelleCourt
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourt() {
@@ -110,7 +110,7 @@ public class Groupement {
    * Le libellé long
    * @return libelleLong
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleLong() {
@@ -134,7 +134,7 @@ public class Groupement {
    * Le code de la nature du groupement
    * @return codeNature
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_NATURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeNature() {
@@ -158,7 +158,7 @@ public class Groupement {
    * Est ce que le groupement est mutualise?
    * @return mutualise
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MUTUALISE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getMutualise() {

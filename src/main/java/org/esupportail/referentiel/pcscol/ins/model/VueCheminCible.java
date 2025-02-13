@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   VueCheminCible.JSON_PROPERTY_LIBELLE_COURT,
   VueCheminCible.JSON_PROPERTY_LIBELLE_LONG
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class VueCheminCible {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -58,7 +58,7 @@ public class VueCheminCible {
    * Code l&#39;objet dans la maquette de formation
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -82,7 +82,7 @@ public class VueCheminCible {
    * Code du type de l&#39;objet dans la maquette de formation (PARCOUR_TYPE, ANNEE, SEMESTRE, ...)
    * @return type
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getType() {
@@ -106,7 +106,7 @@ public class VueCheminCible {
    * Libellé court de l&#39;objet dans la maquette de formation
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -130,7 +130,7 @@ public class VueCheminCible {
    * Libellé long de l&#39;objet dans la maquette de formation
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {

@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /** BacASable */
 @JsonPropertyOrder({BacASable.JSON_PROPERTY_DATE_CONSOMMATION_NOMENCLATURES})
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -65,7 +65,7 @@ public class BacASable extends Espace {
      *
      * @return dateConsommationNomenclatures
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_DATE_CONSOMMATION_NOMENCLATURES)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Date getDateConsommationNomenclatures() {

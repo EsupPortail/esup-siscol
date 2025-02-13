@@ -47,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   CheminObjetFormation.JSON_PROPERTY_OBJET_FORMATION,
   CheminObjetFormation.JSON_PROPERTY_GROUPEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CheminObjetFormation {
   public static final String JSON_PROPERTY_ID_CHEMIN_OBJET_FORMATION = "idCheminObjetFormation";
   private UUID idCheminObjetFormation;
@@ -143,7 +143,7 @@ public class CheminObjetFormation {
    * L&#39;id technique du chemin objet formation
    * @return idCheminObjetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ID_CHEMIN_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getIdCheminObjetFormation() {
@@ -167,7 +167,7 @@ public class CheminObjetFormation {
    * Get codeChemin
    * @return codeChemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeChemin() {
@@ -191,7 +191,7 @@ public class CheminObjetFormation {
    * Get codePeriode
    * @return codePeriode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_PERIODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodePeriode() {
@@ -215,7 +215,7 @@ public class CheminObjetFormation {
    * Le code structure  - identifiant unique
    * @return codeStructure
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeStructure() {
@@ -239,7 +239,7 @@ public class CheminObjetFormation {
    * Get codeType
    * @return codeType
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeType() {
@@ -263,7 +263,7 @@ public class CheminObjetFormation {
    * Get capaciteAccueil
    * @return capaciteAccueil
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CAPACITE_ACCUEIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getCapaciteAccueil() {
@@ -287,7 +287,7 @@ public class CheminObjetFormation {
    * temoin d&#39;obligation
    * @return obligatoire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OBLIGATOIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getObligatoire() {
@@ -311,7 +311,7 @@ public class CheminObjetFormation {
    * Get ouverteChoixCursus
    * @return ouverteChoixCursus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OUVERTE_CHOIX_CURSUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public OuverteChoixCursusEnum getOuverteChoixCursus() {
@@ -335,7 +335,7 @@ public class CheminObjetFormation {
    * Get creditEcts
    * @return creditEcts
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CREDIT_ECTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getCreditEcts() {
@@ -359,7 +359,7 @@ public class CheminObjetFormation {
    * Get estPlageDeChoix
    * @return estPlageDeChoix
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_PLAGE_DE_CHOIX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstPlageDeChoix() {
@@ -383,7 +383,7 @@ public class CheminObjetFormation {
    * Get plageMin
    * @return plageMin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getPlageMin() {
@@ -407,7 +407,7 @@ public class CheminObjetFormation {
    * Get plageMax
    * @return plageMax
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MAX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getPlageMax() {
@@ -431,7 +431,7 @@ public class CheminObjetFormation {
    * Get formation
    * @return formation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public FormationMasse getFormation() {
@@ -455,7 +455,7 @@ public class CheminObjetFormation {
    * Get objetFormation
    * @return objetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public ObjetFormationMasse getObjetFormation() {
@@ -479,7 +479,7 @@ public class CheminObjetFormation {
    * Get groupement
    * @return groupement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_GROUPEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public GroupementMasse getGroupement() {

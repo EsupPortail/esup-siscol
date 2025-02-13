@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DescripteursComposition.JSON_PROPERTY_DESCRIPTION,
   DescripteursComposition.JSON_PROPERTY_LISTE_DIFFUSION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class DescripteursComposition {
   public static final String JSON_PROPERTY_LIBELLE_COURT = "libelleCourt";
   private String libelleCourt;
@@ -58,7 +58,7 @@ public class DescripteursComposition {
    * libelle court de la composition
    * @return libelleCourt
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourt() {
@@ -82,7 +82,7 @@ public class DescripteursComposition {
    * libelle long de la composition
    * @return libelleLong
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleLong() {
@@ -106,7 +106,7 @@ public class DescripteursComposition {
    * description de la composition
    * @return description
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDescription() {
@@ -130,7 +130,7 @@ public class DescripteursComposition {
    * liste de diffusion relative à cette composition
    * @return listeDiffusion
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_DIFFUSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getListeDiffusion() {

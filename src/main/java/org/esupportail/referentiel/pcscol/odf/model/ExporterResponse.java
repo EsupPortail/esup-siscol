@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /** ExporterResponse */
 @JsonPropertyOrder({ExporterResponse.JSON_PROPERTY_BASE64_ENCODE})
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -46,7 +46,7 @@ public class ExporterResponse {
      *
      * @return base64Encode
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_BASE64_ENCODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getBase64Encode() {

@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ApprenantComposition.JSON_PROPERTY_APPRENANT,
   ApprenantComposition.JSON_PROPERTY_CURSUS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ApprenantComposition {
   public static final String JSON_PROPERTY_APPRENANT = "apprenant";
   private Apprenant apprenant;
@@ -48,7 +48,7 @@ public class ApprenantComposition {
    * Get apprenant
    * @return apprenant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Apprenant getApprenant() {
@@ -80,7 +80,7 @@ public class ApprenantComposition {
    * Get cursus
    * @return cursus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CURSUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ApprenantCompositionCursus> getCursus() {

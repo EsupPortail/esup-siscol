@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   StatsChemins.JSON_PROPERTY_A_AFFECTER_A_UN_GROUPE,
   StatsChemins.JSON_PROPERTY_TOTAL
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class StatsChemins {
   public static final String JSON_PROPERTY_A_AFFECTER_A_UN_GROUPE = "aAffecterAUnGroupe";
   private Integer aAffecterAUnGroupe;
@@ -50,7 +50,7 @@ public class StatsChemins {
    * nombre d&#39;apprenants a affecter à un groupe de cette composition au titre d&#39;au moins un des contextes demandés en argument
    * @return aAffecterAUnGroupe
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_A_AFFECTER_A_UN_GROUPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getaAffecterAUnGroupe() {
@@ -74,7 +74,7 @@ public class StatsChemins {
    * nombre d&#39;apprenants affectés ou affectables à un groupe de cette composition au titre d&#39;au moins un des contextes demandés en argument
    * @return total
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TOTAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getTotal() {

@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AffectationIndividuelleAmenagementAcquisUtilisable.JSON_PROPERTY_CODE,
   AffectationIndividuelleAmenagementAcquisUtilisable.JSON_PROPERTY_LIBELLE_AFFICHAGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationIndividuelleAmenagementAcquisUtilisable {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -50,7 +50,7 @@ public class AffectationIndividuelleAmenagementAcquisUtilisable {
    * Le code du type d&#39;aménagement
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -74,7 +74,7 @@ public class AffectationIndividuelleAmenagementAcquisUtilisable {
    * Le libellé  d&#39;affichage du type d&#39;aménagement
    * @return libelleAffichage
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleAffichage() {

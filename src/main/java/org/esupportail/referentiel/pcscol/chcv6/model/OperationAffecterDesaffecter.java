@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   OperationAffecterDesaffecter.JSON_PROPERTY_UUID_APPRENANT,
   OperationAffecterDesaffecter.JSON_PROPERTY_CODE_GROUPE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class OperationAffecterDesaffecter {
   /**
    * opération à effectuer
@@ -92,7 +92,7 @@ public class OperationAffecterDesaffecter {
    * opération à effectuer
    * @return op
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OP)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public OpEnum getOp() {
@@ -116,7 +116,7 @@ public class OperationAffecterDesaffecter {
    * identifiant unique de l&#39;apprenant
    * @return uuidApprenant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_UUID_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getUuidApprenant() {
@@ -140,7 +140,7 @@ public class OperationAffecterDesaffecter {
    * code du groupe dans lequel effectuer l&#39;opération sur l&#39;apprenant
    * @return codeGroupe
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_GROUPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeGroupe() {

@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     CreerDiplomeRequest.JSON_PROPERTY_DIPLOME_INTERMEDIAIRE,
     CreerDiplomeRequest.JSON_PROPERTY_ACTIF
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -91,7 +91,7 @@ public class CreerDiplomeRequest {
      *
      * @return periodesValiditeId
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_PERIODES_VALIDITE_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<UUID> getPeriodesValiditeId() {
@@ -114,7 +114,7 @@ public class CreerDiplomeRequest {
      *
      * @return finaliteDiplome
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_FINALITE_DIPLOME)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getFinaliteDiplome() {
@@ -137,7 +137,7 @@ public class CreerDiplomeRequest {
      *
      * @return code
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getCode() {
@@ -160,7 +160,7 @@ public class CreerDiplomeRequest {
      *
      * @return intitule
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_INTITULE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getIntitule() {
@@ -183,7 +183,7 @@ public class CreerDiplomeRequest {
      *
      * @return libelleCourt
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelleCourt() {
@@ -206,7 +206,7 @@ public class CreerDiplomeRequest {
      *
      * @return libelleLong
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelleLong() {
@@ -229,7 +229,7 @@ public class CreerDiplomeRequest {
      *
      * @return libelleAffichage
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelleAffichage() {
@@ -252,7 +252,7 @@ public class CreerDiplomeRequest {
      *
      * @return diplomeIntermediaire
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DIPLOME_INTERMEDIAIRE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getDiplomeIntermediaire() {
@@ -275,7 +275,7 @@ public class CreerDiplomeRequest {
      *
      * @return actif
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ACTIF)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getActif() {

@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ObjetMaquette.JSON_PROPERTY_OBJET_FORMATION,
   ObjetMaquette.JSON_PROPERTY_GROUPEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ObjetMaquette {
   public static final String JSON_PROPERTY_CODE_CHEMIN = "codeChemin";
   private String codeChemin;
@@ -102,7 +102,7 @@ public class ObjetMaquette {
    * Le code chemin de l&#39;objet maquette - identifiant unique
    * @return codeChemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeChemin() {
@@ -126,7 +126,7 @@ public class ObjetMaquette {
    * Le code de la période  - identifiant unique
    * @return codePeriode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_PERIODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodePeriode() {
@@ -150,7 +150,7 @@ public class ObjetMaquette {
    * Le code structure  - identifiant unique
    * @return codeStructure
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeStructure() {
@@ -174,7 +174,7 @@ public class ObjetMaquette {
    * Le code type  - identifiant unique
    * @return codeType
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeType() {
@@ -198,7 +198,7 @@ public class ObjetMaquette {
    * La capacité d&#39;accueil
    * @return capaciteAccueil
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CAPACITE_ACCUEIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getCapaciteAccueil() {
@@ -222,7 +222,7 @@ public class ObjetMaquette {
    * Est ce que l&#39;objet maquette est obligatoire au choix de cursus?
    * @return caractereObligatoire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CARACTERE_OBLIGATOIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getCaractereObligatoire() {
@@ -246,7 +246,7 @@ public class ObjetMaquette {
    * Est ce que l&#39;objet maquette est ouverte au choix de cursus?
    * @return ouverteChoixCursus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OUVERTE_CHOIX_CURSUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getOuverteChoixCursus() {
@@ -270,7 +270,7 @@ public class ObjetMaquette {
    * Les crédits ECTS de la cible d&#39;inscription au format &lt;4 chiffres maximum&gt;.&lt;2 chiffres maximum&gt;
    * @return creditEcts
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CREDIT_ECTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Double getCreditEcts() {
@@ -294,7 +294,7 @@ public class ObjetMaquette {
    * Est ce que le plage de choix est obligatoire?
    * @return temoinPlageChoix
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TEMOIN_PLAGE_CHOIX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTemoinPlageChoix() {
@@ -318,7 +318,7 @@ public class ObjetMaquette {
    * Le nombre minimum d&#39;objets de formation à sélectionner
    * @return plageMin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPlageMin() {
@@ -342,7 +342,7 @@ public class ObjetMaquette {
    * Le nombre maximum d&#39;objets de formation à sélectionner
    * @return plageMax
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MAX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPlageMax() {
@@ -366,7 +366,7 @@ public class ObjetMaquette {
    * Get periode
    * @return periode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERIODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Periode getPeriode() {
@@ -390,7 +390,7 @@ public class ObjetMaquette {
    * Get formation
    * @return formation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Formation getFormation() {
@@ -414,7 +414,7 @@ public class ObjetMaquette {
    * Get objetFormation
    * @return objetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public ObjetFormation getObjetFormation() {
@@ -438,7 +438,7 @@ public class ObjetMaquette {
    * Get groupement
    * @return groupement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_GROUPEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Groupement getGroupement() {

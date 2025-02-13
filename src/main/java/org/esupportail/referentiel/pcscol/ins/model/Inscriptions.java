@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Inscriptions.JSON_PROPERTY_STATUT_PAIEMENT,
   Inscriptions.JSON_PROPERTY_TOTAL_ELEMENTS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Inscriptions {
   public static final String JSON_PROPERTY_NOMBRE = "nombre";
   private Long nombre;
@@ -70,7 +70,7 @@ public class Inscriptions {
    * Get nombre
    * @return nombre
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_NOMBRE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Long getNombre() {
@@ -102,7 +102,7 @@ public class Inscriptions {
    * Get resultats
    * @return resultats
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_RESULTATS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<Inscription> getResultats() {
@@ -134,7 +134,7 @@ public class Inscriptions {
    * Get statutInscription
    * @return statutInscription
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Map<String, Long> getStatutInscription() {
@@ -166,7 +166,7 @@ public class Inscriptions {
    * Get statutPieces
    * @return statutPieces
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT_PIECES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Map<String, Long> getStatutPieces() {
@@ -198,7 +198,7 @@ public class Inscriptions {
    * Get statutPaiement
    * @return statutPaiement
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT_PAIEMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Map<String, Long> getStatutPaiement() {
@@ -222,7 +222,7 @@ public class Inscriptions {
    * Get totalElements
    * @return totalElements
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TOTAL_ELEMENTS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Long getTotalElements() {

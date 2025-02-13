@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   InfosPedagogique.JSON_PROPERTY_EST_CHOIX_DU_BROUILLON_DIFFERENT,
   InfosPedagogique.JSON_PROPERTY_NOMBRE_DE_CHOIX_DANS_LA_PLAGE_DE_CHOIX
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class InfosPedagogique {
   /**
    * Gets or Sets typeChoixPedagogiqueActuel
@@ -159,7 +159,7 @@ public class InfosPedagogique {
    * Get typeChoixPedagogiqueActuel
    * @return typeChoixPedagogiqueActuel
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_CHOIX_PEDAGOGIQUE_ACTUEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public TypeChoixPedagogiqueActuelEnum getTypeChoixPedagogiqueActuel() {
@@ -191,7 +191,7 @@ public class InfosPedagogique {
    * Get amenagementsActuels
    * @return amenagementsActuels
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AMENAGEMENTS_ACTUELS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<Amenagement> getAmenagementsActuels() {
@@ -215,7 +215,7 @@ public class InfosPedagogique {
    * Get acquisUtilisableUUID
    * @return acquisUtilisableUUID
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ACQUIS_UTILISABLE_U_U_I_D)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getAcquisUtilisableUUID() {
@@ -239,7 +239,7 @@ public class InfosPedagogique {
    * Get estEnAnomalieDirecte
    * @return estEnAnomalieDirecte
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_EN_ANOMALIE_DIRECTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstEnAnomalieDirecte() {
@@ -263,7 +263,7 @@ public class InfosPedagogique {
    * Get anyAnomalieCursus
    * @return anyAnomalieCursus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANY_ANOMALIE_CURSUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getAnyAnomalieCursus() {
@@ -287,7 +287,7 @@ public class InfosPedagogique {
    * La valeur de la completude
    * @return completude
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMPLETUDE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public CompletudeEnum getCompletude() {
@@ -311,7 +311,7 @@ public class InfosPedagogique {
    * Get estChoixDuBrouillonDifferent
    * @return estChoixDuBrouillonDifferent
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_CHOIX_DU_BROUILLON_DIFFERENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstChoixDuBrouillonDifferent() {
@@ -335,7 +335,7 @@ public class InfosPedagogique {
    * le nombre d&#39;objets formation déjà choisis par l&#39;apprenant dans la plage de choix. Vide si n&#39;est pas un groupement à plage de choix.
    * @return nombreDeChoixDansLaPlageDeChoix
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOMBRE_DE_CHOIX_DANS_LA_PLAGE_DE_CHOIX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getNombreDeChoixDansLaPlageDeChoix() {

@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     DescripteursEnquete.JSON_PROPERTY_DESCRIPTEURS_SISE,
     DescripteursEnquete.JSON_PROPERTY_DESCRIPTEURS_AGLAE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -48,7 +48,7 @@ public class DescripteursEnquete {
      *
      * @return descripteursSise
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DESCRIPTEURS_SISE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public DescripteursSise getDescripteursSise() {
@@ -71,7 +71,7 @@ public class DescripteursEnquete {
      *
      * @return descripteursAglae
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DESCRIPTEURS_AGLAE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public DescripteursAglae getDescripteursAglae() {

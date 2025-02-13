@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     DescripteursFormation.JSON_PROPERTY_STRUCTURE_PRINCIPALE,
     DescripteursFormation.JSON_PROPERTY_TELE_ENSEIGNEMENT
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -76,7 +76,7 @@ public class DescripteursFormation extends DescripteursObjetMaquette {
      *
      * @return type
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getType() {
@@ -99,7 +99,7 @@ public class DescripteursFormation extends DescripteursObjetMaquette {
      *
      * @return ects
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ECTS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public BigDecimal getEcts() {
@@ -122,7 +122,7 @@ public class DescripteursFormation extends DescripteursObjetMaquette {
      *
      * @return structurePrincipale
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_STRUCTURE_PRINCIPALE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getStructurePrincipale() {
@@ -145,7 +145,7 @@ public class DescripteursFormation extends DescripteursObjetMaquette {
      *
      * @return teleEnseignement
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TELE_ENSEIGNEMENT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getTeleEnseignement() {

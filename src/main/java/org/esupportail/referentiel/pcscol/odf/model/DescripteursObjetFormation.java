@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     DescripteursObjetFormation.JSON_PROPERTY_TELE_ENSEIGNEMENT,
     DescripteursObjetFormation.JSON_PROPERTY_CAPACITE_ACCUEIL
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -88,7 +88,7 @@ public class DescripteursObjetFormation extends DescripteursObjetMaquette {
      *
      * @return ects
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ECTS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public BigDecimal getEcts() {
@@ -111,7 +111,7 @@ public class DescripteursObjetFormation extends DescripteursObjetMaquette {
      *
      * @return nature
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_NATURE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getNature() {
@@ -134,7 +134,7 @@ public class DescripteursObjetFormation extends DescripteursObjetMaquette {
      *
      * @return type
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getType() {
@@ -157,7 +157,7 @@ public class DescripteursObjetFormation extends DescripteursObjetMaquette {
      *
      * @return structurePrincipale
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_STRUCTURE_PRINCIPALE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getStructurePrincipale() {
@@ -180,7 +180,7 @@ public class DescripteursObjetFormation extends DescripteursObjetMaquette {
      *
      * @return stage
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_STAGE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getStage() {
@@ -203,7 +203,7 @@ public class DescripteursObjetFormation extends DescripteursObjetMaquette {
      *
      * @return teleEnseignement
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TELE_ENSEIGNEMENT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getTeleEnseignement() {
@@ -226,7 +226,7 @@ public class DescripteursObjetFormation extends DescripteursObjetMaquette {
      *
      * @return capaciteAccueil
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CAPACITE_ACCUEIL)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Integer getCapaciteAccueil() {

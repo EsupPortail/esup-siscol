@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   Paiement.JSON_PROPERTY_DATE_HEURE,
   Paiement.JSON_PROPERTY_PAIEMENT_EN_LIGNE_EN_COURS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Paiement {
   public static final String JSON_PROPERTY_MODE = "mode";
   private String mode;
@@ -102,7 +102,7 @@ public class Paiement {
    * mode de paiement selectionné
    * @return mode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getMode() {
@@ -126,7 +126,7 @@ public class Paiement {
    * Référence ou motif de paiement
    * @return reference
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getReference() {
@@ -152,7 +152,7 @@ public class Paiement {
    * @deprecated
    */
   @Deprecated
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MONTANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getMontant() {
@@ -176,7 +176,7 @@ public class Paiement {
    * Montant du paiement
    * @return montantPaye
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MONTANT_PAYE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getMontantPaye() {
@@ -200,7 +200,7 @@ public class Paiement {
    * La date et l&#39;heure du paiement
    * @return dateHeure
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_HEURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDateHeure() {
@@ -224,7 +224,7 @@ public class Paiement {
    * Get paiementEnLigneEnCours
    * @return paiementEnLigneEnCours
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAIEMENT_EN_LIGNE_EN_COURS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public PaiementEnLigneEnCoursEnum getPaiementEnLigneEnCours() {

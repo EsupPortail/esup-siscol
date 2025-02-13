@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AffectationIndividuelleAcquisUtilisable.JSON_PROPERTY_ACQUIS_UTILISABLE_PAR_EVALUATION,
   AffectationIndividuelleAcquisUtilisable.JSON_PROPERTY_ACQUIS_UTILISABLE_PAR_AMENAGEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationIndividuelleAcquisUtilisable {
   public static final String JSON_PROPERTY_ACQUIS_UTILISABLE_PAR_EVALUATION = "acquisUtilisableParEvaluation";
   private AffectationIndividuelleAcquisUtilisableParEvaluation acquisUtilisableParEvaluation;
@@ -46,7 +46,7 @@ public class AffectationIndividuelleAcquisUtilisable {
    * Get acquisUtilisableParEvaluation
    * @return acquisUtilisableParEvaluation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ACQUIS_UTILISABLE_PAR_EVALUATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public AffectationIndividuelleAcquisUtilisableParEvaluation getAcquisUtilisableParEvaluation() {
@@ -70,7 +70,7 @@ public class AffectationIndividuelleAcquisUtilisable {
    * Get acquisUtilisableParAmenagement
    * @return acquisUtilisableParAmenagement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ACQUIS_UTILISABLE_PAR_AMENAGEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public AffectationIndividuelleAcquisUtilisableParAmenagement getAcquisUtilisableParAmenagement() {

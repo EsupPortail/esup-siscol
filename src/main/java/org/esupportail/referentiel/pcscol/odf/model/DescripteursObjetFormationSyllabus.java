@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     DescripteursObjetFormationSyllabus.JSON_PROPERTY_COEFFICIENT,
     DescripteursObjetFormationSyllabus.JSON_PROPERTY_MODALITES_EVALUATION
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -73,7 +73,7 @@ public class DescripteursObjetFormationSyllabus extends DescripteursSyllabus {
      *
      * @return volumeHoraireParTypeDeCours
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_VOLUME_HORAIRE_PAR_TYPE_DE_COURS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getVolumeHoraireParTypeDeCours() {
@@ -96,7 +96,7 @@ public class DescripteursObjetFormationSyllabus extends DescripteursSyllabus {
      *
      * @return coefficient
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_COEFFICIENT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCoefficient() {
@@ -119,7 +119,7 @@ public class DescripteursObjetFormationSyllabus extends DescripteursSyllabus {
      *
      * @return modalitesEvaluation
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MODALITES_EVALUATION)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getModalitesEvaluation() {

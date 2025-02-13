@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     EnfantsStructure.JSON_PROPERTY_OBLIGATOIRE,
     EnfantsStructure.JSON_PROPERTY_OBJET_MAQUETTE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -57,7 +57,7 @@ public class EnfantsStructure {
      *
      * @return id
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public UUID getId() {
@@ -80,7 +80,7 @@ public class EnfantsStructure {
      *
      * @return obligatoire
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_OBLIGATOIRE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Boolean getObligatoire() {
@@ -103,7 +103,7 @@ public class EnfantsStructure {
      *
      * @return objetMaquette
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public ObjetMaquetteStructure getObjetMaquette() {

@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MetaDonnee.JSON_PROPERTY_CODE_STRUCTURE,
   MetaDonnee.JSON_PROPERTY_CODE_APPRENANT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class MetaDonnee {
   public static final String JSON_PROPERTY_CONTEXTE_INSCRIPTION = "contexteInscription";
   private ContexteInscription contexteInscription;
@@ -58,7 +58,7 @@ public class MetaDonnee {
    * Get contexteInscription
    * @return contexteInscription
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONTEXTE_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public ContexteInscription getContexteInscription() {
@@ -82,7 +82,7 @@ public class MetaDonnee {
    * Get temoinNeoBachelier
    * @return temoinNeoBachelier
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TEMOIN_NEO_BACHELIER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTemoinNeoBachelier() {
@@ -106,7 +106,7 @@ public class MetaDonnee {
    * Le code UAI
    * @return codeStructure
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeStructure() {
@@ -130,7 +130,7 @@ public class MetaDonnee {
    * Le code apprenant
    * @return codeApprenant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeApprenant() {

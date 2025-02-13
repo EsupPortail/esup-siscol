@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Predicat.JSON_PROPERTY_OPERATEUR,
   Predicat.JSON_PROPERTY_VALEUR
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Predicat {
   public static final String JSON_PROPERTY_OPERATEUR = "operateur";
   private String operateur;
@@ -50,7 +50,7 @@ public class Predicat {
    * Get operateur
    * @return operateur
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OPERATEUR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getOperateur() {
@@ -74,7 +74,7 @@ public class Predicat {
    * Get valeur
    * @return valeur
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_VALEUR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getValeur() {

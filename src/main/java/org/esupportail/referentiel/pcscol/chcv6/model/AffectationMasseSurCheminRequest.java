@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   AffectationMasseSurCheminRequest.JSON_PROPERTY_OPERATION,
   AffectationMasseSurCheminRequest.JSON_PROPERTY_UUID_CHEMIN_PEDAGOGIQUE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationMasseSurCheminRequest {
   /**
    * Type de l&#39;opération
@@ -87,7 +87,7 @@ public class AffectationMasseSurCheminRequest {
    * Type de l&#39;opération
    * @return operation
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_OPERATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public OperationEnum getOperation() {
@@ -111,7 +111,7 @@ public class AffectationMasseSurCheminRequest {
    * La réference (uuid) du chemin (pédagogique)
    * @return uuidCheminPedagogique
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_UUID_CHEMIN_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getUuidCheminPedagogique() {

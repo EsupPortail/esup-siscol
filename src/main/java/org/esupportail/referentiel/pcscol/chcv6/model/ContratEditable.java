@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ContratEditable.JSON_PROPERTY_DATE_CREATION,
   ContratEditable.JSON_PROPERTY_DATE_DERNIERE_EDITION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ContratEditable {
   public static final String JSON_PROPERTY_CURSUS_ID = "cursusId";
   private UUID cursusId;
@@ -60,7 +60,7 @@ public class ContratEditable {
    * Get cursusId
    * @return cursusId
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CURSUS_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getCursusId() {
@@ -84,7 +84,7 @@ public class ContratEditable {
    * Get apprenant
    * @return apprenant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Apprenant getApprenant() {
@@ -108,7 +108,7 @@ public class ContratEditable {
    * Date de la création du document
    * @return dateCreation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_CREATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateCreation() {
@@ -132,7 +132,7 @@ public class ContratEditable {
    * Date de la dernière modification du document
    * @return dateDerniereEdition
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DERNIERE_EDITION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDerniereEdition() {

@@ -44,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Personne.JSON_PROPERTY_SOURCE_PERSONNE_LST,
   Personne.JSON_PROPERTY_PERSONNE_TYPE_PERSONNE_LST
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Personne {
   public static final String JSON_PROPERTY_CIVILITE = "civilite";
   private String civilite;
@@ -97,7 +97,7 @@ public class Personne {
    * Civilté de la personne
    * @return civilite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CIVILITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCivilite() {
@@ -121,7 +121,7 @@ public class Personne {
    * Sexe de la personne
    * @return sexe
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SEXE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getSexe() {
@@ -145,7 +145,7 @@ public class Personne {
    * Nom d&#39;usage de la personne
    * @return nomUsage
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM_USAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNomUsage() {
@@ -169,7 +169,7 @@ public class Personne {
    * Nom patronymique de la personne
    * @return nomFamille
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM_FAMILLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNomFamille() {
@@ -193,7 +193,7 @@ public class Personne {
    * Prénom principal de la personne
    * @return prenom1
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PRENOM1)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPrenom1() {
@@ -217,7 +217,7 @@ public class Personne {
    * Prénom secondaire de la personne
    * @return prenom2
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PRENOM2)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPrenom2() {
@@ -241,7 +241,7 @@ public class Personne {
    * Troisième prénom de la personne
    * @return prenom3
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PRENOM3)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPrenom3() {
@@ -265,7 +265,7 @@ public class Personne {
    * Date de naissance de la personne
    * @return dateNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateNaissance() {
@@ -289,7 +289,7 @@ public class Personne {
    * Date du début de la validité de la personne
    * @return dateDebutValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebutValidite() {
@@ -313,7 +313,7 @@ public class Personne {
    * Date de la fin de la validité de la personne
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateFinValidite() {
@@ -345,7 +345,7 @@ public class Personne {
    * Association entre personne et utilisateur
    * @return personneUtilisateurLst
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONNE_UTILISATEUR_LST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<PersonneUtilisateur> getPersonneUtilisateurLst() {
@@ -377,7 +377,7 @@ public class Personne {
    * Source d&#39;alimentation de personne (GRHUM, SINAPS, SIRH etablissement, ...)
    * @return sourcePersonneLst
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SOURCE_PERSONNE_LST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<SourcePersonne> getSourcePersonneLst() {
@@ -409,7 +409,7 @@ public class Personne {
    * Association entre personne et type personne
    * @return personneTypePersonneLst
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERSONNE_TYPE_PERSONNE_LST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<PersonneTypePersonne> getPersonneTypePersonneLst() {

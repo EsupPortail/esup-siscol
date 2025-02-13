@@ -54,7 +54,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   InscriptionComplete.JSON_PROPERTY_TEMOIN_NEO_BACHELIER,
   InscriptionComplete.JSON_PROPERTY_DATE_DERNIERE_MODIFICATION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class InscriptionComplete {
   public static final String JSON_PROPERTY_CODE_ETABLISSEMENT = "codeEtablissement";
   private String codeEtablissement;
@@ -140,7 +140,7 @@ public class InscriptionComplete {
    * Le code de l&#39;établissement dans lequel a été réalisée l&#39;inscription
    * @return codeEtablissement
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_ETABLISSEMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeEtablissement() {
@@ -164,7 +164,7 @@ public class InscriptionComplete {
    * Get cible
    * @return cible
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CIBLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public CibleInscription getCible() {
@@ -188,7 +188,7 @@ public class InscriptionComplete {
    * Le numéro de candidature
    * @return noCandidat
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NO_CANDIDAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNoCandidat() {
@@ -212,7 +212,7 @@ public class InscriptionComplete {
    * Get origine
    * @return origine
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ORIGINE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Origine getOrigine() {
@@ -236,7 +236,7 @@ public class InscriptionComplete {
    * le temoin indiquant si une inscription est principale ou pas
    * @return principale
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PRINCIPALE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getPrincipale() {
@@ -260,7 +260,7 @@ public class InscriptionComplete {
    * Get statutInscription
    * @return statutInscription
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public StatutInscriptionVoeu getStatutInscription() {
@@ -284,7 +284,7 @@ public class InscriptionComplete {
    * Get contexteInscription
    * @return contexteInscription
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CONTEXTE_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public ContexteInscription getContexteInscription() {
@@ -308,7 +308,7 @@ public class InscriptionComplete {
    * le temoin indiquant si un télé-enseignement a lieu depuis la France ou l&#39;étranger.
    * @return enseignementADistanceDepuisLaFrance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ENSEIGNEMENT_A_DISTANCE_DEPUIS_LA_FRANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEnseignementADistanceDepuisLaFrance() {
@@ -332,7 +332,7 @@ public class InscriptionComplete {
    * Get statutPaiement
    * @return statutPaiement
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT_PAIEMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public StatutPaiementVoeu getStatutPaiement() {
@@ -356,7 +356,7 @@ public class InscriptionComplete {
    * Get statutPieces
    * @return statutPieces
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT_PIECES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public StatutPiecesVoeu getStatutPieces() {
@@ -380,7 +380,7 @@ public class InscriptionComplete {
    * Get regimeInscription
    * @return regimeInscription
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_REGIME_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public OccurrenceNomenclature getRegimeInscription() {
@@ -412,7 +412,7 @@ public class InscriptionComplete {
    * Les bourses et aides financières
    * @return boursesEtAides
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_BOURSES_ET_AIDES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<OccurrenceNomenclature> getBoursesEtAides() {
@@ -436,7 +436,7 @@ public class InscriptionComplete {
    * Get situationPersonnelleInscription
    * @return situationPersonnelleInscription
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_SITUATION_PERSONNELLE_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public SituationPersonnelleInscription getSituationPersonnelleInscription() {
@@ -460,7 +460,7 @@ public class InscriptionComplete {
    * Get cvec
    * @return cvec
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CVEC)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Cvec getCvec() {
@@ -484,7 +484,7 @@ public class InscriptionComplete {
    * Get admission
    * @return admission
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ADMISSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Admission getAdmission() {
@@ -508,7 +508,7 @@ public class InscriptionComplete {
    * Get situationUniversitaire
    * @return situationUniversitaire
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_SITUATION_UNIVERSITAIRE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public SituationUniversitaire getSituationUniversitaire() {
@@ -532,7 +532,7 @@ public class InscriptionComplete {
    * Get situationPrecedente
    * @return situationPrecedente
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_SITUATION_PRECEDENTE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public SituationPrecedente getSituationPrecedente() {
@@ -556,7 +556,7 @@ public class InscriptionComplete {
    * Get cursusParallele
    * @return cursusParallele
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CURSUS_PARALLELE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public CursusParallele getCursusParallele() {
@@ -580,7 +580,7 @@ public class InscriptionComplete {
    * Get ecoleDoctorale
    * @return ecoleDoctorale
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ECOLE_DOCTORALE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public EcoleDoctorale getEcoleDoctorale() {
@@ -612,7 +612,7 @@ public class InscriptionComplete {
    * les documents soumis à approbation lors de l&#39;inscription
    * @return accords
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ACCORDS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<AccordComplet> getAccords() {
@@ -644,7 +644,7 @@ public class InscriptionComplete {
    * Get pieces
    * @return pieces
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PIECES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<PieceComplete> getPieces() {
@@ -668,7 +668,7 @@ public class InscriptionComplete {
    * La date de l&#39;inscription au format AAAA-MM-JJ
    * @return dateInscription
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getDateInscription() {
@@ -692,7 +692,7 @@ public class InscriptionComplete {
    * Get temoinNeoBachelier
    * @return temoinNeoBachelier
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TEMOIN_NEO_BACHELIER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTemoinNeoBachelier() {
@@ -716,7 +716,7 @@ public class InscriptionComplete {
    * la date de dernière modification de l&#39;inscription
    * @return dateDerniereModification
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_DERNIERE_MODIFICATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getDateDerniereModification() {

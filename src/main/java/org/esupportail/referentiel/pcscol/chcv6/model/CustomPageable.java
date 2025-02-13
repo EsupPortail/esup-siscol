@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CustomPageable.JSON_PROPERTY_TAILLE,
   CustomPageable.JSON_PROPERTY_TRI
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CustomPageable {
   public static final String JSON_PROPERTY_PAGE = "page";
   private Integer page = 0;
@@ -56,7 +56,7 @@ public class CustomPageable {
    * numéro de page demandée (commence à 0)
    * @return page
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPage() {
@@ -80,7 +80,7 @@ public class CustomPageable {
    * nombre d&#39;élements par page. Si taille &#x3D; -1, alors l&#39;API retourne tout le contenu répondant aux critères de recherche
    * @return taille
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TAILLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getTaille() {
@@ -112,7 +112,7 @@ public class CustomPageable {
    * critères de tri, chaque tri est de la forme &lt;propriété&gt;[,asc|desc]
    * @return tri
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TRI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<String> getTri() {

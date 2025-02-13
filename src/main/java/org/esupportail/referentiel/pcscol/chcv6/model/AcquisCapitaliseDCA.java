@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AcquisCapitaliseDCA.JSON_PROPERTY_LIBELLE_RESULTAT_FINAL,
   AcquisCapitaliseDCA.JSON_PROPERTY_AMENAGEMENTS_ACQUIS_UTILISABLE_DCA
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AcquisCapitaliseDCA {
   public static final String JSON_PROPERTY_LIBELLE_AFFICHAGE_PERIODE_ACQUISITION = "libelleAffichagePeriodeAcquisition";
   private String libelleAffichagePeriodeAcquisition;
@@ -75,7 +75,7 @@ public class AcquisCapitaliseDCA {
    * Code de la période à laquelle il y a eu l&#39;acquisition
    * @return libelleAffichagePeriodeAcquisition
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE_PERIODE_ACQUISITION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleAffichagePeriodeAcquisition() {
@@ -99,7 +99,7 @@ public class AcquisCapitaliseDCA {
    * L&#39;objet sur lequel il y a eu l&#39;acquisition (différent de l&#39;objet du chemin dans le cas des LCC par exemple)
    * @return codeObjetFormationAcquisition
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_OBJET_FORMATION_ACQUISITION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeObjetFormationAcquisition() {
@@ -123,7 +123,7 @@ public class AcquisCapitaliseDCA {
    * Vrai si le code de l&#39;OF acqui est different du code OM
    * @return trouveViaLienCorrespondancePourCalcul
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TROUVE_VIA_LIEN_CORRESPONDANCE_POUR_CALCUL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTrouveViaLienCorrespondancePourCalcul() {
@@ -147,7 +147,7 @@ public class AcquisCapitaliseDCA {
    * La note finale
    * @return noteFinale
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOTE_FINALE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNoteFinale() {
@@ -171,7 +171,7 @@ public class AcquisCapitaliseDCA {
    * Le barème (le maximum) de la note Obligatoirement renseigné si la note finale est présente.
    * @return bareme
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_BAREME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getBareme() {
@@ -195,7 +195,7 @@ public class AcquisCapitaliseDCA {
    * Le libellé long du résultat final
    * @return libelleResultatFinal
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_RESULTAT_FINAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleResultatFinal() {
@@ -227,7 +227,7 @@ public class AcquisCapitaliseDCA {
    * les aménagements de l&#39;acquis capitalisé
    * @return amenagementsAcquisUtilisableDca
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AMENAGEMENTS_ACQUIS_UTILISABLE_DCA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<String> getAmenagementsAcquisUtilisableDca() {

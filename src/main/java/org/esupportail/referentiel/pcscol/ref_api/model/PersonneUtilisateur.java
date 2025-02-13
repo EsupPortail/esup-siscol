@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PersonneUtilisateur.JSON_PROPERTY_DATE_DEBUT_VALIDITE,
   PersonneUtilisateur.JSON_PROPERTY_DATE_FIN_VALIDITE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class PersonneUtilisateur {
   public static final String JSON_PROPERTY_IDENTIFIANT_UTILISATEUR = "identifiantUtilisateur";
   private String identifiantUtilisateur;
@@ -59,7 +59,7 @@ public class PersonneUtilisateur {
    * Identifiant de l&#39;utilistauer
    * @return identifiantUtilisateur
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_IDENTIFIANT_UTILISATEUR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getIdentifiantUtilisateur() {
@@ -83,7 +83,7 @@ public class PersonneUtilisateur {
    * Source de l&#39;utilisateur (GRHUM, SINAPS, LDAP, SIRH,...)
    * @return sourceUtilisateur
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SOURCE_UTILISATEUR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getSourceUtilisateur() {
@@ -107,7 +107,7 @@ public class PersonneUtilisateur {
    * Date du début de la validité
    * @return dateDebutValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebutValidite() {
@@ -131,7 +131,7 @@ public class PersonneUtilisateur {
    * Date de la fin de la validité
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateFinValidite() {

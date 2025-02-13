@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     ObjetMaquetteHistoryItem.JSON_PROPERTY_ESPACE_ID,
     ObjetMaquetteHistoryItem.JSON_PROPERTY_ESPACE_LIBELLE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -88,7 +88,7 @@ public class ObjetMaquetteHistoryItem {
      *
      * @return id
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getId() {
@@ -111,7 +111,7 @@ public class ObjetMaquetteHistoryItem {
      *
      * @return typeObjetMaquette
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public TypeObjetMaquette getTypeObjetMaquette() {
@@ -135,7 +135,7 @@ public class ObjetMaquetteHistoryItem {
      *
      * @return type
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getType() {
@@ -158,7 +158,7 @@ public class ObjetMaquetteHistoryItem {
      *
      * @return code
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCode() {
@@ -181,7 +181,7 @@ public class ObjetMaquetteHistoryItem {
      *
      * @return libelle
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelle() {
@@ -204,7 +204,7 @@ public class ObjetMaquetteHistoryItem {
      *
      * @return espaceId
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ESPACE_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getEspaceId() {
@@ -227,7 +227,7 @@ public class ObjetMaquetteHistoryItem {
      *
      * @return espaceLibelle
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ESPACE_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getEspaceLibelle() {

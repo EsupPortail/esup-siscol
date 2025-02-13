@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     ImporterBase64Request.JSON_PROPERTY_BASE64_ENCODE,
     ImporterBase64Request.JSON_PROPERTY_CHECK_NOMENCLATURES
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -57,7 +57,7 @@ public class ImporterBase64Request {
      *
      * @return espaceId
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ESPACE_ID)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public UUID getEspaceId() {
@@ -80,7 +80,7 @@ public class ImporterBase64Request {
      *
      * @return base64Encode
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_BASE64_ENCODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getBase64Encode() {
@@ -103,7 +103,7 @@ public class ImporterBase64Request {
      *
      * @return checkNomenclatures
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CHECK_NOMENCLATURES)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getCheckNomenclatures() {

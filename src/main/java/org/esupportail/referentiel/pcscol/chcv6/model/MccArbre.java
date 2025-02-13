@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   MccArbre.JSON_PROPERTY_REGLE_CALCUL_NOTE,
   MccArbre.JSON_PROPERTY_REGLE_CALCUL_RESULTAT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class MccArbre {
   public static final String JSON_PROPERTY_NOTE_ATTENDUE = "noteAttendue";
   private Boolean noteAttendue;
@@ -62,7 +62,7 @@ public class MccArbre {
    * Est ce qu&#39;une note est attendue ?
    * @return noteAttendue
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOTE_ATTENDUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getNoteAttendue() {
@@ -86,7 +86,7 @@ public class MccArbre {
    * Est ce qu&#39;un résultat est attendu ?
    * @return resultatAttendu
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_RESULTAT_ATTENDU)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getResultatAttendu() {
@@ -110,7 +110,7 @@ public class MccArbre {
    * Est ce qu&#39;il y a deux sessions ?
    * @return sessionDouble
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SESSION_DOUBLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getSessionDouble() {
@@ -134,7 +134,7 @@ public class MccArbre {
    * Est ce qu&#39;une règle de calcul de note a été enregistrée sur ce mcc?
    * @return regleCalculNote
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_REGLE_CALCUL_NOTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getRegleCalculNote() {
@@ -158,7 +158,7 @@ public class MccArbre {
    * Est ce qu&#39;une règle de calcul de résultat a été enregistrée sur ce mcc?
    * @return regleCalculResultat
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_REGLE_CALCUL_RESULTAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getRegleCalculResultat() {

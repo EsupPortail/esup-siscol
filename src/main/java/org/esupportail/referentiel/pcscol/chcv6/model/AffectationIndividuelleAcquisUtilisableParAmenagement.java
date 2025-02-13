@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AffectationIndividuelleAcquisUtilisableParAmenagement.JSON_PROPERTY_NOTE_FINALE,
   AffectationIndividuelleAcquisUtilisableParAmenagement.JSON_PROPERTY_BAREME
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationIndividuelleAcquisUtilisableParAmenagement {
   public static final String JSON_PROPERTY_CHEMIN_DELIBERE_ACQUISITION_LIST = "cheminDelibereAcquisitionList";
   private List<AffectationIndividuelleCheminDelibereAcquisition> cheminDelibereAcquisitionList = new ArrayList<>();
@@ -88,7 +88,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * Get cheminDelibereAcquisitionList
    * @return cheminDelibereAcquisitionList
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CHEMIN_DELIBERE_ACQUISITION_LIST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<AffectationIndividuelleCheminDelibereAcquisition> getCheminDelibereAcquisitionList() {
@@ -112,7 +112,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * le code de l&#39;objet formation dans le contexte de cet arbre pour lequel l&#39;acquis utilisable est utilisable
    * @return codeObjetFormationChoixPedagogique
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_OBJET_FORMATION_CHOIX_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeObjetFormationChoixPedagogique() {
@@ -136,7 +136,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * Libelle long de l&#39;objet maquette à laquelle il y a eu l&#39;acquisition
    * @return libelleLongObjetMaquetteAcquisition
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG_OBJET_MAQUETTE_ACQUISITION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleLongObjetMaquetteAcquisition() {
@@ -160,7 +160,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * Code de la période à laquelle il y a eu l&#39;acquisition
    * @return codePeriodeAcquisition
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_PERIODE_ACQUISITION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodePeriodeAcquisition() {
@@ -184,7 +184,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * Libelle Court de la période à laquelle il y a eu l&#39;acquisition
    * @return libelleCourtPeriodeAcquisition
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT_PERIODE_ACQUISITION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourtPeriodeAcquisition() {
@@ -208,7 +208,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * L&#39;objet sur lequel il y a eu l&#39;acquisition (peut être différent de l&#39;objet de l&#39;arbre actuel si l&#39;acquis est utilisable via LCC)
    * @return codeObjetFormationAcquisition
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_OBJET_FORMATION_ACQUISITION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeObjetFormationAcquisition() {
@@ -232,7 +232,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * Vrai si l&#39;acquis est utilisable pour ce choix pedagogique via un lcc
    * @return utilisableViaLcc
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_UTILISABLE_VIA_LCC)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getUtilisableViaLcc() {
@@ -256,7 +256,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * La note finale
    * @return noteFinale
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOTE_FINALE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNoteFinale() {
@@ -280,7 +280,7 @@ public class AffectationIndividuelleAcquisUtilisableParAmenagement {
    * Le barème (le maximum) de la note Obligatoirement renseigné si la note finale est présente.
    * @return bareme
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_BAREME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getBareme() {

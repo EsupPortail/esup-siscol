@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AffectationIndividuelleCheminDelibereAcquisition.JSON_PROPERTY_AMENAGEMENTS_ACQUISITION_LIST,
   AffectationIndividuelleCheminDelibereAcquisition.JSON_PROPERTY_CODE_CHEMIN
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationIndividuelleCheminDelibereAcquisition {
   public static final String JSON_PROPERTY_AMENAGEMENTS_ACQUISITION_LIST = "amenagementsAcquisitionList";
   private List<AffectationIndividuelleAmenagementAcquisUtilisable> amenagementsAcquisitionList = new ArrayList<>();
@@ -60,7 +60,7 @@ public class AffectationIndividuelleCheminDelibereAcquisition {
    * Get amenagementsAcquisitionList
    * @return amenagementsAcquisitionList
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AMENAGEMENTS_ACQUISITION_LIST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<AffectationIndividuelleAmenagementAcquisUtilisable> getAmenagementsAcquisitionList() {
@@ -84,7 +84,7 @@ public class AffectationIndividuelleCheminDelibereAcquisition {
    * le code chemin vers l&#39;objet formation dans le contexte de cet arbre pour lequel l&#39;acquis utilisable est utilisable
    * @return codeChemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeChemin() {

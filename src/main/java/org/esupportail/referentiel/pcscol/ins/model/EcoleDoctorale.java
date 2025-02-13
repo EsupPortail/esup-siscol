@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   EcoleDoctorale.JSON_PROPERTY_CODE,
   EcoleDoctorale.JSON_PROPERTY_CONTEXTE_CONSOMMATION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class EcoleDoctorale {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -51,7 +51,7 @@ public class EcoleDoctorale {
    * code de la nomenclature école doctorale
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -75,7 +75,7 @@ public class EcoleDoctorale {
    * date
    * @return contexteConsommation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONTEXTE_CONSOMMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getContexteConsommation() {

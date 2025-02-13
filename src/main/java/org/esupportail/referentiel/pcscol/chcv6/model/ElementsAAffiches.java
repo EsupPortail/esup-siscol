@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ElementsAAffiches.JSON_PROPERTY_AFFICHER_SIGNATURE_APPRENANT,
   ElementsAAffiches.JSON_PROPERTY_RESPONSABLE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ElementsAAffiches {
   public static final String JSON_PROPERTY_AFFICHER_SIGNATURE_RESPONSABLE = "afficherSignatureResponsable";
   private Boolean afficherSignatureResponsable = false;
@@ -54,7 +54,7 @@ public class ElementsAAffiches {
    * Est-ce qu&#39;il faut afficher le champ signature du responsable ?
    * @return afficherSignatureResponsable
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_AFFICHER_SIGNATURE_RESPONSABLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getAfficherSignatureResponsable() {
@@ -78,7 +78,7 @@ public class ElementsAAffiches {
    * Est-ce qu&#39;il faut afficher le champ signature de l&#39;apprenant ?
    * @return afficherSignatureApprenant
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_AFFICHER_SIGNATURE_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getAfficherSignatureApprenant() {
@@ -102,7 +102,7 @@ public class ElementsAAffiches {
    * nom et prénom du responsable (saisie libre)
    * @return responsable
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_RESPONSABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getResponsable() {

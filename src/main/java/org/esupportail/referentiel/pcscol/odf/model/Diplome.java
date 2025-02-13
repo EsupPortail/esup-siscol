@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     Diplome.JSON_PROPERTY_DIPLOME_INTERMEDIAIRE,
     Diplome.JSON_PROPERTY_ACTIF
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -87,7 +87,7 @@ public class Diplome {
      *
      * @return id
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getId() {
@@ -110,7 +110,7 @@ public class Diplome {
      *
      * @return finaliteDiplome
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_FINALITE_DIPLOME)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getFinaliteDiplome() {
@@ -141,7 +141,7 @@ public class Diplome {
      *
      * @return periodesValidite
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_PERIODES_VALIDITE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<UUID> getPeriodesValidite() {
@@ -164,7 +164,7 @@ public class Diplome {
      *
      * @return code
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCode() {
@@ -187,7 +187,7 @@ public class Diplome {
      *
      * @return intitule
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_INTITULE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getIntitule() {
@@ -210,7 +210,7 @@ public class Diplome {
      *
      * @return libelleCourt
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelleCourt() {
@@ -233,7 +233,7 @@ public class Diplome {
      *
      * @return libelleLong
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelleLong() {
@@ -256,7 +256,7 @@ public class Diplome {
      *
      * @return libelleAffichage
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelleAffichage() {
@@ -279,7 +279,7 @@ public class Diplome {
      *
      * @return diplomeIntermediaire
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DIPLOME_INTERMEDIAIRE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getDiplomeIntermediaire() {
@@ -302,7 +302,7 @@ public class Diplome {
      *
      * @return actif
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ACTIF)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getActif() {

@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   LignePedagogiqueDCA.JSON_PROPERTY_TYPE_CHOIX_PEDAGOGIQUE,
   LignePedagogiqueDCA.JSON_PROPERTY_ENFANTS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class LignePedagogiqueDCA {
   public static final String JSON_PROPERTY_CODE_OBJET_MAQUETTE = "codeObjetMaquette";
   private String codeObjetMaquette;
@@ -125,7 +125,7 @@ public class LignePedagogiqueDCA {
    * code de l&#39;objet maquette (formation, objet formation ou groupement)
    * @return codeObjetMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeObjetMaquette() {
@@ -149,7 +149,7 @@ public class LignePedagogiqueDCA {
    * libellé long de l&#39;objet maquette (formation, objet formation ou groupement)
    * @return libelleLongObjetMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleLongObjetMaquette() {
@@ -173,7 +173,7 @@ public class LignePedagogiqueDCA {
    * libellé d&#39;affichage du type objet formation
    * @return libelleAffichageTypeObjetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE_TYPE_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleAffichageTypeObjetFormation() {
@@ -197,7 +197,7 @@ public class LignePedagogiqueDCA {
    * si l&#39;objet maquette est obligatoire pour ce code chemin
    * @return estObligatoire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_OBLIGATOIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstObligatoire() {
@@ -221,7 +221,7 @@ public class LignePedagogiqueDCA {
    * le nombre de crédit ECTS de l&#39;objet maquette pour ce code chemin
    * @return creditEcts
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CREDIT_ECTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Double getCreditEcts() {
@@ -253,7 +253,7 @@ public class LignePedagogiqueDCA {
    * liste des aménagements du choix pédagogique
    * @return amenagements
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AMENAGEMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<AmenagementDCA> getAmenagements() {
@@ -277,7 +277,7 @@ public class LignePedagogiqueDCA {
    * Get acquisCapitalise
    * @return acquisCapitalise
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ACQUIS_CAPITALISE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public AcquisCapitaliseDCA getAcquisCapitalise() {
@@ -301,7 +301,7 @@ public class LignePedagogiqueDCA {
    * Enum des differents type de choix pedagogique
    * @return typeChoixPedagogique
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_CHOIX_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public TypeChoixPedagogiqueEnum getTypeChoixPedagogique() {
@@ -333,7 +333,7 @@ public class LignePedagogiqueDCA {
    * les fils pédagogiques dans l&#39;arbre
    * @return enfants
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ENFANTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<LignePedagogiqueDCA> getEnfants() {

@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AffectationMasseResponse.JSON_PROPERTY_CURSUS_EN_ERREUR,
   AffectationMasseResponse.JSON_PROPERTY_LIGNES_AFFECTATION_MASSE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationMasseResponse {
   public static final String JSON_PROPERTY_CURSUS_EN_ERREUR = "cursusEnErreur";
   private List<AffectationMasseErreur> cursusEnErreur = new ArrayList<>();
@@ -56,7 +56,7 @@ public class AffectationMasseResponse {
    * Get cursusEnErreur
    * @return cursusEnErreur
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CURSUS_EN_ERREUR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<AffectationMasseErreur> getCursusEnErreur() {
@@ -88,7 +88,7 @@ public class AffectationMasseResponse {
    * Get lignesAffectationMasse
    * @return lignesAffectationMasse
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIGNES_AFFECTATION_MASSE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<LigneAffectationMasse> getLignesAffectationMasse() {

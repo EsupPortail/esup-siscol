@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PersonneTypePersonne.JSON_PROPERTY_DATE_DEBUT_VALIDITE,
   PersonneTypePersonne.JSON_PROPERTY_DATE_FIN_VALIDITE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class PersonneTypePersonne {
   public static final String JSON_PROPERTY_TYPE_PERSONNE = "typePersonne";
   private TypePersonne typePersonne;
@@ -55,7 +55,7 @@ public class PersonneTypePersonne {
    * Get typePersonne
    * @return typePersonne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_PERSONNE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public TypePersonne getTypePersonne() {
@@ -79,7 +79,7 @@ public class PersonneTypePersonne {
    * Date du début de la validité
    * @return dateDebutValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebutValidite() {
@@ -103,7 +103,7 @@ public class PersonneTypePersonne {
    * Date de la fin de la validité
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateFinValidite() {

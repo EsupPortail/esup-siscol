@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   LienCorrespondanceCalculModification.JSON_PROPERTY_COMMENTAIRE,
   LienCorrespondanceCalculModification.JSON_PROPERTY_ACTIF
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class LienCorrespondanceCalculModification {
   public static final String JSON_PROPERTY_CODE_OBJET_FORMATION_CIBLE = "codeObjetFormationCible";
   private String codeObjetFormationCible;
@@ -58,7 +58,7 @@ public class LienCorrespondanceCalculModification {
    * Le code de l&#39;objet de formation cible
    * @return codeObjetFormationCible
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_OBJET_FORMATION_CIBLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeObjetFormationCible() {
@@ -82,7 +82,7 @@ public class LienCorrespondanceCalculModification {
    * Le code de l&#39;objet de formation source
    * @return codeObjetFormationSource
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_OBJET_FORMATION_SOURCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeObjetFormationSource() {
@@ -106,7 +106,7 @@ public class LienCorrespondanceCalculModification {
    * Le commentaire relatif au lien
    * @return commentaire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMMENTAIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCommentaire() {
@@ -130,7 +130,7 @@ public class LienCorrespondanceCalculModification {
    * Ce lien est-il actif?
    * @return actif
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ACTIF)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getActif() {

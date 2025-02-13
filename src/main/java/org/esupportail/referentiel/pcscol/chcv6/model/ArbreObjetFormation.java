@@ -46,7 +46,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   ArbreObjetFormation.JSON_PROPERTY_LISTE_OBJET_FORMATION,
   ArbreObjetFormation.JSON_PROPERTY_LISTE_GROUPEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ArbreObjetFormation {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -139,7 +139,7 @@ public class ArbreObjetFormation {
    * Get code
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -163,7 +163,7 @@ public class ArbreObjetFormation {
    * Get libelleCourt
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -187,7 +187,7 @@ public class ArbreObjetFormation {
    * Get libelleLong
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {
@@ -211,7 +211,7 @@ public class ArbreObjetFormation {
    * Get description
    * @return description
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDescription() {
@@ -235,7 +235,7 @@ public class ArbreObjetFormation {
    * Get categorie
    * @return categorie
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CATEGORIE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public ObjetLibelle getCategorie() {
@@ -259,7 +259,7 @@ public class ArbreObjetFormation {
    * Get type
    * @return type
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public ObjetLibelle getType() {
@@ -283,7 +283,7 @@ public class ArbreObjetFormation {
    * Get mutualise
    * @return mutualise
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_MUTUALISE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getMutualise() {
@@ -307,7 +307,7 @@ public class ArbreObjetFormation {
    * Get ouvertureAuChoixDuCursus
    * @return ouvertureAuChoixDuCursus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OUVERTURE_AU_CHOIX_DU_CURSUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public OuvertureAuChoixDuCursusEnum getOuvertureAuChoixDuCursus() {
@@ -331,7 +331,7 @@ public class ArbreObjetFormation {
    * 2c1e120f-4799-414e-90d8-bbda2b869704
    * @return idCheminPedagogique
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ID_CHEMIN_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getIdCheminPedagogique() {
@@ -355,7 +355,7 @@ public class ArbreObjetFormation {
    * est-ce que l&#39;objet de formation est obligatoire ou facultatif ?
    * @return caractereObligatoire
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CARACTERE_OBLIGATOIRE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getCaractereObligatoire() {
@@ -379,7 +379,7 @@ public class ArbreObjetFormation {
    * est-ce que l&#39;objet de formation est un stage ?
    * @return stage
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_STAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getStage() {
@@ -403,7 +403,7 @@ public class ArbreObjetFormation {
    * les crédits E.C.T.S. positionnés sur l&#39;objet de formation
    * @return creditEcts
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CREDIT_ECTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCreditEcts() {
@@ -435,7 +435,7 @@ public class ArbreObjetFormation {
    * Get listeObjetFormation
    * @return listeObjetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ArbreObjetFormation> getListeObjetFormation() {
@@ -467,7 +467,7 @@ public class ArbreObjetFormation {
    * Get listeGroupement
    * @return listeGroupement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_GROUPEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ArbreGroupement> getListeGroupement() {

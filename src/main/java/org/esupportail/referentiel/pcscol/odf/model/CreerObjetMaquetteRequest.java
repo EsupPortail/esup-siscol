@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     CreerObjetMaquetteRequest.JSON_PROPERTY_MUTUALISE,
     CreerObjetMaquetteRequest.JSON_PROPERTY_DESCRIPTEURS_OBJET_MAQUETTE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -87,7 +87,7 @@ public class CreerObjetMaquetteRequest {
      *
      * @return espaceId
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ESPACE_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getEspaceId() {
@@ -110,7 +110,7 @@ public class CreerObjetMaquetteRequest {
      *
      * @return typeObjetMaquette
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public TypeObjetMaquette getTypeObjetMaquette() {
@@ -133,7 +133,7 @@ public class CreerObjetMaquetteRequest {
      *
      * @return code
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCode() {
@@ -156,7 +156,7 @@ public class CreerObjetMaquetteRequest {
      *
      * @return mutualise
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MUTUALISE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getMutualise() {
@@ -180,7 +180,7 @@ public class CreerObjetMaquetteRequest {
      *
      * @return descripteursObjetMaquette
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DESCRIPTEURS_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public DescripteursObjetMaquetteRequest getDescripteursObjetMaquette() {

@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ParametresEditionListeAppelEmargement.JSON_PROPERTY_ELEMENTS_SELECTIONNES,
   ParametresEditionListeAppelEmargement.JSON_PROPERTY_COLONNES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ParametresEditionListeAppelEmargement {
   public static final String JSON_PROPERTY_DATE_DU_COURS = "dateDuCours";
   private Date dateDuCours;
@@ -57,7 +57,7 @@ public class ParametresEditionListeAppelEmargement {
    * date du cours
    * @return dateDuCours
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DU_COURS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDuCours() {
@@ -89,7 +89,7 @@ public class ParametresEditionListeAppelEmargement {
    * Get elementsSelectionnes
    * @return elementsSelectionnes
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ELEMENTS_SELECTIONNES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<ElementSelectionne> getElementsSelectionnes() {
@@ -113,7 +113,7 @@ public class ParametresEditionListeAppelEmargement {
    * Get colonnes
    * @return colonnes
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_COLONNES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Colonnes getColonnes() {

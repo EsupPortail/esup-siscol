@@ -41,30 +41,30 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.VariableAppliWSE
  *
  */
 @ConditionalOnProperty(name = "app.mode_apogee")
-@SuppressWarnings("serial")
 @Service
 public class StudentComponentRepositoryDaoWS implements StudentComponentRepositoryDao {
+	private static final long serialVersionUID = 949811640680344536L;
 	/**
 	 *
 	 */
 	@Autowired
-	protected ReferentielMetierServiceInterface referentielMetierService;
+	ReferentielMetierServiceInterface referentielMetierService;
 	/**
 	 *
 	 */
 	@Autowired
-	protected EtudiantMetierServiceInterface etudiantMetierService;
+	EtudiantMetierServiceInterface etudiantMetierService;
 	/**
 	 *
 	 */
 	@Autowired
-	protected AdministratifMetierServiceInterface serviceAdministratif;
+	AdministratifMetierServiceInterface serviceAdministratif;
 
 	/**
 	 *
 	 */
 	@Autowired
-	protected OffreFormationMetierServiceInterface offreFormationMetierService;
+	OffreFormationMetierServiceInterface offreFormationMetierService;
 
 	/**
 	 *

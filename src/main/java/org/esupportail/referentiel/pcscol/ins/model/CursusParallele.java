@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CursusParallele.JSON_PROPERTY_FILIERE,
   CursusParallele.JSON_PROPERTY_CONVENTION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class CursusParallele {
   public static final String JSON_PROPERTY_FILIERE = "filiere";
   private Filiere filiere;
@@ -50,7 +50,7 @@ public class CursusParallele {
    * Get filiere
    * @return filiere
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FILIERE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Filiere getFiliere() {
@@ -74,7 +74,7 @@ public class CursusParallele {
    * L&#39;année d&#39;obtention du dernier diplôme au format AAAA
    * @return convention
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONVENTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getConvention() {

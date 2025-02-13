@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ObjetLibelle.JSON_PROPERTY_LIBELLE_LONG,
   ObjetLibelle.JSON_PROPERTY_LIBELLE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ObjetLibelle {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -58,7 +58,7 @@ public class ObjetLibelle {
    * Le code de l&#39;objet
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -82,7 +82,7 @@ public class ObjetLibelle {
    * Le libellé court de l&#39;objet
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -106,7 +106,7 @@ public class ObjetLibelle {
    * Le libellé long de l&#39;objet
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {
@@ -130,7 +130,7 @@ public class ObjetLibelle {
    * Le libellé de l&#39;objet
    * @return libelle
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelle() {

@@ -47,7 +47,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     ObjetMaquetteDetail.JSON_PROPERTY_DESCRIPTEURS_SYLLABUS,
     ObjetMaquetteDetail.JSON_PROPERTY_FORMATS_ENSEIGNEMENT
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -113,7 +113,7 @@ public class ObjetMaquetteDetail {
      *
      * @return id
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getId() {
@@ -136,7 +136,7 @@ public class ObjetMaquetteDetail {
      *
      * @return typeObjetMaquette
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public TypeObjetMaquette getTypeObjetMaquette() {
@@ -159,7 +159,7 @@ public class ObjetMaquetteDetail {
      *
      * @return code
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCode() {
@@ -182,7 +182,7 @@ public class ObjetMaquetteDetail {
      *
      * @return espace
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ESPACE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getEspace() {
@@ -205,7 +205,7 @@ public class ObjetMaquetteDetail {
      *
      * @return mutualise
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MUTUALISE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getMutualise() {
@@ -236,7 +236,7 @@ public class ObjetMaquetteDetail {
      *
      * @return enfants
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ENFANTS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<Enfant> getEnfants() {
@@ -267,7 +267,7 @@ public class ObjetMaquetteDetail {
      *
      * @return contextes
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CONTEXTES)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<Contexte> getContextes() {
@@ -291,7 +291,7 @@ public class ObjetMaquetteDetail {
      *
      * @return descripteursObjetMaquette
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DESCRIPTEURS_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public DescripteursObjetMaquette getDescripteursObjetMaquette() {
@@ -314,7 +314,7 @@ public class ObjetMaquetteDetail {
      *
      * @return descripteursEnquete
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DESCRIPTEURS_ENQUETE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public DescripteursEnquete getDescripteursEnquete() {
@@ -337,7 +337,7 @@ public class ObjetMaquetteDetail {
      *
      * @return descripteursSyllabus
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DESCRIPTEURS_SYLLABUS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public DescripteursSyllabus getDescripteursSyllabus() {
@@ -360,7 +360,7 @@ public class ObjetMaquetteDetail {
      *
      * @return formatsEnseignement
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_FORMATS_ENSEIGNEMENT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public FormatsEnseignement getFormatsEnseignement() {

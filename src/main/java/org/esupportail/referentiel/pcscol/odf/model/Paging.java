@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     Paging.JSON_PROPERTY_TAILLE,
     Paging.JSON_PROPERTY_PAGE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -60,7 +60,7 @@ public class Paging {
      *
      * @return totalElements
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TOTAL_ELEMENTS)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Long getTotalElements() {
@@ -83,7 +83,7 @@ public class Paging {
      *
      * @return totalPages
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TOTAL_PAGES)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Integer getTotalPages() {
@@ -106,7 +106,7 @@ public class Paging {
      *
      * @return taille
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TAILLE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Integer getTaille() {
@@ -129,7 +129,7 @@ public class Paging {
      *
      * @return page
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_PAGE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Integer getPage() {

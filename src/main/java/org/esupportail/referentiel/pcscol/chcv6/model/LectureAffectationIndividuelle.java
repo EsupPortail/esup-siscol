@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   LectureAffectationIndividuelle.JSON_PROPERTY_INFO_BROUILLON,
   LectureAffectationIndividuelle.JSON_PROPERTY_RACINE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class LectureAffectationIndividuelle {
   public static final String JSON_PROPERTY_CURSUS_UUID = "cursusUuid";
   private UUID cursusUuid;
@@ -59,7 +59,7 @@ public class LectureAffectationIndividuelle {
    * L&#39;UUID du cursus
    * @return cursusUuid
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CURSUS_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getCursusUuid() {
@@ -83,7 +83,7 @@ public class LectureAffectationIndividuelle {
    * Indique si le cursus est complet
    * @return estComplet
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_EST_COMPLET)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getEstComplet() {
@@ -107,7 +107,7 @@ public class LectureAffectationIndividuelle {
    * Get infoBrouillon
    * @return infoBrouillon
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_INFO_BROUILLON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public InfoBrouillon getInfoBrouillon() {
@@ -131,7 +131,7 @@ public class LectureAffectationIndividuelle {
    * Get racine
    * @return racine
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_RACINE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public LigneAffectationIndividuelle getRacine() {

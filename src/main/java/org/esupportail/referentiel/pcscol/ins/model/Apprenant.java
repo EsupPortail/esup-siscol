@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Apprenant.JSON_PROPERTY_PREMIERES_INSCRIPTIONS,
   Apprenant.JSON_PROPERTY_DATE_CONTEXTE_APPRENANT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Apprenant {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -81,7 +81,7 @@ public class Apprenant {
    * le code de l&#39;apprenant
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -105,7 +105,7 @@ public class Apprenant {
    * Get etatCivil
    * @return etatCivil
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ETAT_CIVIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public EtatCivil getEtatCivil() {
@@ -129,7 +129,7 @@ public class Apprenant {
    * Get naissance
    * @return naissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Naissance getNaissance() {
@@ -153,7 +153,7 @@ public class Apprenant {
    * Get situationPersonnelle
    * @return situationPersonnelle
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SITUATION_PERSONNELLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public SituationPersonnelleApprenant getSituationPersonnelle() {
@@ -177,7 +177,7 @@ public class Apprenant {
    * Get profession
    * @return profession
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PROFESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Profession getProfession() {
@@ -209,7 +209,7 @@ public class Apprenant {
    * Liste des contacts sous forme d&#39;objet, avec le code du contact pour clé principale
    * @return contacts
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONTACTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ContactComplet> getContacts() {
@@ -233,7 +233,7 @@ public class Apprenant {
    * Get bac
    * @return bac
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_BAC)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Bac getBac() {
@@ -257,7 +257,7 @@ public class Apprenant {
    * Get premieresInscriptions
    * @return premieresInscriptions
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PREMIERES_INSCRIPTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public PremieresInscriptions getPremieresInscriptions() {
@@ -281,7 +281,7 @@ public class Apprenant {
    * date de contexte de l&#39;apprenant
    * @return dateContexteApprenant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_CONTEXTE_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateContexteApprenant() {

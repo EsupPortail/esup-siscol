@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SituationPersonnelleInscription.JSON_PROPERTY_SOUHAIT_AMENAGEMENT,
   SituationPersonnelleInscription.JSON_PROPERTY_PROFILS_SPECIFIQUES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class SituationPersonnelleInscription {
   public static final String JSON_PROPERTY_AMENAGEMENTS_SPECIFIQUES = "amenagementsSpecifiques";
   private List<String> amenagementsSpecifiques = new ArrayList<>();
@@ -64,7 +64,7 @@ public class SituationPersonnelleInscription {
    * Liste des situations donnant droit à des aménagements spécifiques
    * @return amenagementsSpecifiques
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AMENAGEMENTS_SPECIFIQUES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<String> getAmenagementsSpecifiques() {
@@ -88,7 +88,7 @@ public class SituationPersonnelleInscription {
    * Réponse au souhait d&#39;un aménagement spécifique
    * @return souhaitAmenagement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SOUHAIT_AMENAGEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getSouhaitAmenagement() {
@@ -120,7 +120,7 @@ public class SituationPersonnelleInscription {
    * Code du profil spécifique issu de la nomenclature Profils exonérants  Codes de la nomenclature sur 6 caractères. Préfixe des codes : PRF 
    * @return profilsSpecifiques
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PROFILS_SPECIFIQUES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<String> getProfilsSpecifiques() {

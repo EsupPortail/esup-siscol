@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CommandeBrouillonEnMasseResponse.JSON_PROPERTY_SUCCESS,
   CommandeBrouillonEnMasseResponse.JSON_PROPERTY_ERREURS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CommandeBrouillonEnMasseResponse {
   public static final String JSON_PROPERTY_SUCCESS = "success";
   private List<UUID> success = new ArrayList<>();
@@ -61,7 +61,7 @@ public class CommandeBrouillonEnMasseResponse {
    * Get success
    * @return success
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SUCCESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<UUID> getSuccess() {
@@ -93,7 +93,7 @@ public class CommandeBrouillonEnMasseResponse {
    * Get erreurs
    * @return erreurs
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ERREURS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<UUID> getErreurs() {

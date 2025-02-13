@@ -49,7 +49,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   CheminObjetMaquette.JSON_PROPERTY_OBJET_FORMATION,
   CheminObjetMaquette.JSON_PROPERTY_GROUPEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CheminObjetMaquette {
   public static final String JSON_PROPERTY_ID_CHEMIN_OBJET_MAQUETTE = "idCheminObjetMaquette";
   private UUID idCheminObjetMaquette;
@@ -151,7 +151,7 @@ public class CheminObjetMaquette {
    * L&#39;id technique du chemin objet maquette
    * @return idCheminObjetMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ID_CHEMIN_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getIdCheminObjetMaquette() {
@@ -175,7 +175,7 @@ public class CheminObjetMaquette {
    * L&#39;id technique du chemin pédagogique
    * @return idCheminPedagogique
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ID_CHEMIN_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getIdCheminPedagogique() {
@@ -199,7 +199,7 @@ public class CheminObjetMaquette {
    * Get codeChemin
    * @return codeChemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeChemin() {
@@ -223,7 +223,7 @@ public class CheminObjetMaquette {
    * Get codePeriode
    * @return codePeriode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_PERIODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodePeriode() {
@@ -247,7 +247,7 @@ public class CheminObjetMaquette {
    * Définit si la periode est active ou pas
    * @return periodeEstActive
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERIODE_EST_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getPeriodeEstActive() {
@@ -271,7 +271,7 @@ public class CheminObjetMaquette {
    * Le code structure  - identifiant unique
    * @return codeStructure
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeStructure() {
@@ -295,7 +295,7 @@ public class CheminObjetMaquette {
    * Get codeType
    * @return codeType
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeType() {
@@ -319,7 +319,7 @@ public class CheminObjetMaquette {
    * Get capaciteAccueil
    * @return capaciteAccueil
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CAPACITE_ACCUEIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getCapaciteAccueil() {
@@ -343,7 +343,7 @@ public class CheminObjetMaquette {
    * temoin d&#39;obligation
    * @return obligatoire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OBLIGATOIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getObligatoire() {
@@ -367,7 +367,7 @@ public class CheminObjetMaquette {
    * ouverture au choix du cursus
    * @return ouverteChoixCursus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OUVERTE_CHOIX_CURSUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public OuverteChoixCursusEnum getOuverteChoixCursus() {
@@ -391,7 +391,7 @@ public class CheminObjetMaquette {
    * Get creditEcts
    * @return creditEcts
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CREDIT_ECTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getCreditEcts() {
@@ -415,7 +415,7 @@ public class CheminObjetMaquette {
    * Get estPlageDeChoix
    * @return estPlageDeChoix
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_PLAGE_DE_CHOIX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstPlageDeChoix() {
@@ -439,7 +439,7 @@ public class CheminObjetMaquette {
    * Get plageMin
    * @return plageMin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getPlageMin() {
@@ -463,7 +463,7 @@ public class CheminObjetMaquette {
    * Get plageMax
    * @return plageMax
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MAX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getPlageMax() {
@@ -487,7 +487,7 @@ public class CheminObjetMaquette {
    * Get formation
    * @return formation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public FormationMasse getFormation() {
@@ -511,7 +511,7 @@ public class CheminObjetMaquette {
    * Get objetFormation
    * @return objetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public ObjetFormationMasse getObjetFormation() {
@@ -535,7 +535,7 @@ public class CheminObjetMaquette {
    * Get groupement
    * @return groupement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_GROUPEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public GroupementMasse getGroupement() {

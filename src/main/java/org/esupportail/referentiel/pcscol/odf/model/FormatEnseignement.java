@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     FormatEnseignement.JSON_PROPERTY_NOMBRE_THEORIQUE_DE_GROUPES,
     FormatEnseignement.JSON_PROPERTY_SEUIL_DEDOUBLEMENT
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -66,7 +66,7 @@ public class FormatEnseignement {
      *
      * @return modalite
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MODALITE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getModalite() {
@@ -89,7 +89,7 @@ public class FormatEnseignement {
      *
      * @return typeHeure
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_HEURE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getTypeHeure() {
@@ -112,7 +112,7 @@ public class FormatEnseignement {
      *
      * @return volumeHoraire
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_VOLUME_HORAIRE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public BigDecimal getVolumeHoraire() {
@@ -135,7 +135,7 @@ public class FormatEnseignement {
      *
      * @return nombreTheoriqueDeGroupes
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_NOMBRE_THEORIQUE_DE_GROUPES)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Integer getNombreTheoriqueDeGroupes() {
@@ -158,7 +158,7 @@ public class FormatEnseignement {
      *
      * @return seuilDedoublement
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_SEUIL_DEDOUBLEMENT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Integer getSeuilDedoublement() {

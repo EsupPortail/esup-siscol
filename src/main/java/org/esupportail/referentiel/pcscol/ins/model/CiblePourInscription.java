@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CiblePourInscription.JSON_PROPERTY_OUVERTE_A_INSCRIPTION,
   CiblePourInscription.JSON_PROPERTY_JAMAIS_OUVERTE_A_INSCRIPTION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class CiblePourInscription {
   public static final String JSON_PROPERTY_CODE_STRUCTURE = "codeStructure";
   private String codeStructure;
@@ -80,7 +80,7 @@ public class CiblePourInscription {
    * Le code uai de la structure
    * @return codeStructure
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeStructure() {
@@ -104,7 +104,7 @@ public class CiblePourInscription {
    * Get formation
    * @return formation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Formation getFormation() {
@@ -128,7 +128,7 @@ public class CiblePourInscription {
    * Get periode
    * @return periode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERIODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Periode getPeriode() {
@@ -152,7 +152,7 @@ public class CiblePourInscription {
    * Get calendrier
    * @return calendrier
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CALENDRIER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Calendrier getCalendrier() {
@@ -184,7 +184,7 @@ public class CiblePourInscription {
    * liste des ObjetFormation ou Groupement depuis la Formation racine jusqu&#39;à l&#39;ObjetFormation feuille (même code que CiblePourInscription), peut être vide
    * @return chemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ObjetFormationOuGroupement> getChemin() {
@@ -216,7 +216,7 @@ public class CiblePourInscription {
    * liste des regimes d&#39;inscription récupérée au moment de la mise en œuvre de la cible
    * @return regimesInscription
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_REGIMES_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<RegimeInscription> getRegimesInscription() {
@@ -248,7 +248,7 @@ public class CiblePourInscription {
    * liste des bourses ou aides récupérée au moment de la mise en œuvre de la cible
    * @return boursesOuAides
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_BOURSES_OU_AIDES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<BourseOuAide> getBoursesOuAides() {
@@ -272,7 +272,7 @@ public class CiblePourInscription {
    * Temoin indiquant que la cible est ouverte à l&#39;inscription
    * @return ouverteAInscription
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OUVERTE_A_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getOuverteAInscription() {
@@ -296,7 +296,7 @@ public class CiblePourInscription {
    * Temoin indiquant que la cible est jamais ouverte à l&#39;inscription
    * @return jamaisOuverteAInscription
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_JAMAIS_OUVERTE_A_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getJamaisOuverteAInscription() {

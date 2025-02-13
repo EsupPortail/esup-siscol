@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   VueInscriptions.JSON_PROPERTY_PAGE,
   VueInscriptions.JSON_PROPERTY_TOTAL_PAGES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class VueInscriptions {
   public static final String JSON_PROPERTY_TAILLE = "taille";
   private Long taille;
@@ -64,7 +64,7 @@ public class VueInscriptions {
    * Get taille
    * @return taille
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TAILLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Long getTaille() {
@@ -96,7 +96,7 @@ public class VueInscriptions {
    * Get resultats
    * @return resultats
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_RESULTATS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<VueInscription> getResultats() {
@@ -120,7 +120,7 @@ public class VueInscriptions {
    * Get totalElements
    * @return totalElements
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TOTAL_ELEMENTS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Long getTotalElements() {
@@ -144,7 +144,7 @@ public class VueInscriptions {
    * Get page
    * @return page
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Long getPage() {
@@ -168,7 +168,7 @@ public class VueInscriptions {
    * Get totalPages
    * @return totalPages
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TOTAL_PAGES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Long getTotalPages() {

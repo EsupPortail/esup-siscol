@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     CreerEspaceRequest.JSON_PROPERTY_LIBELLE,
     CreerEspaceRequest.JSON_PROPERTY_TYPE_ESPACE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -76,7 +76,7 @@ public class CreerEspaceRequest {
      *
      * @return code
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getCode() {
@@ -99,7 +99,7 @@ public class CreerEspaceRequest {
      *
      * @return libelle
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelle() {
@@ -122,7 +122,7 @@ public class CreerEspaceRequest {
      *
      * @return typeEspace
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TYPE_ESPACE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public TypeEspace getTypeEspace() {

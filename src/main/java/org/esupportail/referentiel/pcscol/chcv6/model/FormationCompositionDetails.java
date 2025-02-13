@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   FormationCompositionDetails.JSON_PROPERTY_LIBELLE_LONG,
   FormationCompositionDetails.JSON_PROPERTY_TYPE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class FormationCompositionDetails {
   public static final String JSON_PROPERTY_FORMATION_UUID = "formationUuid";
   private UUID formationUuid;
@@ -63,7 +63,7 @@ public class FormationCompositionDetails {
    * L&#39;identifiant technique de la formation
    * @return formationUuid
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_FORMATION_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getFormationUuid() {
@@ -87,7 +87,7 @@ public class FormationCompositionDetails {
    * Le code de la formation
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -111,7 +111,7 @@ public class FormationCompositionDetails {
    * Le libellé long de la formation
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -135,7 +135,7 @@ public class FormationCompositionDetails {
    * Le libellé long de la formation
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {
@@ -159,7 +159,7 @@ public class FormationCompositionDetails {
    * Le type de la formation
    * @return type
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getType() {

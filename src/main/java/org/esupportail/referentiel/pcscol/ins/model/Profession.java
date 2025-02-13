@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Profession.JSON_PROPERTY_PARENT2,
   Profession.JSON_PROPERTY_QUOTITE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Profession {
   public static final String JSON_PROPERTY_ETUDIANT = "etudiant";
   private String etudiant;
@@ -58,7 +58,7 @@ public class Profession {
    * Le code profession de l&#39;étudiant issu de la nomenclature des Professions et catégories socioprofessionnelles.  Codes de la nomenclature sur 6 caractères. Préfixe des codes : PCS 
    * @return etudiant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ETUDIANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getEtudiant() {
@@ -82,7 +82,7 @@ public class Profession {
    * Le code profession du parent 1 issu de la nomenclature des Professions et catégories socioprofessionnelles  Codes de la nomenclature sur 6 caractères. Préfixe des codes : PCS 
    * @return parent1
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PARENT1)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getParent1() {
@@ -106,7 +106,7 @@ public class Profession {
    * Le code profession du parent 2 issu de la nomenclature des Professions et catégories socioprofessionnelles  Codes de la nomenclature sur 6 caractères. Préfixe des codes : PCS 
    * @return parent2
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PARENT2)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getParent2() {
@@ -130,7 +130,7 @@ public class Profession {
    * Le code de la quotité d&#39;activité de l&#39;étudiant issu de la nomenclature des Quotité d&#39;activités  Codes de la nomenclature sur 6 caractères. Préfixe des codes : QUA 
    * @return quotite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_QUOTITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getQuotite() {

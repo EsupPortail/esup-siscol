@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ChoixPedagogiqueEnMasseRequest.JSON_PROPERTY_CHEMIN_PEDAGOGIQUE_UUID,
   ChoixPedagogiqueEnMasseRequest.JSON_PROPERTY_CHOIX_PEDAGOGIQUE_EN_MASSE_OPERATIONS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ChoixPedagogiqueEnMasseRequest {
   public static final String JSON_PROPERTY_AFFECTATIONS_AVEC_PROPOSITIONS = "affectationsAvecPropositions";
   private Boolean affectationsAvecPropositions;
@@ -57,7 +57,7 @@ public class ChoixPedagogiqueEnMasseRequest {
    * Indique si, dans le cas d&#39;une commande affectation, si l&#39;affectation doit être faite avec les propositions dans le sous arbre
    * @return affectationsAvecPropositions
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AFFECTATIONS_AVEC_PROPOSITIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getAffectationsAvecPropositions() {
@@ -81,7 +81,7 @@ public class ChoixPedagogiqueEnMasseRequest {
    * La réference (uuid) du chemin (pédagogique) sur lequel porte les choix pédagogiques en masse
    * @return cheminPedagogiqueUuid
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CHEMIN_PEDAGOGIQUE_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getCheminPedagogiqueUuid() {
@@ -113,7 +113,7 @@ public class ChoixPedagogiqueEnMasseRequest {
    * Get choixPedagogiqueEnMasseOperations
    * @return choixPedagogiqueEnMasseOperations
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CHOIX_PEDAGOGIQUE_EN_MASSE_OPERATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ChoixPedagogiqueEnMasseOperation> getChoixPedagogiqueEnMasseOperations() {

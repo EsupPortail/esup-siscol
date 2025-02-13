@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     ObjetMaquetteFormatsEnseignementStructure.JSON_PROPERTY_FORMATS_ENSEIGNEMENT,
     ObjetMaquetteFormatsEnseignementStructure.JSON_PROPERTY_ENFANTS
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -79,7 +79,7 @@ public class ObjetMaquetteFormatsEnseignementStructure {
      *
      * @return id
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public UUID getId() {
@@ -102,7 +102,7 @@ public class ObjetMaquetteFormatsEnseignementStructure {
      *
      * @return code
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getCode() {
@@ -125,7 +125,7 @@ public class ObjetMaquetteFormatsEnseignementStructure {
      *
      * @return libelle
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelle() {
@@ -148,7 +148,7 @@ public class ObjetMaquetteFormatsEnseignementStructure {
      *
      * @return libelleLong
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelleLong() {
@@ -171,7 +171,7 @@ public class ObjetMaquetteFormatsEnseignementStructure {
      *
      * @return mutualise
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_MUTUALISE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Boolean getMutualise() {
@@ -194,7 +194,7 @@ public class ObjetMaquetteFormatsEnseignementStructure {
      *
      * @return type
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getType() {
@@ -218,7 +218,7 @@ public class ObjetMaquetteFormatsEnseignementStructure {
      *
      * @return formatsEnseignement
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_FORMATS_ENSEIGNEMENT)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public FormatsEnseignement getFormatsEnseignement() {
@@ -251,7 +251,7 @@ public class ObjetMaquetteFormatsEnseignementStructure {
      *
      * @return enfants
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ENFANTS)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public List<EnfantsFormatsEnseignementStructure> getEnfants() {

@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     DescripteursObjetFormationContexte.JSON_PROPERTY_ECTS,
     DescripteursObjetFormationContexte.JSON_PROPERTY_NATURE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -68,7 +68,7 @@ public class DescripteursObjetFormationContexte extends DescripteursContexte {
      *
      * @return ects
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ECTS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public BigDecimal getEcts() {
@@ -91,7 +91,7 @@ public class DescripteursObjetFormationContexte extends DescripteursContexte {
      *
      * @return nature
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_NATURE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getNature() {

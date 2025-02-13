@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PeriodeDCA.JSON_PROPERTY_LIBELLE_AFFICHAGE,
   PeriodeDCA.JSON_PROPERTY_DATE_DEBUT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class PeriodeDCA {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -55,7 +55,7 @@ public class PeriodeDCA {
    * Code de la période - identifiant unique
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -79,7 +79,7 @@ public class PeriodeDCA {
    * Le libellé long de la période
    * @return libelleAffichage
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleAffichage() {
@@ -103,7 +103,7 @@ public class PeriodeDCA {
    * La date de début de la période
    * @return dateDebut
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebut() {

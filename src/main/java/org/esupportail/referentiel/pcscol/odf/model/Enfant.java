@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /** Enfant d&#39;un objet */
 @JsonPropertyOrder({Enfant.JSON_PROPERTY_ID, Enfant.JSON_PROPERTY_OBLIGATOIRE})
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -49,7 +49,7 @@ public class Enfant {
      *
      * @return id
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getId() {
@@ -72,7 +72,7 @@ public class Enfant {
      *
      * @return obligatoire
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_OBLIGATOIRE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getObligatoire() {

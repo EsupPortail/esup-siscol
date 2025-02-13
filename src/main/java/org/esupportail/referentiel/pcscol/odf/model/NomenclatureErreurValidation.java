@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     NomenclatureErreurValidation.JSON_PROPERTY_ID,
     NomenclatureErreurValidation.JSON_PROPERTY_CODE_OBJET_MAQUETTE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -66,7 +66,7 @@ public class NomenclatureErreurValidation {
      *
      * @return nomenclatureList
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_NOMENCLATURE_LIST)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public List<Nomenclature> getNomenclatureList() {
@@ -89,7 +89,7 @@ public class NomenclatureErreurValidation {
      *
      * @return id
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getId() {
@@ -112,7 +112,7 @@ public class NomenclatureErreurValidation {
      *
      * @return codeObjetMaquette
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CODE_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getCodeObjetMaquette() {

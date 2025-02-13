@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     Erreurs.JSON_PROPERTY_STATUS_CODE,
     Erreurs.JSON_PROPERTY_ERRORS
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -71,7 +71,7 @@ public class Erreurs {
      *
      * @return correlationId
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CORRELATION_ID)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getCorrelationId() {
@@ -94,7 +94,7 @@ public class Erreurs {
      *
      * @return timestamp
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TIMESTAMP)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Date getTimestamp() {
@@ -117,7 +117,7 @@ public class Erreurs {
      *
      * @return version
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_VERSION)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getVersion() {
@@ -140,7 +140,7 @@ public class Erreurs {
      *
      * @return path
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_PATH)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getPath() {
@@ -163,7 +163,7 @@ public class Erreurs {
      *
      * @return statusCode
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_STATUS_CODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getStatusCode() {
@@ -194,7 +194,7 @@ public class Erreurs {
      *
      * @return errors
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ERRORS)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public List<Erreur> getErrors() {

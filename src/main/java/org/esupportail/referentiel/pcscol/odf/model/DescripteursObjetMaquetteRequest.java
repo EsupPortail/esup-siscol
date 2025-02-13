@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     DescripteursObjetMaquetteRequest.JSON_PROPERTY_LIBELLE,
     DescripteursObjetMaquetteRequest.JSON_PROPERTY_LIBELLE_LONG
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -73,7 +73,7 @@ public class DescripteursObjetMaquetteRequest {
      *
      * @return libelle
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelle() {
@@ -96,7 +96,7 @@ public class DescripteursObjetMaquetteRequest {
      *
      * @return libelleLong
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelleLong() {

@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   InfoFormationComposition.JSON_PROPERTY_CODE,
   InfoFormationComposition.JSON_PROPERTY_LIBELLE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class InfoFormationComposition {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -50,7 +50,7 @@ public class InfoFormationComposition {
    * Le code de la formation de composition
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -74,7 +74,7 @@ public class InfoFormationComposition {
    * Le libelle de la formation de composition
    * @return libelle
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelle() {

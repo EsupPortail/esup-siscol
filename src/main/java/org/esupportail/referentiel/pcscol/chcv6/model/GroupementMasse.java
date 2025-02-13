@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   GroupementMasse.JSON_PROPERTY_CODE_NATURE,
   GroupementMasse.JSON_PROPERTY_MUTUALISE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class GroupementMasse {
   public static final String JSON_PROPERTY_ID = "id";
   private UUID id;
@@ -63,7 +63,7 @@ public class GroupementMasse {
    * L&#39;id technique du groupement
    * @return id
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getId() {
@@ -87,7 +87,7 @@ public class GroupementMasse {
    * Le code du groupement
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -111,7 +111,7 @@ public class GroupementMasse {
    * Le libelle du groupement
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -135,7 +135,7 @@ public class GroupementMasse {
    * le type du groupement
    * @return codeNature
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_NATURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeNature() {
@@ -159,7 +159,7 @@ public class GroupementMasse {
    * Get mutualise
    * @return mutualise
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MUTUALISE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getMutualise() {

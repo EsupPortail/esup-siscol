@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AffectationMasseErreur.JSON_PROPERTY_CURSUS_ID,
   AffectationMasseErreur.JSON_PROPERTY_MESSAGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationMasseErreur {
   public static final String JSON_PROPERTY_CURSUS_ID = "cursusId";
   private UUID cursusId;
@@ -51,7 +51,7 @@ public class AffectationMasseErreur {
    * L&#39;id technique du cursus
    * @return cursusId
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CURSUS_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getCursusId() {
@@ -75,7 +75,7 @@ public class AffectationMasseErreur {
    * Le message de l&#39;erreur
    * @return message
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getMessage() {

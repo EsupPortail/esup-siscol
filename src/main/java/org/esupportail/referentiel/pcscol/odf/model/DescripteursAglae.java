@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     DescripteursAglae.JSON_PROPERTY_HABILITE_POUR_BOURSES_AGLAE,
     DescripteursAglae.JSON_PROPERTY_NIVEAU_AGLAE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -58,7 +58,7 @@ public class DescripteursAglae {
      *
      * @return habilitePourBoursesAglae
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_HABILITE_POUR_BOURSES_AGLAE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getHabilitePourBoursesAglae() {
@@ -81,7 +81,7 @@ public class DescripteursAglae {
      *
      * @return niveauAglae
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonIgnore
     public String getNiveauAglae() {
         return niveauAglae.orElse(null);

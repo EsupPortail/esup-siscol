@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ObjetFormationMasse.JSON_PROPERTY_LIBELLE_COURT,
   ObjetFormationMasse.JSON_PROPERTY_MUTUALISE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ObjetFormationMasse {
   public static final String JSON_PROPERTY_ID = "id";
   private UUID id;
@@ -59,7 +59,7 @@ public class ObjetFormationMasse {
    * L&#39;id technique de l&#39;OF
    * @return id
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getId() {
@@ -83,7 +83,7 @@ public class ObjetFormationMasse {
    * Le code de l&#39;OF
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -107,7 +107,7 @@ public class ObjetFormationMasse {
    * Le libelle de l&#39;OF
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -131,7 +131,7 @@ public class ObjetFormationMasse {
    * Get mutualise
    * @return mutualise
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_MUTUALISE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getMutualise() {

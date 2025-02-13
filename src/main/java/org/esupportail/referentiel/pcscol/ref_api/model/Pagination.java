@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Pagination.JSON_PROPERTY_NB_OCCURENCES,
   Pagination.JSON_PROPERTY_NUM_PAGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Pagination {
   public static final String JSON_PROPERTY_NOMENCLATURES = "nomenclatures";
   private List<Nomenclature> nomenclatures = new ArrayList<>();
@@ -72,7 +72,7 @@ public class Pagination {
    * Get nomenclatures
    * @return nomenclatures
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOMENCLATURES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<Nomenclature> getNomenclatures() {
@@ -96,7 +96,7 @@ public class Pagination {
    * Get nbTotalOccurences
    * @return nbTotalOccurences
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NB_TOTAL_OCCURENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Long getNbTotalOccurences() {
@@ -120,7 +120,7 @@ public class Pagination {
    * Get nbTotalPages
    * @return nbTotalPages
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NB_TOTAL_PAGES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getNbTotalPages() {
@@ -144,7 +144,7 @@ public class Pagination {
    * Get nbOccurences
    * @return nbOccurences
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NB_OCCURENCES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getNbOccurences() {
@@ -168,7 +168,7 @@ public class Pagination {
    * Get numPage
    * @return numPage
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NUM_PAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getNumPage() {

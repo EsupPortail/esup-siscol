@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Responsable.JSON_PROPERTY_DATE_DEBUT_VALIDITE,
   Responsable.JSON_PROPERTY_DATE_FIN_VALIDITE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Responsable {
   public static final String JSON_PROPERTY_NOM = "nom";
   private String nom;
@@ -63,7 +63,7 @@ public class Responsable {
    * nom
    * @return nom
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNom() {
@@ -87,7 +87,7 @@ public class Responsable {
    * prenom
    * @return prenom
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PRENOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPrenom() {
@@ -111,7 +111,7 @@ public class Responsable {
    * titre
    * @return titre
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TITRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTitre() {
@@ -135,7 +135,7 @@ public class Responsable {
    * Date du début de la validité de responsable
    * @return dateDebutValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebutValidite() {
@@ -159,7 +159,7 @@ public class Responsable {
    * Date de la fin de la validité de responsable
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateFinValidite() {

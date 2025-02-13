@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   NomenclatureAffichage.JSON_PROPERTY_URL,
   NomenclatureAffichage.JSON_PROPERTY_EST_NOMENCLATURE_STANDARD
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class NomenclatureAffichage {
   public static final String JSON_PROPERTY_CODE_NOMENCLATURE = "codeNomenclature";
   private String codeNomenclature;
@@ -62,7 +62,7 @@ public class NomenclatureAffichage {
    * Code de la nomenclature
    * @return codeNomenclature
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_NOMENCLATURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeNomenclature() {
@@ -86,7 +86,7 @@ public class NomenclatureAffichage {
    * nom singulier de la nomenclature
    * @return nomSingulier
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM_SINGULIER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNomSingulier() {
@@ -110,7 +110,7 @@ public class NomenclatureAffichage {
    * nom pluriel de la nomenclature
    * @return nomPluriel
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM_PLURIEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNomPluriel() {
@@ -134,7 +134,7 @@ public class NomenclatureAffichage {
    * url de la nomenclature
    * @return url
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_URL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getUrl() {
@@ -158,7 +158,7 @@ public class NomenclatureAffichage {
    * retourne true si c&#39;est une nomenclature standard
    * @return estNomenclatureStandard
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_NOMENCLATURE_STANDARD)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstNomenclatureStandard() {

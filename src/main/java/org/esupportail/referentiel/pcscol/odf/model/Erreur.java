@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     Erreur.JSON_PROPERTY_CHAMP,
     Erreur.JSON_PROPERTY_MESSAGE_DETAILS
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -65,7 +65,7 @@ public class Erreur {
      *
      * @return code
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getCode() {
@@ -88,7 +88,7 @@ public class Erreur {
      *
      * @return message
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_MESSAGE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getMessage() {
@@ -112,7 +112,7 @@ public class Erreur {
      *
      * @return codeObjet
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE_OBJET)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCodeObjet() {
@@ -140,7 +140,7 @@ public class Erreur {
      *
      * @return champ
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CHAMP)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getChamp() {
@@ -163,7 +163,7 @@ public class Erreur {
      *
      * @return messageDetails
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MESSAGE_DETAILS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public ErreurMessageDetails getMessageDetails() {

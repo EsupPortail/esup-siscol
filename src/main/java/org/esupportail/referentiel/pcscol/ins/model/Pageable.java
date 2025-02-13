@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Pageable.JSON_PROPERTY_PAGE,
   Pageable.JSON_PROPERTY_TAILLE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Pageable {
   public static final String JSON_PROPERTY_PAGE = "page";
   private Integer page = 0;
@@ -50,7 +50,7 @@ public class Pageable {
    * numéro de page demandée (commence à 0)
    * @return page
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPage() {
@@ -74,7 +74,7 @@ public class Pageable {
    * nombre d&#39;élements par page
    * @return taille
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TAILLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getTaille() {

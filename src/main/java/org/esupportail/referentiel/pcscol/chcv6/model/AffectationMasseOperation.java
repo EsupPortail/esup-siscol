@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AffectationMasseOperation.JSON_PROPERTY_CURSUS_ID,
   AffectationMasseOperation.JSON_PROPERTY_AVEC_CREATION_BROUILLON
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationMasseOperation {
   public static final String JSON_PROPERTY_COMMANDE = "commande";
   private String commande;
@@ -55,7 +55,7 @@ public class AffectationMasseOperation {
    * La commande à effectuer
    * @return commande
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_COMMANDE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCommande() {
@@ -79,7 +79,7 @@ public class AffectationMasseOperation {
    * L&#39;id technique du cursus
    * @return cursusId
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CURSUS_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getCursusId() {
@@ -103,7 +103,7 @@ public class AffectationMasseOperation {
    * spécifie si le brouillon doit etre créé
    * @return avecCreationBrouillon
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AVEC_CREATION_BROUILLON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getAvecCreationBrouillon() {

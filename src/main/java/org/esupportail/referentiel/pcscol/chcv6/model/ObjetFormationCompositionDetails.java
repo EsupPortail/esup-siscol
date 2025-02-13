@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ObjetFormationCompositionDetails.JSON_PROPERTY_LIBELLE_LONG,
   ObjetFormationCompositionDetails.JSON_PROPERTY_TYPE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ObjetFormationCompositionDetails {
   public static final String JSON_PROPERTY_OBJET_FORMATION_UUID = "objetFormationUuid";
   private UUID objetFormationUuid;
@@ -63,7 +63,7 @@ public class ObjetFormationCompositionDetails {
    * L&#39;identifiant technique de l&#39;objet de formation
    * @return objetFormationUuid
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_OBJET_FORMATION_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getObjetFormationUuid() {
@@ -87,7 +87,7 @@ public class ObjetFormationCompositionDetails {
    * Le code de la composition
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -111,7 +111,7 @@ public class ObjetFormationCompositionDetails {
    * Le libellé de l&#39;objet de formation
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -135,7 +135,7 @@ public class ObjetFormationCompositionDetails {
    * Le libellé de l&#39;objet de formation
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {
@@ -159,7 +159,7 @@ public class ObjetFormationCompositionDetails {
    * Le type de l&#39;objet de formation
    * @return type
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getType() {

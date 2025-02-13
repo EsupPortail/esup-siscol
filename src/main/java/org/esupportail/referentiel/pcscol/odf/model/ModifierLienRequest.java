@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /** ModifierLienRequest */
 @JsonPropertyOrder({ModifierLienRequest.JSON_PROPERTY_TEMOIN_OBLIGATOIRE})
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -46,7 +46,7 @@ public class ModifierLienRequest {
      *
      * @return temoinObligatoire
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TEMOIN_OBLIGATOIRE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Boolean getTemoinObligatoire() {

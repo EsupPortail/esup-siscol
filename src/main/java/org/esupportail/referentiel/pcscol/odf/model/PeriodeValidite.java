@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PeriodeValidite.JSON_PROPERTY_LIBELLE,
     PeriodeValidite.JSON_PROPERTY_VALIDITE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -61,7 +61,7 @@ public class PeriodeValidite {
      *
      * @return id
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getId() {
@@ -84,7 +84,7 @@ public class PeriodeValidite {
      *
      * @return code
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCode() {
@@ -107,7 +107,7 @@ public class PeriodeValidite {
      *
      * @return libelle
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelle() {
@@ -130,7 +130,7 @@ public class PeriodeValidite {
      *
      * @return validite
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_VALIDITE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public DatesValidation getValidite() {

@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   OccurrenceNomenclature.JSON_PROPERTY_LIBELLE,
   OccurrenceNomenclature.JSON_PROPERTY_CONTEXTE_CONSOMMATION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class OccurrenceNomenclature {
   public static final String JSON_PROPERTY_NOMENCLATURE = "nomenclature";
   private OccurrenceNomenclatureType nomenclature;
@@ -58,7 +58,7 @@ public class OccurrenceNomenclature {
    * Get nomenclature
    * @return nomenclature
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_NOMENCLATURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public OccurrenceNomenclatureType getNomenclature() {
@@ -82,7 +82,7 @@ public class OccurrenceNomenclature {
    * le code de l&#39;occurrence de nomenclature
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -106,7 +106,7 @@ public class OccurrenceNomenclature {
    * le libellé d&#39;affichage de l&#39;occurrence de nomenclature
    * @return libelle
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelle() {
@@ -130,7 +130,7 @@ public class OccurrenceNomenclature {
    * La date de consommation de l&#39;occurrence de nomenclature au format AAAA-MM-JJ
    * @return contexteConsommation
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CONTEXTE_CONSOMMATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getContexteConsommation() {

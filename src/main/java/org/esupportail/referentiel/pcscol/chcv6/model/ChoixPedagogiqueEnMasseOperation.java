@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   ChoixPedagogiqueEnMasseOperation.JSON_PROPERTY_COMMANDE,
   ChoixPedagogiqueEnMasseOperation.JSON_PROPERTY_CURSUS_UUID
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ChoixPedagogiqueEnMasseOperation {
   /**
    * La commande à effectuer
@@ -92,7 +92,7 @@ public class ChoixPedagogiqueEnMasseOperation {
    * La commande à effectuer
    * @return commande
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_COMMANDE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public CommandeEnum getCommande() {
@@ -116,7 +116,7 @@ public class ChoixPedagogiqueEnMasseOperation {
    * L&#39;id technique du cursus
    * @return cursusUuid
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CURSUS_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getCursusUuid() {

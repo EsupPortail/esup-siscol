@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   EtatCivil.JSON_PROPERTY_TROISIEME_PRENOM,
   EtatCivil.JSON_PROPERTY_GENRE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class EtatCivil {
   public static final String JSON_PROPERTY_NOM_DE_NAISSANCE = "nomDeNaissance";
   private String nomDeNaissance;
@@ -66,7 +66,7 @@ public class EtatCivil {
    * Le nom de naissance
    * @return nomDeNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNomDeNaissance() {
@@ -90,7 +90,7 @@ public class EtatCivil {
    * Le nom usuel
    * @return nomUsuel
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOM_USUEL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNomUsuel() {
@@ -114,7 +114,7 @@ public class EtatCivil {
    * Le prénom
    * @return prenom
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PRENOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPrenom() {
@@ -138,7 +138,7 @@ public class EtatCivil {
    * Le deuxième prénom
    * @return deuxiemePrenom
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DEUXIEME_PRENOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDeuxiemePrenom() {
@@ -162,7 +162,7 @@ public class EtatCivil {
    * Le troisième prénom
    * @return troisiemePrenom
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TROISIEME_PRENOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTroisiemePrenom() {
@@ -186,7 +186,7 @@ public class EtatCivil {
    * Les valeurs &#x60;M&#x60; ou &#x60;F&#x60; sont acceptées
    * @return genre
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_GENRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getGenre() {

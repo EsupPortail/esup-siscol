@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   AffectationIndividuelleRechercherCursusApprenantResultatCursus.JSON_PROPERTY_STATUT_IA,
   AffectationIndividuelleRechercherCursusApprenantResultatCursus.JSON_PROPERTY_INFO_OBJETS_MAQUETTE_CHEMIN_IA_LIST
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AffectationIndividuelleRechercherCursusApprenantResultatCursus {
   public static final String JSON_PROPERTY_CURSUS_UUID = "cursusUuid";
   private UUID cursusUuid;
@@ -102,7 +102,7 @@ public class AffectationIndividuelleRechercherCursusApprenantResultatCursus {
    * L&#39;UUID du cursus
    * @return cursusUuid
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CURSUS_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getCursusUuid() {
@@ -126,7 +126,7 @@ public class AffectationIndividuelleRechercherCursusApprenantResultatCursus {
    * si l&#39;objet maquette qui porte l&#39;inscription administrative est ouvert au chc
    * @return estOmIaOuvertAuChc
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_EST_OM_IA_OUVERT_AU_CHC)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getEstOmIaOuvertAuChc() {
@@ -150,7 +150,7 @@ public class AffectationIndividuelleRechercherCursusApprenantResultatCursus {
    * code chemin de l&#39;objet maquette qui porte l&#39;inscription administrative
    * @return codeCheminOmIa
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN_OM_IA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeCheminOmIa() {
@@ -174,7 +174,7 @@ public class AffectationIndividuelleRechercherCursusApprenantResultatCursus {
    * le statut de l&#39;inscription
    * @return statutIa
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_STATUT_IA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public StatutIaEnum getStatutIa() {
@@ -206,7 +206,7 @@ public class AffectationIndividuelleRechercherCursusApprenantResultatCursus {
    * liste ordonnée des informations sur les OM, de l&#39;OM racine jusqu&#39;à l&#39;OM qui porte l&#39;IA
    * @return infoObjetsMaquetteCheminIaList
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_INFO_OBJETS_MAQUETTE_CHEMIN_IA_LIST)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<AffectationIndividuelleRechercherCursusApprenantResultatCursusInfoOm> getInfoObjetsMaquetteCheminIaList() {

@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Inscription.JSON_PROPERTY_PRINCIPAL,
   Inscription.JSON_PROPERTY_TEMOIN_P_I_A_ACTIF
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Inscription {
   public static final String JSON_PROPERTY_UUID = "uuid";
   private UUID uuid;
@@ -81,7 +81,7 @@ public class Inscription {
    * L&#39;identifiant unique de la piste
    * @return uuid
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_UUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getUuid() {
@@ -105,7 +105,7 @@ public class Inscription {
    * Get etatCivil
    * @return etatCivil
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ETAT_CIVIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public EtatCivil getEtatCivil() {
@@ -129,7 +129,7 @@ public class Inscription {
    * Get naissance
    * @return naissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Naissance getNaissance() {
@@ -153,7 +153,7 @@ public class Inscription {
    * Get bac
    * @return bac
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_BAC)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Bac getBac() {
@@ -177,7 +177,7 @@ public class Inscription {
    * Get voeu
    * @return voeu
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_VOEU)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Voeu getVoeu() {
@@ -201,7 +201,7 @@ public class Inscription {
    * Get meta
    * @return meta
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_META)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public MetaDonnee getMeta() {
@@ -233,7 +233,7 @@ public class Inscription {
    * Get paiements
    * @return paiements
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAIEMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<Paiement> getPaiements() {
@@ -257,7 +257,7 @@ public class Inscription {
    * Get principal
    * @return principal
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PRINCIPAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getPrincipal() {
@@ -281,7 +281,7 @@ public class Inscription {
    * Get temoinPIAActif
    * @return temoinPIAActif
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TEMOIN_P_I_A_ACTIF)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTemoinPIAActif() {

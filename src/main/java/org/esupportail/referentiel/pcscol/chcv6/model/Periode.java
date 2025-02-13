@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Periode.JSON_PROPERTY_EST_ACTIVE,
   Periode.JSON_PROPERTY_IDENTIFIANT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class Periode {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -80,7 +80,7 @@ public class Periode {
    * Code de la période - identifiant unique
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -104,7 +104,7 @@ public class Periode {
    * Le libellé court de la période
    * @return libelleCourt
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourt() {
@@ -128,7 +128,7 @@ public class Periode {
    * Le libellé long de la période
    * @return libelleLong
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleLong() {
@@ -152,7 +152,7 @@ public class Periode {
    * Le libellé affichage de la période
    * @return libelleAffichage
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleAffichage() {
@@ -176,7 +176,7 @@ public class Periode {
    * année universitaire - ex : 2019
    * @return anneeUniversitaire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_UNIVERSITAIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getAnneeUniversitaire() {
@@ -200,7 +200,7 @@ public class Periode {
    * Date de début de la période
    * @return dateDebut
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateDebut() {
@@ -224,7 +224,7 @@ public class Periode {
    * Date de fin de la période
    * @return dateFin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getDateFin() {
@@ -248,7 +248,7 @@ public class Periode {
    * Définit si la période est active ou pas
    * @return estActive
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstActive() {
@@ -272,7 +272,7 @@ public class Periode {
    * Identifiant unique de la période
    * @return identifiant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_IDENTIFIANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getIdentifiant() {

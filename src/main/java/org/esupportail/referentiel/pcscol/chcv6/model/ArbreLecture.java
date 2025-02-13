@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
   ArbreLecture.JSON_PROPERTY_FORMATION_ARBRE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ArbreLecture {
   public static final String JSON_PROPERTY_FORMATION_ARBRE = "formationArbre";
   private ArbreFormation formationArbre;
@@ -42,7 +42,7 @@ public class ArbreLecture {
    * Get formationArbre
    * @return formationArbre
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_FORMATION_ARBRE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public ArbreFormation getFormationArbre() {

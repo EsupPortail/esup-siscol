@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     PagedObjetMaquetteSummaries.JSON_PROPERTY_TAILLE,
     PagedObjetMaquetteSummaries.JSON_PROPERTY_PAGE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -74,7 +74,7 @@ public class PagedObjetMaquetteSummaries {
      *
      * @return items
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ITEMS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<ObjetMaquetteSummary> getItems() {
@@ -97,7 +97,7 @@ public class PagedObjetMaquetteSummaries {
      *
      * @return totalElements
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TOTAL_ELEMENTS)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Long getTotalElements() {
@@ -120,7 +120,7 @@ public class PagedObjetMaquetteSummaries {
      *
      * @return totalPages
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TOTAL_PAGES)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Integer getTotalPages() {
@@ -143,7 +143,7 @@ public class PagedObjetMaquetteSummaries {
      *
      * @return taille
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TAILLE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Integer getTaille() {
@@ -166,7 +166,7 @@ public class PagedObjetMaquetteSummaries {
      *
      * @return page
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_PAGE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Integer getPage() {

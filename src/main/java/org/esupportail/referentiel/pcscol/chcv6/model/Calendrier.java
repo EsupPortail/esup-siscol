@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Calendrier.JSON_PROPERTY_DATE_FIN,
   Calendrier.JSON_PROPERTY_ACTIF
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class Calendrier {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -77,7 +77,7 @@ public class Calendrier {
    * Le code du calendrier
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -101,7 +101,7 @@ public class Calendrier {
    * Le libellé du calendrier à afficher
    * @return libelle
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelle() {
@@ -125,7 +125,7 @@ public class Calendrier {
    * Le libellé court du calendrier à afficher
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -149,7 +149,7 @@ public class Calendrier {
    * Le libellé long du calendrier à afficher
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {
@@ -181,7 +181,7 @@ public class Calendrier {
    * Get listeContexte
    * @return listeContexte
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LISTE_CONTEXTE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<ObjetLibelle> getListeContexte() {
@@ -205,7 +205,7 @@ public class Calendrier {
    * La date de début du calendrier
    * @return dateDebut
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Date getDateDebut() {
@@ -229,7 +229,7 @@ public class Calendrier {
    * La date de fin du calendrier
    * @return dateFin
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_FIN)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Date getDateFin() {
@@ -253,7 +253,7 @@ public class Calendrier {
    * Le calendrier est-if actif ?
    * @return actif
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ACTIF)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getActif() {

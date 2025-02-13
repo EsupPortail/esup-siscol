@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SituationPersonnelleApprenant.JSON_PROPERTY_ENFANTS,
   SituationPersonnelleApprenant.JSON_PROPERTY_SITUATION_MILITAIRE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class SituationPersonnelleApprenant {
   public static final String JSON_PROPERTY_SITUATION_FAMILIALE = "situationFamiliale";
   private String situationFamiliale;
@@ -54,7 +54,7 @@ public class SituationPersonnelleApprenant {
    * Le code de la situation familiale de l&#39;étudiant issu de la nomenclature Situations familiales  Codes de la nomenclature sur 6 caractères. Préfixe des codes : SIF 
    * @return situationFamiliale
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SITUATION_FAMILIALE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getSituationFamiliale() {
@@ -78,7 +78,7 @@ public class SituationPersonnelleApprenant {
    * Le nombre d&#39;enfants à charge
    * @return enfants
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ENFANTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getEnfants() {
@@ -102,7 +102,7 @@ public class SituationPersonnelleApprenant {
    * Le code de la situation militaire de l&#39;étudiant issu de la nomenclature Situations militaires  Codes de la nomenclature sur 6 caractères. Préfixe des codes : SIM. 
    * @return situationMilitaire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SITUATION_MILITAIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getSituationMilitaire() {

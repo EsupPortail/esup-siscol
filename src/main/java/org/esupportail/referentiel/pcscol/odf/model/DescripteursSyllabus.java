@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     DescripteursSyllabus.JSON_PROPERTY_AUTRES_INFORMATIONS,
     DescripteursSyllabus.JSON_PROPERTY_MODALITES_ENSEIGNEMENTS
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -106,7 +106,7 @@ public class DescripteursSyllabus {
      *
      * @return typeObjetMaquette
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public TypeObjetMaquette getTypeObjetMaquette() {
@@ -129,7 +129,7 @@ public class DescripteursSyllabus {
      *
      * @return description
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DESCRIPTION)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getDescription() {
@@ -152,7 +152,7 @@ public class DescripteursSyllabus {
      *
      * @return objectif
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_OBJECTIF)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getObjectif() {
@@ -175,7 +175,7 @@ public class DescripteursSyllabus {
      *
      * @return ouvertureALaMobiliteEntrante
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_OUVERTURE_A_LA_MOBILITE_ENTRANTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getOuvertureALaMobiliteEntrante() {
@@ -198,7 +198,7 @@ public class DescripteursSyllabus {
      *
      * @return langueEnseignement
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LANGUE_ENSEIGNEMENT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLangueEnseignement() {
@@ -221,7 +221,7 @@ public class DescripteursSyllabus {
      *
      * @return prerequisPedagogique
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_PREREQUIS_PEDAGOGIQUE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getPrerequisPedagogique() {
@@ -244,7 +244,7 @@ public class DescripteursSyllabus {
      *
      * @return bibliographie
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_BIBLIOGRAPHIE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getBibliographie() {
@@ -267,7 +267,7 @@ public class DescripteursSyllabus {
      *
      * @return contacts
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CONTACTS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getContacts() {
@@ -290,7 +290,7 @@ public class DescripteursSyllabus {
      *
      * @return autresInformations
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_AUTRES_INFORMATIONS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getAutresInformations() {
@@ -313,7 +313,7 @@ public class DescripteursSyllabus {
      *
      * @return modalitesEnseignements
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MODALITES_ENSEIGNEMENTS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getModalitesEnseignements() {

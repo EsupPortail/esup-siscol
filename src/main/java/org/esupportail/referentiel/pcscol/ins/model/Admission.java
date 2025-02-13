@@ -44,7 +44,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Admission.JSON_PROPERTY_ETABLISSEMENT_PRECEDENT,
   Admission.JSON_PROPERTY_ETABLISSEMENT_PRECEDENT_ETRANGER
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Admission {
   public static final String JSON_PROPERTY_VOIE = "voie";
   private VoieAdmission voie;
@@ -100,7 +100,7 @@ public class Admission {
    * Get voie
    * @return voie
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_VOIE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public VoieAdmission getVoie() {
@@ -124,7 +124,7 @@ public class Admission {
    * L&#39;année de passage du concours d&#39;admission au format AAAA  Obligatoire si VoieAdmission &#x3D; concours 
    * @return anneeConcours
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_CONCOURS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getAnneeConcours() {
@@ -148,7 +148,7 @@ public class Admission {
    * Le code du concours d&#39;admission issu de la nomenclature Concours d&#39;admission.  Codes de la nomenclature sur 6 caractères. Préfixe des codes : CON Obligatoire si le champ anneeConcours est complété 
    * @return concours
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONCOURS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getConcours() {
@@ -172,7 +172,7 @@ public class Admission {
    * Le rang obtenu au concours d&#39;admission
    * @return rangConcours
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_RANG_CONCOURS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getRangConcours() {
@@ -196,7 +196,7 @@ public class Admission {
    * L&#39;année universitaire correspondant au cursus CPGE au format AAAA
    * @return anneePrecedente
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_PRECEDENTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getAnneePrecedente() {
@@ -220,7 +220,7 @@ public class Admission {
    * Le témoin indiquant que l&#39;étudiant a suivi un cursus en CPGE (classe préparatoire) l&#39;année dernière.  Obligatoire si le champ anneeConcours est complété. 
    * @return temoinClassePrepa
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TEMOIN_CLASSE_PREPA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTemoinClassePrepa() {
@@ -244,7 +244,7 @@ public class Admission {
    * Le code du type de classe préparatoire fréquenté issu de la nomenclature Types de classe préparatoire Codes de la nomenclature sur 6 caractères. Préfixe des codes : TCP  Obligatoire si temoinClassePrepa &#x3D; true 
    * @return typePrepa
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_PREPA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTypePrepa() {
@@ -268,7 +268,7 @@ public class Admission {
    * date contexte admission type classe preparatoire
    * @return contexteConsommationTypePrepa
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONTEXTE_CONSOMMATION_TYPE_PREPA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getContexteConsommationTypePrepa() {
@@ -292,7 +292,7 @@ public class Admission {
    * La puissance de la classe préparatoire Les valeurs P1, P2, P22 et P32 sont acceptées 
    * @return puissancePrepa
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PUISSANCE_PREPA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPuissancePrepa() {
@@ -316,7 +316,7 @@ public class Admission {
    * - F : français en France, - E : français à l&#39;étranger, - R : étranger Obligatoire si temoinClassePrepa &#x3D; true 
    * @return typeEtablissementPrecedent
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_ETABLISSEMENT_PRECEDENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTypeEtablissementPrecedent() {
@@ -340,7 +340,7 @@ public class Admission {
    * Le code du département de l&#39;établissement de la CPGE si &#39;français en France&#39; issu de la nomenclature Départements Obligatoire si typeEtablissementPrecedent &#x3D; F 
    * @return departementEtablissementPrecedent
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DEPARTEMENT_ETABLISSEMENT_PRECEDENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDepartementEtablissementPrecedent() {
@@ -364,7 +364,7 @@ public class Admission {
    * Le code du pays de l&#39;établissement de la CPGE si &#39;français à l&#39;étranger&#39; ou &#39;étranger&#39; issu de la nomenclature Pays et Nationalités  Obligatoire si typeEtablissementPrecedent &#x3D; E ou R 
    * @return paysEtablissementPrecedent
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAYS_ETABLISSEMENT_PRECEDENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getPaysEtablissementPrecedent() {
@@ -388,7 +388,7 @@ public class Admission {
    * Le code de l&#39;établissement français de la CPGE si &#39;français en France&#39; ou &#39;français à l&#39;étranger&#39; issu de la nomenclature Etablissements français  Obligatoire 
    * @return etablissementPrecedent
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ETABLISSEMENT_PRECEDENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getEtablissementPrecedent() {
@@ -412,7 +412,7 @@ public class Admission {
    * Le code de l&#39;établissement étranger de la CPGE si &#39;étranger&#39; issu de la nomenclature Etablissements étrangers  Obligatoire 
    * @return etablissementPrecedentEtranger
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ETABLISSEMENT_PRECEDENT_ETRANGER)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getEtablissementPrecedentEtranger() {

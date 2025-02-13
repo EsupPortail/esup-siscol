@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Amenagement.JSON_PROPERTY_CODE_AMENAGEMENT,
   Amenagement.JSON_PROPERTY_LIBELLE_AMENAGEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class Amenagement {
   public static final String JSON_PROPERTY_CODE_AMENAGEMENT = "codeAmenagement";
   private String codeAmenagement;
@@ -50,7 +50,7 @@ public class Amenagement {
    * le code de l&#39;amenagement
    * @return codeAmenagement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_AMENAGEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeAmenagement() {
@@ -74,7 +74,7 @@ public class Amenagement {
    * le libelle de l&#39;amenagement
    * @return libelleAmenagement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_AMENAGEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleAmenagement() {

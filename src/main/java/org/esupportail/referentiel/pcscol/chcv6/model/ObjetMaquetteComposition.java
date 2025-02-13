@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ObjetMaquetteComposition.JSON_PROPERTY_OBJET_FORMATION_OU_FORMATION,
   ObjetMaquetteComposition.JSON_PROPERTY_CHEMINS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ObjetMaquetteComposition {
   public static final String JSON_PROPERTY_OBJET_FORMATION_OU_FORMATION = "objetFormationOuFormation";
   private ObjetFormationOuFormation objetFormationOuFormation;
@@ -48,7 +48,7 @@ public class ObjetMaquetteComposition {
    * Get objetFormationOuFormation
    * @return objetFormationOuFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OBJET_FORMATION_OU_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public ObjetFormationOuFormation getObjetFormationOuFormation() {
@@ -80,7 +80,7 @@ public class ObjetMaquetteComposition {
    * la liste des chemins (un seul pour une Formation) : - de cet ObjetFormation (ou Formation) lié à cette composition - et compatibles avec les paramètres de recherche
    * @return chemins
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CHEMINS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ObjetMaquetteCompositionChemins> getChemins() {

@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ObjetMaquetteCompositionChemins.JSON_PROPERTY_CODE_CHEMIN,
   ObjetMaquetteCompositionChemins.JSON_PROPERTY_FORMATION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ObjetMaquetteCompositionChemins {
   public static final String JSON_PROPERTY_CODE_CHEMIN = "codeChemin";
   private String codeChemin;
@@ -50,7 +50,7 @@ public class ObjetMaquetteCompositionChemins {
    * chemin de cet ObjetFormationn (ou Formation)
    * @return codeChemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeChemin() {
@@ -74,7 +74,7 @@ public class ObjetMaquetteCompositionChemins {
    * Get formation
    * @return formation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Formation getFormation() {

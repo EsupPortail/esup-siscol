@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   ResultatTacheLongue.JSON_PROPERTY_STATUT_EXECUTION,
   ResultatTacheLongue.JSON_PROPERTY_LISTE_ERREUR
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ResultatTacheLongue {
   public static final String JSON_PROPERTY_IDENTIFIANT_TACHE = "identifiantTache";
   private String identifiantTache;
@@ -126,7 +126,7 @@ public class ResultatTacheLongue {
    * identifiant de la tache en cours
    * @return identifiantTache
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_IDENTIFIANT_TACHE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getIdentifiantTache() {
@@ -150,7 +150,7 @@ public class ResultatTacheLongue {
    * Get progression
    * @return progression
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PROGRESSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Float getProgression() {
@@ -174,7 +174,7 @@ public class ResultatTacheLongue {
    * Get nbElementTraite
    * @return nbElementTraite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NB_ELEMENT_TRAITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getNbElementTraite() {
@@ -198,7 +198,7 @@ public class ResultatTacheLongue {
    * Get nbElementErreur
    * @return nbElementErreur
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NB_ELEMENT_ERREUR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getNbElementErreur() {
@@ -222,7 +222,7 @@ public class ResultatTacheLongue {
    * Get nbElementTotal
    * @return nbElementTotal
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NB_ELEMENT_TOTAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getNbElementTotal() {
@@ -246,7 +246,7 @@ public class ResultatTacheLongue {
    * Get dateDebutExecution
    * @return dateDebutExecution
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_EXECUTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getDateDebutExecution() {
@@ -270,7 +270,7 @@ public class ResultatTacheLongue {
    * Get dateFinExecution
    * @return dateFinExecution
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_EXECUTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getDateFinExecution() {
@@ -294,7 +294,7 @@ public class ResultatTacheLongue {
    * Get dureeExecution
    * @return dureeExecution
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DUREE_EXECUTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getDureeExecution() {
@@ -318,7 +318,7 @@ public class ResultatTacheLongue {
    * Get statutExecution
    * @return statutExecution
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_STATUT_EXECUTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public StatutExecutionEnum getStatutExecution() {
@@ -350,7 +350,7 @@ public class ResultatTacheLongue {
    * Get listeErreur
    * @return listeErreur
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_ERREUR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ResultatTacheLongueErreur> getListeErreur() {

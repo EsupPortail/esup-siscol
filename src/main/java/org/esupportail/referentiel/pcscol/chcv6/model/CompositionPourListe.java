@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CompositionPourListe.JSON_PROPERTY_ACTIVE,
   CompositionPourListe.JSON_PROPERTY_ASSOCIEE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CompositionPourListe {
   public static final String JSON_PROPERTY_COMPOSITION_UUID = "compositionUuid";
   private UUID compositionUuid;
@@ -71,7 +71,7 @@ public class CompositionPourListe {
    * L&#39;UUID de la composition
    * @return compositionUuid
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMPOSITION_UUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getCompositionUuid() {
@@ -95,7 +95,7 @@ public class CompositionPourListe {
    * Le code de la composition
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -119,7 +119,7 @@ public class CompositionPourListe {
    * Le libellé de la composition
    * @return libelle
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelle() {
@@ -143,7 +143,7 @@ public class CompositionPourListe {
    * Le libellé court de la composition
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -167,7 +167,7 @@ public class CompositionPourListe {
    * Le libellé long de la composition
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {
@@ -191,7 +191,7 @@ public class CompositionPourListe {
    * Est-ce que la composition est active
    * @return active
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getActive() {
@@ -215,7 +215,7 @@ public class CompositionPourListe {
    * Est ce que la composition est associee à un objet de formation ou une formation
    * @return associee
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ASSOCIEE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getAssociee() {

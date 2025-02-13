@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   StructureAvecUaiCreation.JSON_PROPERTY_COMMENTAIRE,
   StructureAvecUaiCreation.JSON_PROPERTY_RESPONSABLE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class StructureAvecUaiCreation {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -66,7 +66,7 @@ public class StructureAvecUaiCreation {
    * Code Interne Pégase de l&#39;établissement (choisi par l&#39;établissement) - Clé fonctionnelle
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -90,7 +90,7 @@ public class StructureAvecUaiCreation {
    * Code national de l&#39;établissement d&#39;enseignement supérieur, fourni par le ministère
    * @return codeUai
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_UAI)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeUai() {
@@ -114,7 +114,7 @@ public class StructureAvecUaiCreation {
    * id Référentiel Externe de pegase
    * @return codeReferentielExterne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_REFERENTIEL_EXTERNE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeReferentielExterne() {
@@ -138,7 +138,7 @@ public class StructureAvecUaiCreation {
    * Témoin de la visibilité
    * @return temoinVisible
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TEMOIN_VISIBLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTemoinVisible() {
@@ -162,7 +162,7 @@ public class StructureAvecUaiCreation {
    * Commentaire
    * @return commentaire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMMENTAIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCommentaire() {
@@ -186,7 +186,7 @@ public class StructureAvecUaiCreation {
    * Get responsable
    * @return responsable
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_RESPONSABLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Responsable getResponsable() {

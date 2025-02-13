@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     Nomenclature.JSON_PROPERTY_CODE,
     Nomenclature.JSON_PROPERTY_DATE_CONSOMMATION
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -57,7 +57,7 @@ public class Nomenclature {
      *
      * @return type
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getType() {
@@ -82,7 +82,7 @@ public class Nomenclature {
      *
      * @return code
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getCode() {
@@ -105,7 +105,7 @@ public class Nomenclature {
      *
      * @return dateConsommation
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_DATE_CONSOMMATION)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Date getDateConsommation() {

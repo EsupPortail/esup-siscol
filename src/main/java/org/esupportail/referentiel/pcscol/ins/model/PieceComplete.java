@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PieceComplete.JSON_PROPERTY_TYPE_CONTENU,
   PieceComplete.JSON_PROPERTY_DEMANDE_DE_PIECE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class PieceComplete {
   public static final String JSON_PROPERTY_STATUT = "statut";
   private StatutPiece statut;
@@ -67,7 +67,7 @@ public class PieceComplete {
    * Get statut
    * @return statut
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public StatutPiece getStatut() {
@@ -91,7 +91,7 @@ public class PieceComplete {
    * le motif de rejet de la pièce
    * @return motifDuRejet
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MOTIF_DU_REJET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getMotifDuRejet() {
@@ -115,7 +115,7 @@ public class PieceComplete {
    * le contenu de la piece
    * @return contenu
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONTENU)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public byte[] getContenu() {
@@ -139,7 +139,7 @@ public class PieceComplete {
    * référence au contenu dans le système de stockage Pegase
    * @return contenuReference
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONTENU_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getContenuReference() {
@@ -163,7 +163,7 @@ public class PieceComplete {
    * le type du contenu
    * @return typeContenu
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_CONTENU)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTypeContenu() {
@@ -187,7 +187,7 @@ public class PieceComplete {
    * Get demandeDePiece
    * @return demandeDePiece
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DEMANDE_DE_PIECE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public DemandeDePiece getDemandeDePiece() {

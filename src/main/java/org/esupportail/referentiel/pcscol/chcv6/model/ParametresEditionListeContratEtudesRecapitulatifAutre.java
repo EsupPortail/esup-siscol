@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ParametresEditionListeContratEtudesRecapitulatifAutre.JSON_PROPERTY_CODE_CHEMIN,
   ParametresEditionListeContratEtudesRecapitulatifAutre.JSON_PROPERTY_LISTE_ID_CURSUS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ParametresEditionListeContratEtudesRecapitulatifAutre {
   public static final String JSON_PROPERTY_TITRE_DOCUMENT = "titreDocument";
   private String titreDocument;
@@ -65,7 +65,7 @@ public class ParametresEditionListeContratEtudesRecapitulatifAutre {
    * titre du document
    * @return titreDocument
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TITRE_DOCUMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getTitreDocument() {
@@ -89,7 +89,7 @@ public class ParametresEditionListeContratEtudesRecapitulatifAutre {
    * est-ce une demande de prévisualisation du document ?
    * @return previsualisation
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PREVISUALISATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getPrevisualisation() {
@@ -113,7 +113,7 @@ public class ParametresEditionListeContratEtudesRecapitulatifAutre {
    * Get elementsAAffiches
    * @return elementsAAffiches
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ELEMENTS_A_AFFICHES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public ElementsAAffiches getElementsAAffiches() {
@@ -137,7 +137,7 @@ public class ParametresEditionListeContratEtudesRecapitulatifAutre {
    * la code chemin
    * @return codeChemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeChemin() {
@@ -169,7 +169,7 @@ public class ParametresEditionListeContratEtudesRecapitulatifAutre {
    * la liste des cursus sur ayant les choix pedagogiques du contrat à éditer
    * @return listeIdCursus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_ID_CURSUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<UUID> getListeIdCursus() {

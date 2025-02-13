@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Apprenant.JSON_PROPERTY_DATE_DE_NAISSANCE,
   Apprenant.JSON_PROPERTY_INE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class Apprenant {
   public static final String JSON_PROPERTY_APPRENANT_UUID = "apprenantUuid";
   private String apprenantUuid;
@@ -67,7 +67,7 @@ public class Apprenant {
    * L&#39;UUID de l&#39;apprenant
    * @return apprenantUuid
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_APPRENANT_UUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getApprenantUuid() {
@@ -91,7 +91,7 @@ public class Apprenant {
    * Le code de l&#39;apprenant
    * @return codeApprenant
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeApprenant() {
@@ -115,7 +115,7 @@ public class Apprenant {
    * Le nom de famille de l&#39;apprenant
    * @return nomDeFamille
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_NOM_DE_FAMILLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getNomDeFamille() {
@@ -139,7 +139,7 @@ public class Apprenant {
    * Le prenom de l&#39;apprenant
    * @return prenom
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PRENOM)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getPrenom() {
@@ -163,7 +163,7 @@ public class Apprenant {
    * La date de naissance de l&#39;apprenant
    * @return dateDeNaissance
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Date getDateDeNaissance() {
@@ -187,7 +187,7 @@ public class Apprenant {
    * l&#39;identifiant national etudiant de l&#39;apprenant
    * @return ine
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_INE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getIne() {

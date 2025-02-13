@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     FormatsEnseignementRequest.JSON_PROPERTY_FORMATION_PORTEUSE,
     FormatsEnseignementRequest.JSON_PROPERTY_FORMATS_ENSEIGNEMENT
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -67,7 +67,7 @@ public class FormatsEnseignementRequest {
      *
      * @return structuresPorteuse
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_STRUCTURES_PORTEUSE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<String> getStructuresPorteuse() {
@@ -90,7 +90,7 @@ public class FormatsEnseignementRequest {
      *
      * @return formationPorteuse
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_FORMATION_PORTEUSE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getFormationPorteuse() {
@@ -123,7 +123,7 @@ public class FormatsEnseignementRequest {
      *
      * @return formatsEnseignement
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_FORMATS_ENSEIGNEMENT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<FormatEnseignement> getFormatsEnseignement() {

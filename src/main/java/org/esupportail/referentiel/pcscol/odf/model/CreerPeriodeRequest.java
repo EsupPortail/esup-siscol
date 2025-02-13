@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     CreerPeriodeRequest.JSON_PROPERTY_ANNEE_UNIVERSITAIRE,
     CreerPeriodeRequest.JSON_PROPERTY_TYPE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -83,7 +83,7 @@ public class CreerPeriodeRequest extends CreerEspaceRequest {
      *
      * @return libelleLong
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelleLong() {
@@ -106,7 +106,7 @@ public class CreerPeriodeRequest extends CreerEspaceRequest {
      *
      * @return libelleAffichage
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelleAffichage() {
@@ -129,7 +129,7 @@ public class CreerPeriodeRequest extends CreerEspaceRequest {
      *
      * @return validite
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_VALIDITE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public DatesValidation getValidite() {
@@ -152,7 +152,7 @@ public class CreerPeriodeRequest extends CreerEspaceRequest {
      *
      * @return active
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ACTIVE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Boolean getActive() {
@@ -175,7 +175,7 @@ public class CreerPeriodeRequest extends CreerEspaceRequest {
      *
      * @return anneeUniversitaire
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ANNEE_UNIVERSITAIRE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Integer getAnneeUniversitaire() {
@@ -198,7 +198,7 @@ public class CreerPeriodeRequest extends CreerEspaceRequest {
      *
      * @return type
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Typologie getType() {

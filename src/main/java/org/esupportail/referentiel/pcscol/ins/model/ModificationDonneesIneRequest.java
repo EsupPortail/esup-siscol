@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ModificationDonneesIneRequest.JSON_PROPERTY_COMMUNE_DE_NAISSANCE,
   ModificationDonneesIneRequest.JSON_PROPERTY_ETAT_CIVIL
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class ModificationDonneesIneRequest {
   public static final String JSON_PROPERTY_INE = "ine";
   private String ine;
@@ -62,7 +62,7 @@ public class ModificationDonneesIneRequest {
    * nouveau ine de l&#39;apprenant
    * @return ine
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_INE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getIne() {
@@ -86,7 +86,7 @@ public class ModificationDonneesIneRequest {
    * La date de naissance au format AAAA-MM-JJ
    * @return dateDeNaissance
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getDateDeNaissance() {
@@ -110,7 +110,7 @@ public class ModificationDonneesIneRequest {
    * Le code pays du pays de naissance issu de la nomenclature Pays et Nationalités Ex : 100 &#x3D; France 
    * @return paysDeNaissance
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PAYS_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getPaysDeNaissance() {
@@ -134,7 +134,7 @@ public class ModificationDonneesIneRequest {
    * Le code INSEE de la commune de naissance en France Ex : 67482 &#x3D; Strasbourg 
    * @return communeDeNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMMUNE_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCommuneDeNaissance() {
@@ -158,7 +158,7 @@ public class ModificationDonneesIneRequest {
    * Get etatCivil
    * @return etatCivil
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ETAT_CIVIL)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public EtatCivil getEtatCivil() {

@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
   StatsInscriptions.JSON_PROPERTY_VALIDEES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class StatsInscriptions {
   public static final String JSON_PROPERTY_VALIDEES = "validees";
   private Integer validees;
@@ -46,7 +46,7 @@ public class StatsInscriptions {
    * Get validees
    * @return validees
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_VALIDEES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Integer getValidees() {

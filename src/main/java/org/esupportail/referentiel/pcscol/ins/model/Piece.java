@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Piece.JSON_PROPERTY_STATUT,
   Piece.JSON_PROPERTY_MOTIF_DU_REJET
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Piece {
   public static final String JSON_PROPERTY_STATUT = "statut";
   private StatutPiece statut;
@@ -50,7 +50,7 @@ public class Piece {
    * Get statut
    * @return statut
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_STATUT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public StatutPiece getStatut() {
@@ -74,7 +74,7 @@ public class Piece {
    * Motif du rejet si statut est rejete
    * @return motifDuRejet
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MOTIF_DU_REJET)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getMotifDuRejet() {

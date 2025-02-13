@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   TexteParametrable.JSON_PROPERTY_TYPE_TEXTE,
   TexteParametrable.JSON_PROPERTY_CONTENU
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class TexteParametrable {
   public static final String JSON_PROPERTY_CODE_STRUCTURE = "codeStructure";
   private String codeStructure;
@@ -54,7 +54,7 @@ public class TexteParametrable {
    * Le code de l&#39;établissement (structure)
    * @return codeStructure
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeStructure() {
@@ -78,7 +78,7 @@ public class TexteParametrable {
    * Get typeTexte
    * @return typeTexte
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TYPE_TEXTE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public TypeTexte getTypeTexte() {
@@ -102,7 +102,7 @@ public class TexteParametrable {
    * contenu HTML du texte paramétrable
    * @return contenu
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CONTENU)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getContenu() {

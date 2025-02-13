@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SituationUniversitaire.JSON_PROPERTY_MOBILITE,
   SituationUniversitaire.JSON_PROPERTY_PROGRAMME_ECHANGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class SituationUniversitaire {
   public static final String JSON_PROPERTY_CESURE = "cesure";
   private Cesure cesure;
@@ -54,7 +54,7 @@ public class SituationUniversitaire {
    * Get cesure
    * @return cesure
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CESURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Cesure getCesure() {
@@ -78,7 +78,7 @@ public class SituationUniversitaire {
    * Get mobilite
    * @return mobilite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MOBILITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Mobilite getMobilite() {
@@ -102,7 +102,7 @@ public class SituationUniversitaire {
    * Get programmeEchange
    * @return programmeEchange
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PROGRAMME_ECHANGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public ProgrammeEchange getProgrammeEchange() {

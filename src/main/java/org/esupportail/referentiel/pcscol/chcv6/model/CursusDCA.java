@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CursusDCA.JSON_PROPERTY_FORMATION,
   CursusDCA.JSON_PROPERTY_RACINE_PEDAGOGIQUE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CursusDCA {
   public static final String JSON_PROPERTY_CODE_STRUCTURE = "codeStructure";
   private String codeStructure;
@@ -58,7 +58,7 @@ public class CursusDCA {
    * le code de la structure
    * @return codeStructure
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeStructure() {
@@ -82,7 +82,7 @@ public class CursusDCA {
    * Get periode
    * @return periode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERIODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public PeriodeDCA getPeriode() {
@@ -106,7 +106,7 @@ public class CursusDCA {
    * Get formation
    * @return formation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public FormationDCA getFormation() {
@@ -130,7 +130,7 @@ public class CursusDCA {
    * Get racinePedagogique
    * @return racinePedagogique
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_RACINE_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public LignePedagogiqueDCA getRacinePedagogique() {

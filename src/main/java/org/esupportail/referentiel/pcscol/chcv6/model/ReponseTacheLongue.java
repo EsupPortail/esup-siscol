@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
   ReponseTacheLongue.JSON_PROPERTY_IDENTIFIANT_TACHE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ReponseTacheLongue {
   public static final String JSON_PROPERTY_IDENTIFIANT_TACHE = "identifiantTache";
   private String identifiantTache;
@@ -46,7 +46,7 @@ public class ReponseTacheLongue {
    * identifiant de la tache en cours
    * @return identifiantTache
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_IDENTIFIANT_TACHE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getIdentifiantTache() {

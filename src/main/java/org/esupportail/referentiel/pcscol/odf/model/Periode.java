@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     Periode.JSON_PROPERTY_ACTIVE,
     Periode.JSON_PROPERTY_TYPE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -84,7 +84,7 @@ public class Periode extends Espace {
      *
      * @return libelleLong
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelleLong() {
@@ -107,7 +107,7 @@ public class Periode extends Espace {
      *
      * @return libelleAffichage
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getLibelleAffichage() {
@@ -130,7 +130,7 @@ public class Periode extends Espace {
      *
      * @return validite
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_VALIDITE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public DatesValidation getValidite() {
@@ -153,7 +153,7 @@ public class Periode extends Espace {
      *
      * @return anneeUniversitaire
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ANNEE_UNIVERSITAIRE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Integer getAnneeUniversitaire() {
@@ -176,7 +176,7 @@ public class Periode extends Espace {
      *
      * @return active
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ACTIVE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Boolean getActive() {
@@ -199,7 +199,7 @@ public class Periode extends Espace {
      *
      * @return type
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Typologie getType() {

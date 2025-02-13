@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   SituationPrecedente.JSON_PROPERTY_ANNEE_OBTENTION_DU_DERNIER_DIPLOME,
   SituationPrecedente.JSON_PROPERTY_DERNIER_DIPLOME
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class SituationPrecedente {
   public static final String JSON_PROPERTY_ANNEE_PRECEDENTE = "anneePrecedente";
   private BigDecimal anneePrecedente;
@@ -59,7 +59,7 @@ public class SituationPrecedente {
    * L&#39;année universitaire précédant l&#39;inscription en cours au format AAAA
    * @return anneePrecedente
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_PRECEDENTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getAnneePrecedente() {
@@ -83,7 +83,7 @@ public class SituationPrecedente {
    * Get situationPrecedente
    * @return situationPrecedente
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_SITUATION_PRECEDENTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public SituationAnneePrecedente getSituationPrecedente() {
@@ -107,7 +107,7 @@ public class SituationPrecedente {
    * L&#39;année d&#39;obtention du dernier diplôme au format AAAA
    * @return anneeObtentionDuDernierDiplome
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_OBTENTION_DU_DERNIER_DIPLOME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getAnneeObtentionDuDernierDiplome() {
@@ -131,7 +131,7 @@ public class SituationPrecedente {
    * Le code du type du dernier diplôme obtenu issu de la nomenclature Types du dernier diplôme obtenu.  Codes de la nomenclature sur 6 caractères. Préfixe des codes : DDO 
    * @return dernierDiplome
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DERNIER_DIPLOME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDernierDiplome() {

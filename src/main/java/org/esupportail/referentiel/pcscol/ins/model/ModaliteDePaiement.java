@@ -48,7 +48,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   ModaliteDePaiement.JSON_PROPERTY_PRIORITE_AFFICHAGE,
   ModaliteDePaiement.JSON_PROPERTY_NOTICE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class ModaliteDePaiement {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -160,7 +160,7 @@ public class ModaliteDePaiement {
    * Le code metier en saisie libre
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -184,7 +184,7 @@ public class ModaliteDePaiement {
    * Le code interne de l&#39;établissement pour lequel la modalité de paiement sera créée
    * @return codeStructure
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeStructure() {
@@ -208,7 +208,7 @@ public class ModaliteDePaiement {
    * Le libellé d&#39;affichage
    * @return libelleAffichage
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleAffichage() {
@@ -232,7 +232,7 @@ public class ModaliteDePaiement {
    * Code issu de la nomenclature mode de paiement du référentiel
    * @return codeModeDePaiement
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_MODE_DE_PAIEMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeModeDePaiement() {
@@ -256,7 +256,7 @@ public class ModaliteDePaiement {
    * Le témoin indiquant que cette modalité de paiement est proposée aux étudiants
    * @return temoinVisibleEtudiant
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_VISIBLE_ETUDIANT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinVisibleEtudiant() {
@@ -280,7 +280,7 @@ public class ModaliteDePaiement {
    * Statut du paiement généré à la confirmation du paiement
    * @return statutPaiement
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT_PAIEMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public StatutPaiementEnum getStatutPaiement() {
@@ -304,7 +304,7 @@ public class ModaliteDePaiement {
    * Le témoin modalité de paiement proposée aux primo-entrants
    * @return temoinPrimo
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_PRIMO)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinPrimo() {
@@ -328,7 +328,7 @@ public class ModaliteDePaiement {
    * Le témoin modalité de paiement proposée lors de la réinscription
    * @return temoinReins
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_REINS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinReins() {
@@ -352,7 +352,7 @@ public class ModaliteDePaiement {
    * Le nombre de paiements
    * @return nombreDePaiements
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NOMBRE_DE_PAIEMENTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getNombreDePaiements() {
@@ -376,7 +376,7 @@ public class ModaliteDePaiement {
    * Le montant minimum pour proposer la modalité de paiement
    * @return montantMinimum
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MONTANT_MINIMUM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getMontantMinimum() {
@@ -400,7 +400,7 @@ public class ModaliteDePaiement {
    * Le montant maximum pour proposer la modalité de paiement
    * @return montantMaximum
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MONTANT_MAXIMUM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BigDecimal getMontantMaximum() {
@@ -424,7 +424,7 @@ public class ModaliteDePaiement {
    * Le témoin de saisie d&#39;un motif ou d&#39;une référence
    * @return temoinSaisieReference
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_SAISIE_REFERENCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinSaisieReference() {
@@ -443,7 +443,7 @@ public class ModaliteDePaiement {
    * Le témoin de paiement en ligne − ne sera pas pris en compte à la création ou la modification
    * @return temoinPaiementEnLigne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TEMOIN_PAIEMENT_EN_LIGNE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getTemoinPaiementEnLigne() {
@@ -462,7 +462,7 @@ public class ModaliteDePaiement {
    * La date de début de validité
    * @return dateDebutValidite
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getDateDebutValidite() {
@@ -486,7 +486,7 @@ public class ModaliteDePaiement {
    * La date de fin de validité
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDateFinValidite() {
@@ -510,7 +510,7 @@ public class ModaliteDePaiement {
    * La priorité d&#39;affichage
    * @return prioriteAffichage
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PRIORITE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPrioriteAffichage() {
@@ -534,7 +534,7 @@ public class ModaliteDePaiement {
    * Notice de la modalité de paiement
    * @return notice
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_NOTICE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getNotice() {

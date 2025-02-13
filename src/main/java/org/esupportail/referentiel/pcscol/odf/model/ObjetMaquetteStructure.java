@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     ObjetMaquetteStructure.JSON_PROPERTY_ECTS,
     ObjetMaquetteStructure.JSON_PROPERTY_ENFANTS
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -91,7 +91,7 @@ public class ObjetMaquetteStructure {
      *
      * @return id
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public UUID getId() {
@@ -114,7 +114,7 @@ public class ObjetMaquetteStructure {
      *
      * @return contexteId
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CONTEXTE_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getContexteId() {
@@ -137,7 +137,7 @@ public class ObjetMaquetteStructure {
      *
      * @return classe
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CLASSE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getClasse() {
@@ -160,7 +160,7 @@ public class ObjetMaquetteStructure {
      *
      * @return type
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getType() {
@@ -183,7 +183,7 @@ public class ObjetMaquetteStructure {
      *
      * @return code
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public String getCode() {
@@ -206,7 +206,7 @@ public class ObjetMaquetteStructure {
      *
      * @return libelle
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelle() {
@@ -229,7 +229,7 @@ public class ObjetMaquetteStructure {
      *
      * @return pia
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_PIA)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public PointInscriptionAdministrative getPia() {
@@ -252,7 +252,7 @@ public class ObjetMaquetteStructure {
      *
      * @return valide
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_VALIDE)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public Boolean getValide() {
@@ -275,7 +275,7 @@ public class ObjetMaquetteStructure {
      *
      * @return mutualise
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MUTUALISE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getMutualise() {
@@ -301,7 +301,7 @@ public class ObjetMaquetteStructure {
      *
      * @return ects
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ECTS)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Double getEcts() {
@@ -332,7 +332,7 @@ public class ObjetMaquetteStructure {
      *
      * @return enfants
      */
-    @javax.annotation.Nonnull
+    @jakarta.annotation.Nonnull
     @JsonProperty(JSON_PROPERTY_ENFANTS)
     @JsonInclude(value = JsonInclude.Include.ALWAYS)
     public List<EnfantsStructure> getEnfants() {

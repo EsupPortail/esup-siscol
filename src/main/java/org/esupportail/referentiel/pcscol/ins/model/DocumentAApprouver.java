@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DocumentAApprouver.JSON_PROPERTY_PRIORITE_AFFICHAGE,
   DocumentAApprouver.JSON_PROPERTY_TEMOIN_VISIBLE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class DocumentAApprouver {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -86,7 +86,7 @@ public class DocumentAApprouver {
    * Le code metier en saisie libre
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -110,7 +110,7 @@ public class DocumentAApprouver {
    * Le code de l&#39;établissement (structure)
    * @return codeStructure
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeStructure() {
@@ -134,7 +134,7 @@ public class DocumentAApprouver {
    * Le libellé d&#39;affichage
    * @return libelleAffichage
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleAffichage() {
@@ -158,7 +158,7 @@ public class DocumentAApprouver {
    * Le contenu
    * @return contenu
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CONTENU)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getContenu() {
@@ -182,7 +182,7 @@ public class DocumentAApprouver {
    * Le libellé d&#39;acceptation
    * @return libelleAcceptation
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_ACCEPTATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleAcceptation() {
@@ -206,7 +206,7 @@ public class DocumentAApprouver {
    * Le libellé de refus
    * @return libelleRefus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_REFUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleRefus() {
@@ -230,7 +230,7 @@ public class DocumentAApprouver {
    * Si true, impose une réponse pour pouvoir continuer l&#39;inscription
    * @return temoinBloquant
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_BLOQUANT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinBloquant() {
@@ -254,7 +254,7 @@ public class DocumentAApprouver {
    * La date de début de validité
    * @return dateDebutValidite
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getDateDebutValidite() {
@@ -278,7 +278,7 @@ public class DocumentAApprouver {
    * La date de fin de validité
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDateFinValidite() {
@@ -302,7 +302,7 @@ public class DocumentAApprouver {
    * La priorité d&#39;affichage : Plus le nombre est élevé, plus le document apparaît en priorité dans la liste de valeurs. 
    * @return prioriteAffichage
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PRIORITE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Integer getPrioriteAffichage() {
@@ -326,7 +326,7 @@ public class DocumentAApprouver {
    * Si le document sera visible par l&#39;étudiant ou non.
    * @return temoinVisible
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_VISIBLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinVisible() {

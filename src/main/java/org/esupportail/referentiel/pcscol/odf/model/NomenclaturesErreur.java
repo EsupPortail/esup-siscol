@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /** NomenclaturesErreur */
 @JsonPropertyOrder({NomenclaturesErreur.JSON_PROPERTY_NOMENCLATURES_ERREUR})
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -58,7 +58,7 @@ public class NomenclaturesErreur {
      *
      * @return nomenclaturesErreur
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_NOMENCLATURES_ERREUR)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<NomenclatureErreurValidation> getNomenclaturesErreur() {

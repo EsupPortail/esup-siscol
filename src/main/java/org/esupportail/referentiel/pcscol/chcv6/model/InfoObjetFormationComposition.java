@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   InfoObjetFormationComposition.JSON_PROPERTY_ID,
   InfoObjetFormationComposition.JSON_PROPERTY_CODE_TYPE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class InfoObjetFormationComposition {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -59,7 +59,7 @@ public class InfoObjetFormationComposition {
    * Le code de l&#39;objet formation de composition
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -83,7 +83,7 @@ public class InfoObjetFormationComposition {
    * Le libelle de l&#39;objet formation de composition
    * @return libelle
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelle() {
@@ -107,7 +107,7 @@ public class InfoObjetFormationComposition {
    * l&#39;id de l&#39;objet formation de composition
    * @return id
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getId() {
@@ -131,7 +131,7 @@ public class InfoObjetFormationComposition {
    * Le codeType de l&#39;objet formation de composition
    * @return codeType
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeType() {

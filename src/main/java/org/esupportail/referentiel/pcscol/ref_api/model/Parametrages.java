@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Parametrages.JSON_PROPERTY_NATURE_TYPE_OBJET_FORMATION_ORIGINE,
   Parametrages.JSON_PROPERTY_NATURE_TYPE_OBJET_FORMATION_MODIFIE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Parametrages {
   public static final String JSON_PROPERTY_NATURE_TYPE_OBJET_FORMATION_ORIGINE = "natureTypeObjetFormationOrigine";
   private NatureTypeObjetFormation natureTypeObjetFormationOrigine;
@@ -46,7 +46,7 @@ public class Parametrages {
    * Get natureTypeObjetFormationOrigine
    * @return natureTypeObjetFormationOrigine
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NATURE_TYPE_OBJET_FORMATION_ORIGINE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public NatureTypeObjetFormation getNatureTypeObjetFormationOrigine() {
@@ -70,7 +70,7 @@ public class Parametrages {
    * Get natureTypeObjetFormationModifie
    * @return natureTypeObjetFormationModifie
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NATURE_TYPE_OBJET_FORMATION_MODIFIE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public NatureTypeObjetFormation getNatureTypeObjetFormationModifie() {

@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   LigneAffectationMasse.JSON_PROPERTY_CODE_CHEMIN_OM_IA,
   LigneAffectationMasse.JSON_PROPERTY_PROPRIETAIRE_BROUILLON
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class LigneAffectationMasse {
   public static final String JSON_PROPERTY_ID_CURSUS = "idCursus";
   private UUID idCursus;
@@ -75,7 +75,7 @@ public class LigneAffectationMasse {
    * L&#39;id technique du cursus
    * @return idCursus
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ID_CURSUS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getIdCursus() {
@@ -99,7 +99,7 @@ public class LigneAffectationMasse {
    * Get apprenant
    * @return apprenant
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Apprenant getApprenant() {
@@ -123,7 +123,7 @@ public class LigneAffectationMasse {
    * Get infosObjetMaquette
    * @return infosObjetMaquette
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_INFOS_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public InfosObjetMaquette getInfosObjetMaquette() {
@@ -147,7 +147,7 @@ public class LigneAffectationMasse {
    * Get infosPedagogique
    * @return infosPedagogique
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_INFOS_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public InfosPedagogique getInfosPedagogique() {
@@ -171,7 +171,7 @@ public class LigneAffectationMasse {
    * Get possibilitesPedagogiques
    * @return possibilitesPedagogiques
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_POSSIBILITES_PEDAGOGIQUES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public PossibilitesPedagogiques getPossibilitesPedagogiques() {
@@ -195,7 +195,7 @@ public class LigneAffectationMasse {
    * Spécifie si un brouillon existe pour ce cursus
    * @return brouillonEnCours
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_BROUILLON_EN_COURS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getBrouillonEnCours() {
@@ -219,7 +219,7 @@ public class LigneAffectationMasse {
    * code chemin de l&#39;objet maquette qui porte l&#39;inscription administrative
    * @return codeCheminOmIa
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN_OM_IA)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeCheminOmIa() {
@@ -243,7 +243,7 @@ public class LigneAffectationMasse {
    * username CAS du proprietaire du brouillon
    * @return proprietaireBrouillon
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PROPRIETAIRE_BROUILLON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getProprietaireBrouillon() {

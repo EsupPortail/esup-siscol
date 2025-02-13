@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
   Cvec.JSON_PROPERTY_NUMERO
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Cvec {
   public static final String JSON_PROPERTY_NUMERO = "numero";
   private String numero;
@@ -46,7 +46,7 @@ public class Cvec {
    * Le numéro de la Contribution Vie Etudiante et de Campus
    * @return numero
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_NUMERO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getNumero() {

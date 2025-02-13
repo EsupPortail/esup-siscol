@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     ContexteDetails.JSON_PROPERTY_INSCRIPTION_ADMINISTRATIVE,
     ContexteDetails.JSON_PROPERTY_DESCRIPTEURS_CONTEXTE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -72,7 +72,7 @@ public class ContexteDetails {
      *
      * @return id
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getId() {
@@ -103,7 +103,7 @@ public class ContexteDetails {
      *
      * @return chemin
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CHEMIN)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<UUID> getChemin() {
@@ -134,7 +134,7 @@ public class ContexteDetails {
      *
      * @return cheminCodes
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CHEMIN_CODES)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<String> getCheminCodes() {
@@ -157,7 +157,7 @@ public class ContexteDetails {
      *
      * @return valide
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_VALIDE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getValide() {
@@ -181,7 +181,7 @@ public class ContexteDetails {
      *
      * @return inscriptionAdministrative
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_INSCRIPTION_ADMINISTRATIVE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public PointInscriptionAdministrative getInscriptionAdministrative() {
@@ -205,7 +205,7 @@ public class ContexteDetails {
      *
      * @return descripteursContexte
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DESCRIPTEURS_CONTEXTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public DescripteursContexte getDescripteursContexte() {

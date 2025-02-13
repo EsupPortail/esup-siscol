@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /** PlageDeChoix */
 @JsonPropertyOrder({PlageDeChoix.JSON_PROPERTY_MIN, PlageDeChoix.JSON_PROPERTY_MAX})
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -49,7 +49,7 @@ public class PlageDeChoix {
      *
      * @return min
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MIN)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Integer getMin() {
@@ -72,7 +72,7 @@ public class PlageDeChoix {
      *
      * @return max
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MAX)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Integer getMax() {

@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   FaireChoixPedagogiqueAvecPropositionRequest.JSON_PROPERTY_AVEC_PROPOSITION,
   FaireChoixPedagogiqueAvecPropositionRequest.JSON_PROPERTY_CODE_CHEMIN_CHOIX_PEDAGOGIQUE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class FaireChoixPedagogiqueAvecPropositionRequest {
   public static final String JSON_PROPERTY_AVEC_PROPOSITION = "avecProposition";
   private Boolean avecProposition;
@@ -50,7 +50,7 @@ public class FaireChoixPedagogiqueAvecPropositionRequest {
    * Si les propositions pédagogiques doivent être faites à la création du brouillon. C&#39;est à dire choix affectation ou choix capitalisé lorsque possible sur les OF obligatoires et hors plage de choix
    * @return avecProposition
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_AVEC_PROPOSITION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getAvecProposition() {
@@ -74,7 +74,7 @@ public class FaireChoixPedagogiqueAvecPropositionRequest {
    * le code chemin de l&#39;objet maquette sur lequel on veut faire un choix pédagogique
    * @return codeCheminChoixPedagogique
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN_CHOIX_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeCheminChoixPedagogique() {

@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CommandeBrouillonEnMasseRequest.JSON_PROPERTY_CHEMIN_PEDAGOGIQUE_UUID,
   CommandeBrouillonEnMasseRequest.JSON_PROPERTY_CURSUS_UUIDS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CommandeBrouillonEnMasseRequest {
   public static final String JSON_PROPERTY_CHEMIN_PEDAGOGIQUE_UUID = "cheminPedagogiqueUuid";
   private UUID cheminPedagogiqueUuid;
@@ -53,7 +53,7 @@ public class CommandeBrouillonEnMasseRequest {
    * La réference (uuid) du chemin (pédagogique) sur lequel porte les commandes en masse
    * @return cheminPedagogiqueUuid
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CHEMIN_PEDAGOGIQUE_UUID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public UUID getCheminPedagogiqueUuid() {
@@ -85,7 +85,7 @@ public class CommandeBrouillonEnMasseRequest {
    * Get cursusUuids
    * @return cursusUuids
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CURSUS_UUIDS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<UUID> getCursusUuids() {

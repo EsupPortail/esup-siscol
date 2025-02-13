@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ChoisirAmenagementRequest.JSON_PROPERTY_CODE_CHEMIN_CHOIX_PEDAGOGIQUE,
   ChoisirAmenagementRequest.JSON_PROPERTY_TYPE_AMENAGEMENT_CODE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ChoisirAmenagementRequest {
   public static final String JSON_PROPERTY_CODE_CHEMIN_CHOIX_PEDAGOGIQUE = "codeCheminChoixPedagogique";
   private String codeCheminChoixPedagogique;
@@ -50,7 +50,7 @@ public class ChoisirAmenagementRequest {
    * le code chemin de l&#39;objet maquette sur lequel on veut faire un choix pédagogique
    * @return codeCheminChoixPedagogique
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN_CHOIX_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeCheminChoixPedagogique() {
@@ -74,7 +74,7 @@ public class ChoisirAmenagementRequest {
    * Code du type d&#39;amenagement à ajouter
    * @return typeAmenagementCode
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TYPE_AMENAGEMENT_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getTypeAmenagementCode() {

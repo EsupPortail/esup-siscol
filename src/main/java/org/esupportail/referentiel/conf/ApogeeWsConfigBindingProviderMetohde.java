@@ -1,5 +1,6 @@
 package org.esupportail.referentiel.conf;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -28,7 +29,9 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetie
 
 @ConditionalOnProperty(name = "app.mode_apogee")
 @Configuration
-public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { // NO_UCD (unused code)
+public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean,Serializable { // NO_UCD (unused code)
+
+	private static final long serialVersionUID = -1521878436222655994L;
 
 	private static final Logger log = LoggerFactory.getLogger(ApogeeWsConfigBindingProviderMetohde.class);
 
@@ -199,6 +202,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 
 	@Bean
 	ReferentielMetierServiceInterface referentielMetier() {
+		
 		String wsdlUrl = referentielMetierUrlService + "?wsdl";
 		String pwd = referentielMetierPassword;
 		String username = referentielMetierUserName;
@@ -211,8 +215,10 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 			log.error(e.getMessage());
 			referentielMetierService = new ReferentielMetierServiceInterfaceService();
 		}
+		System.out.println("++++++++++++++++++++++++++++++"+referentielMetierService.getReferentielMetier());
 		ReferentielMetierServiceInterface referentielMetierServiceInterface = referentielMetierService
 				.getReferentielMetier();
+		System.out.println("++++++++++++++++++++++++++++++"+referentielMetierServiceInterface);
 		BindingProvider bp = (BindingProvider) referentielMetierServiceInterface;
 		bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, wsdlUrl);
 		bp.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, username);

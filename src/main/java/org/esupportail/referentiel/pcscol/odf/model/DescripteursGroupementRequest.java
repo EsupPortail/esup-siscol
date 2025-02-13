@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     DescripteursGroupementRequest.JSON_PROPERTY_PLAGE_DE_CHOIX,
     DescripteursGroupementRequest.JSON_PROPERTY_NATURE_GROUPEMENT
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -67,7 +67,7 @@ public class DescripteursGroupementRequest extends DescripteursObjetMaquetteRequ
      *
      * @return plageDeChoix
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_PLAGE_DE_CHOIX)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public PlageDeChoix getPlageDeChoix() {
@@ -90,7 +90,7 @@ public class DescripteursGroupementRequest extends DescripteursObjetMaquetteRequ
      *
      * @return natureGroupement
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_NATURE_GROUPEMENT)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getNatureGroupement() {

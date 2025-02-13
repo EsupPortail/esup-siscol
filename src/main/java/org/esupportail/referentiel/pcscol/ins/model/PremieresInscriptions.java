@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   PremieresInscriptions.JSON_PROPERTY_ANNEE_UNIVERSITE,
   PremieresInscriptions.JSON_PROPERTY_ANNEE_ETABLISSEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class PremieresInscriptions {
   public static final String JSON_PROPERTY_ANNEE_ENSEIGNEMENT_SUPERIEUR = "anneeEnseignementSuperieur";
   private String anneeEnseignementSuperieur;
@@ -54,7 +54,7 @@ public class PremieresInscriptions {
    * Année de 1ère inscription dans l&#39;enseignement supérieur français au format AAAA
    * @return anneeEnseignementSuperieur
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_ENSEIGNEMENT_SUPERIEUR)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAnneeEnseignementSuperieur() {
@@ -78,7 +78,7 @@ public class PremieresInscriptions {
    * Année de 1ère inscription en université française au format AAAA
    * @return anneeUniversite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_UNIVERSITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAnneeUniversite() {
@@ -102,7 +102,7 @@ public class PremieresInscriptions {
    * Année de 1ère inscription dans l&#39;établissement au format AAAA
    * @return anneeEtablissement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_ETABLISSEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAnneeEtablissement() {

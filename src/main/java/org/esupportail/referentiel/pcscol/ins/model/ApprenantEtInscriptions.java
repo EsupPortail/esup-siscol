@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ApprenantEtInscriptions.JSON_PROPERTY_APPRENANT,
   ApprenantEtInscriptions.JSON_PROPERTY_INSCRIPTIONS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class ApprenantEtInscriptions {
   public static final String JSON_PROPERTY_APPRENANT = "apprenant";
   private Apprenant apprenant;
@@ -48,7 +48,7 @@ public class ApprenantEtInscriptions {
    * Get apprenant
    * @return apprenant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Apprenant getApprenant() {
@@ -80,7 +80,7 @@ public class ApprenantEtInscriptions {
    * les inscriptions
    * @return inscriptions
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_INSCRIPTIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<InscriptionComplete> getInscriptions() {

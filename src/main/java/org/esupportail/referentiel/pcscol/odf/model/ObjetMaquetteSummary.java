@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
     ObjetMaquetteSummary.JSON_PROPERTY_VALIDE_IN_ANY_CONTEXTE,
     ObjetMaquetteSummary.JSON_PROPERTY_PERIODE_ACTIVE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -102,7 +102,7 @@ public class ObjetMaquetteSummary {
      *
      * @return id
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getId() {
@@ -125,7 +125,7 @@ public class ObjetMaquetteSummary {
      *
      * @return typeObjetMaquette
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_OBJET_MAQUETTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public TypeObjetMaquette getTypeObjetMaquette() {
@@ -148,7 +148,7 @@ public class ObjetMaquetteSummary {
      *
      * @return typeObjetFormation
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_OBJET_FORMATION)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getTypeObjetFormation() {
@@ -171,7 +171,7 @@ public class ObjetMaquetteSummary {
      *
      * @return code
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCode() {
@@ -194,7 +194,7 @@ public class ObjetMaquetteSummary {
      *
      * @return espaceLibelle
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ESPACE_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getEspaceLibelle() {
@@ -217,7 +217,7 @@ public class ObjetMaquetteSummary {
      *
      * @return mutualise
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MUTUALISE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getMutualise() {
@@ -240,7 +240,7 @@ public class ObjetMaquetteSummary {
      *
      * @return libelle
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelle() {
@@ -263,7 +263,7 @@ public class ObjetMaquetteSummary {
      *
      * @return libelleLong
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelleLong() {
@@ -286,7 +286,7 @@ public class ObjetMaquetteSummary {
      *
      * @return valideInAnyContexte
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_VALIDE_IN_ANY_CONTEXTE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getValideInAnyContexte() {
@@ -309,7 +309,7 @@ public class ObjetMaquetteSummary {
      *
      * @return periodeActive
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_PERIODE_ACTIVE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getPeriodeActive() {

@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CompositionRecopie.JSON_PROPERTY_COMPOSITION_UUIDS,
   CompositionRecopie.JSON_PROPERTY_CODE_PERIODE_CIBLE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CompositionRecopie {
   public static final String JSON_PROPERTY_COMPOSITION_UUIDS = "compositionUuids";
   private List<UUID> compositionUuids = new ArrayList<>();
@@ -61,7 +61,7 @@ public class CompositionRecopie {
    * la liste des uuids des compositions à recopier
    * @return compositionUuids
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_COMPOSITION_UUIDS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<UUID> getCompositionUuids() {
@@ -85,7 +85,7 @@ public class CompositionRecopie {
    * Le code de la période sur laquelle les compositions sont à recopier
    * @return codePeriodeCible
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_PERIODE_CIBLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodePeriodeCible() {

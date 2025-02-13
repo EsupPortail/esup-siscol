@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Adresse.JSON_PROPERTY_PAYS,
   Adresse.JSON_PROPERTY_COMMUNE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class Adresse {
   public static final String JSON_PROPERTY_ADRESSE1 = "adresse1";
   private String adresse1;
@@ -86,7 +86,7 @@ public class Adresse {
    * Adresse1
    * @return adresse1
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ADRESSE1)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAdresse1() {
@@ -110,7 +110,7 @@ public class Adresse {
    * Complément adresse
    * @return adresse2
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ADRESSE2)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAdresse2() {
@@ -134,7 +134,7 @@ public class Adresse {
    * Complément adresse
    * @return adresse3
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ADRESSE3)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAdresse3() {
@@ -158,7 +158,7 @@ public class Adresse {
    * Complément adresse
    * @return adresse4
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ADRESSE4)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAdresse4() {
@@ -182,7 +182,7 @@ public class Adresse {
    * Complément adresse
    * @return adresse5
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ADRESSE5)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAdresse5() {
@@ -206,7 +206,7 @@ public class Adresse {
    * Code postale pour structure
    * @return codePostal
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_POSTAL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodePostal() {
@@ -230,7 +230,7 @@ public class Adresse {
    * Localite d&#39;acheminement pour structure
    * @return localiteAcheminement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LOCALITE_ACHEMINEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLocaliteAcheminement() {
@@ -254,7 +254,7 @@ public class Adresse {
    * Code du pays pour structure avec UAI
    * @return codePaysAcheminement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_PAYS_ACHEMINEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodePaysAcheminement() {
@@ -278,7 +278,7 @@ public class Adresse {
    * LibelleCourt pour structure avec UAI
    * @return libelleCourtPaysAcheminement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT_PAYS_ACHEMINEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourtPaysAcheminement() {
@@ -302,7 +302,7 @@ public class Adresse {
    * Get pays
    * @return pays
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PAYS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public PaysNationalite getPays() {
@@ -326,7 +326,7 @@ public class Adresse {
    * Get commune
    * @return commune
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMMUNE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Commune getCommune() {

@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   ArbreFormation.JSON_PROPERTY_LISTE_OBJET_FORMATION,
   ArbreFormation.JSON_PROPERTY_LISTE_GROUPEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ArbreFormation {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -115,7 +115,7 @@ public class ArbreFormation {
    * Get code
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -139,7 +139,7 @@ public class ArbreFormation {
    * Get libelleCourt
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -163,7 +163,7 @@ public class ArbreFormation {
    * Les crédits E.C.T.S. positionnés sur la formation
    * @return creditEcts
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CREDIT_ECTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCreditEcts() {
@@ -187,7 +187,7 @@ public class ArbreFormation {
    * Get ouvertureAuChoixDuCursus
    * @return ouvertureAuChoixDuCursus
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OUVERTURE_AU_CHOIX_DU_CURSUS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public OuvertureAuChoixDuCursusEnum getOuvertureAuChoixDuCursus() {
@@ -211,7 +211,7 @@ public class ArbreFormation {
    * 2c1e120f-4799-414e-90d8-bbda2b869704
    * @return idCheminPedagogique
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ID_CHEMIN_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getIdCheminPedagogique() {
@@ -235,7 +235,7 @@ public class ArbreFormation {
    * Get type
    * @return type
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public ObjetLibelle getType() {
@@ -267,7 +267,7 @@ public class ArbreFormation {
    * Get listeObjetFormation
    * @return listeObjetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ArbreObjetFormation> getListeObjetFormation() {
@@ -299,7 +299,7 @@ public class ArbreFormation {
    * Get listeGroupement
    * @return listeGroupement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_GROUPEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ArbreGroupement> getListeGroupement() {

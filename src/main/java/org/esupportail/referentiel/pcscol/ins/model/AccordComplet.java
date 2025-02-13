@@ -34,7 +34,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   AccordComplet.JSON_PROPERTY_EST_ACCEPTE,
   AccordComplet.JSON_PROPERTY_DOCUMENT_A_APPROUVER
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class AccordComplet {
   public static final String JSON_PROPERTY_DATE_VALIDATION = "dateValidation";
   private String dateValidation;
@@ -57,7 +57,7 @@ public class AccordComplet {
    * Date de validation de l&#39;accord
    * @return dateValidation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_VALIDATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDateValidation() {
@@ -81,7 +81,7 @@ public class AccordComplet {
    * Témoin pour savoir si le document a été accepté ou refusé
    * @return estAccepte
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_ACCEPTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstAccepte() {
@@ -105,7 +105,7 @@ public class AccordComplet {
    * Get documentAApprouver
    * @return documentAApprouver
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DOCUMENT_A_APPROUVER)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public DocumentAApprouver getDocumentAApprouver() {

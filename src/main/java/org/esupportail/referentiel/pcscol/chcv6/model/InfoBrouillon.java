@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   InfoBrouillon.JSON_PROPERTY_EST_BROUILLON_EXISTANT,
   InfoBrouillon.JSON_PROPERTY_EST_UTILISATEUR_PROPRIETAIRE_BROUILLON
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class InfoBrouillon {
   public static final String JSON_PROPERTY_EST_BROUILLON_EXISTANT = "estBrouillonExistant";
   private Boolean estBrouillonExistant;
@@ -50,7 +50,7 @@ public class InfoBrouillon {
    * Indique si il existe un brouillon pour le cursus
    * @return estBrouillonExistant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_BROUILLON_EXISTANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstBrouillonExistant() {
@@ -74,7 +74,7 @@ public class InfoBrouillon {
    * Indique si l&#39;utilisateur est le propriétaire du brouillon du cursus
    * @return estUtilisateurProprietaireBrouillon
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_UTILISATEUR_PROPRIETAIRE_BROUILLON)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstUtilisateurProprietaireBrouillon() {

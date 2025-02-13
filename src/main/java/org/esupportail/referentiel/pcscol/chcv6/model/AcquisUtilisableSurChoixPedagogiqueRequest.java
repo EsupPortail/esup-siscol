@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
   AcquisUtilisableSurChoixPedagogiqueRequest.JSON_PROPERTY_CODE_CHEMIN_CHOIX_PEDAGOGIQUE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class AcquisUtilisableSurChoixPedagogiqueRequest {
   public static final String JSON_PROPERTY_CODE_CHEMIN_CHOIX_PEDAGOGIQUE = "codeCheminChoixPedagogique";
   private String codeCheminChoixPedagogique;
@@ -46,7 +46,7 @@ public class AcquisUtilisableSurChoixPedagogiqueRequest {
    * le code chemin de l&#39;objet maquette pour lequel on veut le detail de l&#39;acquis utilisable.
    * @return codeCheminChoixPedagogique
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN_CHOIX_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeCheminChoixPedagogique() {

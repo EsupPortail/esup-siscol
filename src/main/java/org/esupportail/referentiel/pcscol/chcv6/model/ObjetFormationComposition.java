@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ObjetFormationComposition.JSON_PROPERTY_INFO_FORMATIONS,
   ObjetFormationComposition.JSON_PROPERTY_OBJET_FORMATION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ObjetFormationComposition {
   public static final String JSON_PROPERTY_INFO_FORMATIONS = "infoFormations";
   private List<InfoFormationComposition> infoFormations = new ArrayList<>();
@@ -56,7 +56,7 @@ public class ObjetFormationComposition {
    * Array de InfoFormationComposition
    * @return infoFormations
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_INFO_FORMATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<InfoFormationComposition> getInfoFormations() {
@@ -80,7 +80,7 @@ public class ObjetFormationComposition {
    * Get objetFormation
    * @return objetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public InfoObjetFormationComposition getObjetFormation() {

@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Colonnes.JSON_PROPERTY_AFFICHER_PRENOM,
   Colonnes.JSON_PROPERTY_AFFICHER_DATE_NAISSANCE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class Colonnes {
   public static final String JSON_PROPERTY_AFFICHER_INE = "afficherIne";
   private Boolean afficherIne = false;
@@ -62,7 +62,7 @@ public class Colonnes {
    * Est-ce qu&#39;il faut imprimer le numéro INE de l&#39;apprenant ?
    * @return afficherIne
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AFFICHER_INE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getAfficherIne() {
@@ -86,7 +86,7 @@ public class Colonnes {
    * Est-ce qu&#39;il faut imprimer le code de l&#39;apprenant ?
    * @return afficherCodeApprenant
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AFFICHER_CODE_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getAfficherCodeApprenant() {
@@ -110,7 +110,7 @@ public class Colonnes {
    * Est-ce qu&#39;il faut imprimer le nom de famille de l&#39;apprenant ?
    * @return afficherNom
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AFFICHER_NOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getAfficherNom() {
@@ -134,7 +134,7 @@ public class Colonnes {
    * Est-ce qu&#39;il faut imprimer le prénom de l&#39;apprenant ?
    * @return afficherPrenom
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AFFICHER_PRENOM)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getAfficherPrenom() {
@@ -158,7 +158,7 @@ public class Colonnes {
    * Est-ce qu&#39;il faut imprimer la date de naissance de l&#39;apprenant ?
    * @return afficherDateNaissance
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_AFFICHER_DATE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getAfficherDateNaissance() {

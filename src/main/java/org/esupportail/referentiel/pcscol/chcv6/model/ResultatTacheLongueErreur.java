@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ResultatTacheLongueErreur.JSON_PROPERTY_IDENTIFIANT_AGGREGAT,
   ResultatTacheLongueErreur.JSON_PROPERTY_MESSAGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ResultatTacheLongueErreur {
   public static final String JSON_PROPERTY_IDENTIFIANT_AGGREGAT = "identifiantAggregat";
   private String identifiantAggregat;
@@ -50,7 +50,7 @@ public class ResultatTacheLongueErreur {
    * Get identifiantAggregat
    * @return identifiantAggregat
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_IDENTIFIANT_AGGREGAT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getIdentifiantAggregat() {
@@ -74,7 +74,7 @@ public class ResultatTacheLongueErreur {
    * Get message
    * @return message
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_MESSAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getMessage() {

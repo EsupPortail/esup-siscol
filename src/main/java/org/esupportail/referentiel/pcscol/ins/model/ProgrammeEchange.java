@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ProgrammeEchange.JSON_PROPERTY_CODE_PAYS,
   ProgrammeEchange.JSON_PROPERTY_CONTEXTE_CONSOMMATION
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class ProgrammeEchange {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -55,7 +55,7 @@ public class ProgrammeEchange {
    * code de la nomenclature programme d&#39;échange
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -79,7 +79,7 @@ public class ProgrammeEchange {
    * code de la nomenclature du pays du programme d&#39;échange
    * @return codePays
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_PAYS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodePays() {
@@ -103,7 +103,7 @@ public class ProgrammeEchange {
    * Get contexteConsommation
    * @return contexteConsommation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CONTEXTE_CONSOMMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Date getContexteConsommation() {

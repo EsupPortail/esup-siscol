@@ -42,7 +42,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   DemandeDePiece.JSON_PROPERTY_TEMOIN_LIVRE,
   DemandeDePiece.JSON_PROPERTY_TEMOIN_PHOTO
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class DemandeDePiece {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -98,7 +98,7 @@ public class DemandeDePiece {
    * Le code metier en saisie libre
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -122,7 +122,7 @@ public class DemandeDePiece {
    * Le code de l&#39;établissement (structure)
    * @return codeStructure
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_STRUCTURE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeStructure() {
@@ -146,7 +146,7 @@ public class DemandeDePiece {
    * Le libellé d&#39;affichage
    * @return libelleAffichage
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleAffichage() {
@@ -170,7 +170,7 @@ public class DemandeDePiece {
    * La description détaillée de la demande de pièces
    * @return description
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDescription() {
@@ -194,7 +194,7 @@ public class DemandeDePiece {
    * La date de début de validité
    * @return dateDebutValidite
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_DEBUT_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getDateDebutValidite() {
@@ -218,7 +218,7 @@ public class DemandeDePiece {
    * La date de fin de validité
    * @return dateFinValidite
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DATE_FIN_VALIDITE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDateFinValidite() {
@@ -242,7 +242,7 @@ public class DemandeDePiece {
    * Le code de la pièce à fournir issu de la nomenclature des pièces à fournir dans référentiel.  Codes de la nomenclature sur 6 caractères. Préfixe des codes : PAF 
    * @return codePieceAFournir
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_PIECE_A_FOURNIR)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodePieceAFournir() {
@@ -266,7 +266,7 @@ public class DemandeDePiece {
    * Le témoin pièce demandée pour les primo-entrants
    * @return temoinPrimo
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_PRIMO)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinPrimo() {
@@ -290,7 +290,7 @@ public class DemandeDePiece {
    * Le témoin pièce demandée pour les réinscriptions
    * @return temoinReins
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_REINS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinReins() {
@@ -314,7 +314,7 @@ public class DemandeDePiece {
    * Get temoinTeleversement
    * @return temoinTeleversement
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_TELEVERSEMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public TemoinTeleversement getTemoinTeleversement() {
@@ -338,7 +338,7 @@ public class DemandeDePiece {
    * Le témoin pièce obligatoire (true) ou facultative (false)
    * @return temoinObligatoire
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_OBLIGATOIRE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinObligatoire() {
@@ -362,7 +362,7 @@ public class DemandeDePiece {
    * La priorité d&#39;affichage : Plus le nombre est élevé, plus la demande de pièce apparaît en priorité dans la liste de valeurs 
    * @return prioriteAffichage
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PRIORITE_AFFICHAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Integer getPrioriteAffichage() {
@@ -386,7 +386,7 @@ public class DemandeDePiece {
    * Le témoin livré
    * @return temoinLivre
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_LIVRE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinLivre() {
@@ -410,7 +410,7 @@ public class DemandeDePiece {
    * Le témoin de la pièce de type photo d&#39;identité
    * @return temoinPhoto
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TEMOIN_PHOTO)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getTemoinPhoto() {

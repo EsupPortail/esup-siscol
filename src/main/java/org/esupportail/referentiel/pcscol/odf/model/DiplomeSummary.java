@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     DiplomeSummary.JSON_PROPERTY_ACTIF,
     DiplomeSummary.JSON_PROPERTY_PERIODES_VALIDITE
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -75,7 +75,7 @@ public class DiplomeSummary {
      *
      * @return id
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ID)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public UUID getId() {
@@ -98,7 +98,7 @@ public class DiplomeSummary {
      *
      * @return code
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getCode() {
@@ -121,7 +121,7 @@ public class DiplomeSummary {
      *
      * @return libelle
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_LIBELLE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getLibelle() {
@@ -144,7 +144,7 @@ public class DiplomeSummary {
      *
      * @return intitule
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_INTITULE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getIntitule() {
@@ -167,7 +167,7 @@ public class DiplomeSummary {
      *
      * @return finaliteDiplome
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_FINALITE_DIPLOME)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getFinaliteDiplome() {
@@ -190,7 +190,7 @@ public class DiplomeSummary {
      *
      * @return actif
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_ACTIF)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Boolean getActif() {
@@ -221,7 +221,7 @@ public class DiplomeSummary {
      *
      * @return periodesValidite
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_PERIODES_VALIDITE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public List<UUID> getPeriodesValidite() {

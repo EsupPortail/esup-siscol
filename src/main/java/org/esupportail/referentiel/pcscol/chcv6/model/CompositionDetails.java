@@ -42,7 +42,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CompositionDetails.JSON_PROPERTY_LISTE_OBJETS_FORMATION,
   CompositionDetails.JSON_PROPERTY_LISTE_FORMATIONS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CompositionDetails {
   public static final String JSON_PROPERTY_COMPOSITION_UUID = "compositionUuid";
   private UUID compositionUuid;
@@ -89,7 +89,7 @@ public class CompositionDetails {
    * L&#39;identifiant technique de la composition
    * @return compositionUuid
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMPOSITION_UUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getCompositionUuid() {
@@ -113,7 +113,7 @@ public class CompositionDetails {
    * temoin vrai si la composition est active, faux si inactive
    * @return active
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getActive() {
@@ -137,7 +137,7 @@ public class CompositionDetails {
    * code de la composition
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -161,7 +161,7 @@ public class CompositionDetails {
    * libelle court de la composition
    * @return libelleCourt
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourt() {
@@ -185,7 +185,7 @@ public class CompositionDetails {
    * libelle long de la composition
    * @return libelleLong
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleLong() {
@@ -209,7 +209,7 @@ public class CompositionDetails {
    * description de la composition
    * @return description
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDescription() {
@@ -233,7 +233,7 @@ public class CompositionDetails {
    * liste de diffusion relative à cette composition
    * @return listeDiffusion
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_DIFFUSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getListeDiffusion() {
@@ -257,7 +257,7 @@ public class CompositionDetails {
    * Get periode
    * @return periode
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PERIODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Periode getPeriode() {
@@ -289,7 +289,7 @@ public class CompositionDetails {
    * liste de groupes de cette composition
    * @return listeGroupes
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_GROUPES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<GroupeDetails> getListeGroupes() {
@@ -321,7 +321,7 @@ public class CompositionDetails {
    * liste des associations de cette composition dans les objets de formation
    * @return listeObjetsFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_OBJETS_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ObjetFormationCompositionDetails> getListeObjetsFormation() {
@@ -353,7 +353,7 @@ public class CompositionDetails {
    * liste des associations de cette composition aux formations
    * @return listeFormations
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_FORMATIONS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<FormationCompositionDetails> getListeFormations() {

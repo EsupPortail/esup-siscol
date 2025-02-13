@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   CompositionModification.JSON_PROPERTY_DESCRIPTEURS_COMPOSITION,
   CompositionModification.JSON_PROPERTY_LISTE_GROUPES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class CompositionModification {
   public static final String JSON_PROPERTY_ACTIVE = "active";
   private Boolean active;
@@ -56,7 +56,7 @@ public class CompositionModification {
    * temoin vrai si la composition est active, faux si inactive
    * @return active
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getActive() {
@@ -80,7 +80,7 @@ public class CompositionModification {
    * Get descripteursComposition
    * @return descripteursComposition
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTEURS_COMPOSITION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public DescripteursComposition getDescripteursComposition() {
@@ -112,7 +112,7 @@ public class CompositionModification {
    * liste de groupes de cette composition
    * @return listeGroupes
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_GROUPES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<GroupeInfo> getListeGroupes() {

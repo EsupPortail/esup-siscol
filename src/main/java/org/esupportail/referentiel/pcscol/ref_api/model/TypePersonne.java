@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
   TypePersonne.JSON_PROPERTY_LIBELLE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-30T09:24:02.851634+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class TypePersonne {
   public static final String JSON_PROPERTY_LIBELLE = "libelle";
   private String libelle;
@@ -46,7 +46,7 @@ public class TypePersonne {
    * Type de la personne (Administratif, Enseignant, ...)
    * @return libelle
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelle() {

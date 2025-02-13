@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   LigneAffectationIndividuelle.JSON_PROPERTY_POSSIBILITES_PEDAGOGIQUES,
   LigneAffectationIndividuelle.JSON_PROPERTY_ENFANTS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class LigneAffectationIndividuelle {
   public static final String JSON_PROPERTY_INFOS_OBJET_MAQUETTE = "infosObjetMaquette";
   private InfosObjetMaquette infosObjetMaquette;
@@ -56,7 +56,7 @@ public class LigneAffectationIndividuelle {
    * Get infosObjetMaquette
    * @return infosObjetMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_INFOS_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public InfosObjetMaquette getInfosObjetMaquette() {
@@ -80,7 +80,7 @@ public class LigneAffectationIndividuelle {
    * Get infosPedagogique
    * @return infosPedagogique
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_INFOS_PEDAGOGIQUE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public InfosPedagogique getInfosPedagogique() {
@@ -104,7 +104,7 @@ public class LigneAffectationIndividuelle {
    * Get possibilitesPedagogiques
    * @return possibilitesPedagogiques
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_POSSIBILITES_PEDAGOGIQUES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public PossibilitesPedagogiques getPossibilitesPedagogiques() {
@@ -136,7 +136,7 @@ public class LigneAffectationIndividuelle {
    * les lignes filles dans l&#39;arbre de la lecture pédagogique
    * @return enfants
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ENFANTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<LigneAffectationIndividuelle> getEnfants() {

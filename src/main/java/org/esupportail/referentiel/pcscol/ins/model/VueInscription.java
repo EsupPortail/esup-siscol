@@ -63,7 +63,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
   VueInscription.JSON_PROPERTY_MELS,
   VueInscription.JSON_PROPERTY_TELEPHONES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-07-23T10:43:17.979817+02:00[Europe/Paris]", comments = "Generator version: 7.7.0")
 public class VueInscription {
   public static final String JSON_PROPERTY_U_A_I = "UAI";
   private String UAI;
@@ -313,7 +313,7 @@ public class VueInscription {
    * Le code UAI
    * @return UAI
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_U_A_I)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getUAI() {
@@ -337,7 +337,7 @@ public class VueInscription {
    * Le code Pegase de l&#39;apprenant
    * @return codeApprenant
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE_APPRENANT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCodeApprenant() {
@@ -361,7 +361,7 @@ public class VueInscription {
    * La date de l&#39;inscription au format ISO-8601 (AAAA-MM-JJThh:mm)
    * @return dateInscription
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getDateInscription() {
@@ -385,7 +385,7 @@ public class VueInscription {
    * L&#39;horodatage de la dernière modification (Timestamp nombre de secondes depuis le 01/01/1970 à 00:00)
    * @return derniereModification
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DERNIERE_MODIFICATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Long getDerniereModification() {
@@ -409,7 +409,7 @@ public class VueInscription {
    * Le numéro INE de l&#39;apprenant si connu
    * @return INE
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_I_N_E)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getINE() {
@@ -433,7 +433,7 @@ public class VueInscription {
    * La civilité M ou F de l&#39;apprenant⋅e
    * @return civilite
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CIVILITE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public CiviliteEnum getCivilite() {
@@ -457,7 +457,7 @@ public class VueInscription {
    * Le nom d&#39;usage de l&#39;apprenant⋅e
    * @return nomUsage
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_NOM_USAGE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getNomUsage() {
@@ -481,7 +481,7 @@ public class VueInscription {
    * Le nom patronymique de l&#39;apprenant⋅e
    * @return nomFamille
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_NOM_FAMILLE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getNomFamille() {
@@ -505,7 +505,7 @@ public class VueInscription {
    * Le prénom de l&#39;apprenant⋅e
    * @return prenom
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PRENOM)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getPrenom() {
@@ -529,7 +529,7 @@ public class VueInscription {
    * La date de naissance au format ISO-8601 (AAAA-MM-JJ)
    * @return dateDeNaissance
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DATE_DE_NAISSANCE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getDateDeNaissance() {
@@ -553,7 +553,7 @@ public class VueInscription {
    * Le code INSEE de la nationalité (100 pour française)
    * @return nationalite
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_NATIONALITE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getNationalite() {
@@ -577,7 +577,7 @@ public class VueInscription {
    * Autorisation accordée ou non par l&#39;apprenant⋅e pour l&#39;utilisation de sa photo dans un trombinoscope
    * @return droitPhoto
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_DROIT_PHOTO)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getDroitPhoto() {
@@ -601,7 +601,7 @@ public class VueInscription {
    * Si demandée en paramètre photo; La photographie d&#39;identité de l&#39;apprenant (Format binaire, png ou jpeg en ligne)
    * @return photo
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PHOTO)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public byte[] getPhoto() {
@@ -625,7 +625,7 @@ public class VueInscription {
    * Le code BCN du regime d&#39;inscription
    * @return regime
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_REGIME)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getRegime() {
@@ -657,7 +657,7 @@ public class VueInscription {
    * Déprécié -&gt; Les codes des bourses de l&#39;inscription
    * @return bourses
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_BOURSES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<String> getBourses() {
@@ -689,7 +689,7 @@ public class VueInscription {
    * Les codes des bourses de l&#39;inscription
    * @return boursesCompletes
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_BOURSES_COMPLETES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<VueBourse> getBoursesCompletes() {
@@ -721,7 +721,7 @@ public class VueInscription {
    * Les codes des profils exonerants
    * @return profilsExonerants
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PROFILS_EXONERANTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<VueProfilExonerant> getProfilsExonerants() {
@@ -745,7 +745,7 @@ public class VueInscription {
    * Le type de la mobilité étudiante (SANS si pas de mobilité ou soit ENTRANTE soit SORTANTE)
    * @return mobilite
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_MOBILITE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public MobiliteEnum getMobilite() {
@@ -769,7 +769,7 @@ public class VueInscription {
    * Statut du paiement généré à la confirmation du paiement
    * @return statutPaiement
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_STATUT_PAIEMENT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public StatutPaiementEnum getStatutPaiement() {
@@ -793,7 +793,7 @@ public class VueInscription {
    * Statut validé ou annulé de l&#39;inscription
    * @return statutInscription
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_STATUT_INSCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public StatutInscriptionEnum getStatutInscription() {
@@ -817,7 +817,7 @@ public class VueInscription {
    * Témoin indiquant s&#39;il s&#39;agit d&#39;une inscription principale (true) ou d&#39;une inscription complémentaire (false)
    * @return inscriptionPrincipale
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_INSCRIPTION_PRINCIPALE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getInscriptionPrincipale() {
@@ -841,7 +841,7 @@ public class VueInscription {
    * Le code SISE de la formation
    * @return formation
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_FORMATION)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getFormation() {
@@ -865,7 +865,7 @@ public class VueInscription {
    * L&#39;année universitaire si renseigné dans la période
    * @return anneeUniversitaire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_ANNEE_UNIVERSITAIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getAnneeUniversitaire() {
@@ -889,7 +889,7 @@ public class VueInscription {
    * Le libelle de la période de mise en œuvre
    * @return periode
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PERIODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getPeriode() {
@@ -921,7 +921,7 @@ public class VueInscription {
    * Sous-liste avec le chemin cible de la formation racine jusqu&#39;à l&#39;objet de la maquette de formation sur lequel s&#39;est inscrit l&#39;étudiant
    * @return chemin
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<VueCheminCible> getChemin() {
@@ -945,7 +945,7 @@ public class VueInscription {
    * Le code UAI de la structure
    * @return uaIStructurePrincipale
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_UA_I_STRUCTURE_PRINCIPALE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getUaIStructurePrincipale() {
@@ -969,7 +969,7 @@ public class VueInscription {
    * Le code SISE du diplome
    * @return codeDiplomeSISE
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_DIPLOME_S_I_S_E)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeDiplomeSISE() {
@@ -1001,7 +1001,7 @@ public class VueInscription {
    * Adresses détaillées
    * @return adresses
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_ADRESSES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<VueContactAdresse> getAdresses() {
@@ -1033,7 +1033,7 @@ public class VueInscription {
    * Adresses mel détaillées
    * @return mels
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_MELS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<VueContactMel> getMels() {
@@ -1065,7 +1065,7 @@ public class VueInscription {
    * Adresses téléphoniques détaillées
    * @return telephones
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_TELEPHONES)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<VueContactTelephone> getTelephones() {

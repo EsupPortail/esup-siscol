@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   ArbreGroupement.JSON_PROPERTY_LISTE_OBJET_FORMATION,
   ArbreGroupement.JSON_PROPERTY_LISTE_GROUPEMENT
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class ArbreGroupement {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;
@@ -84,7 +84,7 @@ public class ArbreGroupement {
    * Get code
    * @return code
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCode() {
@@ -108,7 +108,7 @@ public class ArbreGroupement {
    * Get caractereObligatoire
    * @return caractereObligatoire
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_CARACTERE_OBLIGATOIRE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getCaractereObligatoire() {
@@ -132,7 +132,7 @@ public class ArbreGroupement {
    * Get libelleCourt
    * @return libelleCourt
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleCourt() {
@@ -156,7 +156,7 @@ public class ArbreGroupement {
    * Get libelleLong
    * @return libelleLong
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getLibelleLong() {
@@ -180,7 +180,7 @@ public class ArbreGroupement {
    * Get plageChoix
    * @return plageChoix
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_PLAGE_CHOIX)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getPlageChoix() {
@@ -204,7 +204,7 @@ public class ArbreGroupement {
    * Get plageMin
    * @return plageMin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPlageMin() {
@@ -228,7 +228,7 @@ public class ArbreGroupement {
    * Get plageMax
    * @return plageMax
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MAX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPlageMax() {
@@ -252,7 +252,7 @@ public class ArbreGroupement {
    * Get mutualise
    * @return mutualise
    */
-  @javax.annotation.Nonnull
+  @jakarta.annotation.Nonnull
   @JsonProperty(JSON_PROPERTY_MUTUALISE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public Boolean getMutualise() {
@@ -284,7 +284,7 @@ public class ArbreGroupement {
    * Get listeObjetFormation
    * @return listeObjetFormation
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_OBJET_FORMATION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ArbreObjetFormation> getListeObjetFormation() {
@@ -316,7 +316,7 @@ public class ArbreGroupement {
    * Get listeGroupement
    * @return listeGroupement
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_GROUPEMENT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ArbreGroupement> getListeGroupement() {

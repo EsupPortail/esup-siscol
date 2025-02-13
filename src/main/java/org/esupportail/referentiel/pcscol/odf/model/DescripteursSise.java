@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     DescripteursSise.JSON_PROPERTY_CHAMP_FORMATION,
     DescripteursSise.JSON_PROPERTY_NIVEAU_DIPLOME
 })
-@javax.annotation.Generated(
+@jakarta.annotation.Generated(
         value = "org.openapitools.codegen.languages.JavaClientCodegen",
         date = "2024-07-04T09:22:32.722688+02:00[Europe/Paris]",
         comments = "Generator version: 7.7.0")
@@ -76,7 +76,7 @@ public class DescripteursSise {
      *
      * @return typeDiplome
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_TYPE_DIPLOME)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getTypeDiplome() {
@@ -99,7 +99,7 @@ public class DescripteursSise {
      *
      * @return codeDiplomeSise
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CODE_DIPLOME_SISE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getCodeDiplomeSise() {
@@ -122,7 +122,7 @@ public class DescripteursSise {
      *
      * @return niveauDiplomeSise
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_NIVEAU_DIPLOME_SISE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public String getNiveauDiplomeSise() {
@@ -145,7 +145,7 @@ public class DescripteursSise {
      *
      * @return parcoursTypeSise
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_PARCOURS_TYPE_SISE)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getParcoursTypeSise() {
@@ -168,7 +168,7 @@ public class DescripteursSise {
      *
      * @return domaineFormation
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_DOMAINE_FORMATION)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getDomaineFormation() {
@@ -191,7 +191,7 @@ public class DescripteursSise {
      *
      * @return mention
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_MENTION)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getMention() {
@@ -214,7 +214,7 @@ public class DescripteursSise {
      *
      * @return champFormation
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_CHAMP_FORMATION)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getChampFormation() {
@@ -237,7 +237,7 @@ public class DescripteursSise {
      *
      * @return niveauDiplome
      */
-    @javax.annotation.Nullable
+    @jakarta.annotation.Nullable
     @JsonProperty(JSON_PROPERTY_NIVEAU_DIPLOME)
     @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
     public Nomenclature getNiveauDiplome() {

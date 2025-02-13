@@ -42,7 +42,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   InfosObjetMaquette.JSON_PROPERTY_EST_OUVERT_AU_CHC,
   InfosObjetMaquette.JSON_PROPERTY_CODE_CHEMIN
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class InfosObjetMaquette {
   public static final String JSON_PROPERTY_CODE_OBJET_MAQUETTE = "codeObjetMaquette";
   private String codeObjetMaquette;
@@ -98,7 +98,7 @@ public class InfosObjetMaquette {
    * le code de l&#39;objet maquette
    * @return codeObjetMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeObjetMaquette() {
@@ -122,7 +122,7 @@ public class InfosObjetMaquette {
    * le type de l&#39;objet maquette (FORMATION/OBJET_FORMATION/GROUPEMENT)
    * @return typeObjetMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TYPE_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getTypeObjetMaquette() {
@@ -146,7 +146,7 @@ public class InfosObjetMaquette {
    * le libelle de l&#39;objet maquette
    * @return libelleObjetMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_OBJET_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleObjetMaquette() {
@@ -170,7 +170,7 @@ public class InfosObjetMaquette {
    * le code type de l&#39;objet maquette (CodeType formation si typeObjetMaquette est une Formation ou CodeType objetFormation si typeObjetMaquette est un objetFormation, null pour les groupements)
    * @return codeType
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_TYPE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeType() {
@@ -194,7 +194,7 @@ public class InfosObjetMaquette {
    * le caractère obligatoire/facultatif de l&#39;objet maquette
    * @return estObligatoire
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_OBLIGATOIRE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstObligatoire() {
@@ -218,7 +218,7 @@ public class InfosObjetMaquette {
    * le nombre de credits ECTS de l&#39;objet maquette
    * @return creditsEcts
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CREDITS_ECTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Double getCreditsEcts() {
@@ -242,7 +242,7 @@ public class InfosObjetMaquette {
    * si l&#39;objet maquette est un stage
    * @return estStage
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_STAGE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstStage() {
@@ -266,7 +266,7 @@ public class InfosObjetMaquette {
    * le nombre maximum d&#39;apprenant pouvant choisir cet objet maquette. Vide si aucune capacité d&#39;accueil n&#39;a été définie. Un gestionnaire peut outrepasser ce maximum.
    * @return capaciteAccueil
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CAPACITE_ACCUEIL)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getCapaciteAccueil() {
@@ -290,7 +290,7 @@ public class InfosObjetMaquette {
    * le minimum d&#39;objets formation devant être choisis. Vide si n&#39;est pas un groupement à plage de choix.
    * @return plageMin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPlageMin() {
@@ -314,7 +314,7 @@ public class InfosObjetMaquette {
    * le maximum d&#39;objets formation pouvant être choisis. Vide si n&#39;est pas un groupement à plage de choix.
    * @return plageMax
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLAGE_MAX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPlageMax() {
@@ -338,7 +338,7 @@ public class InfosObjetMaquette {
    * si l&#39;objet maquette est dans un groupement à plage de choix
    * @return estDansGroupementAPlageDeChoix
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_DANS_GROUPEMENT_A_PLAGE_DE_CHOIX)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstDansGroupementAPlageDeChoix() {
@@ -362,7 +362,7 @@ public class InfosObjetMaquette {
    * le nombre de places occupées par les apprenants. Vide si aucune capacité d&#39;accueil n&#39;a été définie.
    * @return placesOccupees
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_PLACES_OCCUPEES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getPlacesOccupees() {
@@ -386,7 +386,7 @@ public class InfosObjetMaquette {
    * l&#39;objet maquette est ouvert au choix de cursus, empêche le gestionnaire de faire des actions sur l&#39;objet maquette
    * @return estOuvertAuChc
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_OUVERT_AU_CHC)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstOuvertAuChc() {
@@ -410,7 +410,7 @@ public class InfosObjetMaquette {
    * le code chemin du choix pédagogique
    * @return codeChemin
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE_CHEMIN)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCodeChemin() {

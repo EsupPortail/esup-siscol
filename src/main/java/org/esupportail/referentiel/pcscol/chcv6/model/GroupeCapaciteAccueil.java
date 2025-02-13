@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   GroupeCapaciteAccueil.JSON_PROPERTY_TOTALE,
   GroupeCapaciteAccueil.JSON_PROPERTY_RESTANTE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class GroupeCapaciteAccueil {
   public static final String JSON_PROPERTY_TOTALE = "totale";
   private Integer totale;
@@ -50,7 +50,7 @@ public class GroupeCapaciteAccueil {
    * capacité d&#39;accueil totale de ce groupe
    * @return totale
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_TOTALE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getTotale() {
@@ -74,7 +74,7 @@ public class GroupeCapaciteAccueil {
    * capacité d&#39;accueil restante de ce groupe
    * @return restante
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_RESTANTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Integer getRestante() {

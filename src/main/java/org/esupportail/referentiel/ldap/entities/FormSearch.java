@@ -2,18 +2,11 @@ package org.esupportail.referentiel.ldap.entities;
 
 import java.io.Serializable;
 
-import javax.persistence.Transient;
-
 import org.esupportail.referentiel.conf.LdapAttributesConf;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.ldap.filter.Filter;
-import org.springframework.ldap.filter.LikeFilter;
 import org.springframework.ldap.filter.WhitespaceWildcardsFilter;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class FormSearch implements Serializable {
 

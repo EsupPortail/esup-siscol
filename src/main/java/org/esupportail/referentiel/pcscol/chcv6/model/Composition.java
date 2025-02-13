@@ -40,7 +40,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
   Composition.JSON_PROPERTY_GROUPES,
   Composition.JSON_PROPERTY_OBJETS_MAQUETTE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
 public class Composition {
   public static final String JSON_PROPERTY_COMPOSITION_UUID = "compositionUuid";
   private UUID compositionUuid;
@@ -81,7 +81,7 @@ public class Composition {
    * L&#39;identifiant technique de la composition
    * @return compositionUuid
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_COMPOSITION_UUID)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public UUID getCompositionUuid() {
@@ -105,7 +105,7 @@ public class Composition {
    * code de la composition
    * @return code
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_CODE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getCode() {
@@ -129,7 +129,7 @@ public class Composition {
    * libelle court de la composition
    * @return libelleCourt
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_COURT)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleCourt() {
@@ -153,7 +153,7 @@ public class Composition {
    * libelle long de la composition
    * @return libelleLong
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LIBELLE_LONG)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getLibelleLong() {
@@ -177,7 +177,7 @@ public class Composition {
    * description de la composition
    * @return description
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_DESCRIPTION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getDescription() {
@@ -201,7 +201,7 @@ public class Composition {
    * liste de diffusion relative à cette composition
    * @return listeDiffusion
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_LISTE_DIFFUSION)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getListeDiffusion() {
@@ -225,7 +225,7 @@ public class Composition {
    * composition active ou inactive
    * @return estActive
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_EST_ACTIVE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getEstActive() {
@@ -257,7 +257,7 @@ public class Composition {
    * liste de groupes de cette composition
    * @return groupes
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_GROUPES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<Groupe> getGroupes() {
@@ -289,7 +289,7 @@ public class Composition {
    * liste des associations de cette composition dans les maquettes de formation
    * @return objetsMaquette
    */
-  @javax.annotation.Nullable
+  @jakarta.annotation.Nullable
   @JsonProperty(JSON_PROPERTY_OBJETS_MAQUETTE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<ObjetMaquetteComposition> getObjetsMaquette() {
