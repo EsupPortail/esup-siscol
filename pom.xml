@@ -16,9 +16,9 @@
 		<skipTests>true</skipTests>
 		<maven.compiler.target>21</maven.compiler.target>
 		<maven.compiler.source>21</maven.compiler.source>
-		<jackson-databind-nullable-version>0.2.4</jackson-databind-nullable-version>
+		<jackson-databind-nullable-version>0.2.6</jackson-databind-nullable-version>
 		<swagger-annotations-version>1.5.22</swagger-annotations-version>
-		<org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+		<org.mapstruct.version>1.6.3</org.mapstruct.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -337,9 +337,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				 <configuration>
-        <jvmArguments>
-            <argument>--add-opens=java.base/java.lang=ALL-UNNAMED</argument>
-        </jvmArguments>
+       
     </configuration>
 			</plugin>
 			
@@ -360,18 +358,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>java11</id>
-			<activation>
-				<jdk>[11,)</jdk>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.glassfish.jaxb</groupId>
-					<artifactId>jaxb-runtime</artifactId>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+	
 </project>

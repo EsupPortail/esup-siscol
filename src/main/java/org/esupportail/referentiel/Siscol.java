@@ -9,15 +9,15 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
-@SpringBootApplication
-@EnableWebMvc
-@ComponentScan({ "org.esupportail.referentiel" })
+//@SpringBootApplication
+//@EnableWebMvc
+//@ComponentScan({ "org.esupportail.referentiel" })
 public class Siscol {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Siscol.class, args);
-
-	}
+//	public static void main(String[] args) {
+//		SpringApplication.run(Siscol.class, args);
+//
+//	}
 
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver slr = new SessionLocaleResolver();

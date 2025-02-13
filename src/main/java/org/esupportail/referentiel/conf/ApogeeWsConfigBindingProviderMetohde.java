@@ -215,10 +215,8 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean,Se
 			log.error(e.getMessage());
 			referentielMetierService = new ReferentielMetierServiceInterfaceService();
 		}
-		System.out.println("++++++++++++++++++++++++++++++"+referentielMetierService.getReferentielMetier());
 		ReferentielMetierServiceInterface referentielMetierServiceInterface = referentielMetierService
 				.getReferentielMetier();
-		System.out.println("++++++++++++++++++++++++++++++"+referentielMetierServiceInterface);
 		BindingProvider bp = (BindingProvider) referentielMetierServiceInterface;
 		bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, wsdlUrl);
 		bp.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, username);
