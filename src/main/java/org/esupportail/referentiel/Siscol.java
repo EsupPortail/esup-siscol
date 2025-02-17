@@ -12,6 +12,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 //@SpringBootApplication
 //@EnableWebMvc
 //@ComponentScan({ "org.esupportail.referentiel" })
+@Deprecated
 public class Siscol {
 
 //	public static void main(String[] args) {

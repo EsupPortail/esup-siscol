@@ -6,12 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -26,28 +25,22 @@ public class WebSecurityConfig { // NO_UCD (unused code)
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		return http.authorizeHttpRequests(request -> request.anyRequest()
-                .authenticated())
-            .httpBasic(Customizer.withDefaults())
-            .build();
-		
-		
-//		http
-//				// HTTP Basic authentication
-//				.httpBasic().and().authorizeRequests()
-//				/* GET */
-//				.antMatchers(HttpMethod.GET, "/cache/**", "/supann/**", "/apogee/**").hasAnyAuthority("USER", "ADMIN")
-//				/* POST */
-//				.antMatchers(HttpMethod.POST, "/ldap/**").hasAnyAuthority("USER", "ADMIN")
-//				/* misc */
-//				.and().csrf().disable().formLogin().disable();
-//
-//		http.authorizeRequests().antMatchers("/registration", "/js/**", "/css/**", "/img/**", "/webjars/**").permitAll()
-//				.anyRequest().hasAnyAuthority("ADMIN", "USER")
-//
-//				.and().formLogin().loginPage("/login").permitAll().and().logout().invalidateHttpSession(true)
-//				.clearAuthentication(true).logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//				.logoutSuccessUrl("/login?logout").permitAll();
+		http .csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((requests) -> requests
+				.requestMatchers(HttpMethod.GET, "/apogee/**").hasAnyAuthority("ADMIN","USER_APOGEE")
+				.requestMatchers(HttpMethod.POST, "/apogee/**").hasAnyAuthority("ADMIN","USER_APOGEE")
+				.requestMatchers(HttpMethod.GET, "/pcscol/**").hasAnyAuthority("ADMIN","USER_PCSCOL")
+				.requestMatchers(HttpMethod.POST, "/pcscol/**").hasAnyAuthority("ADMIN","USER_PCSCOL")
+				.requestMatchers(HttpMethod.GET, "/ldap/**").hasAnyAuthority("ADMIN","USER_LDAP")
+				.requestMatchers(HttpMethod.POST, "/ldap/**").hasAnyAuthority("ADMIN","USER_LDAP")
+				.requestMatchers(HttpMethod.GET, "/cache/**").hasAnyAuthority("ADMIN")
+				.requestMatchers(HttpMethod.POST, "/cache/**").hasAnyAuthority("ADMIN")
+				
+				.anyRequest().authenticated()).formLogin((form) -> form.loginPage("/login").permitAll())
+				.logout((logout) -> logout.permitAll().invalidateHttpSession(true).clearAuthentication(true));
+
+		return http.build();
+
+
 	}
 
 	@Bean
