@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
@@ -18,9 +17,7 @@ import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;
-import org.esupportail.referentiel.pcscol.odf.model.PagedEspaces;
 import org.esupportail.referentiel.pcscol.odf.model.PagedObjetMaquetteSummaries;
-import org.esupportail.referentiel.pcscol.odf.model.TypeEspace;
 import org.esupportail.referentiel.pcscol.odf.model.TypeObjetMaquette;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
