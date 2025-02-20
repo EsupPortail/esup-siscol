@@ -2,7 +2,7 @@ package apogee.test.etudiant;
 
 import java.util.List;
 
-import org.esupportail.referentiel.Siscol;
+import org.esupportail.referentiel.SpringBootTomcatApplication;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@ContextConfiguration(classes = { Siscol.class })
+@ContextConfiguration(classes = { SpringBootTomcatApplication.class })
 @SpringBootTest
 @SpringJUnitConfig
 @ActiveProfiles("test")

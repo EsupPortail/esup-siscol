@@ -3,7 +3,7 @@ package org.esupportail.referentiel.pcscol.ins;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.esupportail.referentiel.Siscol;
+import org.esupportail.referentiel.SpringBootTomcatApplication;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
@@ -25,7 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-@ContextConfiguration(classes = { Siscol.class })
+@ContextConfiguration(classes = { SpringBootTomcatApplication.class })
 @SpringBootTest
 @SpringJUnitConfig
 @ActiveProfiles("test")

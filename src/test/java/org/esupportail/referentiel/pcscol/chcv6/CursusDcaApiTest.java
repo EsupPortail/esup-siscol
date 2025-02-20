@@ -2,13 +2,12 @@ package org.esupportail.referentiel.pcscol.chcv6;
 
 import java.util.List;
 
-import org.esupportail.referentiel.Siscol;
+import org.esupportail.referentiel.SpringBootTomcatApplication;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.pcscol.chcv6.model.ArbreLecture;
 import org.esupportail.referentiel.pcscol.chcv6.model.CursusDCA;
 import org.esupportail.referentiel.pcscol.chcv6.model.ObjetMaquette;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
-import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.services.ChcService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-@ContextConfiguration(classes = { Siscol.class })
+@ContextConfiguration(classes = { SpringBootTomcatApplication.class })
 @SpringBootTest
 @SpringJUnitConfig
 @ActiveProfiles("test")

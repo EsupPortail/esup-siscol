@@ -15,11 +15,10 @@ package org.esupportail.referentiel.pcscol.ref;
 import java.util.List;
 import java.util.Map;
 
-import org.esupportail.referentiel.Siscol;
+import org.esupportail.referentiel.SpringBootTomcatApplication;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
-import org.esupportail.referentiel.pcscol.services.OffreFormationService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 /**
  * API tests for StructureApi
  */
-@ContextConfiguration(classes = { Siscol.class })
+@ContextConfiguration(classes = { SpringBootTomcatApplication.class })
 @SpringBootTest
 @SpringJUnitConfig
 @ActiveProfiles("test")

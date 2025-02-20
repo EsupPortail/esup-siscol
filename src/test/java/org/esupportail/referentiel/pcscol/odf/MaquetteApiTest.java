@@ -17,10 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.esupportail.referentiel.Siscol;
+import org.esupportail.referentiel.SpringBootTomcatApplication;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
-import org.esupportail.referentiel.pcscol.config.PcscolConfig;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
@@ -30,10 +29,8 @@ import org.esupportail.referentiel.pcscol.odf.model.PagedEspaces;
 import org.esupportail.referentiel.pcscol.odf.model.PagedObjetMaquetteSummaries;
 import org.esupportail.referentiel.pcscol.odf.model.TypeEspace;
 import org.esupportail.referentiel.pcscol.odf.model.TypeObjetMaquette;
-import org.esupportail.referentiel.pcscol.services.AccessTokenService;
 import org.esupportail.referentiel.pcscol.services.OffreFormationService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -44,7 +41,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 /**
  * API tests for StructureApi
  */
-@ContextConfiguration(classes = { Siscol.class })
+@ContextConfiguration(classes = { SpringBootTomcatApplication.class })
 @SpringBootTest
 @SpringJUnitConfig
 @ActiveProfiles("test")

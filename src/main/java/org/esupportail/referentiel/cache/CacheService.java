@@ -18,11 +18,18 @@ import org.springframework.stereotype.Service;
  *
  * @author Kevin Hergalant - Université de Lorraine
  * @author Matthieu Manginot - Université de Lorraine
+ * 
+ * @author acheraga
+ *         Simplifications made: 
+ *         Removed redundant final keywords for local variables. 
+ *         Used Cache.spliterator().getExactSizeIfKnown() to get the size of the cache directly. 
+ *         Simplified the getKey() and getValue() type checks in getCacheEntries(). 
+ *         Used CacheService.class directly in  the logger initialization.
  */
 @Service
 @SuppressWarnings("serial")
 public class CacheService implements Serializable {
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(CacheService.class);
 
 	@Autowired
 	private transient CacheManager cacheManager;
@@ -33,19 +40,14 @@ public class CacheService implements Serializable {
 	 * @return les caches disponibles
 	 */
 	public List<CacheEntry> getCaches() {
-		final List<CacheEntry> entries = new ArrayList<>();
-		cacheManager.getCacheNames().forEach(e -> {
-			final Cache<Object, Object> cache = cacheManager.getCache(e);
-			final CacheEntry entry = new CacheEntry();
-			entry.setKey(e);
-			entry.setCache(e);
-			final AtomicInteger count = new AtomicInteger(0);
-			cache.forEach(cacheEntry -> {
-				count.getAndIncrement();
-			});
-			entry.setSize(count.get());
+		List<CacheEntry> entries = new ArrayList<>();
+		cacheManager.getCacheNames().forEach(name -> {
+			Cache<Object, Object> cache = cacheManager.getCache(name);
+			CacheEntry entry = new CacheEntry();
+			entry.setKey(name);
+			entry.setCache(name);
+			entry.setSize((int) cache.spliterator().getExactSizeIfKnown());
 			entries.add(entry);
-
 		});
 		return entries;
 	}
@@ -56,25 +58,16 @@ public class CacheService implements Serializable {
 	 * @return les entrées de cache
 	 */
 	public List<CacheEntry> getCacheEntries() {
-		final List<CacheEntry> entries = new ArrayList<>();
-		cacheManager.getCacheNames().forEach(e -> {
-			final Cache<Object, Object> cache = cacheManager.getCache(e);
+		List<CacheEntry> entries = new ArrayList<>();
+		cacheManager.getCacheNames().forEach(name -> {
+			Cache<Object, Object> cache = cacheManager.getCache(name);
 			cache.forEach(cacheEntry -> {
-				final CacheEntry entry = new CacheEntry();
-				entry.setCache(e);
-				if (cacheEntry.getKey() instanceof String) {
-					entry.setKey(((String) cacheEntry.getKey()));
-				} else {
-					entry.setKey(cacheEntry.getKey().toString());
-				}
-				if (cacheEntry.getValue() instanceof ArrayList<?>) {
-					entry.setSize(((ArrayList<?>) cacheEntry.getValue()).size());
-				} else {
-					entry.setSize(1);
-				}
+				CacheEntry entry = new CacheEntry();
+				entry.setCache(name);
+				entry.setKey(cacheEntry.getKey().toString());
+				entry.setSize(cacheEntry.getValue() instanceof List<?> ? ((List<?>) cacheEntry.getValue()).size() : 1);
 				entries.add(entry);
 			});
-
 		});
 		return entries;
 	}

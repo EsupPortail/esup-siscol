@@ -2,7 +2,7 @@ package apogee.test.etudiant;
 
 import java.util.List;
 
-import org.esupportail.referentiel.Siscol;
+import org.esupportail.referentiel.SpringBootTomcatApplication;
 import org.esupportail.referentiel.services.StudentComponentRepositoryDao;
 import org.esupportail.referentiel.services.impl.StudentDataRepositoryDaoWS;
 import org.esupportail.referentiel.ws.services.EtudiantMetierClient;
@@ -13,13 +13,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
-import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantCritereDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantCritereListeDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.EtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauDiplomes;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauEtapes;
 
-@ContextConfiguration(classes = { Siscol.class })
+@ContextConfiguration(classes = { SpringBootTomcatApplication.class })
 @SpringBootTest
 @SpringJUnitConfig
 @ActiveProfiles("test")

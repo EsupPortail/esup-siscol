@@ -10,9 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
-import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
+import org.springframework.cache.jcache.config.JCacheConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,8 @@ import org.springframework.stereotype.Service;
 @EnableCaching
 @Configuration
 @Service
-public class CacheConfig extends CachingConfigurerSupport {
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+public class CacheConfig implements JCacheConfigurer {
+	private static final Logger logger = LoggerFactory.getLogger(CacheConfig.class);
 
 	public static final String TMP = "temporaire";
 
@@ -45,7 +45,7 @@ public class CacheConfig extends CachingConfigurerSupport {
 	 * @return manager
 	 */
 	@Bean
-	public JCacheManagerCustomizer jCacheManagerCustomizer() {
+	JCacheManagerCustomizer jCacheManagerCustomizer() {
 		return cacheManager -> {
 			logger.info("Initialize cache levels...");
 			cacheManager.createCache(TMP, new MutableConfiguration<>()
@@ -66,12 +66,11 @@ public class CacheConfig extends CachingConfigurerSupport {
 	@Override
 	public KeyGenerator keyGenerator() {
 		return (target, method, params) -> {
-			final StringBuilder sbKey = new StringBuilder();
-			sbKey.append(target.getClass().getName());
-			sbKey.append("#" + method.getName());
-			for (final Object param : params) {
-				if (param != null)
-					sbKey.append("#" + param.toString());
+			StringBuilder sbKey = new StringBuilder(target.getClass().getName()).append("#").append(method.getName());
+			for (Object param : params) {
+				if (param != null) {
+					sbKey.append("#").append(param.toString());
+				}
 			}
 			return sbKey.toString();
 		};

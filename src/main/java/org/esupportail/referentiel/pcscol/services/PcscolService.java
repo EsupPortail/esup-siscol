@@ -19,6 +19,7 @@ import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.RegimeInscription;
 import org.esupportail.referentiel.beans.SignataireRef;
+import org.esupportail.referentiel.cache.CacheConfig;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
@@ -48,6 +49,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -207,6 +209,7 @@ public class PcscolService implements PcscolServiceI {
 	 * uniquementOuvrableAuChoixDuCursus
 	 */
 	@Override
+	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public HashMap<String, String> lireMapFormations(String codeStructure, String codePeriode,
 			boolean uniquementOuvrableAInscription, boolean uniquementOuvrableAuChoixDuCursus) {
 
@@ -230,6 +233,7 @@ public class PcscolService implements PcscolServiceI {
 	}
 
 	@Override
+	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public Map<String, String> lireMapStructures() {
 		Map<String, String> mapComp = new LinkedHashMap<String, String>();
 		List<Structure> strucList = lireListeStructure();
@@ -277,6 +281,7 @@ public class PcscolService implements PcscolServiceI {
 	 * @param codesPeriodesChargementFormations
 	 * @return
 	 */
+	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public List<DiplomeReduitDto> diplomeRef(String codeStructure, String codesPeriodesChargementFormations) {
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = allObjetMaquetteSummariesFromPeriodes(codeStructure,
 				codesPeriodesChargementFormations);
@@ -537,24 +542,24 @@ public class PcscolService implements PcscolServiceI {
 	 */
 	public List<String> codePeriodeFromPeriodes(String codeStructure, String codes) {
 
-		List<String> listCodePeriode = new ArrayList<>();
+		final List<String> listCodePeriode = new ArrayList<>();
 		if (codes == null || codes.isEmpty()) {
 			try {
 				List<Periode> listPeriodes = inscriptionsApi.listerPeriodes(codeStructure);
-
-				for (Periode p : listPeriodes) {
+				listPeriodes.stream().forEach(p -> {
 					listCodePeriode.add(p.getCode());
-				}
+				});
+				return listCodePeriode;
 
 			} catch (ApiException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(" "+ e.getMessage());
+				return null;
 
 			}
 		} else {
-			listCodePeriode = Arrays.asList(codes.split("[,;\\s]+"));
+			return Arrays.asList(codes.split("[,;\\s]+"));
 		}
-		return listCodePeriode;
+		
 
 	}
 
