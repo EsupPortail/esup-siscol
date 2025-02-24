@@ -5,9 +5,9 @@ Generic  Referentiel WAR overlay to expose apogee and LDAP data . This programm 
 
 # Versions
 
-- APOGEE `6.4.x`
-- JDK `11`, `8`
-- APOGEE WS à partir de la version `62031`...
+- APOGEE `6.4.x` `6.5.x`
+- JDK `17`, `21`
+- APOGEE WS à partir de la version `6.xxx`...
 
 # Installation du JAR client WS-APOGEE
 Avant de commencer l'installation il faut bien installer le jar client apo-webservices-client, chaque établissement doit s'assurer que la version installée correspond au web-service qui va être interroger:
@@ -133,9 +133,12 @@ pour activer ou désactiver un apogee/pegase mettre la valeur à true ou à fals
 
 	credential:
 		userscredential:
-    		root:
-      			username: root
+    		root: # ici le login est root
+      			username: {le nom qui va être affiché}
       			password: {password}
+      			roles:
+        				- ADMIN
+      			
 
 
 ## Version Apogee
@@ -159,7 +162,7 @@ mvn install
 Pour éxecuter le projet en mode développement il suffit de le lancer  avec la commande : 
 
 ```bash
-cp application.yml.sample application.yml
+cp etc/esup-siscol/application.yml.sample /etc/esup-siscol/application.yml
 ##configurer la partie LDAP, apogee (urls de services) et userscredential
 mvn  spring-boot:run
 ```

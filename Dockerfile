@@ -1,20 +1,28 @@
-FROM adoptopenjdk/openjdk11:alpine-slim
+# Utiliser une image Alpine Linux comme base
+FROM eclipse-temurin:21-jdk-alpine
+
+
 
 # Install base packages
 RUN apk update
 RUN apk upgrade
-RUN apk add ca-certificates && update-ca-certificates
+#RUN apk add ca-certificates && update-ca-certificates
 # Change TimeZone
 RUN apk add --update tzdata
 ENV TZ=Europe/Paris
 # Clean APK cache
+RUN rm -rf /var/cache/apk/*
+# Installer les dépendances nécessaires
+
+
 RUN rm -rf /var/cache/apk/*
 
 RUN mkdir -p esup-siscol 
 RUN mkdir -p /etc/esup-siscol
 
 #COPY etc/resolv.conf /etc/resolv.conf
-COPY  target/esup-siscol-0.1.14.war  /esup-siscol/esup-siscol.jar
+COPY  target/esup-siscol-2.0.0-SNAPSHOT.war  /esup-siscol/esup-siscol.jar
+#apres configuration de  application.yml
 COPY  etc/esup-siscol /etc/esup-siscol
 EXPOSE 8080
 
