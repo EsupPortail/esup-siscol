@@ -1,2 +1,2 @@
-sudo docker stop apogee
-sudo docker rm apogee
+sudo docker stop esup-siscol 
+sudo docker rm esup-siscol 
