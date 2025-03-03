@@ -263,8 +263,7 @@ public class ApogeeController { // NO_UCD (unused code)
 			return new ResponseEntity<>(
 					studentComponentRepositoryDao.getComposantesPrincipalesRef(universityCode, null), HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("erreur lors de la récupération composantesPrincipalesRef pour : " + universityCode + " -> "
-					+ e.getMessage());
+			logger.error("erreur lors de la récupération composantesPrincipalesRef pour : " + universityCode , e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
@@ -283,7 +282,7 @@ public class ApogeeController { // NO_UCD (unused code)
 					HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error(
-					"erreur lors de la récupération signaitaireRef pour : " + universityCode + " -> " + e.getMessage());
+					"erreur lors de la récupération signaitaireRef pour : " + universityCode , e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
