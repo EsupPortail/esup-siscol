@@ -46,6 +46,7 @@ import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauEtapes;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TypeHebergementDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.WebBaseException_Exception;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.OffreFormationMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.SECritereDTO2;
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ComposanteDTO3;
@@ -422,7 +423,7 @@ public class EtudiantMetierClient {
 	 * @return List<DiplomeDTO3>
 	 */
 
-	public List<DiplomeDTO3> recupererListDiplomeDTO3(String codeEtp, String versionEtp) {
+	public List<DiplomeDTO4> recupererListDiplomeDTO4(String codeEtp, String versionEtp) {
 
 		// recherche du cursus LMD, codFinalite
 		SECritereDTO2 seCritereDTO = new SECritereDTO2();
@@ -436,10 +437,10 @@ public class EtudiantMetierClient {
 		seCritereDTO.setCodElp("tous");
 //			seCritereDTO.setCodNatureElp("stag");
 
-		List<DiplomeDTO3> diplomeDTO = null;
+		List<DiplomeDTO4> diplomeDTO = null;
 
 		try {
-			diplomeDTO = offreFormationMetierService.recupererSEV3(seCritereDTO);
+			diplomeDTO = offreFormationMetierService.recupererSEV4(seCritereDTO);
 		} catch (gouv.education.apogee.commun.client.ws.OffreFormationMetier.WebBaseException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

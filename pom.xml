@@ -4,16 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail.referentiel</groupId>
 	<artifactId>esup-siscol</artifactId>
-	<version>2.0.2-RC</version>
+	<version>2.0.3-RC</version>
 	<packaging>war</packaging>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.2</version>
+		<version>3.4.3</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<properties>
 	    <java.version>21</java.version>
+	    <maven.compiler.release>21</maven.compiler.release>
 	    <skipTests>true</skipTests>
 		<jaxb-impl-version>2.3.1</jaxb-impl-version>
 		<resolver-version>20050927</resolver-version>
@@ -50,7 +51,7 @@
 		<dependency>
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
-			<version>6.50.00</version>
+			<version>6.50.30</version>
 			<!--			<version>6.40.70</version>-->
 			<!--			<version>6.40.01</version>-->
 			<!--			<version>6.30.50</version>-->

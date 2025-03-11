@@ -1,19 +1,30 @@
 APOGEE WS à partir de la version 62031 ...Referentiel overlay Template
 =======================
 
-Generic  Referentiel WAR overlay to expose apogee and LDAP data . This programm  could be freely used.
 
-# Versions
+
+# Prérequis et Versions
 
 - APOGEE `6.4.x` `6.5.x`
 - JDK `17`, `21`
 - APOGEE WS à partir de la version `6.xxx`...
+- Annuaire LDAP
+
+# Installation de la version compilée:
+- Téléchargez le à partir de l'url https://github.com/EsupPortail/esup-siscol/tags la derniére release
+- Pour une premiére installation il faut créer le fichier /etc/esup-siscol/application.yml à partir du modèle https://github.com/EsupPortail/esup-siscol/blob/main/etc/esup-siscol/application.yml.sample.
+- une fois paramétrer (voir ci-dessous le parmétrage) déposer le fichier esup-siscol.jar téléchargé précédement dans le webappas tomcat. 
 
 # Installation du JAR client WS-APOGEE
-Avant de commencer l'installation il faut bien installer le jar client apo-webservices-client, chaque établissement doit s'assurer que la version installée correspond au web-service qui va être interroger:
+Avant de commencer l'installation de l'application esup-siscol, il faut bien commencer par installer le jar client apo-webservices-client, chaque établissement doit s'assurer que la version installée correspond au web-service qui va être interroger:
 
 ```bash
-mvn install:install-file -Dfile=apo-webservices-client{mettre la version}.jar -DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client -Dversion={mettre la version} -Dpackaging=jar
+mvn install:install-file -Dfile=apo-webservices-client{mettre la version}.jar \ 
+		-DgroupId=gouv.education.apogee \ 
+		-DartifactId=apo-webservices-client \
+		-Dversion={mettre la version} \
+		-Dpackaging=jar  \
+		-DgeneratePom=true
 ```
 
 

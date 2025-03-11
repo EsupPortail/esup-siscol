@@ -12,7 +12,7 @@ import gouv.education.apogee.commun.client.ws.AdministratifMetier.InsAdmAnuDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.CoordonneesDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudiantDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
-import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO2;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ComposanteDTO3;
@@ -89,7 +89,7 @@ public interface StudentDataRepositoryDao extends Serializable {
 	 * @return List<DiplomeDTO3>
 	 */
 
-	public List<DiplomeDTO3> recupererListDiplomeDTO3(String codeEtp, String versionEtp);
+	public List<DiplomeDTO4> recupererListDiplomeDTO4(String codeEtp, String versionEtp);
 
 	/**
 	 * Composante

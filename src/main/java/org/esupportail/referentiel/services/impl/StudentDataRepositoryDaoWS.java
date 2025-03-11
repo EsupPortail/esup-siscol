@@ -35,14 +35,22 @@ import gouv.education.apogee.commun.client.ws.EtudiantMetier.IndBacDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ComposanteCentreGestionDTO;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ElementPedagogiDTO22;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ElementPedagogiDTO32;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.EtapeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.EtapeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO2;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.OffreFormationDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.OffreFormationDTO4;
 //import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauListeElementPedagogiDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauVersionDiplomeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauVersionDiplomeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionEtapeDTO32;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionEtapeDTO42;
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ComposanteDTO3;
 
 /**
@@ -210,8 +218,8 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	 * @return List<DiplomeDTO3>
 	 */
 
-	public List<DiplomeDTO3> recupererListDiplomeDTO3(String codeEtp, String versionEtp) {
-		List<DiplomeDTO3> diplomeDTO = etudiantMetierClient.recupererListDiplomeDTO3(codeEtp, versionEtp);
+	public List<DiplomeDTO4> recupererListDiplomeDTO4(String codeEtp, String versionEtp) {
+		List<DiplomeDTO4> diplomeDTO = etudiantMetierClient.recupererListDiplomeDTO4(codeEtp, versionEtp);
 		return (diplomeDTO);
 
 	}
@@ -837,20 +845,20 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 					String versDiplome = insAdmEtp.getDiplome().getVersionDiplome();
 					etpins.setVersionDiplome(versDiplome);
 
-					List<DiplomeDTO3> diplomeDTOs = recupererListDiplomeDTO3(insAdmEtp.getEtape().getCodeEtp(),
+					List<DiplomeDTO4> diplomeDTOs = recupererListDiplomeDTO4(insAdmEtp.getEtape().getCodeEtp(),
 							insAdmEtp.getEtape().getVersionEtp());
 					if (diplomeDTOs != null && !diplomeDTOs.isEmpty()) {
-						for (DiplomeDTO3 diplomeDTO : diplomeDTOs) {
+						for (DiplomeDTO4 diplomeDTO : diplomeDTOs) {
 
 							try {
 
-								TableauVersionDiplomeDTO3 versionDiplomes = diplomeDTO.getListVersionDiplome();
+								TableauVersionDiplomeDTO4 versionDiplomes = diplomeDTO.getListVersionDiplome();
 
-								for (VersionDiplomeDTO3 versionDiplome : versionDiplomes.getItem()) {
+								for (VersionDiplomeDTO4 versionDiplome : versionDiplomes.getItem()) {
 									if (versionDiplome.getCodCursusLmd() != null) {
 										etpins.setCodCursusLmd(versionDiplome.getCodCursusLmd());
 									}
-									OffreFormationDTO3 offreFormation = versionDiplome.getOffreFormation();
+									OffreFormationDTO4 offreFormation = versionDiplome.getOffreFormation();
 									if (offreFormation != null) {
 
 										if (offreFormation.getCodFinalite() != null) {
@@ -879,7 +887,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
 								}
 							} catch (Exception e) {
-								logger.warn("Exception recupererSE_v3 : " + e);
+								logger.warn("Exception recupererSE_v4 : " + e);
 								if (e.toString().equals("technical.data.nullretrieve.recupererse")) {
 									logger.warn("Aucune donnee en sortie pour " + codEtud + " - diplome/vers : "
 											+ codeDiplome + versDiplome);
@@ -946,11 +954,11 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		List<ElementPedagogique> listeELPs = new ArrayList<ElementPedagogique>();
 		try {
 
-			List<DiplomeDTO3> diplomeDTOs = recupererListDiplomeDTO3(codeEtp, versionEtp);
+			List<DiplomeDTO4> diplomeDTOs = recupererListDiplomeDTO4(codeEtp, versionEtp);
 			if (diplomeDTOs != null && !diplomeDTOs.isEmpty()) {
-				for (DiplomeDTO3 diplomeDTO : diplomeDTOs) {
-					TableauVersionDiplomeDTO3 versionDiplomes = diplomeDTO.getListVersionDiplome();
-					for (VersionDiplomeDTO3 versionDiplome : versionDiplomes.getItem()) {
+				for (DiplomeDTO4 diplomeDTO : diplomeDTOs) {
+					TableauVersionDiplomeDTO4 versionDiplomes = diplomeDTO.getListVersionDiplome();
+					for (VersionDiplomeDTO4 versionDiplome : versionDiplomes.getItem()) {
 						EtapeInscription etpins = new EtapeInscription();
 						etpins.setCodeEtp(codeEtp);
 						etpins.setCodVrsVet(versionEtp);
@@ -958,7 +966,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 						if (versionDiplome != null) {
 							etpins.setCodCursusLmd(versionDiplome.getCodCursusLmd());
 						}
-						OffreFormationDTO3 offreFormation = versionDiplome.getOffreFormation();
+						OffreFormationDTO4 offreFormation = versionDiplome.getOffreFormation();
 						if (offreFormation != null) {
 
 							if (offreFormation.getCodFinalite() != null) {
@@ -978,9 +986,9 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 							}
 
 							// Recup éléments pédagogiques
-							EtapeDTO3 etape = offreFormation.getListEtape().getItem().get(0);
-							VersionEtapeDTO32 versionEtape = etape.getListVersionEtape().getItem().get(0);
-							List<ListeElementPedagogiDTO2> listeelementPedagogiDTO = versionEtape
+							EtapeDTO4 etape = offreFormation.getListEtape().getItem().get(0);
+							VersionEtapeDTO42 versionEtape = etape.getListVersionEtape().getItem().get(0);
+							List<ListeElementPedagogiDTO3> listeelementPedagogiDTO = versionEtape
 									.getListListeElementPedagogi().getItem();
 
 //							ListeElementPedagogiDTO2[] listeelementPedagogiDTO = offreFormation
@@ -1000,14 +1008,14 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 								/**
 								 * TOD s'assurer des resultats !!
 								 */
-								for (ListeElementPedagogiDTO2 element : listeelementPedagogiDTO) {
+								for (ListeElementPedagogiDTO3 element : listeelementPedagogiDTO) {
 
 //								List<ElementPedagogiDTO22> listElementPedagogiqueDTO22 = listeelementPedagogiDTO
 //										.get(0).getListElementPedagogi().getItem();
-									List<ElementPedagogiDTO22> listElementPedagogiqueDTO22 = element
+									List<ElementPedagogiDTO32> listElementPedagogiqueDTO22 = element
 											.getListElementPedagogi().getItem();
 
-									for (ElementPedagogiDTO22 elementPedagogiqueDTO22 : listElementPedagogiqueDTO22) {
+									for (ElementPedagogiDTO32 elementPedagogiqueDTO22 : listElementPedagogiqueDTO22) {
 
 										// Remplissage de la table des elements pedagogiques si elp de
 										// nature stage (ou avec temoin stage actif) et non suspendu
@@ -1065,16 +1073,16 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	 * @return EtapeInscription
 	 */
 	public EtapeInscription recupererEtapeInscription(String codEape, String versEtape) {
-		List<DiplomeDTO3> diplomeDTOs = recupererListDiplomeDTO3(codEape, versEtape);
+		List<DiplomeDTO4> diplomeDTOs = recupererListDiplomeDTO4(codEape, versEtape);
 		EtapeInscription etpins = new EtapeInscription();
 		if (diplomeDTOs != null) {
 			diplomeDTOs.forEach((diplomeDTO) -> {
-				TableauVersionDiplomeDTO3 versionDiplomes = diplomeDTO.getListVersionDiplome();
+				TableauVersionDiplomeDTO4 versionDiplomes = diplomeDTO.getListVersionDiplome();
 				if (versionDiplomes != null && versionDiplomes.getItem() != null) {
 
 					versionDiplomes.getItem().forEach(versionDiplome -> {
 
-						OffreFormationDTO3 offreFormation = versionDiplome.getOffreFormation();
+						OffreFormationDTO4 offreFormation = versionDiplome.getOffreFormation();
 						if (offreFormation != null) {
 
 							if (offreFormation.getCodFinalite() != null) {
@@ -1102,10 +1110,10 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
 							etpins.setTypeIns(DonneesStatic.TYPE_INS_ADMIN);
 
-							EtapeDTO3 etape = offreFormation.getListEtape().getItem().get(0);
+							EtapeDTO4 etape = offreFormation.getListEtape().getItem().get(0);
 							etpins.setCodeEtp(etape.getCodEtp());
 
-							VersionEtapeDTO32 vers = offreFormation.getListEtape().getItem().get(0)
+							VersionEtapeDTO42 vers = offreFormation.getListEtape().getItem().get(0)
 									.getListVersionEtape().getItem().get(0);
 
 							etpins.setCodVrsVet(String.valueOf(vers.getCodVrsVet()));
@@ -1256,16 +1264,16 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
 					try {
 
-						List<DiplomeDTO3> diplomeDTOs = recupererListDiplomeDTO3(insAdmEtp.getEtape().getCodeEtp(),
+						List<DiplomeDTO4> diplomeDTOs = recupererListDiplomeDTO4(insAdmEtp.getEtape().getCodeEtp(),
 								insAdmEtp.getEtape().getVersionEtp());
 						if (diplomeDTOs != null && !diplomeDTOs.isEmpty()) {
-							for (DiplomeDTO3 diplomeDTO : diplomeDTOs) {
-								TableauVersionDiplomeDTO3 versionDiplomes = diplomeDTO.getListVersionDiplome();
-								for (VersionDiplomeDTO3 versionDiplome : versionDiplomes.getItem()) {
+							for (DiplomeDTO4 diplomeDTO : diplomeDTOs) {
+								TableauVersionDiplomeDTO4 versionDiplomes = diplomeDTO.getListVersionDiplome();
+								for (VersionDiplomeDTO4 versionDiplome : versionDiplomes.getItem()) {
 									if (versionDiplome != null) {
 										etpins.setCodCursusLmd(versionDiplome.getCodCursusLmd());
 									}
-									OffreFormationDTO3 offreFormation = versionDiplome.getOffreFormation();
+									OffreFormationDTO4 offreFormation = versionDiplome.getOffreFormation();
 									if (offreFormation != null) {
 
 										if (offreFormation.getCodFinalite() != null) {
@@ -1285,9 +1293,9 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 										}
 
 										// Recup éléments pédagogiques
-										EtapeDTO3 etape = offreFormation.getListEtape().getItem().get(0);
-										VersionEtapeDTO32 versionEtape = etape.getListVersionEtape().getItem().get(0);
-										List<ListeElementPedagogiDTO2> listeelementPedagogiDTO = versionEtape
+										EtapeDTO4 etape = offreFormation.getListEtape().getItem().get(0);
+										VersionEtapeDTO42 versionEtape = etape.getListVersionEtape().getItem().get(0);
+										List<ListeElementPedagogiDTO3> listeelementPedagogiDTO = versionEtape
 												.getListListeElementPedagogi().getItem();
 
 //										ListeElementPedagogiDTO2[] listeelementPedagogiDTO = offreFormation
@@ -1307,43 +1315,43 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 											/**
 											 * TOD s'assurer des resultats !!
 											 */
-											for (ListeElementPedagogiDTO2 element : listeelementPedagogiDTO) {
+											for (ListeElementPedagogiDTO3 element : listeelementPedagogiDTO) {
 
 //											List<ElementPedagogiDTO22> listElementPedagogiqueDTO22 = listeelementPedagogiDTO
 //													.get(0).getListElementPedagogi().getItem();
-												List<ElementPedagogiDTO22> listElementPedagogiqueDTO22 = element
+												List<ElementPedagogiDTO32> listElementPedagogiqueDTO32 = element
 														.getListElementPedagogi().getItem();
 
-												for (ElementPedagogiDTO22 elementPedagogiqueDTO22 : listElementPedagogiqueDTO22) {
+												for (ElementPedagogiDTO32 elementPedagogiqueDTO32 : listElementPedagogiqueDTO32) {
 
 													// Remplissage de la table des elements pedagogiques si elp de
 													// nature stage (ou avec temoin stage actif) et non suspendu
 													logger.trace("trace ELP :" + "etape :[ " + etpins.getCodeEtp() + ":"
 															+ etpins.getCodVrsVet() + " ]"
-															+ elementPedagogiqueDTO22.getCodElp() + " "
-															+ elementPedagogiqueDTO22.getLibNatureElp()
+															+ elementPedagogiqueDTO32.getCodElp() + " "
+															+ elementPedagogiqueDTO32.getLibNatureElp()
 															+ " \tTemStage :"
-															+ elementPedagogiqueDTO22.getTemStage().equals("O"));
+															+ elementPedagogiqueDTO32.getTemStage().equals("O"));
 
 													// .equalsIgnoreCase("stage")
 													// if ("4S6LEM16".equals(elementPedagogiqueDTO22.getCodElp()))
 
-													if ((elementPedagogiqueDTO22.getLibNatureElp()
+													if ((elementPedagogiqueDTO32.getLibNatureElp()
 															.equalsIgnoreCase("stage")
-															|| elementPedagogiqueDTO22.getTemStage().equals("O"))
-															&& !elementPedagogiqueDTO22.getTemSusp().equals("O")) {
+															|| elementPedagogiqueDTO32.getTemStage().equals("O"))
+															&& !elementPedagogiqueDTO32.getTemSusp().equals("O")) {
 														ElementPedagogique elpedago = new ElementPedagogique();
 														elpedago.setCodEtp(etpins.getCodeEtp());
 														elpedago.setCodVrsVet(etpins.getCodVrsVet());
 
 														elpedago.setLibNatureElp(
-																elementPedagogiqueDTO22.getLibNatureElp());
-														elpedago.setCodElp(elementPedagogiqueDTO22.getCodElp());
-														elpedago.setLibElp(elementPedagogiqueDTO22.getLibElp());
+																elementPedagogiqueDTO32.getLibNatureElp());
+														elpedago.setCodElp(elementPedagogiqueDTO32.getCodElp());
+														elpedago.setLibElp(elementPedagogiqueDTO32.getLibElp());
 														elpedago.setTemElpTypeStage(
-																elementPedagogiqueDTO22.getTemStage());
-														if (elementPedagogiqueDTO22.getCredits() != null) {
-															elpedago.setNbrCrdElp(elementPedagogiqueDTO22.getCredits());
+																elementPedagogiqueDTO32.getTemStage());
+														if (elementPedagogiqueDTO32.getCredits() != null) {
+															elpedago.setNbrCrdElp(elementPedagogiqueDTO32.getCredits());
 														}
 														// renseignement de la map element pedagogique
 														elementPedagogiques.put(etpins.getCodeEtp() + "", elpedago);
@@ -1362,7 +1370,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 							}
 						}
 					} catch (Exception e) {
-						logger.warn("Exception recupererSE_v3 : " + e);
+						logger.warn("Exception recupererSE_v4 : " + e);
 						if (e.toString().equals("technical.data.nullretrieve.recupererse")) {
 							logger.warn("Aucune donnee en sortie pour " + codEtud + " - diplome/vers : " + codeDiplome
 									+ versDiplome);
