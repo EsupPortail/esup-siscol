@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,9 +36,11 @@ public class WebSecurityConfig { // NO_UCD (unused code)
 				.requestMatchers(HttpMethod.GET, "/cache/**").hasAnyAuthority("ADMIN")
 				.requestMatchers(HttpMethod.POST, "/cache/**").hasAnyAuthority("ADMIN")
 				
-				.anyRequest().authenticated()).formLogin((form) -> form.loginPage("/login").permitAll())
-				.logout((logout) -> logout.permitAll().invalidateHttpSession(true).clearAuthentication(true));
-
+				.anyRequest().authenticated()).formLogin((form) -> form.loginPage("/login").permitAll()).
+					logout((logout) -> logout.permitAll().invalidateHttpSession(true).clearAuthentication(true))
+					 .httpBasic(Customizer.withDefaults());
+				            
+		//.httpBasic(Customizer.withDefaults());
 		return http.build();
 
 

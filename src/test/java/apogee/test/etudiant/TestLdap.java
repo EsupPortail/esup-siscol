@@ -1,27 +1,20 @@
 package apogee.test.etudiant;
 
 import java.net.URI;
-import java.util.List;
 
-import org.esupportail.referentiel.beans.ApogeeMap;
-import org.esupportail.referentiel.ldap.entities.FormSearch;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.reactive.function.client.WebClient.ResponseSpec;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import reactor.core.publisher.Mono;
 
 public class TestLdap {
 
-	String baseUrl = "http://cri146.admc.parisnanterre.fr:8080";
+	String baseUrl = "http://localhost:8080";
 	String login = "root";
 	String password = "root";
 
@@ -32,7 +25,7 @@ public class TestLdap {
 		Mono<Person[]> result = ldapSearchByForm(m);
 		Person[] list = result.block();
 		for (Person p : list) {
-			System.out.println(p.getCn()+ ": " +p.getEduPersonPrimaryAffiliation());
+			System.out.println(p.getCn() + ": " + p.getMail());
 			System.out.println(p);
 		}
 	}
@@ -61,5 +54,23 @@ public class TestLdap {
 				.defaultHeaders(header -> header.setBasicAuth(login, password)).build();
 		return webClient.post().uri("/ldap/etudiant").accept(MediaType.APPLICATION_JSON)
 				.body(form, FormSearchTest.class).retrieve().bodyToMono(Person[].class);
+	}
+
+	@Test
+	public void testLdapWebCLient2() {
+		WebClient webClient = WebClient.builder().baseUrl(baseUrl)
+				.defaultHeaders(header -> header.setBasicAuth(login, password)).build();
+		Mono<Person[]> test = webClient.get().uri("/ldap/bySupannAliasLogin?login=acheraga&base=default").accept(MediaType.APPLICATION_JSON).retrieve()
+				.bodyToMono(Person[].class);
+		Person[] list = test.block();
+		for (Person p : list) {
+			System.out.println(p.getCn() + ": " + p.getMail());
+			System.out.println(p);
+		}
+	}
+	
+	@Test
+	public void testLdapWebCLient3() {
+		 ExternalApiService externalApiService=new ExternalApiService(null);
 	}
 }
