@@ -1,8 +1,5 @@
 # Utiliser une image Alpine Linux comme base
 FROM eclipse-temurin:21-jdk-alpine
-
-
-
 # Install base packages
 RUN apk update
 RUN apk upgrade
@@ -21,7 +18,7 @@ RUN mkdir -p esup-siscol
 RUN mkdir -p /etc/esup-siscol
 
 #COPY etc/resolv.conf /etc/resolv.conf
-COPY  target/esup-siscol-2.0.0-SNAPSHOT.war  /esup-siscol/esup-siscol.jar
+COPY  target/esup-siscol-2.0.2-RC.war /esup-siscol/esup-siscol.jar
 #apres configuration de  application.yml
 COPY  etc/esup-siscol /etc/esup-siscol
 EXPOSE 8080

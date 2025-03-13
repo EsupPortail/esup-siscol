@@ -1,4 +1,4 @@
-imageTag=2.0.0-SNAPSHOT
+imageTag=2.0.2-RC
 echo "Building CAS docker image tagged as [$imageTag]"
 
 docker build  --tag="local/esup-siscol:v$imageTag" . \
