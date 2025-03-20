@@ -13,7 +13,12 @@ Generic  Referentiel WAR overlay to expose apogee and LDAP data . This programm 
 Avant de commencer l'installation il faut bien installer le jar client apo-webservices-client, chaque établissement doit s'assurer que la version installée correspond au web-service qui va être interroger:
 
 ```bash
-mvn install:install-file -Dfile=apo-webservices-client{mettre la version}.jar -DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client -Dversion={mettre la version} -Dpackaging=jar
+mvn install:install-file -Dfile=apo-webservices-client{mettre la version}.jar \ 
+		-DgroupId=gouv.education.apogee \ 
+		-DartifactId=apo-webservices-client \
+		-Dversion={mettre la version} \
+		-Dpackaging=jar  \
+		-DgeneratePom=true
 ```
 
 

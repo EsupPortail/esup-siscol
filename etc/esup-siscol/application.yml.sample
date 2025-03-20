@@ -1,27 +1,23 @@
-
+---
 spring:
- ldap:
-    urls: 
-    - ldap://ldap.fr:389
+  ldap:
+    urls: [ldap://ldap.fr:389]
     username: uid=user,ou=admins,dc=univ.fr
     password: password
     base: dc=univ,dc=fr
- 
 springdoc:
   version: '@springdoc.version@'
   api-docs:
     groups:
       enabled: true
   swagger-ui:
-
     display-request-duration: true
     groups-order: ASC
     operationsSorter: method
     disable-swagger-default-url: true
     use-root-path: true
     path: /swagger-ui.html
-    url: /api-docs.yaml 
-     
+    url: /api-docs.yaml
 server:
   error:
     include-exception: true
@@ -29,7 +25,6 @@ server:
       enabled: true
     path: /error.html
     include-stacktrace: always
-   
 app:
   server-url: http://localhost:8080/esup-siscol
   server-version: 1.0.14
@@ -38,55 +33,41 @@ app:
     stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
     stringFilterStudent: (eduPersonAffiliation=student)
     stringFilterStaff: (eduPersonAffiliation=staff)
-    ##les paramètres ci-dessous commentés sont obsolètes 
-    parametres:
- 		
-		#laissez vide si vous n'utilisez pas de prefix
-		#supannEtuEtapePrefix: "*" ## ou par exemple{UAI:0921436L} 
-
-		#false pour ignorer le version d'etape et le separateur dansla recherche LDAP
-		#supannEtuEtapeExisteVetVersion: false
-		#laissez vide si n'existe pas, il faut mettre des espaces si ils existent
-		#supannEtuEtapeSepVetVersion: " - "
-
     attributes:
-                objectClass: Person
-                supannAliasLogin: supannAliasLogin
-                baseDn: ou=people
-                dn: dn
-                uid: uid
-                codEtu: supannEtuId
-                supannEtuId: supannEtuId
-                sn: sn
-                mail: mail
-                supannAutreMail: supannAutreMail
-                cn: cn
-                givenName: givenName
-                displayName: givenName
-                eduPersonPrimaryAffiliation: eduPersonPrimaryAffiliation
-                eduPersonAffiliation: eduPersonAffiliation
-                supannEntiteAffectation: supannEntiteAffectation
-                supannEntiteAffectationPrincipale: supannEntiteAffectationPrincipale
-                supannCivilite: supannCivilite
-                telephoneNumber: telephoneNumber
-                supannEtuCursusAnnee: supannEtuCursusAnnee
-                eduPersonOrgDN: eduPersonOrgDN
-                supannEmpId: supannEmpId
-                supannRefId: supannRefId
-                supannEtuEtape: supannEtuEtape
-                supannEtuAnneeInscription: supannEtuAnneeInscription
-                     			                
-    
+      objectClass: Person
+      supannAliasLogin: supannAliasLogin
+      baseDn: ou=people
+      dn: dn
+      uid: uid
+      codEtu: supannEtuId
+      supannEtuId: supannEtuId
+      sn: sn
+      mail: mail
+      supannAutreMail: supannAutreMail
+      cn: cn
+      givenName: givenName
+      displayName: givenName
+      eduPersonPrimaryAffiliation: eduPersonPrimaryAffiliation
+      eduPersonAffiliation: eduPersonAffiliation
+      supannEntiteAffectation: supannEntiteAffectation
+      supannEntiteAffectationPrincipale: supannEntiteAffectationPrincipale
+      supannCivilite: supannCivilite
+      telephoneNumber: telephoneNumber
+      supannEtuCursusAnnee: supannEtuCursusAnnee
+      eduPersonOrgDN: eduPersonOrgDN
+      supannEmpId: supannEmpId
+      supannRefId: supannRefId
+      supannEtuEtape: supannEtuEtape
+      supannEtuAnneeInscription: supannEtuAnneeInscription
   apogee:
     startYearMonth: 09
     startYearDay: 01
     universityCode: UPN
     codesRegimeInscriptionFC: 2;4;5
     # valeurs de temoinRecupAnnu  possible :  TOUS,  N,   O
-    temoinRecupAnnu : N
-    
+    temoinRecupAnnu: N
     urlService:
-    	##si vous n'utilisaez pas l'authentifaction ws, laissez les champs username et password vides
+      ##si vous n'utilisaez pas l'authentifaction ws, laissez les champs username et password vides
       administratifMetier: http://ws.apogee.univ.fr:8080/aws/services/AdministratifMetier
       administratifMetierUserName:
       administratifMetierPassword:
@@ -103,8 +84,8 @@ app:
       referentielMetierUserName:
       referentielMetierPassword:
       offreFormationMetier: http://ws.apogee.univ.fr:8080/aws/services/OffreFormationMetier
-      offreFormationMetierUserName: 
-      offreFormationMetierPassword: 
+      offreFormationMetierUserName:
+      offreFormationMetierPassword:
   pcscol:
     codeStructure: ETAB00
     codePeriode: PER-2020
@@ -128,57 +109,41 @@ app:
         url: https://mof.pc-scol.fr/api/v1/mof
       # Base Url de l'API COF de Pgase
       ref:
-          url: https://ref.pc-scol.fr/api/v1/ref
+        url: https://ref.pc-scol.fr/api/v1/ref
     # Permet de cibler un dossier par dfaut. /!\ Attention /!\ A renseigner uniquement pour une dmonstration ou en phase de test/dveloppement.
     demo:
       codeapprenant: 000000001
     # Liste des statuts des inscriptions  afficher dans la vue "Parcours" spars par des virgules
     inscription:
       statut: valide
-     
-    
 credential:
   userscredential:
     root:
       username: root
       password: root
-      roles:
-        - ADMIN
-        - USER
-        - USER_APOGEE
-        - USER_LDAP
+      roles: [ADMIN, USER, USER_APOGEE, USER_LDAP]
   autorisation:
-    supann:
-      - USER_LDAP
-      - ADMIN
+    supann: [USER_LDAP, ADMIN]
     referentiel:
       - USER_APOGEE
       - ADMIN
-
 # Configuration du cache [Bloc optionnel]
 # Fonctionnement par defaut
 # - Aucun cache au demarrage
 # - Aucun cron
 cache:
     # Chargement au demarrage des caches
-    onStartup:
+  onStartup:
         # Active ou non, par defaut : false
-        enabled: true
+    enabled: true
     # Time-To-Live du cache temporaire, en minutes, par defaut : 60 [minutes]
-    #ttl-tmp:
+    # ttl-tmp:
     # Time-To-Live du cache permanent, en heures, par defaut : 0 [heures]
     # Si 0, aucune limite de temps
-    #ttl-permanent:
+    # ttl-permanent:
     # Cron pour un rechargement periodique des caches
-    scheduling:
+  scheduling:
         # Active ou non, par defaut : false
-        enabled: false
+    enabled: false
         # Expression cron, par defaut : aucune
-        cron: 0 0 7-22 * * *
-
-logging:
-    level:
-        org:
-            springframework:
-                # Affichage des logs Spring pour le cache 
-                cache: TRACE
+    cron: 0 0 7-22 * * *
