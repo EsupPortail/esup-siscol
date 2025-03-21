@@ -47,7 +47,7 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.VariableAppliWSE
  * Acces au composantes du personnel personnalise.
  *
  */
-@ConditionalOnProperty(name = "app.mode_apogee")
+
 @Service
 public class StudentComponentRepositoryDaoWS implements StudentComponentRepositoryDao {
 	private static final long serialVersionUID = 949811640680344536L;

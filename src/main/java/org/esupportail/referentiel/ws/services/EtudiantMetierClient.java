@@ -57,7 +57,7 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.RegimeInscDTO;
  * @author abdelhamid
  *
  */
-@ConditionalOnProperty(name = "app.mode_apogee")
+
 @Service
 public class EtudiantMetierClient {
 

@@ -49,7 +49,7 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.ComposanteDTO3;
 /**
  * Acces donnees etudiant
  */
-@ConditionalOnProperty(name = "app.mode_apogee")
+
 @Service
 public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
