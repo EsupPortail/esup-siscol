@@ -359,22 +359,22 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		param.setCodDip("aucun");
 		param.setCodVrsVdi("aucun");
 		param.setCodElp("aucun");
-		List<DiplomeDTO3> diplomeDTO3 = null;
+		List<DiplomeDTO4> diplomeDTO = null;
 		try {
-			diplomeDTO3 = offreFormationMetierService.recupererSEV3(param);
+			diplomeDTO = offreFormationMetierService.recupererSEV4(param);
 		} catch (gouv.education.apogee.commun.client.ws.OffreFormationMetier.WebBaseException_Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
 
-		for (DiplomeDTO3 ld : diplomeDTO3) {
-			TableauVersionDiplomeDTO3 versionDiplomeDTO3 = ld.getListVersionDiplome();
-			for (VersionDiplomeDTO3 lvd : versionDiplomeDTO3.getItem()) {
-				TableauEtapeDTO3 etapeDTO3 = lvd.getOffreFormation().getListEtape();
-				for (EtapeDTO3 le : etapeDTO3.getItem()) {
-					TableauVersionEtapeDTO3 versionEtapeDTO3 = le.getListVersionEtape();
-					for (VersionEtapeDTO32 ve : versionEtapeDTO3.getItem()) {
+		for (DiplomeDTO4 ld : diplomeDTO) {
+			TableauVersionDiplomeDTO4 versionDiplomeDTO = ld.getListVersionDiplome();
+			for (VersionDiplomeDTO4 lvd : versionDiplomeDTO.getItem()) {
+				TableauEtapeDTO4 etapeDTO = lvd.getOffreFormation().getListEtape();
+				for (EtapeDTO4 le : etapeDTO.getItem()) {
+					TableauVersionEtapeDTO4 versionEtapeDTO = le.getListVersionEtape();
+					for (VersionEtapeDTO42 ve : versionEtapeDTO.getItem()) {
 						idl = le.getCodEtp();
 						lib = ve.getLibWebVet();
 						lSI.put(idl + ";" + ve.getCodVrsVet(), lib);
