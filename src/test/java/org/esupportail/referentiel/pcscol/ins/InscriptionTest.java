@@ -12,10 +12,10 @@ import org.esupportail.referentiel.pcscol.ins.model.ApprenantEtInscriptions;
 import org.esupportail.referentiel.pcscol.ins.model.InscriptionComplete;
 import org.esupportail.referentiel.pcscol.ins.model.Inscriptions;
 import org.esupportail.referentiel.pcscol.ins.model.Periode;
+import org.esupportail.referentiel.pcscol.ins.model.StatutGlobalPiece;
 import org.esupportail.referentiel.pcscol.ins.model.StatutIne;
 import org.esupportail.referentiel.pcscol.ins.model.StatutInscriptionVoeu;
 import org.esupportail.referentiel.pcscol.ins.model.StatutPaiementVoeu;
-import org.esupportail.referentiel.pcscol.ins.model.StatutPiecesVoeu;
 import org.esupportail.referentiel.pcscol.ins.model.TriInscription;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.mapper.ApprenantEtuInfoAdmMapperInterface;
@@ -25,6 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
 @ContextConfiguration(classes = { SpringBootTomcatApplication.class })
 @SpringBootTest
 @SpringJUnitConfig
@@ -33,17 +34,20 @@ public class InscriptionTest {
 
 	@Autowired
 	InscriptionsApi insApi;
-	
-
-	
 
 	@Test
 	public void testInsEtApp() throws ApiException {
-		ApprenantEtInscriptions app = insApi.lireInscriptions("ETAB00", "000000001");
-		Apprenant appInfo = app.getApprenant();
+		try {
+			ApprenantEtInscriptions app = insApi.lireInscriptions("ETAB00", "000000249");
+			Apprenant appInfo = app.getApprenant();
 
-		EtudiantRef aa = ApprenantEtuInfoAdmMapperInterface.Instance.apprenantToEtudiantRef(appInfo);
-		System.out.println(appInfo);
+			EtudiantRef aa = ApprenantEtuInfoAdmMapperInterface.Instance.apprenantToEtudiantRef(appInfo);
+			System.out.println(appInfo);
+		} catch (ApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	@Test
@@ -94,7 +98,7 @@ public class InscriptionTest {
 		List<StatutInscriptionVoeu> statutsInscription = new ArrayList<StatutInscriptionVoeu>();
 		// statutsInscription.add(StatutInscriptionVoeu.VALIDE);
 		// statutsInscription.add(StatutInscriptionVoeu.ANNULEE);
-		List<StatutPiecesVoeu> statutsPieces = new ArrayList<StatutPiecesVoeu>();
+		List<StatutGlobalPiece> statutsPieces = new ArrayList<StatutGlobalPiece>();
 		List<StatutPaiementVoeu> statutsPaiement = new ArrayList<StatutPaiementVoeu>();
 		List<TriInscription> tri = null;
 		String rechercheIne = null;
@@ -115,8 +119,9 @@ public class InscriptionTest {
 					prenom, codeApprenant, ine, statutsIne, limit);
 			System.out.println(list.getTotalElements());
 			list.getResultats().forEach(i -> {
-				System.out.println(i.getMeta().getCodeApprenant()+": "+i.getVoeu().getCible().getPeriode().getCode());
-				//System.out.println(i);
+				System.out
+						.println(i.getMeta().getCodeApprenant() + ": " + i.getVoeu().getCible().getPeriode().getCode());
+				// System.out.println(i);
 			});
 		} catch (ApiException e) {
 			// TODO Auto-generated catch block
