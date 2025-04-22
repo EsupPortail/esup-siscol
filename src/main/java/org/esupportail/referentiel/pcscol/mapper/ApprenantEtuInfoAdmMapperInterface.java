@@ -18,6 +18,7 @@ import org.esupportail.referentiel.pcscol.ins.model.ContactTelephoneComplet;
 import org.esupportail.referentiel.pcscol.ins.model.Inscription;
 import org.esupportail.referentiel.pcscol.ins.model.InscriptionComplete;
 import org.esupportail.referentiel.pcscol.ins.model.OccurrenceNomenclature;
+import org.esupportail.referentiel.utils.DateMapper;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -25,7 +26,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = DateMapper.class)
 public interface ApprenantEtuInfoAdmMapperInterface {
 
 	/**
@@ -47,7 +48,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 	@Mapping(target = "nom", source =  "etatCivil.nomDeNaissance")
 	@Mapping(target = "prenom", source = "etatCivil.prenom")
 	@Mapping(target="codEtu",source="meta.codeApprenant")
-	@Mapping(target = "dateNaissance", source = "naissance.dateDeNaissance", dateFormat = "dd-MM-yyyy")
+	@Mapping(target = "dateNaissance", source = "naissance.dateDeNaissance")
 	@Mapping(target = "numeroIne", source = "bac.ine")
 	public ApprenantDto inscrptionToApprenantDto(Inscription inscription);
 	
@@ -65,7 +66,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 	@Mapping(target = "prenom2", source = "etatCivil.deuxiemePrenom")
 	@Mapping(target = "sexe", source = "etatCivil.genre")
 	@Mapping(target = "nomPatronymique", source = "etatCivil.nomDeNaissance")
-	@Mapping(target = "dateNaissance", source = "naissance.dateDeNaissance", dateFormat = "dd-MM-yyyy")
+	@Mapping(target = "dateNaissance", source = "naissance.dateDeNaissance")
 	@Mapping(target = "libVilleNaissance", expression = "java(app.getNaissance().getLibelleCommuneDeNaissance()!=null?app.getNaissance().getLibelleCommuneDeNaissance():app.getNaissance().getCommuneDeNaissanceEtranger())")
 	@Mapping(target = "departementNaissance", source = "naissance.communeDeNaissance")
 	@Mapping(target = "paysNaissance", source = "naissance.libellePaysDeNaissance")
@@ -91,7 +92,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 	@Mapping(target = "nommarital", source = "etatCivil.nomUsuel")
 	@Mapping(target = "nompatro", source = "etatCivil.nomDeNaissance")
 	@Mapping(target = "prenom", source = "etatCivil.prenom")
-	@Mapping(target = "dateNais", source = "naissance.dateDeNaissance", dateFormat = "dd-MM-yyyy")
+	@Mapping(target = "dateNais", source = "naissance.dateDeNaissance",dateFormat = "yyyy-MM-dd")
 	@Mapping(target = "codeSexe", source = "etatCivil.genre")
 	@Mapping(target = "sexEtatCivil", source = "etatCivil.genre")
 	public EtudiantRef apprenantToEtudiantRef(Apprenant app);

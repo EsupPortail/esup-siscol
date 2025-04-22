@@ -13,6 +13,7 @@ import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
+import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtapeReduiteDto;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
@@ -44,6 +45,7 @@ import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
+import org.esupportail.referentiel.pcscol.ref_api.model.Adresse;
 import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -237,7 +239,7 @@ public class PcscolService implements PcscolServiceI {
 	public Map<String, String> lireMapStructures() {
 		Map<String, String> mapComp = new LinkedHashMap<String, String>();
 		List<Structure> strucList = lireListeStructure();
-
+		logger.debug("lireMapStructures : {}", strucList.size());
 		if (!strucList.isEmpty())
 			strucList.forEach(s -> {
 				mapComp.put(s.getCode(), s.getDenominationPrincipale());
@@ -245,6 +247,37 @@ public class PcscolService implements PcscolServiceI {
 				// peuplerArbreStructures(mapComp, s.getCode());
 			});
 		return mapComp;
+	}
+	@Override
+	public EtabRef lireEtabRef() {
+		List<Structure> strucList = lireListeStructure();
+		EtabRef etabRef = new EtabRef();
+		Structure structure = strucList.stream().filter(s -> s.getEstStructureMere())
+				.findFirst().orElse(null);
+		etabRef.setNomEtabRef(structure.getDenominationPrincipale());
+		etabRef.setAdresseEtabRef(formatAdresse(structure.getAdresse()));
+
+		return etabRef;
+		
+	}
+	
+	private String formatAdresse(Adresse adresse) {
+	    if (adresse == null) {
+	        return null;
+	    }
+	    return Arrays.asList(
+	            adresse.getAdresse1(),
+	            adresse.getAdresse2(),
+	            adresse.getAdresse3(),
+	            adresse.getAdresse4(),
+	            adresse.getAdresse5(),
+	            adresse.getLocaliteAcheminement(),
+	            adresse.getCodePostal()
+	           
+	            
+	        ).stream()
+	        .filter(field -> field != null && !field.isEmpty())
+	        .collect(Collectors.joining(", "));
 	}
 
 	/**
@@ -258,13 +291,14 @@ public class PcscolService implements PcscolServiceI {
 		List<String> listCodePeriode = codePeriodeFromPeriodes(codeStructure, codesPeriodesChargementFormations);
 		logger.debug("listCodePeriode: {}", listCodePeriode);
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<ObjetMaquetteSummary>();
-
+		logger.debug("codeStructure : {} ", codeStructure);
+		
 		listCodePeriode.forEach(codePeiode -> {
 			try {
-
+				logger.debug("\t\tcodePeiode : {}", codePeiode);
 				List<ObjetMaquetteSummary> diplomes = offreFormationService
 						.rechercherObjetMaquetteDiplomeReferences(codeStructure, codePeiode);
-				logger.debug("nbr diplomes {}", diplomes.size());
+				logger.debug("\t\tnbr diplomes {}", diplomes.size());
 
 				objetMaquetteSummaries.addAll(diplomes);
 			} catch (ApiException e) {
@@ -281,10 +315,13 @@ public class PcscolService implements PcscolServiceI {
 	 * @param codesPeriodesChargementFormations
 	 * @return
 	 */
-	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
+	//@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public List<DiplomeReduitDto> diplomeRef(String codeStructure, String codesPeriodesChargementFormations) {
+		
+		logger.debug("diplomeRef : {} period {}", codeStructure, codesPeriodesChargementFormations);
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = allObjetMaquetteSummariesFromPeriodes(codeStructure,
 				codesPeriodesChargementFormations);
+		
 		List<DiplomeReduitDto> diplomes = new ArrayList<DiplomeReduitDto>();
 		objetMaquetteSummaries.forEach(f -> {
 			try {
@@ -318,7 +355,6 @@ public class PcscolService implements PcscolServiceI {
 							try {
 								objectMaqette2 = objetsMaquetteApi.lireObjetMaquette(codeStructure,
 										e.getObjetMaquette().getId());
-								logger.debug("{}", objectMaqette2);
 								EtapeReduiteDto etp = new EtapeReduiteDto();
 								etp.setCodeEtp(objectMaqette2.getCode());
 								/**

@@ -70,6 +70,7 @@ public class OffreFormationService {
 //	}
 
 	public MaquetteStructure lireMaquette(String codeStructure, String idMaquette) {
+		logger.debug("lireMaquette( {} ,{} )", codeStructure, idMaquette);
 		try {
 			MaquetteStructure response = maquettesApi.lireStructureMaquette(codeStructure, UUID.fromString(idMaquette));
 			return response;
@@ -148,9 +149,9 @@ public class OffreFormationService {
 	public List<ObjetMaquetteSummary> rechercheObjetMaquetteSummary(String codeStructure,
 			List<TypeObjetMaquette> typeObjetMaquette, Boolean racine, String typeObjetFormation, List<UUID> ids,
 			String espace) throws ApiException {
-	
-		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{},{},{} ,{} )", codeStructure,
-				typeObjetMaquette, racine, typeObjetFormation, ids, espace);
+
+		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{},{},{} ,{} )", codeStructure, typeObjetMaquette, racine,
+				typeObjetFormation, ids, espace);
 		List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<>();
 		Pageable pageable = new Pageable();
 		pageable.setPage(0);
@@ -407,7 +408,15 @@ public class OffreFormationService {
 
 		List<Espace> espaces = espaceService.checherPeriodeParCode(codeStructure, periode);
 		if (espaces != null && !espaces.isEmpty()) {
-			UUID idPeriode = espaces.get(0).getId();
+			UUID idPeriode = null;
+
+			for (Espace espace : espaces) {
+				if (espace.getCode().equals(periode)) {
+					idPeriode = espace.getId();
+					logger.debug("idPeriode : " + idPeriode);
+				}
+			}
+
 			typesObjetMaquette.add(TypeObjetMaquette.FORMATION);
 
 			List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure,
@@ -450,7 +459,7 @@ public class OffreFormationService {
 
 		// typeObjetFormation [UE, PARCOURS-TYPE, SEMESTRE, ANNEE, ENS, EC]
 		List<String> listTypeObjetFormation = Arrays.asList(typeObjetFormationChargementFormations.split("[,;\\s]+"));
-		
+
 		Map<String, String> objetMaquettes = new HashMap<String, String>();
 
 		listTypeObjetFormation.forEach(typeObjetFormation -> {

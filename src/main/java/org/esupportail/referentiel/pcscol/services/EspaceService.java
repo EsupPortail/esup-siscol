@@ -130,7 +130,7 @@ public class EspaceService {
 	public List<Espace> checherPeriodeParCode(String codeStructure, String code) throws ApiException {
 		Pageable pageable = new Pageable();
 		pageable.setPage(0);
-		pageable.setTaille(20);
+		pageable.setTaille(50);
 		String r = code;
 		TypeEspace type = null;
 		// ( String codeStructure, Pageable pageable, String r, TypeEspace type, Boolean

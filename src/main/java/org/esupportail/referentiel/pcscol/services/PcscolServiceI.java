@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ApprenantDto;
+import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.SignataireRef;
@@ -79,5 +80,7 @@ public interface PcscolServiceI {
 	 * @return
 	 */
 	public SignataireRef signaitaireRef(String composante);
+
+	EtabRef lireEtabRef();
 
 }

@@ -55,7 +55,7 @@ public class PcscolControllerAdapter {
 
 		// generique
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
-		logger.debug(annee, " =>", espaces);
+		logger.debug("{} {}  {}", "getEtudiantRef", " => nbr d'esapces ", espaces.size());
 		/**
 		 * TODO relation annee periode ?? Attention ceci est une POF doit etre valide
 		 */

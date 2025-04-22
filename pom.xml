@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail.referentiel</groupId>
 	<artifactId>esup-siscol</artifactId>
-	<version>2.0.3-RC</version>
+	<version>2.0.4-RC</version>
 	<packaging>war</packaging>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -62,6 +62,14 @@
 			<artifactId>jakarta.annotation-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<version>10.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+	
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -152,7 +160,7 @@
 			<artifactId>springdoc-openapi-starter-webflux-api</artifactId>
 			<version>${springdoc-openapi-starter-webmvc-ui-version}</version>
 		</dependency>
-		
+
 
 		<!--Import pour pcscol-->
 
@@ -196,11 +204,11 @@
 
 
 		<!-- JAXB Implementation -->
-<!--		<dependency>-->
-<!--			<groupId>org.glassfish.jaxb</groupId>-->
-<!--			<artifactId>jaxb-runtime</artifactId>-->
-<!--			<version>${jaxb-runtime-version}</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>org.glassfish.jaxb</groupId>-->
+		<!--			<artifactId>jaxb-runtime</artifactId>-->
+		<!--			<version>${jaxb-runtime-version}</version>-->
+		<!--		</dependency>-->
 
 		<!-- JAXB Core -->
 		<dependency>
@@ -235,11 +243,11 @@
 		</dependency>
 
 		<!-- Activation Framework -->
-<!--		<dependency>-->
-<!--			<groupId>com.sun.activation</groupId>-->
-<!--			<artifactId>javax.activation</artifactId>-->
-<!--			<version>1.2.0</version>-->
-<!--		</dependency>-->
+		<!--		<dependency>-->
+		<!--			<groupId>com.sun.activation</groupId>-->
+		<!--			<artifactId>javax.activation</artifactId>-->
+		<!--			<version>1.2.0</version>-->
+		<!--		</dependency>-->
 
 
 		<dependency>

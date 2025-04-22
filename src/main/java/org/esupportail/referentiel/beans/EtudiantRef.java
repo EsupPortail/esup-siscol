@@ -64,8 +64,8 @@ public class EtudiantRef implements Serializable {
 	private String codeSexe = "";
 	
 	// date Naissance etudiant
-	@JsonFormat(shape = JsonFormat.Shape.STRING, locale = "fr_FR",timezone = "Europe/Paris")
-	private Date dateNais = new Date();
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "Europe/Paris")
+	private Date dateNais ;
 	// libelle CPAM etudiant
 	private String libelleCPAM = "";
 	
