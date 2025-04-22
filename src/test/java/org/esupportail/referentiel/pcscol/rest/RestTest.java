@@ -69,7 +69,7 @@ public class RestTest {
 		String espace=null;
 		
 		 List<ObjetMaquetteSummary> test = offreFormationService.rechercheObjetMaquetteSummary(codeStructure,
-				typeObjetMaquette,  racine, typeObjetFormation,  ids,espace);
+				typeObjetMaquette,  racine, typeObjetFormation,  ids,espace,false);
 		System.out.println(test.size());
 	}
 	

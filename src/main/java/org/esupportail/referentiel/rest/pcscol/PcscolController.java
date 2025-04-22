@@ -54,8 +54,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 
 	@GetMapping("/etapesReference")
 	public ResponseEntity<Map<String, String>> getEtapesRef() {
-		Map<String, String> ref = pcscolService.lireMapFormations(codeStructure, codesPeriodesChargementFormations,
-				false, false);
+		Map<String, String> ref = pcscolService.lireMapFormations(codeStructure, codesPeriodesChargementFormations,true);
 		return new ResponseEntity<Map<String, String>>(ref, HttpStatus.OK);
 
 	}

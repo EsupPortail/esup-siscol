@@ -212,8 +212,7 @@ public class PcscolService implements PcscolServiceI {
 	 */
 	@Override
 	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
-	public HashMap<String, String> lireMapFormations(String codeStructure, String codePeriode,
-			boolean uniquementOuvrableAInscription, boolean uniquementOuvrableAuChoixDuCursus) {
+	public HashMap<String, String> lireMapFormations(String codeStructure, String codePeriode,boolean piaSeulement) {
 
 		List<String> listCodePeriode = codePeriodeFromPeriodes(codeStructure, codePeriode);
 
@@ -223,7 +222,7 @@ public class PcscolService implements PcscolServiceI {
 
 			try {
 				HashMap<String, String> formations = (HashMap<String, String>) offreFormationService
-						.rechercherObjetMaquetteObjetFormation(codeStructure, periode);
+						.rechercherObjetMaquetteObjetFormation(codeStructure, periode,piaSeulement);
 				mapAllFormations.putAll(formations);
 			} catch (ApiException e) {
 				logger.error("lireMapFormations : " + codePeriode + " : " + e.getMessage() + " : " + e.getCode());
@@ -248,36 +247,27 @@ public class PcscolService implements PcscolServiceI {
 			});
 		return mapComp;
 	}
+
 	@Override
 	public EtabRef lireEtabRef() {
 		List<Structure> strucList = lireListeStructure();
 		EtabRef etabRef = new EtabRef();
-		Structure structure = strucList.stream().filter(s -> s.getEstStructureMere())
-				.findFirst().orElse(null);
+		Structure structure = strucList.stream().filter(s -> s.getEstStructureMere()).findFirst().orElse(null);
 		etabRef.setNomEtabRef(structure.getDenominationPrincipale());
 		etabRef.setAdresseEtabRef(formatAdresse(structure.getAdresse()));
 
 		return etabRef;
-		
+
 	}
-	
+
 	private String formatAdresse(Adresse adresse) {
-	    if (adresse == null) {
-	        return null;
-	    }
-	    return Arrays.asList(
-	            adresse.getAdresse1(),
-	            adresse.getAdresse2(),
-	            adresse.getAdresse3(),
-	            adresse.getAdresse4(),
-	            adresse.getAdresse5(),
-	            adresse.getLocaliteAcheminement(),
-	            adresse.getCodePostal()
-	           
-	            
-	        ).stream()
-	        .filter(field -> field != null && !field.isEmpty())
-	        .collect(Collectors.joining(", "));
+		if (adresse == null) {
+			return null;
+		}
+		return Arrays.asList(adresse.getAdresse1(), adresse.getAdresse2(), adresse.getAdresse3(), adresse.getAdresse4(),
+				adresse.getAdresse5(), adresse.getLocaliteAcheminement(), adresse.getCodePostal()
+
+		).stream().filter(field -> field != null && !field.isEmpty()).collect(Collectors.joining(", "));
 	}
 
 	/**
@@ -292,7 +282,7 @@ public class PcscolService implements PcscolServiceI {
 		logger.debug("listCodePeriode: {}", listCodePeriode);
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<ObjetMaquetteSummary>();
 		logger.debug("codeStructure : {} ", codeStructure);
-		
+
 		listCodePeriode.forEach(codePeiode -> {
 			try {
 				logger.debug("\t\tcodePeiode : {}", codePeiode);
@@ -315,13 +305,13 @@ public class PcscolService implements PcscolServiceI {
 	 * @param codesPeriodesChargementFormations
 	 * @return
 	 */
-	//@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
+	// @Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
 	public List<DiplomeReduitDto> diplomeRef(String codeStructure, String codesPeriodesChargementFormations) {
-		
+
 		logger.debug("diplomeRef : {} period {}", codeStructure, codesPeriodesChargementFormations);
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = allObjetMaquetteSummariesFromPeriodes(codeStructure,
 				codesPeriodesChargementFormations);
-		
+
 		List<DiplomeReduitDto> diplomes = new ArrayList<DiplomeReduitDto>();
 		objetMaquetteSummaries.forEach(f -> {
 			try {
@@ -560,7 +550,7 @@ public class PcscolService implements PcscolServiceI {
 		try {
 			Structure response = structureApi.lireStructure(composante);
 			SignataireRef sign = new SignataireRef();
-			sign.setNomSignataireComposante(response.getResponsable().getNom());
+			sign.setNomSignataireComposante(response.getResponsable().getNom()+" "+response.getResponsable().getPrenom());
 			sign.setQualiteSignataire(response.getResponsable().getTitre());
 			return sign;
 		} catch (ApiException e) {
@@ -577,26 +567,7 @@ public class PcscolService implements PcscolServiceI {
 	 * @return List<String>
 	 */
 	public List<String> codePeriodeFromPeriodes(String codeStructure, String codes) {
-
-		final List<String> listCodePeriode = new ArrayList<>();
-		if (codes == null || codes.isEmpty()) {
-			try {
-				List<Periode> listPeriodes = inscriptionsApi.listerPeriodes(codeStructure);
-				listPeriodes.stream().forEach(p -> {
-					listCodePeriode.add(p.getCode());
-				});
-				return listCodePeriode;
-
-			} catch (ApiException e) {
-				logger.error(" "+ e.getMessage());
-				return null;
-
-			}
-		} else {
-			return Arrays.asList(codes.split("[,;\\s]+"));
-		}
-		
-
+		return Arrays.asList(codes.split("[,;\\s]+"));
 	}
 
 	public StructureApi getStructureApi() {

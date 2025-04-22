@@ -99,7 +99,7 @@ public class MaquetteApiTest {
 	public void rechercherObjetMaquetteObjetFormaion() throws ApiException {
 
 		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,
-				"PER-2021");
+				"PER-2021",true);
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
 		}
@@ -118,7 +118,7 @@ public class MaquetteApiTest {
 	@Test
 	public void rechercherObjetMaquetteVET() throws ApiException {
 		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,
-				"PER-2021");
+				"PER-2021",false);
 
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
