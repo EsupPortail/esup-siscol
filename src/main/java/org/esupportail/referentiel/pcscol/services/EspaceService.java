@@ -137,7 +137,7 @@ public class EspaceService {
 		// actif)
 		PagedEspaces espaces = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, true);
 		logger.debug("nbr d'Espaces pour le code   " + r + " :" + espaces.getTotalElements());
-		return espaces.getItems();
+		return espaces.getItems().stream().filter(e -> e.getCode().equals(code)).toList();
 
 	}
 

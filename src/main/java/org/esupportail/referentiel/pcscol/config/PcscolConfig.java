@@ -6,6 +6,7 @@ import java.time.Duration;
 import org.esupportail.referentiel.pcscol.api.ArbresApi;
 import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
+import org.esupportail.referentiel.pcscol.api.ExtractionsApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
@@ -39,6 +40,9 @@ public class PcscolConfig {
 	
 	@Value("${app.pcscol.api.chc.url}")
 	private String apiChcV6;
+	
+	@Value("${app.pcscol.api.chcExterne.url}")
+	private String apiChcExtrene;
 
 
 	@Autowired
@@ -145,6 +149,18 @@ public class PcscolConfig {
 			return new EspacesApi();
 		}
 	}
+    @Bean
+    @SessionScope
+    ExtractionsApi extractionsApi() {
+    	try {
+			String token = accessTokenService.getToken();
+			ExtractionsApi api = new ExtractionsApi(apiClient(apiChcExtrene, token));
+			return api;
+		} catch (Exception e) {
+			logger.error(e.getMessage() + " :" + e.getMessage());
+			return new ExtractionsApi();
+		} 
+    }
 
     @Bean
     @SessionScope
@@ -226,6 +242,14 @@ public class PcscolConfig {
 
 	public void setApiChcV6(String apiChcV6) {
 		this.apiChcV6 = apiChcV6;
+	}
+
+	public String getApiChcExtrene() {
+		return apiChcExtrene;
+	}
+
+	public void setApiChcExtrene(String apiChcExtrene) {
+		this.apiChcExtrene = apiChcExtrene;
 	}
 	
 	

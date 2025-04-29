@@ -14,6 +14,21 @@ public class ApprenantDto {
 	private String numeroIne;
 	private String mail;
 
+	
+	
+	public ApprenantDto() {
+		super();
+	}
+	
+	public ApprenantDto(String codEtu, String nom, String prenom, String dateNaissance, String numeroIne, String mail) {
+		super();
+		this.codEtu = codEtu;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.numeroIne = numeroIne;
+		this.mail = mail;
+	}
 	public String getCodEtu() {
 		return codEtu;
 	}

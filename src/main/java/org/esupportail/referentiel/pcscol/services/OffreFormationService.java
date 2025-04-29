@@ -1,7 +1,6 @@
 package org.esupportail.referentiel.pcscol.services;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -283,8 +282,7 @@ public class OffreFormationService {
 		try {
 			return rechercherIdObjetMaquette(codeStructure, type, racine, typeObjetFormation, espace);
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		return new ArrayList<String>();
 	}
@@ -372,8 +370,7 @@ public class OffreFormationService {
 
 								mapVDI.put(f.getCode() + ";" + esp.getCode(), f.getLibelle());
 							} catch (ApiException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
+								logger	.error(e.getMessage() + " : " + e.getCode());
 							}
 
 						}
@@ -404,10 +401,14 @@ public class OffreFormationService {
 		logger.debug("Recherche de diplomes pour la periode : " + periode);
 
 		List<TypeObjetMaquette> typesObjetMaquette = new ArrayList<TypeObjetMaquette>();
-
+		typesObjetMaquette.add(TypeObjetMaquette.FORMATION);
+		
+		
 		boolean racine = false;
 		String typeObjetFormation = null;
 		List<UUID> ids = null;
+		typesObjetMaquette.add(TypeObjetMaquette.FORMATION);
+		boolean piaSeulement = false;
 
 		List<Espace> espaces = espaceService.checherPeriodeParCode(codeStructure, periode);
 		if (espaces != null && !espaces.isEmpty()) {
@@ -420,8 +421,7 @@ public class OffreFormationService {
 				}
 			}
 
-			typesObjetMaquette.add(TypeObjetMaquette.FORMATION);
-			boolean piaSeulement = false;
+			
 			List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure,
 					typesObjetMaquette, racine, typeObjetFormation, ids, idPeriode.toString(), piaSeulement);
 			logger.debug(periode + " nbr diplomes : " + allObjetMaquetteDetail.size());
@@ -535,8 +535,7 @@ public class OffreFormationService {
 					}
 
 				} catch (ApiException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					logger.error(e.getMessage() + " : " + e.getCode());
 				}
 			});
 		}

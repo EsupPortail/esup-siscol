@@ -76,7 +76,7 @@ public interface GeneriqueSIControllerInterface {
 	 * @param annee
 	 * @return
 	 */
-	public ResponseEntity<LinkedHashMap<String, String>> studentEtapeVets(@RequestParam(value = "codEtud") String codeEtud,
+	public ResponseEntity<Map<String, String>> studentEtapeVets(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee);
 	/**
 	 * 

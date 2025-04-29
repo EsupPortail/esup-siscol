@@ -146,7 +146,7 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 					new PersonContextMapper(ldapAtributes));
 			return persons.get(0);
 		} catch (Exception e) {
-			logger.error("LDAP EXCEPTION ", e);
+			logger.error("LDAP EXCEPTION codeEtud  {} {} ",CodEtu, e.getMessage());
 			return null;
 		}
 	}

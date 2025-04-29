@@ -37,7 +37,7 @@ public interface PcscolServiceI {
 	 * @param uniquementOuvrableAuChoixDuCursus
 	 * @return
 	 */
-	public HashMap<String, String> lireMapFormations(String codeStructure, String codePeriode,boolean uniquementOuvrableAInscription);
+	public Map<String, String> lireMapFormations(String codeStructure, String codePeriode,boolean uniquementOuvrableAInscription);
 
 	/**
 	 * 

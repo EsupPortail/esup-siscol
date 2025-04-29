@@ -89,7 +89,7 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface {
 	 * @return
 	 */
 	@GetMapping("/studentEtapeVets")
-	public ResponseEntity<LinkedHashMap<String, String>> studentEtapeVets(
+	public ResponseEntity<Map<String, String>> studentEtapeVets(
 			@RequestParam(value = "codEtud") String codeEtud, @RequestParam(value = "annee") String annee) {
 		LinkedHashMap<String, String> lEtapeInscriptions = new LinkedHashMap<String, String>();
 		return new ResponseEntity<>(lEtapeInscriptions, HttpStatus.OK);

@@ -74,6 +74,10 @@ public class PcscolService implements PcscolServiceI {
 	private EspacesApi espacesApi;
 	@Autowired
 	private OffreFormationService offreFormationService;
+	@Autowired
+	private OffreFormationServicePartielEtapes offreFormationServiceRevisited;
+
+	
 
 	@Autowired
 	private ChcService chcService;
@@ -212,21 +216,46 @@ public class PcscolService implements PcscolServiceI {
 	 */
 	@Override
 	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
-	public HashMap<String, String> lireMapFormations(String codeStructure, String codePeriode,boolean piaSeulement) {
+	public Map<String, String> lireMapFormations(String codeStructure, String codePeriode,boolean piaSeulement) {
 
 		List<String> listCodePeriode = codePeriodeFromPeriodes(codeStructure, codePeriode);
 
-		HashMap<String, String> mapAllFormations = new HashMap<String, String>();
+		Map<String, String> mapAllFormations = new HashMap<String, String>();
 
 		listCodePeriode.forEach(periode -> {
 
-			try {
-				HashMap<String, String> formations = (HashMap<String, String>) offreFormationService
-						.rechercherObjetMaquetteObjetFormation(codeStructure, periode,piaSeulement);
-				mapAllFormations.putAll(formations);
-			} catch (ApiException e) {
-				logger.error("lireMapFormations : " + codePeriode + " : " + e.getMessage() + " : " + e.getCode());
+			
+			UUID idPeriode = espaceService.chercherEspaceFromCode(codeStructure, periode);
+			if (idPeriode != null) {
+
+				logger.debug("lireMapFormations : {} ", idPeriode);
+				List<ObjetMaquetteSummary> maquetteSummaries = offreFormationServiceRevisited
+						.rechercheObjetMaquetteSummaryParPiaSeaulement(codeStructure, idPeriode.toString());
+				logger.debug("lireMapFormations : {} ", maquetteSummaries.size());
+				maquetteSummaries.stream().forEach(e -> {
+					logger.debug("lireMapFormations : {}  {} =>{}", e.getCode(),e.getTypeObjetFormation() ,e.getTypeObjetMaquette());
+				});
+				HashMap<String, String> mapFormations = offreFormationServiceRevisited
+						.objetMaquetteSummaryMap(maquetteSummaries, periode);
+
+				mapAllFormations.putAll(mapFormations);
+				
 			}
+			
+			
+		
+			
+//			
+//			
+//			
+//			
+//			try {
+//				Map<String, String> formations = (HashMap<String, String>) offreFormationService
+//						.rechercherObjetMaquetteObjetFormation(codeStructure, periode,piaSeulement);
+//				mapAllFormations.putAll(formations);
+//			} catch (ApiException e) {
+//				logger.error("lireMapFormations : " + codePeriode + " : " + e.getMessage() + " : " + e.getCode());
+//			}
 
 		});
 
@@ -413,8 +442,7 @@ public class PcscolService implements PcscolServiceI {
 				l.add(elp);
 			});
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("studentListeElpStage : " + e.getMessage());
 		}
 
 		return l;
@@ -443,7 +471,7 @@ public class PcscolService implements PcscolServiceI {
 		 * TODO versionEtape codeEtape
 		 */
 
-		return lireApprenantDtoFromInscriptions(codeComposante, codeDiplome, codePeriode, nom, prenom, codEtu);
+		return lireApprenantDtoFromInscriptions(codeComposante, codeEtape, codePeriode, nom, prenom, codEtu);
 	}
 
 	/**
@@ -520,6 +548,10 @@ public class PcscolService implements PcscolServiceI {
 		Integer limit = 50;
 
 		try {
+			/**
+			 * TODO afin de passer à ins extrene remplacer listerInscriptionsValidees qui n'est pas disponible
+			 */
+			
 			Inscriptions listInscriptions = inscriptionsApi.listerInscriptionsValidees(codeStructure,
 					statutsInscription, statutsPieces, statutsPaiement, tri, rechercheIne, recherche, periode,
 					objetMaquette, nomOuPrenom, nomDeNaissance, prenom, codeApprenant, ine, statutsIne, limit);
@@ -584,6 +616,14 @@ public class PcscolService implements PcscolServiceI {
 
 	public void setInscriptionsApi(InscriptionsApi inscriptionsApi) {
 		this.inscriptionsApi = inscriptionsApi;
+	}
+	
+	public OffreFormationServicePartielEtapes getOffreFormationServiceRevisited() {
+		return offreFormationServiceRevisited;
+	}
+
+	public void setOffreFormationServiceRevisited(OffreFormationServicePartielEtapes offreFormationServiceRevisited) {
+		this.offreFormationServiceRevisited = offreFormationServiceRevisited;
 	}
 
 }

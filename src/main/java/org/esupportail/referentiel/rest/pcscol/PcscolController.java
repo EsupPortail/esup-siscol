@@ -1,6 +1,5 @@
 package org.esupportail.referentiel.rest.pcscol;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -122,11 +121,11 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	@GetMapping("/listEtuParEtapeEtDiplome")
 	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
 			@RequestParam(value = "codeComposante", required = true, defaultValue = "ETAB00") String codeComposante,
-			@RequestParam(value = "annee", required = true, defaultValue = "PER-2020") String annee,
-			@RequestParam(value = "codeEtape", required = true, defaultValue = "None") String codeEtape,
-			@RequestParam(value = "versionEtape", required = true, defaultValue = "None") String versionEtape,
-			@RequestParam(value = "codeDiplome", required = true, defaultValue = "JJ-M-ENT") String codeDiplome,
-			@RequestParam(value = "versionDiplome", required = true, defaultValue = "PER-2020") String versionDiplome,
+			@RequestParam(value = "annee", required = true, defaultValue = "2021") String annee,
+			@RequestParam(value = "codeEtape", required = true, defaultValue = "MST-CIEA-A1") String codeEtape,
+			@RequestParam(value = "versionEtape", required = true, defaultValue = "PER-2021") String versionEtape,
+			@RequestParam(value = "codeDiplome", required = true, defaultValue = "MST-CIEA") String codeDiplome,
+			@RequestParam(value = "versionDiplome", required = true, defaultValue = "PER-2021") String versionDiplome,
 			@RequestParam(value = "codEtu", required = false) String codEtu,
 			@RequestParam(value = "nom", required = false) String nom,
 			@RequestParam(value = "prenom", required = false) String prenom) {
@@ -142,8 +141,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 * @return
 	 */
 	@GetMapping("/studentEtapeVets")
-	public ResponseEntity<LinkedHashMap<String, String>> studentEtapeVets(String codeEtud, String annee) {
-		ResponseEntity<LinkedHashMap<String, String>> lEtapeInscriptions = pcscolControllerAdapter
+	public ResponseEntity<Map<String, String>> studentEtapeVets(String codeEtud, String annee) {
+		ResponseEntity<Map<String, String>> lEtapeInscriptions = pcscolControllerAdapter
 				.studentEtapeVets(codeEtud, annee);
 		return lEtapeInscriptions;
 

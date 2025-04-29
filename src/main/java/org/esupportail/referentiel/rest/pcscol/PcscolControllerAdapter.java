@@ -1,20 +1,28 @@
 package org.esupportail.referentiel.rest.pcscol;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantRef;
+import org.esupportail.referentiel.ldap.entities.Person;
+import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
 import org.esupportail.referentiel.pcscol.ins.model.Periode;
+import org.esupportail.referentiel.pcscol.invoker.ApiException;
+import org.esupportail.referentiel.pcscol.odf.model.Espace;
+import org.esupportail.referentiel.pcscol.services.ChcExtreneService;
 import org.esupportail.referentiel.pcscol.services.EspaceService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
@@ -29,6 +37,12 @@ public class PcscolControllerAdapter {
 
 	@Autowired
 	private PcscolService pcscolService;
+	@Autowired
+	private ChcExtreneService chcExtreneService;
+
+	@Autowired
+	@Qualifier("personServiceMapperMethod")
+	LdapServiceInterface personService;
 
 	@Value("${app.pcscol.codeStructure}")
 	String codeStructure = "ETAB00";
@@ -38,9 +52,6 @@ public class PcscolControllerAdapter {
 
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
 	String codesPeriodesChargementFormations;
-	
-	
-	
 
 	@Autowired
 	private EspaceService espaceService;
@@ -85,12 +96,12 @@ public class PcscolControllerAdapter {
 		 * TODO relation annee periode ??
 		 */
 		if (espaces != null && !espaces.isEmpty()) {
-			
-			List<String> code_espaces=new ArrayList<String>();
-			espaces.forEach(e->{
+
+			List<String> code_espaces = new ArrayList<String>();
+			espaces.forEach(e -> {
 				code_espaces.add(e.getCode());
 			});
-			
+
 			ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, code_espaces);
 			return new ResponseEntity<ApogeeMap>(apogeeMap, HttpStatus.OK);
 		}
@@ -131,20 +142,43 @@ public class PcscolControllerAdapter {
 
 		// TODO
 		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
-		
-		List<ApprenantDto> apprenantDtos=new ArrayList<ApprenantDto>();
-		
+
+		List<ApprenantDto> apprenantDtos = new ArrayList<ApprenantDto>();
+
 		if (periodes != null && !periodes.isEmpty()) {
 			periodes.forEach(p -> {
-				List<ApprenantDto> ins = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, p.getCode(), codeEtape,
-						versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
-					logger.debug("recupererListeEtuParEtpEtDiplome : "+ins);	
-				if (ins != null && !ins.isEmpty()) {
-					apprenantDtos.addAll(ins);
+
+				// (String codeStructure, String codePeriode, String codeObjetFormation,String
+				// codeObjetFormationParent, String codeApprenant, String nom, String prenom)
+				List<ApprenantDto> apperants = chcExtreneService.getApprenantDto(codeComposante, versionEtape,
+						codeEtape, codeDiplome, codEtu, nom, prenom);
+				
+				/**
+				 * A supprimer après confirmation
+				 * l'appel inscriptionsValidees sera supprimé 
+				 */
+//				List<ApprenantDto> apperants = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, p.getCode(), codeEtape,
+//						versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
+				
+				logger.debug("recupererListeEtuParEtpEtDiplome : " + apperants);
+				if (apperants != null && !apperants.isEmpty()) {
+					apprenantDtos.addAll(apperants);
 				}
 			});
 		}
-		
+
+		apprenantDtos.forEach(e -> {
+			try {
+				Person person = personService.findByCodEtu(e.getCodEtu());
+				if (person != null) {
+					e.setMail(person.getMail());
+				}
+			} catch (Exception e1) {
+				logger.error("Erreur lors de la recherche de l'étudiant dans LDAP : " + e1.getMessage());
+			}
+
+		});
+
 		return new ResponseEntity<>(apprenantDtos, HttpStatus.OK);
 
 	}
@@ -156,10 +190,10 @@ public class PcscolControllerAdapter {
 	 * @return
 	 */
 
-	public ResponseEntity<LinkedHashMap<String, String>> studentEtapeVets(String codeEtud, String annee) {
+	public ResponseEntity<Map<String, String>> studentEtapeVets(String codeEtud, String annee) {
 		// TODO
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
-		LinkedHashMap<String, String> lEtapeInscriptions = new LinkedHashMap<String, String>();
+		Map<String, String> lEtapeInscriptions = new HashMap<String, String>();
 
 		if (espaces != null && !espaces.isEmpty()) {
 			espaces.forEach(e -> {
@@ -224,8 +258,6 @@ public class PcscolControllerAdapter {
 		return new ResponseEntity<>(diplomeReduitDtos, HttpStatus.OK);
 	}
 
-	
-	
 	public PcscolService getPcscolService() {
 		return pcscolService;
 	}
