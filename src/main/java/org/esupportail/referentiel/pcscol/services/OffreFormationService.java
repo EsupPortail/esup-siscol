@@ -172,7 +172,7 @@ public class OffreFormationService {
 		Integer nbr_page = response.getTotalPages();
 		if (nbr_page > 1) {
 			for (int i = 1; i < nbr_page; i++) {
-				pageable.setPage(1);
+				pageable.setPage(i);
 				PagedObjetMaquetteSummaries responsePartial = objetsMaquetteApi.rechercherObjetMaquette(codeStructure,
 						pageable, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
 						valideSeulement, mutualise);

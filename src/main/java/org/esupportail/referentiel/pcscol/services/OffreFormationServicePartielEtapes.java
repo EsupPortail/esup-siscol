@@ -115,7 +115,7 @@ public class OffreFormationServicePartielEtapes {
 			Boolean piaSeulement, Boolean piaActif, Boolean valideSeulement) {
 
 		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
-		boolean racine = false;
+		Boolean racine = null;
 		List<UUID> ids = null;
 		String typeObjetFormation;
 		typeObjetFormation = null;
