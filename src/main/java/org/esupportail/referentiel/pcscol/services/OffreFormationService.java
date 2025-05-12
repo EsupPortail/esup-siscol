@@ -180,6 +180,10 @@ public class OffreFormationService {
 
 			}
 		}
+		objetMaquetteSummaries = objetMaquetteSummaries.stream().distinct().toList();
+		objetMaquetteSummaries.stream().forEach(om -> {
+			logger.debug("objetMaquetteSummary : " + om.getCode() + " : " + om.getLibelle()+ ": " + om.getTypeObjetMaquette());
+		});
 
 		return objetMaquetteSummaries;
 	}
@@ -199,11 +203,20 @@ public class OffreFormationService {
 
 		pageable.setPage(0);
 		pageable.setTaille(10);
+		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{} )", codeStructure, codeFormation, codePeriode);
 		UUID idEsapce = espaceService.chercherEspaceFromCode(codeStructure, codePeriode);
-
+		if (idEsapce == null) {
+			logger.error("ID periode== null pour " + codePeriode);
+			return new ArrayList<ObjetMaquetteSummary>();
+		}
 		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
 				codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, piaActif, valideSeulement,
 				mutualise);
+		
+		if (response == null || response.getItems() == null) {
+			logger.info("rechercheObjetMaquetteSummary vide : " + codeFormation + " : " + codePeriode);
+			return listMaquetteSummaries;
+		}
 		listMaquetteSummaries.addAll(response.getItems());
 
 		if (response.getTotalPages() > 1) {
@@ -407,7 +420,7 @@ public class OffreFormationService {
 		boolean racine = false;
 		String typeObjetFormation = null;
 		List<UUID> ids = null;
-		typesObjetMaquette.add(TypeObjetMaquette.FORMATION);
+		
 		boolean piaSeulement = false;
 
 		List<Espace> espaces = espaceService.checherPeriodeParCode(codeStructure, periode);

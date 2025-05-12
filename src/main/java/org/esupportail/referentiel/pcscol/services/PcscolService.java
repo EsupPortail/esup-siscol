@@ -84,8 +84,8 @@ public class PcscolService implements PcscolServiceI {
 	@Autowired
 	private EspaceService espaceService;
 
-	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String annee) {
-
+	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String codePeriode) {
+		logger.debug("etapeInscription : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
 		ApprenantEtInscriptions app;
 		List<EtapeInscription> etps = new ArrayList<EtapeInscription>();
 		try {
@@ -94,7 +94,7 @@ public class PcscolService implements PcscolServiceI {
 			List<InscriptionComplete> inscriptions = app.getInscriptions();
 
 			inscriptions.forEach(ins -> {
-				if (ins.getCible().getPeriode().getCode().equalsIgnoreCase(annee)) {
+				if (ins.getCible().getPeriode().getCode().equalsIgnoreCase(codePeriode)) {
 					EtapeInscription etpinscr = ApprenantEtuInfoAdmMapperInterface.Instance
 							.stagesApprenantToEtapeInscription(ins);
 					if (etpinscr.getCodeComposante() != null && !etpinscr.getCodeComposante().isEmpty())
@@ -109,7 +109,7 @@ public class PcscolService implements PcscolServiceI {
 			});
 
 		} catch (ApiException e) {
-			logger.error("EtapeInscription : " + codeApprenant + " , " + annee + " : " + e.getMessage() + " : "
+			logger.error("EtapeInscription : " + codeApprenant + " , " + codePeriode + " : " + e.getMessage() + " : "
 					+ e.getCode());
 		}
 
@@ -361,7 +361,11 @@ public class PcscolService implements PcscolServiceI {
 				if (!objectMaqette.getEnfants().isEmpty()) {
 					MaquetteStructure maquetteStructure = offreFormationService.lireMaquette(codeStructure,
 							f.getId().toString());
-
+					/**
+					 * TODO ajouter le parent comme fils de lui meme
+					 * cas ou le diplome est lui meme porteur de PIA fils/pere ?
+					 */
+					
 					List<EnfantsStructure> enfants = listeEnfantsObjectMaquettePia(maquetteStructure);
 
 					// Enfant enfant = objectMaqette.getEnfants().get(0);
@@ -406,10 +410,10 @@ public class PcscolService implements PcscolServiceI {
 	 */
 	public List<EnfantsStructure> listeEnfantsObjectMaquettePia(MaquetteStructure maquetteStructure) {
 		final List<EnfantsStructure> listeEnfantPia = new ArrayList<EnfantsStructure>();
-
 		List<EnfantsStructure> enfants = maquetteStructure.getRacine().getEnfants();
 		enfants.forEach(e -> {
-			if (e.getObjetMaquette().getPia() != null) {
+			if (e.getObjetMaquette().getPia() != null && e.getObjetMaquette().getValide()==true
+					&& e.getObjetMaquette().getPia().getActif()	==true) {
 				listeEnfantPia.add(e);
 			}
 		});
@@ -422,6 +426,11 @@ public class PcscolService implements PcscolServiceI {
 		try {
 			List<ObjetMaquetteSummary> objetMaquetteSummaries = offreFormationService
 					.rechercheObjetMaquetteSummary(codeStructure, codeEtape, versionEtape);
+			if (objetMaquetteSummaries == null || objetMaquetteSummaries.isEmpty()) {
+				logger.error("studentListeElpStage : " + codeStructure + " , " + codeEtape + " , " + versionEtape);
+				logger.error("studentListeElpStage : " + "Aucun Objet Maquette trouvé");
+				return l;
+			}	
 			ObjetMaquetteSummary objetMaquetteSummary = objetMaquetteSummaries.get(0);
 			UUID id = objetMaquetteSummary.getId();
 			List<ObjetMaquetteDetail> llStage = offreFormationService.listeEnfantsObjectMaquetteStage(codeStructure,

@@ -62,7 +62,7 @@ public class OffreFormationServicePartielEtapes {
 			Boolean piaSeulement, Boolean piaActif, Boolean valideSeulement, Boolean mutualis) {
 		Pageable pageable = new Pageable();
 		pageable.setPage(0);
-		pageable.setTaille(20);
+		pageable.setTaille(10);
 		String r = null;
 
 		List<ObjetMaquetteSummary> result = new ArrayList<ObjetMaquetteSummary>();
@@ -76,12 +76,13 @@ public class OffreFormationServicePartielEtapes {
 			PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
 					espaceUUID, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
 					mutualis);
-			logger.debug("{} {}  {} ", "rechercheObjetMaquetteSummary", " => response ", response);
+			logger.debug(" Items().size() : {} TotalElements : {} ", "rechercheObjetMaquetteSummary", response.getItems().size(), response.getTotalElements());
 			if (response != null && response.getItems() != null) {
 				result.addAll(response.getItems());
 				if (response.getTotalPages() > 1) {
 					for (int i = 1; i < response.getTotalPages(); i++) {
 						pageable.setPage(i);
+						logger.debug("rechercheObjetMaquetteSummary page {}", i);
 						response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r, espaceUUID,
 								typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
 								valideSeulement, mutualis);
@@ -135,14 +136,17 @@ public class OffreFormationServicePartielEtapes {
 		List<UUID> ids = new ArrayList<UUID>();
 		String typeObjetFormation = null;
 		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
-		typeObjetMaquette.add(TypeObjetMaquette.OBJET_FORMATION);
-		typeObjetMaquette.add(TypeObjetMaquette.FORMATION);
+		//typeObjetMaquette.add(TypeObjetMaquette.OBJET_FORMATION);
+		//typeObjetMaquette.add(TypeObjetMaquette.FORMATION);
 		
 		Boolean piaSeulement = true;
 		Boolean piaActif = true;
 		Boolean valideSeulement = true;
+		logger.debug(
+				"rechercheObjetMaquetteSummaryParPiaSeaulement codeStructure {} espaceUUID {} piaSeulement {} piaActif {} valideSeulement {}",
+				codeStructure, espaceUUID, piaSeulement, piaActif, valideSeulement);
 		return rechercheObjetMaquetteSummary(codeStructure, espaceUUID, typeObjetMaquette, racine, typeObjetFormation, ids,
-				piaSeulement, piaActif, valideSeulement, false);
+				piaSeulement, piaActif, valideSeulement, null);
 	}
 	
 	

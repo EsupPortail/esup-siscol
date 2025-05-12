@@ -4,6 +4,7 @@ import java.net.URI;
 import java.time.Duration;
 
 import org.esupportail.referentiel.pcscol.api.ArbresApi;
+import org.esupportail.referentiel.pcscol.api.CursusApi;
 import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.ExtractionsApi;
@@ -159,6 +160,19 @@ public class PcscolConfig {
 		} catch (Exception e) {
 			logger.error(e.getMessage() + " :" + e.getMessage());
 			return new ExtractionsApi();
+		} 
+    }
+    
+    @Bean
+    @SessionScope
+    CursusApi cursusApi() {
+    	try {
+			String token = accessTokenService.getToken();
+			CursusApi api = new CursusApi(apiClient(apiChcExtrene, token));
+			return api;
+		} catch (Exception e) {
+			logger.error(e.getMessage() + " :" + e.getMessage());
+			return new CursusApi();
 		} 
     }
 

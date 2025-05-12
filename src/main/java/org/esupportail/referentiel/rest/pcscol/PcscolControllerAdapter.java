@@ -13,10 +13,11 @@ import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
+import org.esupportail.referentiel.pcscol.chcExterneV1.model.Cursus;
 import org.esupportail.referentiel.pcscol.ins.model.Periode;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
-import org.esupportail.referentiel.pcscol.services.ChcExtreneService;
+import org.esupportail.referentiel.pcscol.services.ChcExterneService;
 import org.esupportail.referentiel.pcscol.services.EspaceService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
 import org.slf4j.Logger;
@@ -38,7 +39,7 @@ public class PcscolControllerAdapter {
 	@Autowired
 	private PcscolService pcscolService;
 	@Autowired
-	private ChcExtreneService chcExtreneService;
+	private ChcExterneService chcExterneService;
 
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
@@ -150,16 +151,17 @@ public class PcscolControllerAdapter {
 
 				// (String codeStructure, String codePeriode, String codeObjetFormation,String
 				// codeObjetFormationParent, String codeApprenant, String nom, String prenom)
-				List<ApprenantDto> apperants = chcExtreneService.getApprenantDto(codeComposante, versionEtape,
+				List<ApprenantDto> apperants = chcExterneService.getApprenantDto(codeComposante, versionEtape,
 						codeEtape, codeDiplome, codEtu, nom, prenom);
 				
 				/**
+				 * TODO
 				 * A supprimer après confirmation
 				 * l'appel inscriptionsValidees sera supprimé 
 				 */
 //				List<ApprenantDto> apperants = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, p.getCode(), codeEtape,
 //						versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
-				
+//				
 				logger.debug("recupererListeEtuParEtpEtDiplome : " + apperants);
 				if (apperants != null && !apperants.isEmpty()) {
 					apprenantDtos.addAll(apperants);
@@ -167,17 +169,17 @@ public class PcscolControllerAdapter {
 			});
 		}
 
-		apprenantDtos.forEach(e -> {
-			try {
-				Person person = personService.findByCodEtu(e.getCodEtu());
-				if (person != null) {
-					e.setMail(person.getMail());
-				}
-			} catch (Exception e1) {
-				logger.error("Erreur lors de la recherche de l'étudiant dans LDAP : " + e1.getMessage());
-			}
-
-		});
+//		apprenantDtos.forEach(e -> {
+//			try {
+//				Person person = personService.findByCodEtu(e.getCodEtu());
+//				if (person != null) {
+//					e.setMail(person.getMail());
+//				}
+//			} catch (Exception e1) {
+//				logger.error("Erreur lors de la recherche de l'étudiant dans LDAP : " + e1.getMessage());
+//			}
+//
+//		});
 
 		return new ResponseEntity<>(apprenantDtos, HttpStatus.OK);
 
@@ -219,6 +221,7 @@ public class PcscolControllerAdapter {
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
 		if (espaces != null && !espaces.isEmpty()) {
 			espaces.forEach(espace -> {
+			
 				List<EtapeInscription> etps = pcscolService.etapeInscription(codeStructure, codEtud, espace.getCode());
 				etapeInscriptions.addAll(etps);
 			});

@@ -43,8 +43,7 @@ public class EspaceService {
 			return periodes;
 
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur lors de la récupération des périodes : " + e.getMessage());
 		}
 		return null;
 	}
@@ -147,7 +146,7 @@ public class EspaceService {
 		pageable.setTaille(50);
 		PagedEspaces espaces;
 		try {
-			espaces = espacesApi.rechercherEspaces(codeStructure, pageable, codePeriode, null, true);
+			espaces = espacesApi.rechercherEspaces(codeStructure, pageable, codePeriode, null, null);
 			logger.debug("" + espaces);
 			if (espaces.getItems() != null && !espaces.getItems().isEmpty() ){
 				logger.debug("" + espaces);
@@ -159,8 +158,7 @@ public class EspaceService {
 				}
 			}
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur lors de la récupération des espaces : " + e.getMessage());
 		}
 
 		return null;
