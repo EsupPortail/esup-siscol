@@ -394,7 +394,16 @@ public class EtudiantMetierClient {
 		criteres.setListDiplomes(diplomes);
 		criteres.setListEtapes(etps);
 
-		criteres.getListComposante().add(codeComposante);
+		/**
+		 * ON vérifie si la composante existe avant de l'ajouter dans les critères sinon on ignore
+		 */
+		if (codeComposante != null) {
+			ComposanteDTO3 composante = recupererComposanteV2(codeComposante);
+			if (composante != null) {
+				criteres.getListComposante().add(codeComposante);
+			}
+		}
+		
 
 		criteres.setCodeCollectionELP(null);
 		criteres.setCodeCollectionVET(null);

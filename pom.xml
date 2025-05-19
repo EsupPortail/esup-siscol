@@ -51,7 +51,8 @@
 		<dependency>
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
-			<version>6.50.30</version>
+			<version>6.50.50</version>
+<!--			<version>6.50.30</version>-->
 			<!--			<version>6.40.70</version>-->
 			<!--			<version>6.40.01</version>-->
 			<!--			<version>6.30.50</version>-->
@@ -319,7 +320,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+			  <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            
+            <configuration>
+                <argLine>-javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar</argLine>
+            </configuration>
+        </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
