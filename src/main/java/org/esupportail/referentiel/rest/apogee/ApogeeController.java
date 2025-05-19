@@ -91,7 +91,7 @@ public class ApogeeController { // NO_UCD (unused code)
 
 	@GetMapping("/listEtuParEtapeEtDiplome")
 	public List<EtudiantDTO2Ext> recupererListeEtuParEtpEtDiplome(
-			@RequestParam(value = "codeComposante", required = true) String codeComposante,
+			@RequestParam(value = "codeComposante",required = false) String codeComposante,
 			@RequestParam(value = "annee", required = true) String annee,
 			@RequestParam(value = "codeEtape", required = true) String codeEtape,
 			@RequestParam(value = "versionEtape", required = true) String versionEtape,
