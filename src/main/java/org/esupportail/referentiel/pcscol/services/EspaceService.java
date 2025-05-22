@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
-import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
-import org.esupportail.referentiel.pcscol.ins.model.Periode;
+import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;
@@ -27,25 +26,44 @@ public class EspaceService {
 	@Autowired
 	private EspacesApi espacesApi;
 
-	@Autowired
-	private InscriptionsApi inscriptionsApi;
-
 	/**
 	 * 
 	 * @param codeStructure
 	 * @return
 	 */
-	public List<Periode> allEespaces(String codeStructure) {
+	public List<Espace> allEspaces(String codeStructure) {
+
+		List<Espace> espaces = new ArrayList<Espace>();
 
 		try {
 
-			List<Periode> periodes = inscriptionsApi.listerPeriodes(codeStructure);
-			return periodes;
+			Pageable pageable = new Pageable();
+			pageable.setPage(0);
+			pageable.setTaille(50);
+			String r = null;
+			TypeEspace type = null;
+			Boolean actif = true;
+			logger.debug("code structure : {} ", codeStructure);
+			PagedEspaces pagedEspaces = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, actif);
+
+			if (pagedEspaces.getItems() != null && !pagedEspaces.getItems().isEmpty()) {
+				espaces.addAll(pagedEspaces.getItems());
+			}
+			int nbrPage = pagedEspaces.getTotalPages();
+			if (nbrPage > 1) {
+				for (int i = 1; i < nbrPage; i++) {
+					pageable.setPage(i);
+					PagedEspaces pagedEspaces2 = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, actif);
+					if (pagedEspaces2.getItems() != null && !pagedEspaces2.getItems().isEmpty()) {
+						espaces.addAll(pagedEspaces2.getItems());
+					}
+				}
+			}
 
 		} catch (ApiException e) {
 			logger.error("Erreur lors de la récupération des périodes : " + e.getMessage());
 		}
-		return null;
+		return espaces;
 	}
 
 	/**
@@ -55,12 +73,16 @@ public class EspaceService {
 	 * @return
 	 */
 	public List<Periode> espacesFromAnnee(String codeStructure, String annee) {
-		List<Periode> espaces = allEespaces(codeStructure);
+		List<Espace> espaces = allEspaces(codeStructure);
 		List<Periode> filtredEsapce = new ArrayList<Periode>();
 		espaces.forEach(espace -> {
-			String anneeUniv = String.valueOf(espace.getAnneeUniversitaire());
-			if (anneeUniv.equals(annee)) {
-				filtredEsapce.add(espace);
+			if (espace instanceof Periode) {
+
+				Periode periode = (Periode) espace;
+				String anneeUniv = String.valueOf(periode.getAnneeUniversitaire());
+				if (anneeUniv.equals(annee)) {
+					filtredEsapce.add(periode);
+				}
 			}
 		});
 		return filtredEsapce;
@@ -112,14 +134,16 @@ public class EspaceService {
 
 	public List<String> anneeUnivFromEsapces(String codeStructure, List<String> codesPeriode) {
 
-		List<Periode> espaces = allEespaces(codeStructure);
+		List<Espace> espaces = allEspaces(codeStructure);
 		List<String> anneesUniv = new ArrayList<String>();
 		if (espaces != null) {
 			espaces.forEach(e -> {
-				if (codesPeriode.contains(e.getCode())) {
-					String anneeUniv = String.valueOf(e.getAnneeUniversitaire());
+				if (e instanceof Periode) {
+					Periode periode = (Periode) e;
+					String anneeUniv = String.valueOf(periode.getAnneeUniversitaire());
 					anneesUniv.add(anneeUniv);
 				}
+				
 			});
 		}
 		return anneesUniv;
@@ -148,7 +172,7 @@ public class EspaceService {
 		try {
 			espaces = espacesApi.rechercherEspaces(codeStructure, pageable, codePeriode, null, null);
 			logger.debug("" + espaces);
-			if (espaces.getItems() != null && !espaces.getItems().isEmpty() ){
+			if (espaces.getItems() != null && !espaces.getItems().isEmpty()) {
 				logger.debug("" + espaces);
 				for (Espace item : espaces.getItems()) {
 					if (item.getCode().equals(codePeriode)) {

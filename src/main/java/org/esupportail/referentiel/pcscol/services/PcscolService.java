@@ -30,7 +30,6 @@ import org.esupportail.referentiel.pcscol.ins.model.ApprenantEtInscriptions;
 import org.esupportail.referentiel.pcscol.ins.model.Inscription;
 import org.esupportail.referentiel.pcscol.ins.model.InscriptionComplete;
 import org.esupportail.referentiel.pcscol.ins.model.Inscriptions;
-import org.esupportail.referentiel.pcscol.ins.model.Periode;
 import org.esupportail.referentiel.pcscol.ins.model.StatutGlobalPiece;
 import org.esupportail.referentiel.pcscol.ins.model.StatutIne;
 import org.esupportail.referentiel.pcscol.ins.model.StatutInscriptionVoeu;
@@ -45,6 +44,7 @@ import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
+import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.ref_api.model.Adresse;
 import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
 import org.slf4j.Logger;
@@ -76,8 +76,6 @@ public class PcscolService implements PcscolServiceI {
 	private OffreFormationService offreFormationService;
 	@Autowired
 	private OffreFormationServicePartielEtapes offreFormationServiceRevisited;
-
-	
 
 	@Autowired
 	private ChcService chcService;
@@ -216,7 +214,7 @@ public class PcscolService implements PcscolServiceI {
 	 */
 	@Override
 	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
-	public Map<String, String> lireMapFormations(String codeStructure, String codePeriode,boolean piaSeulement) {
+	public Map<String, String> lireMapFormations(String codeStructure, String codePeriode, boolean piaSeulement) {
 
 		List<String> listCodePeriode = codePeriodeFromPeriodes(codeStructure, codePeriode);
 
@@ -224,7 +222,6 @@ public class PcscolService implements PcscolServiceI {
 
 		listCodePeriode.forEach(periode -> {
 
-			
 			UUID idPeriode = espaceService.chercherEspaceFromCode(codeStructure, periode);
 			if (idPeriode != null) {
 
@@ -233,18 +230,16 @@ public class PcscolService implements PcscolServiceI {
 						.rechercheObjetMaquetteSummaryParPiaSeaulement(codeStructure, idPeriode.toString());
 				logger.debug("lireMapFormations : {} ", maquetteSummaries.size());
 				maquetteSummaries.stream().forEach(e -> {
-					logger.debug("lireMapFormations : {}  {} =>{}", e.getCode(),e.getTypeObjetFormation() ,e.getTypeObjetMaquette());
+					logger.debug("lireMapFormations : {}  {} =>{}", e.getCode(), e.getTypeObjetFormation(),
+							e.getTypeObjetMaquette());
 				});
 				HashMap<String, String> mapFormations = offreFormationServiceRevisited
 						.objetMaquetteSummaryMap(maquetteSummaries, periode);
 
 				mapAllFormations.putAll(mapFormations);
-				
+
 			}
-			
-			
-		
-			
+
 //			
 //			
 //			
@@ -362,10 +357,10 @@ public class PcscolService implements PcscolServiceI {
 					MaquetteStructure maquetteStructure = offreFormationService.lireMaquette(codeStructure,
 							f.getId().toString());
 					/**
-					 * TODO ajouter le parent comme fils de lui meme
-					 * cas ou le diplome est lui meme porteur de PIA fils/pere ?
+					 * TODO ajouter le parent comme fils de lui meme cas ou le diplome est lui meme
+					 * porteur de PIA fils/pere ?
 					 */
-					
+
 					List<EnfantsStructure> enfants = listeEnfantsObjectMaquettePia(maquetteStructure);
 
 					// Enfant enfant = objectMaqette.getEnfants().get(0);
@@ -412,8 +407,8 @@ public class PcscolService implements PcscolServiceI {
 		final List<EnfantsStructure> listeEnfantPia = new ArrayList<EnfantsStructure>();
 		List<EnfantsStructure> enfants = maquetteStructure.getRacine().getEnfants();
 		enfants.forEach(e -> {
-			if (e.getObjetMaquette().getPia() != null && e.getObjetMaquette().getValide()==true
-					&& e.getObjetMaquette().getPia().getActif()	==true) {
+			if (e.getObjetMaquette().getPia() != null && e.getObjetMaquette().getValide() == true
+					&& e.getObjetMaquette().getPia().getActif() == true) {
 				listeEnfantPia.add(e);
 			}
 		});
@@ -430,7 +425,7 @@ public class PcscolService implements PcscolServiceI {
 				logger.error("studentListeElpStage : " + codeStructure + " , " + codeEtape + " , " + versionEtape);
 				logger.error("studentListeElpStage : " + "Aucun Objet Maquette trouvé");
 				return l;
-			}	
+			}
 			ObjetMaquetteSummary objetMaquetteSummary = objetMaquetteSummaries.get(0);
 			UUID id = objetMaquetteSummary.getId();
 			List<ObjetMaquetteDetail> llStage = offreFormationService.listeEnfantsObjectMaquetteStage(codeStructure,
@@ -558,9 +553,10 @@ public class PcscolService implements PcscolServiceI {
 
 		try {
 			/**
-			 * TODO afin de passer à ins extrene remplacer listerInscriptionsValidees qui n'est pas disponible
+			 * TODO afin de passer à ins extrene remplacer listerInscriptionsValidees qui
+			 * n'est pas disponible
 			 */
-			
+
 			Inscriptions listInscriptions = inscriptionsApi.listerInscriptionsValidees(codeStructure,
 					statutsInscription, statutsPieces, statutsPaiement, tri, rechercheIne, recherche, periode,
 					objetMaquette, nomOuPrenom, nomDeNaissance, prenom, codeApprenant, ine, statutsIne, limit);
@@ -591,7 +587,8 @@ public class PcscolService implements PcscolServiceI {
 		try {
 			Structure response = structureApi.lireStructure(composante);
 			SignataireRef sign = new SignataireRef();
-			sign.setNomSignataireComposante(response.getResponsable().getNom()+" "+response.getResponsable().getPrenom());
+			sign.setNomSignataireComposante(
+					response.getResponsable().getNom() + " " + response.getResponsable().getPrenom());
 			sign.setQualiteSignataire(response.getResponsable().getTitre());
 			return sign;
 		} catch (ApiException e) {
@@ -626,7 +623,7 @@ public class PcscolService implements PcscolServiceI {
 	public void setInscriptionsApi(InscriptionsApi inscriptionsApi) {
 		this.inscriptionsApi = inscriptionsApi;
 	}
-	
+
 	public OffreFormationServicePartielEtapes getOffreFormationServiceRevisited() {
 		return offreFormationServiceRevisited;
 	}
