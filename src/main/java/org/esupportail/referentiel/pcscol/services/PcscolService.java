@@ -88,13 +88,18 @@ public class PcscolService implements PcscolServiceI {
 		List<EtapeInscription> etps = new ArrayList<EtapeInscription>();
 		try {
 			app = inscriptionsApi.lireInscriptions(codeStructure, codeApprenant);
+			logger.debug(" Appel Apprenant {}",app.getApprenant().getEtatCivil());
 
 			List<InscriptionComplete> inscriptions = app.getInscriptions();
+			logger.debug("Inscriptions : {}", inscriptions.size());
 
 			inscriptions.forEach(ins -> {
+				logger.debug("Inscription : {} =={}", ins.getCible().getPeriode().getCode(),codePeriode);
 				if (ins.getCible().getPeriode().getCode().equalsIgnoreCase(codePeriode)) {
 					EtapeInscription etpinscr = ApprenantEtuInfoAdmMapperInterface.Instance
 							.stagesApprenantToEtapeInscription(ins);
+					
+					logger.debug("EtapeInscription : {}", etpinscr.getCodeEtp());
 					if (etpinscr.getCodeComposante() != null && !etpinscr.getCodeComposante().isEmpty())
 						try {
 							Structure structure = structureApi.lireStructure(etpinscr.getCodeComposante());
@@ -131,16 +136,24 @@ public class PcscolService implements PcscolServiceI {
 		/**
 		 * TODO regime
 		 */
+		
+		
 		List<EtapeInscription> etapeInscriptions = new ArrayList<EtapeInscription>();
 
 		codesPeriodes.forEach(codePeriode -> {
+			logger.debug("recupererIaIpParEtudiantAnnee : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
 			List<EtapeInscription> etapeInscriptionsPartiel = etapeInscription(codeStructure, codeApprenant,
 					codePeriode);
 			etapeInscriptions.addAll(etapeInscriptionsPartiel);
 		});
 
+		logger.debug("----------------------- {}",etapeInscriptions);
+		
 		List<RegimeInscription> regimesInscriptions = new ArrayList<RegimeInscription>();
 		apogeeMap.setListeEtapeInscriptions(etapeInscriptions);
+		
+		logger.debug("recupererIaIpParEtudiantAnnee : {} , {} , {}", codeStructure, codeApprenant, codesPeriodes);
+		
 		try {
 			List<ElementPedagogique> lelps = chcService.lirelisteElementPedagogiqueStageApprenant(codeApprenant,
 					codeStructure);
@@ -173,7 +186,7 @@ public class PcscolService implements PcscolServiceI {
 
 		});
 		apogeeMap.setRegimeInscription(regimesInscriptions);
-
+		
 		return apogeeMap;
 
 	}
@@ -235,7 +248,7 @@ public class PcscolService implements PcscolServiceI {
 				});
 				HashMap<String, String> mapFormations = offreFormationServiceRevisited
 						.objetMaquetteSummaryMap(maquetteSummaries, periode);
-
+				logger.debug("lireMapFormations : {} ", mapFormations.size());
 				mapAllFormations.putAll(mapFormations);
 
 			}

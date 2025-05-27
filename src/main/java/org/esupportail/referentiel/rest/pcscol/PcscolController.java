@@ -112,7 +112,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/infosAdmEtu")
 	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
-		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
+		EtudiantInfoAdm student = pcscolControllerAdapter.lireEtudiantInfoAdm(codeStructure, numEtud);
 		return new ResponseEntity<>(student, HttpStatus.OK);
 	}
 

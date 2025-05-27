@@ -839,7 +839,7 @@ public class ObjetsMaquetteApi {
         HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
         String localVarPath =
-                "/etablissement/{codeStructure}/objet-maquette/{id}"
+                "/etablissement/{codeStructure}/objets-maquette/{id}"
                         .replace("{codeStructure}", ApiClient.urlEncode(codeStructure.toString()))
                         .replace("{id}", ApiClient.urlEncode(id.toString()));
 

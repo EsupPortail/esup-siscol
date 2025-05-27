@@ -10,7 +10,9 @@ import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.EtapeInscription;
+import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
+import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
 import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.services.ChcExterneService;
@@ -25,6 +27,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @ConditionalOnProperty(name = "app.mode_pegase")
@@ -36,6 +39,8 @@ public class PcscolControllerAdapter {
 	private PcscolService pcscolService;
 	@Autowired
 	private ChcExterneService chcExterneService;
+	
+	
 
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
@@ -53,6 +58,32 @@ public class PcscolControllerAdapter {
 	@Autowired
 	private EspaceService espaceService;
 
+	
+	public EtudiantInfoAdm lireEtudiantInfoAdm(String codeStructure ,String numEtud) {
+		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
+		if (student != null) {
+			logger.info("rechcerche mail ldap Etudiant  : " + numEtud);
+			Person person = personService.findByCodEtu(numEtud);
+			if (person != null) {
+				student.setEmailAnnuaire(person.getMail());
+			} else {
+				logger.warn("Aucun mail trouvé pour l'étudiant : " + numEtud);
+			}
+			return student;
+		}
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 
 	 * @param codeApprenant
@@ -165,17 +196,17 @@ public class PcscolControllerAdapter {
 			});
 		}
 
-//		apprenantDtos.forEach(e -> {
-//			try {
-//				Person person = personService.findByCodEtu(e.getCodEtu());
-//				if (person != null) {
-//					e.setMail(person.getMail());
-//				}
-//			} catch (Exception e1) {
-//				logger.error("Erreur lors de la recherche de l'étudiant dans LDAP : " + e1.getMessage());
-//			}
-//
-//		});
+		apprenantDtos.forEach(e -> {
+			try {
+				Person person = personService.findByCodEtu(e.getCodEtu());
+				if (person != null) {
+					e.setMail(person.getMail());
+				}
+			} catch (Exception e1) {
+				logger.error("Erreur lors de la recherche de l'étudiant dans LDAP : " + e1.getMessage());
+			}
+
+		});
 
 		return new ResponseEntity<>(apprenantDtos, HttpStatus.OK);
 
