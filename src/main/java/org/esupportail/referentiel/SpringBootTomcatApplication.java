@@ -26,8 +26,5 @@ public class SpringBootTomcatApplication extends SpringBootServletInitializer {
 		return slr;
 	}
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(SpringBootTomcatApplication.class);
-	}
+	
 }
