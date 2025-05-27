@@ -15,13 +15,19 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @ComponentScan({ "org.esupportail.referentiel" })
 public class SpringBootTomcatApplication extends SpringBootServletInitializer {
 
-	
-	 public static void main(String[] args) {
-	        new SpringBootTomcatApplication().configure(new SpringApplicationBuilder(SpringBootTomcatApplication.class)).run(args);
-	    }
-	 public LocaleResolver localeResolver() {
-			SessionLocaleResolver slr = new SessionLocaleResolver();
-			slr.setDefaultLocale(Locale.FRANCE);
-			return slr;
-		}
+	public static void main(String[] args) {
+		new SpringBootTomcatApplication().configure(new SpringApplicationBuilder(SpringBootTomcatApplication.class))
+				.run(args);
+	}
+
+	public LocaleResolver localeResolver() {
+		SessionLocaleResolver slr = new SessionLocaleResolver();
+		slr.setDefaultLocale(Locale.FRANCE);
+		return slr;
+	}
+
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(SpringBootTomcatApplication.class);
+	}
 }
