@@ -119,7 +119,7 @@ app:
         url: https://chc.partenaires.pc-scol.fr/api/chc/v6
       # Base Url de l'API ODF de Pgase
       odf: 
-        url: https://odf.partenaires.pc-scol.fr/api/odf/v1
+        https://odf.partenaires.pc-scol.fr/api/odf/ext/v1
       # Base Url de l'API COF de Pgase
       ref: 
           url: https://ref.partenaires.pc-scol.fr/api/v1/ref
