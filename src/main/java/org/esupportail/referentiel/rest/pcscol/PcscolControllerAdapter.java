@@ -39,8 +39,6 @@ public class PcscolControllerAdapter {
 	private PcscolService pcscolService;
 	@Autowired
 	private ChcExterneService chcExterneService;
-	
-	
 
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
@@ -58,8 +56,7 @@ public class PcscolControllerAdapter {
 	@Autowired
 	private EspaceService espaceService;
 
-	
-	public EtudiantInfoAdm lireEtudiantInfoAdm(String codeStructure ,String numEtud) {
+	public EtudiantInfoAdm lireEtudiantInfoAdm(String codeStructure, String numEtud) {
 		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
 		if (student != null) {
 			logger.info("rechcerche mail ldap Etudiant  : " + numEtud);
@@ -73,17 +70,7 @@ public class PcscolControllerAdapter {
 		}
 		return null;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	/**
 	 * 
 	 * @param codeApprenant
@@ -102,10 +89,23 @@ public class PcscolControllerAdapter {
 		if (espaces != null && !espaces.isEmpty()) {
 			String espacesFictif = espaces.get(0).getCode();
 
-			EtudiantRef result = pcscolService.lireEtudiantRef(codeStructure, codeApprenant, espacesFictif);
-			return new ResponseEntity<EtudiantRef>(result, HttpStatus.OK);
-		} else
-			return ResponseEntity.badRequest().build();
+			EtudiantRef etudientREf = pcscolService.lireEtudiantRef(codeStructure, codeApprenant, espacesFictif);
+
+			if (etudientREf != null) {
+				Person person = personService.findByCodEtu(codeApprenant);
+				if (person != null) {
+					etudientREf.setMail(person.getMail());
+					logger.debug("Mail trouvé pour l'étudiant : " + codeApprenant + " : " + person.getMail());
+				} else {
+					logger.warn("Aucun mail trouvé pour l'étudiant : " + codeApprenant);
+				}
+
+			}
+			return new ResponseEntity<EtudiantRef>(etudientREf, HttpStatus.OK);
+		} else {
+			logger.error("Aucun étudiant trouvé pour le code : " + codeApprenant);
+			return ResponseEntity.notFound().build();
+		}
 	}
 
 	/**
@@ -180,11 +180,10 @@ public class PcscolControllerAdapter {
 				// codeObjetFormationParent, String codeApprenant, String nom, String prenom)
 				List<ApprenantDto> apperants = chcExterneService.getApprenantDto(codeComposante, versionEtape,
 						codeEtape, codeDiplome, codEtu, nom, prenom);
-				
+
 				/**
-				 * TODO
-				 * A supprimer après confirmation
-				 * l'appel inscriptionsValidees sera supprimé 
+				 * TODO A supprimer après confirmation l'appel inscriptionsValidees sera
+				 * supprimé
 				 */
 //				List<ApprenantDto> apperants = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, p.getCode(), codeEtape,
 //						versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
@@ -248,7 +247,7 @@ public class PcscolControllerAdapter {
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
 		if (espaces != null && !espaces.isEmpty()) {
 			espaces.forEach(espace -> {
-			
+
 				List<EtapeInscription> etps = pcscolService.etapeInscription(codeStructure, codEtud, espace.getCode());
 				etapeInscriptions.addAll(etps);
 			});
