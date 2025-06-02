@@ -121,7 +121,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/listEtuParEtapeEtDiplome")
 	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
-			@RequestParam(value = "codeComposante", required = true, defaultValue = "ETAB00") String codeComposante,
+			@RequestParam(value = "codeComposante", required = false, defaultValue = "ETAB00") String codeComposante,
 			@RequestParam(value = "annee", required = true, defaultValue = "2021") String annee,
 			@RequestParam(value = "codeEtape", required = true, defaultValue = "MST-CIEA-A1") String codeEtape,
 			@RequestParam(value = "versionEtape", required = true, defaultValue = "PER-2021") String versionEtape,

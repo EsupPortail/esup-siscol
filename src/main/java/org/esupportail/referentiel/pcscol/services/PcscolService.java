@@ -94,7 +94,7 @@ public class PcscolService implements PcscolServiceI {
 			logger.debug("Inscriptions : {}", inscriptions.size());
 
 			inscriptions.forEach(ins -> {
-				logger.debug("Inscription : {} =={}", ins.getCible().getPeriode().getCode(),codePeriode);
+				logger.debug("Inscription : {} ?=={}", ins.getCible().getPeriode().getCode(),codePeriode);
 				if (ins.getCible().getPeriode().getCode().equalsIgnoreCase(codePeriode)) {
 					EtapeInscription etpinscr = ApprenantEtuInfoAdmMapperInterface.Instance
 							.stagesApprenantToEtapeInscription(ins);
@@ -175,8 +175,19 @@ public class PcscolService implements PcscolServiceI {
 			etp.getLibRg();
 			etp.getTypeIns();
 			RegimeInscription regime = new RegimeInscription();
-			if (listeAnnee != null && !listeAnnee.isEmpty())
-				regime.setAnnee(listeAnnee.get(0));
+			logger.debug("regimeInscription : {} , {} , {}", etp.getRegimeIns(), etp.getLibRg(), etp.getTypeIns());
+			logger.debug("listeAnnee : {}", listeAnnee);
+			if (listeAnnee != null && !listeAnnee.isEmpty()) {
+				/**
+				 * * TODO annee
+				 * 
+				 * on devrait traiter les regimes d'inscription par etapes et non de façon isolée
+				 * héritage apogge
+				 */
+				
+				
+				
+			}
 			regime.setCodRegIns(etp.getRegimeIns());
 			// regime.setCodRegIns(etp.get)
 			regime.setLicRegIns(etp.getRegimeIns());

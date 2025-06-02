@@ -131,6 +131,10 @@ public class PcscolControllerAdapter {
 			});
 
 			ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, code_espaces);
+			apogeeMap.getRegimeInscription().forEach(r->{
+				r.setAnnee(annee);
+			});
+			
 			return new ResponseEntity<ApogeeMap>(apogeeMap, HttpStatus.OK);
 		}
 		return ResponseEntity.badRequest().build();
@@ -245,6 +249,10 @@ public class PcscolControllerAdapter {
 		// TODO
 		List<EtapeInscription> etapeInscriptions = new ArrayList<EtapeInscription>();
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
+		
+		logger.debug("{} {}  {}", "studentListeEtapesInscription", " => nbr d'esapces ", espaces.size());
+		logger.debug("studentListeEtapesInscription espaces  : {}",espaces);
+		
 		if (espaces != null && !espaces.isEmpty()) {
 			espaces.forEach(espace -> {
 
