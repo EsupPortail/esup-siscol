@@ -25,8 +25,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Mapper(uses = DateMapper.class)
+@Mapper(uses = DateMapper.class, componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+
 public interface ApprenantEtuInfoAdmMapperInterface {
 
 	/**
@@ -37,25 +40,21 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 
 	public ApprenantEtuInfoAdmMapperInterface Instance = Mappers.getMapper(ApprenantEtuInfoAdmMapperInterface.class);
 
-	
-	
 	/**
 	 * 
 	 * @param inscription
 	 * @return
 	 */
-	
-	@Mapping(target = "nom", source =  "etatCivil.nomDeNaissance")
+
+	@Mapping(target = "nom", source = "etatCivil.nomDeNaissance")
 	@Mapping(target = "prenom", source = "etatCivil.prenom")
-	@Mapping(target="codEtu",source="meta.codeApprenant")
+	@Mapping(target = "codEtu", source = "meta.codeApprenant")
 	@Mapping(target = "dateNaissance", source = "naissance.dateDeNaissance")
 	@Mapping(target = "numeroIne", source = "bac.ine")
 	public ApprenantDto inscrptionToApprenantDto(Inscription inscription);
-	
-	
+
 	public List<ApprenantDto> inscrptionToApprenantDto(List<Inscription> inscription);
-	
-	
+
 	/**
 	 * 
 	 * @param app
@@ -92,7 +91,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 	@Mapping(target = "nommarital", source = "etatCivil.nomUsuel")
 	@Mapping(target = "nompatro", source = "etatCivil.nomDeNaissance")
 	@Mapping(target = "prenom", source = "etatCivil.prenom")
-	@Mapping(target = "dateNais", source = "naissance.dateDeNaissance",dateFormat = "yyyy-MM-dd")
+	@Mapping(target = "dateNais", source = "naissance.dateDeNaissance", dateFormat = "yyyy-MM-dd")
 	@Mapping(target = "codeSexe", source = "etatCivil.genre")
 	@Mapping(target = "sexEtatCivil", source = "etatCivil.genre")
 	public EtudiantRef apprenantToEtudiantRef(Apprenant app);
@@ -105,18 +104,40 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 		List<ContactComplet> contacts = app.getContacts();
 
 		contacts.forEach(c -> {
+
 			if (c.getCanalCommunication().getValue().equalsIgnoreCase("contactAdresseComplet")) {
 				ContactAdresseComplet contactAdresseComplet = (ContactAdresseComplet) c;
-				if (contactAdresseComplet.getLigne1OuEtage() != null)
-					addr.append(contactAdresseComplet.getLigne1OuEtage() + ", ");
-				if (contactAdresseComplet.getLigne2OuBatiment() != null)
-					addr.append(contactAdresseComplet.getLigne2OuBatiment() + ", ");
+				System.out.println("contactAdresseComplet: " + contactAdresseComplet);
+				if (contactAdresseComplet.getCommune() != null) {
+					etuRef.setTown(contactAdresseComplet.getCommune());
+				}
 
-				if (contactAdresseComplet.getLigne3OuVoie() != null) {
-					addr.append(contactAdresseComplet.getLigne3OuVoie() + ", ");
+				if (contactAdresseComplet.getLigne1OuEtage() != null
+						&& !contactAdresseComplet.getLigne1OuEtage().isEmpty()) {
+					addr.append(contactAdresseComplet.getLigne1OuEtage());
+				}
+
+				if (contactAdresseComplet.getLigne2OuBatiment() != null
+						&& !contactAdresseComplet.getLigne2OuBatiment().isEmpty()) {
+					if (addr.length() > 0) {
+						addr.append(", ");
+					}
+					addr.append(contactAdresseComplet.getLigne2OuBatiment());
+				}
+
+				if (contactAdresseComplet.getLigne3OuVoie() != null
+						&& !contactAdresseComplet.getLigne3OuVoie().isEmpty()) {
+					if (addr.length() > 0) {
+						addr.append(", ");
+					}
+
+					addr.append(contactAdresseComplet.getLigne3OuVoie());
 					etuRef.setLibAd1(contactAdresseComplet.getLigne3OuVoie());
 				}
-				if (contactAdresseComplet.getLigne4OuComplement() != null) {
+				if (contactAdresseComplet.getLigne4OuComplement() != null && !contactAdresseComplet.getLigne4OuComplement().isEmpty()) {
+					if (addr.length() > 0) {
+						addr.append(", ");
+					}
 					addr.append(contactAdresseComplet.getLigne4OuComplement());
 					etuRef.setLibAd2(contactAdresseComplet.getLigne4OuComplement());
 				}
@@ -136,7 +157,9 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 			}
 
 		});
-		etuRef.setMainAddress(addr.toString());
+		
+		String adresse = addr.toString().trim().replaceAll(",+$", ""); // remove trailing comma if exists");
+		etuRef.setMainAddress(adresse); 
 	}
 
 	/**
@@ -191,5 +214,6 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 
 		return apogeeMap;
 	}
+	
 
 }
