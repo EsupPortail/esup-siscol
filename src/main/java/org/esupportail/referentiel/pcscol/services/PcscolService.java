@@ -23,6 +23,7 @@ import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.cache.CacheConfig;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
+import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
 import org.esupportail.referentiel.pcscol.ins.model.Apprenant;
@@ -46,6 +47,9 @@ import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.ref_api.model.Adresse;
+import org.esupportail.referentiel.pcscol.ref_api.model.Commune;
+import org.esupportail.referentiel.pcscol.ref_api.model.Nomenclature;
+import org.esupportail.referentiel.pcscol.ref_api.model.PaysNationalite;
 import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,23 +86,26 @@ public class PcscolService implements PcscolServiceI {
 	@Autowired
 	private EspaceService espaceService;
 
+	@Autowired
+	private NomenclatureApi nomenclatureApi;
+
 	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String codePeriode) {
 		logger.debug("etapeInscription : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
 		ApprenantEtInscriptions app;
 		List<EtapeInscription> etps = new ArrayList<EtapeInscription>();
 		try {
 			app = inscriptionsApi.lireInscriptions(codeStructure, codeApprenant);
-			logger.debug(" Appel Apprenant {}",app.getApprenant().getEtatCivil());
+			logger.debug(" Appel Apprenant {}", app.getApprenant().getEtatCivil());
 
 			List<InscriptionComplete> inscriptions = app.getInscriptions();
 			logger.debug("Inscriptions : {}", inscriptions.size());
 
 			inscriptions.forEach(ins -> {
-				logger.debug("Inscription : {} ?=={}", ins.getCible().getPeriode().getCode(),codePeriode);
+				logger.debug("Inscription : {} ?=={}", ins.getCible().getPeriode().getCode(), codePeriode);
 				if (ins.getCible().getPeriode().getCode().equalsIgnoreCase(codePeriode)) {
 					EtapeInscription etpinscr = ApprenantEtuInfoAdmMapperInterface.Instance
 							.stagesApprenantToEtapeInscription(ins);
-					
+
 					logger.debug("EtapeInscription : {}", etpinscr.getCodeEtp());
 					if (etpinscr.getCodeComposante() != null && !etpinscr.getCodeComposante().isEmpty())
 						try {
@@ -136,8 +143,7 @@ public class PcscolService implements PcscolServiceI {
 		/**
 		 * TODO regime
 		 */
-		
-		
+
 		List<EtapeInscription> etapeInscriptions = new ArrayList<EtapeInscription>();
 
 		codesPeriodes.forEach(codePeriode -> {
@@ -147,13 +153,13 @@ public class PcscolService implements PcscolServiceI {
 			etapeInscriptions.addAll(etapeInscriptionsPartiel);
 		});
 
-		logger.debug("----------------------- {}",etapeInscriptions);
-		
+		logger.debug("----------------------- {}", etapeInscriptions);
+
 		List<RegimeInscription> regimesInscriptions = new ArrayList<RegimeInscription>();
 		apogeeMap.setListeEtapeInscriptions(etapeInscriptions);
-		
+
 		logger.debug("recupererIaIpParEtudiantAnnee : {} , {} , {}", codeStructure, codeApprenant, codesPeriodes);
-		
+
 		try {
 			List<ElementPedagogique> lelps = chcService.lirelisteElementPedagogiqueStageApprenant(codeApprenant,
 					codeStructure);
@@ -181,12 +187,10 @@ public class PcscolService implements PcscolServiceI {
 				/**
 				 * * TODO annee
 				 * 
-				 * on devrait traiter les regimes d'inscription par etapes et non de façon isolée
-				 * héritage apogge
+				 * on devrait traiter les regimes d'inscription par etapes et non de façon
+				 * isolée héritage apogge
 				 */
-				
-				
-				
+
 			}
 			regime.setCodRegIns(etp.getRegimeIns());
 			// regime.setCodRegIns(etp.get)
@@ -197,7 +201,7 @@ public class PcscolService implements PcscolServiceI {
 
 		});
 		apogeeMap.setRegimeInscription(regimesInscriptions);
-		
+
 		return apogeeMap;
 
 	}
@@ -620,6 +624,65 @@ public class PcscolService implements PcscolServiceI {
 			e.printStackTrace();
 		}
 		return new SignataireRef();
+	}
+
+	/**
+	 * * Recherche une commune par son code postal et son code commune.
+	 * 
+	 * @param codePostal
+	 * @param codeCommune
+	 * @return
+	 */
+	public Commune chercheCommune(String codePostal, String codeCommune) {
+		logger.debug("chercheCommune : {} , {}", codePostal, codeCommune);
+		try {
+			List<Nomenclature> noms = nomenclatureApi.lireCommunes(codePostal);
+			List<Commune> communes = new ArrayList<Commune>();
+			for (Nomenclature nom : noms) {
+				if (nom instanceof Commune) {
+					communes.add((Commune) nom);
+				}
+			}
+			if (noms != null && !noms.isEmpty()) {
+				Commune commune = communes.stream().filter(n -> n.getCodeInsee().equalsIgnoreCase(codeCommune)).findFirst()
+						.orElse(null);
+				if (commune != null) {
+					logger.debug("chercheCommune : {} , {} : {}", codePostal, codeCommune, commune.getLibelleLong());
+					return (Commune) commune;
+				} else {
+					logger.debug("chercheCommune : {} , {} : Pas de commune trouvée", codePostal, codeCommune);
+				}
+			} else {
+				logger.debug("chercheCommune : {} , {} : Pas de commune trouvée", codePostal, codeCommune);
+			}
+		} catch (ApiException e) {
+			logger.error("chercheCommune : " + codePostal + " , " + codeCommune + " : " + e.getMessage() + " : "
+					+ e.getCode());
+		}
+		return null;
+	}
+
+	/**
+	 * 
+	 * @param codePays
+	 * @return
+	 */
+	public PaysNationalite cherchePays(String codePays) {
+		List<Nomenclature> nomenclatures;
+		try {
+			nomenclatures = nomenclatureApi.lireListeNomenclatures("PaysNationalite");
+			Nomenclature nomenclature = nomenclatures.stream().filter(n -> n.getCode().equalsIgnoreCase(codePays))
+					.findFirst().orElse(null);
+			if (nomenclature == null) {
+				logger.debug("cherchePays : {} : Pas de pays trouvé", codePays);
+				return null;
+			}
+			return (PaysNationalite) nomenclature;
+		} catch (ApiException e) {
+			logger.error("Erreur lors de la récupération Pays : " + codePays + " : " + e.getMessage() + " : " + e.getCode());
+		}
+		return null;
+
 	}
 
 	/**
