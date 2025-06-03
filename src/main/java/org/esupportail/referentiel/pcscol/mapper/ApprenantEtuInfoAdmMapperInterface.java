@@ -109,8 +109,8 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 				ContactAdresseComplet contactAdresseComplet = (ContactAdresseComplet) c;
 				System.out.println("contactAdresseComplet: " + contactAdresseComplet);
 				
-				if (contactAdresseComplet.getLibellePays() != null && !contactAdresseComplet.getLibellePays().isEmpty()) {
-					etuRef.setCountry(contactAdresseComplet.getLibellePays());
+				if (contactAdresseComplet.getPays() != null && !contactAdresseComplet.getPays().isEmpty()) {
+					etuRef.setCodePays(contactAdresseComplet.getPays());
 //					/etuRef.setCodeContry(contactAdresseComplet.getPays());
 				}
 				

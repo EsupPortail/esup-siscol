@@ -107,7 +107,9 @@ public class PcscolControllerAdapter {
 				} else {
 					logger.warn("Aucun mail trouvé pour l'étudiant : " + codeApprenant);
 				}
-
+				/*
+				 * Recherche de la commune à partir du code postal
+				 */
 				try {
 					logger.debug("Recherche de la commune pour l'étudiant : " + codeApprenant
 							+ " avec le code postal : " + etudientREf.getPostalCode());
@@ -126,10 +128,9 @@ public class PcscolControllerAdapter {
 								communes.add((Commune) nom);
 							}
 						}
-						communes=communes.stream().filter(c -> c.getCodeInsee().equals(etudientREf.getTown())).collect(Collectors.toList());
-								
-						
-						
+						communes = communes.stream().filter(c -> c.getCodeInsee().equals(etudientREf.getTown()))
+								.collect(Collectors.toList());
+
 						logger.debug("La nomenclature est de type Commune");
 						Commune commune = communes.get(0);
 						etudientREf.setTown(commune.getLibelleLong());
@@ -142,6 +143,21 @@ public class PcscolControllerAdapter {
 				}
 
 			}
+
+			try {
+				nomenclatureApi.lireListeNomenclatures("PaysNationalite").forEach(n -> {
+					if (n.getCode().equals(etudientREf.getCodePays())) {
+						etudientREf.setCountry(n.getLibelleLong());
+					}
+				});
+			} catch (ApiException e) {
+				logger.error("Erreur lors de la récupération de la nomenclature PaysNationalite pour l'étudiant : "
+						+ codeApprenant + " - " + e.getMessage());
+			} catch (Exception e) {
+				logger.error(
+						"Erreur lors de la récupération de l'étudiant : " + codeApprenant + " - " + e.getMessage());
+			}
+
 			return new ResponseEntity<EtudiantRef>(etudientREf, HttpStatus.OK);
 		} else {
 			logger.error("Aucun étudiant trouvé pour le code : " + codeApprenant);
