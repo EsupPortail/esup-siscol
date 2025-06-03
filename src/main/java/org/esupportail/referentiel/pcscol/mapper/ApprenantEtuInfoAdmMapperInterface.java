@@ -108,6 +108,12 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 			if (c.getCanalCommunication().getValue().equalsIgnoreCase("contactAdresseComplet")) {
 				ContactAdresseComplet contactAdresseComplet = (ContactAdresseComplet) c;
 				System.out.println("contactAdresseComplet: " + contactAdresseComplet);
+				
+				if (contactAdresseComplet.getLibellePays() != null && !contactAdresseComplet.getLibellePays().isEmpty()) {
+					etuRef.setCountry(contactAdresseComplet.getLibellePays());
+//					/etuRef.setCodeContry(contactAdresseComplet.getPays());
+				}
+				
 				if (contactAdresseComplet.getCommune() != null) {
 					etuRef.setTown(contactAdresseComplet.getCommune());
 				}
@@ -143,8 +149,8 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 				}
 				etuRef.setLibAde(contactAdresseComplet.getLigne5Etranger());
 				etuRef.setPostalCode(contactAdresseComplet.getCodePostal());
-				etuRef.setTown(contactAdresseComplet.getLibelleCommune());
-				etuRef.setCountry(contactAdresseComplet.getPays());
+				etuRef.setTown(contactAdresseComplet.getCommune());
+				
 			}
 			if (c.getCanalCommunication().getValue().equalsIgnoreCase("ContactTelephoneComplet")) {
 				ContactTelephoneComplet contactTelephoneComplet = (ContactTelephoneComplet) c;

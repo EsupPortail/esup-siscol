@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ApprenantDto;
@@ -14,7 +15,11 @@ import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
+import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
+import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.Periode;
+import org.esupportail.referentiel.pcscol.ref_api.model.Commune;
+import org.esupportail.referentiel.pcscol.ref_api.model.Nomenclature;
 import org.esupportail.referentiel.pcscol.services.ChcExterneService;
 import org.esupportail.referentiel.pcscol.services.EspaceService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
@@ -39,6 +44,9 @@ public class PcscolControllerAdapter {
 	private PcscolService pcscolService;
 	@Autowired
 	private ChcExterneService chcExterneService;
+
+	@Autowired
+	NomenclatureApi nomenclatureApi;
 
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
@@ -100,6 +108,39 @@ public class PcscolControllerAdapter {
 					logger.warn("Aucun mail trouvé pour l'étudiant : " + codeApprenant);
 				}
 
+				try {
+					logger.debug("Recherche de la commune pour l'étudiant : " + codeApprenant
+							+ " avec le code postal : " + etudientREf.getPostalCode());
+					List<Nomenclature> nomenclature = nomenclatureApi.lireCommunes(etudientREf.getPostalCode());
+					System.out.println("nomenclature : " + nomenclature.get(0).getClass());
+
+					if (nomenclature == null || nomenclature.isEmpty()) {
+						logger.warn("Aucune nomenclature trouvée pour le code postal : " + etudientREf.getPostalCode());
+
+					} else {
+						logger.debug("nomenclature : " + nomenclature.get(0).getClass());
+
+						List<Commune> communes = new ArrayList<Commune>();
+						for (Nomenclature nom : nomenclature) {
+							if (nom instanceof Commune) {
+								communes.add((Commune) nom);
+							}
+						}
+						communes=communes.stream().filter(c -> c.getCodeInsee().equals(etudientREf.getTown())).collect(Collectors.toList());
+								
+						
+						
+						logger.debug("La nomenclature est de type Commune");
+						Commune commune = communes.get(0);
+						etudientREf.setTown(commune.getLibelleLong());
+
+					}
+
+				} catch (ApiException e) {
+					logger.error("Erreur lors de la récupération de la commune pour l'étudiant : " + codeApprenant
+							+ " - " + e.getMessage());
+				}
+
 			}
 			return new ResponseEntity<EtudiantRef>(etudientREf, HttpStatus.OK);
 		} else {
@@ -131,10 +172,10 @@ public class PcscolControllerAdapter {
 			});
 
 			ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, code_espaces);
-			apogeeMap.getRegimeInscription().forEach(r->{
+			apogeeMap.getRegimeInscription().forEach(r -> {
 				r.setAnnee(annee);
 			});
-			
+
 			return new ResponseEntity<ApogeeMap>(apogeeMap, HttpStatus.OK);
 		}
 		return ResponseEntity.badRequest().build();
@@ -249,10 +290,10 @@ public class PcscolControllerAdapter {
 		// TODO
 		List<EtapeInscription> etapeInscriptions = new ArrayList<EtapeInscription>();
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
-		
+
 		logger.debug("{} {}  {}", "studentListeEtapesInscription", " => nbr d'esapces ", espaces.size());
-		logger.debug("studentListeEtapesInscription espaces  : {}",espaces);
-		
+		logger.debug("studentListeEtapesInscription espaces  : {}", espaces);
+
 		if (espaces != null && !espaces.isEmpty()) {
 			espaces.forEach(espace -> {
 

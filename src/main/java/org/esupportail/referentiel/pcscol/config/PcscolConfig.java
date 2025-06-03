@@ -10,6 +10,7 @@ import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.ExtractionsApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.MaquettesApi;
+import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApiCHC;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
@@ -52,6 +53,23 @@ public class PcscolConfig {
 	@Value("${app.pcscol.accesstoken.duration}")
 	private long duration = 6;
 
+	
+	@Bean
+	@SessionScope
+	NomenclatureApi nomenclatureApi() {
+		try {
+			String token = accessTokenService.getToken();
+			NomenclatureApi api = new NomenclatureApi(apiClient(apiRef, token));
+			return api;
+		} catch (Exception e) {
+			logger.error(e.getMessage() + " :" + e.getMessage());
+			return new NomenclatureApi();
+		}
+	}
+	
+	
+	
+	
 		
 	@Bean
 	@SessionScope
