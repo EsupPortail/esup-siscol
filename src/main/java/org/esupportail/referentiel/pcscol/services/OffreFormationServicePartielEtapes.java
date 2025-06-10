@@ -39,6 +39,9 @@ public class OffreFormationServicePartielEtapes {
 
 	@Value("${app.pcscol.typeObjetFormationChargementFormations:null}")
 	String typeObjetFormationChargementFormations;
+	
+	@Value("${app.pcscol.codeStructure}")
+	String codeStructure = "ETAB00";
 
 	public EspaceService getEspaceService() {
 		return espaceService;
@@ -160,7 +163,13 @@ public class OffreFormationServicePartielEtapes {
 			String espaceCode) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		for (ObjetMaquetteSummary obj : objetMaquetteSummaries) {
-			map.put(obj.getCode() + ";" + espaceCode, obj.getLibelle());
+			//map.put(obj.getCode() + ";" + espaceCode, obj.getLibelle());
+			try {
+				map.put(obj.getCode() + ";" + codeStructure, obj.getLibelle());
+			} catch (Exception e) {
+				logger.error("Error in objetMaquetteSummaryMap for code {} and espaceCode {}: {}", obj.getCode(),
+						espaceCode, e.getMessage());
+			}
 		}
 		return map;
 

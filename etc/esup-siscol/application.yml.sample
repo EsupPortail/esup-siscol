@@ -98,6 +98,10 @@ app:
       offreFormationMetierUserName: user
       offreFormationMetierPassword: **********
   pcscol:
+    cesures:
+       ANNEE: 1
+       SEMESTRE: 2
+       SANS: 3
     codeStructure: ETAB00
     codePeriode: PER-2020
     codesPeriodesChargementFormations: PER-2021, PER-2022, PER-2023, PER-2024, PER-2018, PER-2019, PER-2020, PER-2020-21

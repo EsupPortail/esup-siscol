@@ -26,6 +26,7 @@ import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
+import org.esupportail.referentiel.pcscol.config.CesureUtils;
 import org.esupportail.referentiel.pcscol.ins.model.Apprenant;
 import org.esupportail.referentiel.pcscol.ins.model.ApprenantEtInscriptions;
 import org.esupportail.referentiel.pcscol.ins.model.Inscription;
@@ -54,6 +55,7 @@ import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -89,6 +91,9 @@ public class PcscolService implements PcscolServiceI {
 	@Autowired
 	private NomenclatureApi nomenclatureApi;
 
+	@Autowired
+	private CesureUtils cesureUtils;
+
 	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String codePeriode) {
 		logger.debug("etapeInscription : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
 		ApprenantEtInscriptions app;
@@ -101,10 +106,19 @@ public class PcscolService implements PcscolServiceI {
 			logger.debug("Inscriptions : {}", inscriptions.size());
 
 			inscriptions.forEach(ins -> {
-				logger.debug("Inscription : {} ?=={}", ins.getCible().getPeriode().getCode(), codePeriode);
+
 				if (ins.getCible().getPeriode().getCode().equalsIgnoreCase(codePeriode)) {
 					EtapeInscription etpinscr = ApprenantEtuInfoAdmMapperInterface.Instance
 							.stagesApprenantToEtapeInscription(ins);
+
+					etpinscr.setCodVrsVet(codeStructure);
+					etpinscr.setVersionDiplome(codeStructure);
+
+					if (etpinscr.getLibelleCursusAmenage() != null && !etpinscr.getLibelleCursusAmenage().isEmpty()) {
+						logger.debug("EtapeInscription : Cursus amenagé {}", etpinscr.getLibelleCursusAmenage());
+						etpinscr.setCodeCursusAmenage(cesureUtils.getCesures().get(etpinscr.getLibelleCursusAmenage()));
+
+					}
 
 					logger.debug("EtapeInscription : {}", etpinscr.getCodeEtp());
 					if (etpinscr.getCodeComposante() != null && !etpinscr.getCodeComposante().isEmpty())
@@ -242,9 +256,9 @@ public class PcscolService implements PcscolServiceI {
 	 */
 	@Override
 	@Cacheable(cacheNames = CacheConfig.PERMANENT, sync = true)
-	public Map<String, String> lireMapFormations(String codeStructure, String codePeriode, boolean piaSeulement) {
+	public Map<String, String> lireMapFormations(String codeStructure, String listecodesPeriode, boolean piaSeulement) {
 
-		List<String> listCodePeriode = codePeriodeFromPeriodes(codeStructure, codePeriode);
+		List<String> listCodePeriode = codePeriodeFromPeriodes(listecodesPeriode);
 
 		Map<String, String> mapAllFormations = new HashMap<String, String>();
 
@@ -330,7 +344,7 @@ public class PcscolService implements PcscolServiceI {
 	 */
 	public List<ObjetMaquetteSummary> allObjetMaquetteSummariesFromPeriodes(String codeStructure,
 			String codesPeriodesChargementFormations) {
-		List<String> listCodePeriode = codePeriodeFromPeriodes(codeStructure, codesPeriodesChargementFormations);
+		List<String> listCodePeriode = codePeriodeFromPeriodes(codesPeriodesChargementFormations);
 		logger.debug("listCodePeriode: {}", listCodePeriode);
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<ObjetMaquetteSummary>();
 		logger.debug("codeStructure : {} ", codeStructure);
@@ -376,7 +390,8 @@ public class PcscolService implements PcscolServiceI {
 				DiplomeReduitDto diplome = OdfDtoMapperInterface.Instance
 						.diplomeReduitDtoFromObjetMaquette(objectMaqette);
 				Espace esp = espacesApi.lireEspace(codeStructure, idEspace);
-				diplome.setVersionDiplome(esp.getCode());
+				diplome.setCodePeriode(esp.getCode());
+				diplome.setVersionDiplome(codeStructure);
 				diplomes.add(diplome);
 
 				// possibilite d'avoir un espace different ???
@@ -402,11 +417,13 @@ public class PcscolService implements PcscolServiceI {
 								objectMaqette2 = objetsMaquetteApi.lireObjetMaquette(codeStructure,
 										e.getObjetMaquette().getId());
 								EtapeReduiteDto etp = new EtapeReduiteDto();
+
 								etp.setCodeEtp(objectMaqette2.getCode());
 								/**
 								 * TODO recupere le codePeriode
 								 */
-								etp.setCodVrsVet(esp.getCode());
+								etp.setCodePeriode(esp.getCode());
+								etp.setCodVrsVet(codeStructure);
 								etp.setLibWebVet(objectMaqette2.getDescripteursObjetMaquette().getLibelle());
 								diplome.getListeEtapes().add(etp);
 							} catch (ApiException e1) {
@@ -443,14 +460,15 @@ public class PcscolService implements PcscolServiceI {
 		return listeEnfantPia;
 	}
 
-	public List<ElementPedagogique> studentListeElpStage(String codeStructure, String codeEtape, String versionEtape) {
-
+	public List<ElementPedagogique> chercherElementPeda(String codeStructure, String codeEtape, String codePeriode) {
 		List<ElementPedagogique> l = new ArrayList<ElementPedagogique>();
 		try {
+			logger.debug("studentListeElpStage : {} , {} , {}", codeStructure, codeEtape, codePeriode);
+
 			List<ObjetMaquetteSummary> objetMaquetteSummaries = offreFormationService
-					.rechercheObjetMaquetteSummary(codeStructure, codeEtape, versionEtape);
+					.rechercheObjetMaquetteSummary(codeStructure, codeEtape, codePeriode);
 			if (objetMaquetteSummaries == null || objetMaquetteSummaries.isEmpty()) {
-				logger.error("studentListeElpStage : " + codeStructure + " , " + codeEtape + " , " + versionEtape);
+				logger.error("studentListeElpStage : " + codeStructure + " , " + codeEtape + " , " + codePeriode);
 				logger.error("studentListeElpStage : " + "Aucun Objet Maquette trouvé");
 				return l;
 			}
@@ -462,6 +480,7 @@ public class PcscolService implements PcscolServiceI {
 				ElementPedagogique elp = new ElementPedagogique();
 				elp.setCodElp(e.getCode());
 				elp.setLibElp(e.getDescripteursObjetMaquette().getLibelle());
+				logger.debug("chercherElementPeda : DescripteursObjetFormation" + e.getClass());
 
 				DescripteursObjetFormation dom = (DescripteursObjetFormation) e.getDescripteursObjetMaquette();
 
@@ -469,15 +488,83 @@ public class PcscolService implements PcscolServiceI {
 				if (dom.getNature() != null)
 					elp.setLibNatureElp(dom.getNature().getType());
 				elp.setCodEtp(objetMaquetteSummary.getCode());
-				elp.setCodVrsVet(versionEtape);
+				elp.setCodVrsVet(codeStructure);
+				elp.setCodePeriode(codePeriode);
 				elp.setNbrCrdElp(dom.getEcts());
 				l.add(elp);
+
 			});
 		} catch (ApiException e) {
 			logger.error("studentListeElpStage : " + e.getMessage());
 		}
 
 		return l;
+	}
+
+	public List<ElementPedagogique> studentListeElpStage(String codeStructure, String codeEtape, String versionEtape,
+			String codesPeriodesChargementFormations) {
+
+		List<ElementPedagogique> listElementPedagogique = new ArrayList<ElementPedagogique>();
+
+		List<String> listCodePeriode = codePeriodeFromPeriodes(codesPeriodesChargementFormations);
+
+		logger.debug("studentListeElpStage : {} , {} , {}", codeStructure, codeEtape, versionEtape);
+
+		if (listCodePeriode == null || listCodePeriode.isEmpty()) {
+			logger.error("studentListeElpStage : " + codeStructure + " , " + codeEtape + " , " + versionEtape);
+			logger.error("studentListeElpStage : " + "Aucun Objet Maquette trouvé");
+			return listElementPedagogique;
+		}
+		for (String codePeriode : listCodePeriode) {
+			logger.debug("studentListeElpStage : {} , {} , {}", codeStructure, codeEtape, codePeriode);
+			List<ElementPedagogique> elps = chercherElementPeda(codeStructure, codeEtape, codePeriode);
+			if (elps != null && !elps.isEmpty()) {
+				listElementPedagogique.addAll(elps);
+			}
+		}
+		return listElementPedagogique;
+
+//		
+//		
+//		
+//		
+//		
+//		List<ElementPedagogique> l = new ArrayList<ElementPedagogique>();
+//		try {
+//			
+//			
+//			
+//			List<ObjetMaquetteSummary> objetMaquetteSummaries = offreFormationService
+//					.rechercheObjetMaquetteSummary(codeStructure, codeEtape, versionEtape);
+//			if (objetMaquetteSummaries == null || objetMaquetteSummaries.isEmpty()) {
+//				logger.error("studentListeElpStage : " + codeStructure + " , " + codeEtape + " , " + versionEtape);
+//				logger.error("studentListeElpStage : " + "Aucun Objet Maquette trouvé");
+//				return l;
+//			}
+//			ObjetMaquetteSummary objetMaquetteSummary = objetMaquetteSummaries.get(0);
+//			UUID id = objetMaquetteSummary.getId();
+//			List<ObjetMaquetteDetail> llStage = offreFormationService.listeEnfantsObjectMaquetteStage(codeStructure,
+//					id.toString());
+//			llStage.forEach(e -> {
+//				ElementPedagogique elp = new ElementPedagogique();
+//				elp.setCodElp(e.getCode());
+//				elp.setLibElp(e.getDescripteursObjetMaquette().getLibelle());
+//
+//				DescripteursObjetFormation dom = (DescripteursObjetFormation) e.getDescripteursObjetMaquette();
+//
+//				elp.setTemElpTypeStage(String.valueOf(dom.getStage()));
+//				if (dom.getNature() != null)
+//					elp.setLibNatureElp(dom.getNature().getType());
+//				elp.setCodEtp(objetMaquetteSummary.getCode());
+//				elp.setCodVrsVet(versionEtape);
+//				elp.setNbrCrdElp(dom.getEcts());
+//				l.add(elp);
+//			});
+//		} catch (ApiException e) {
+//			logger.error("studentListeElpStage : " + e.getMessage());
+//		}
+//
+//		return l;
 	}
 
 	/**
@@ -644,8 +731,8 @@ public class PcscolService implements PcscolServiceI {
 				}
 			}
 			if (noms != null && !noms.isEmpty()) {
-				Commune commune = communes.stream().filter(n -> n.getCodeInsee().equalsIgnoreCase(codeCommune)).findFirst()
-						.orElse(null);
+				Commune commune = communes.stream().filter(n -> n.getCodeInsee().equalsIgnoreCase(codeCommune))
+						.findFirst().orElse(null);
 				if (commune != null) {
 					logger.debug("chercheCommune : {} , {} : {}", codePostal, codeCommune, commune.getLibelleLong());
 					return (Commune) commune;
@@ -679,7 +766,8 @@ public class PcscolService implements PcscolServiceI {
 			}
 			return (PaysNationalite) nomenclature;
 		} catch (ApiException e) {
-			logger.error("Erreur lors de la récupération Pays : " + codePays + " : " + e.getMessage() + " : " + e.getCode());
+			logger.error(
+					"Erreur lors de la récupération Pays : " + codePays + " : " + e.getMessage() + " : " + e.getCode());
 		}
 		return null;
 
@@ -691,7 +779,7 @@ public class PcscolService implements PcscolServiceI {
 	 * @param codes
 	 * @return List<String>
 	 */
-	public List<String> codePeriodeFromPeriodes(String codeStructure, String codes) {
+	public List<String> codePeriodeFromPeriodes(String codes) {
 		return Arrays.asList(codes.split("[,;\\s]+"));
 	}
 
@@ -717,6 +805,14 @@ public class PcscolService implements PcscolServiceI {
 
 	public void setOffreFormationServiceRevisited(OffreFormationServicePartielEtapes offreFormationServiceRevisited) {
 		this.offreFormationServiceRevisited = offreFormationServiceRevisited;
+	}
+
+	public CesureUtils getCesureUtils() {
+		return cesureUtils;
+	}
+
+	public void setCesureUtils(CesureUtils cesureUtils) {
+		this.cesureUtils = cesureUtils;
 	}
 
 }

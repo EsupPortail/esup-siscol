@@ -171,7 +171,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	public ResponseEntity<List<ElementPedagogique>> studentListeElpStage(
 			@RequestParam(value = "codeEtape") String codeEtape,
 			@RequestParam(value = "versionEtape") String versionEtape) {
-		List<ElementPedagogique> l = pcscolService.studentListeElpStage(codeStructure, codeEtape, versionEtape);
+		List<ElementPedagogique> l = pcscolService.studentListeElpStage(codeStructure, codeEtape, versionEtape,codesPeriodesChargementFormations);
 		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 

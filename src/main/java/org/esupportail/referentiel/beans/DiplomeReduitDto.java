@@ -12,6 +12,8 @@ public class DiplomeReduitDto implements Serializable{
 	 * codeDiplome.
 	 */
 	private String codeDiplome = "";
+	
+	private String codePeriode = "";
 
 	/**
 	 * versionDiplome.
@@ -55,6 +57,14 @@ public class DiplomeReduitDto implements Serializable{
 
 	public void setListeEtapes(List<EtapeReduiteDto> listeEtapes) {
 		this.listeEtapes = listeEtapes;
+	}
+
+	public String getCodePeriode() {
+		return codePeriode;
+	}
+
+	public void setCodePeriode(String codePeriode) {
+		this.codePeriode = codePeriode;
 	}
 	
 	

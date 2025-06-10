@@ -38,6 +38,8 @@ public class EtapeInscription implements Serializable {
 	 * code version etape.
 	 */
 	private String codVrsVet = "";
+	
+	private String codePeriode = "";
 	/**
 	 * libelle Web Vet.
 	 */
@@ -92,6 +94,33 @@ public class EtapeInscription implements Serializable {
 	private String libRg;
 	
 	private String statutInscription;
+	
+	
+	private String programmeEchange="";
+	
+	private String typeMobilite="";
+	
+	/*
+	 * *************************************************************** Getters et
+	 * Setters
+	 ****************************************************************/
+	
+	public String getProgrammeEchange() {
+		return programmeEchange;
+	}
+
+	public void setProgrammeEchange(String programmeEchange) {
+		this.programmeEchange = programmeEchange;
+	}
+	
+	public String getTypeMobilite() {
+		return typeMobilite;
+	}
+
+	public void setTypeMobilite(String typeMobilite) {
+		this.typeMobilite = typeMobilite;
+	}
+	
 
 	/**
 	 * @return the codeEtp
@@ -326,6 +355,16 @@ public class EtapeInscription implements Serializable {
 	public void setStatutInscription(String statutInscription) {
 		this.statutInscription = statutInscription;
 	}
+
+	public String getCodePeriode() {
+		return codePeriode;
+	}
+
+	public void setCodePeriode(String codePeriode) {
+		this.codePeriode = codePeriode;
+	}
+
+	
 	
 	
 

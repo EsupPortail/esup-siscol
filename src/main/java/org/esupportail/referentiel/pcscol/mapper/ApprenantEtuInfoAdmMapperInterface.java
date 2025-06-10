@@ -175,6 +175,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 	 */
 	@Mapping(target = "codeEtp", source = "cible.code")
 	@Mapping(target = "codVrsVet", source = "cible.periode.code")
+	@Mapping(target = "codePeriode", source = "cible.periode.code")
 	@Mapping(target = "libWebVet", source = "cible.libelleCourt")
 	@Mapping(target = "codeDiplome", source = "cible.formation.code")
 	@Mapping(target = "versionDiplome", source = "cible.periode.code")
@@ -184,10 +185,13 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 	@Mapping(target = "libRg", source = "regimeInscription.libelle", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	// @Mapping(target = "codeCursusAmenage", expression =
 	// "java(String.join(\",\",inscription.getSituationPersonnelleInscription().getAmenagementsSpecifiques()))")
-	@Mapping(target = "libelleCursusAmenage", expression = "java("
-			+ "\"cesure=\"+inscription.getSituationUniversitaire().getCesure()"
-			+ "+\",mobilite=\"+inscription.getSituationUniversitaire().getMobilite()"
-			+ "+\",programmeEchange= \"+inscription.getSituationUniversitaire().getProgrammeEchange())")
+//	@Mapping(target = "libelleCursusAmenage", expression = "java("
+//			+ "\"cesure=\"+inscription.getSituationUniversitaire().getCesure()"
+//			+ "+\",mobilite=\"+inscription.getSituationUniversitaire().getMobilite()"
+//			+ "+\",programmeEchange= \"+inscription.getSituationUniversitaire().getProgrammeEchange())")
+	@Mapping(target = "libelleCursusAmenage", source = "inscription.situationUniversitaire.cesure")
+	@Mapping(target = "programmeEchange", source = "inscription.situationUniversitaire.programmeEchange.code")
+	@Mapping(target = "typeMobilite", source = "inscription.situationUniversitaire.mobilite")
 	@Mapping(target = "typeIns", source = "contexteInscription")
 	@Mapping(target = "statutInscription", source = "statutInscription")
 	public EtapeInscription stagesApprenantToEtapeInscription(InscriptionComplete inscription);
