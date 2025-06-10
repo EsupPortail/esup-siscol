@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.ApprenantDto;
@@ -16,16 +15,16 @@ import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
 import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
-import org.esupportail.referentiel.pcscol.invoker.ApiException;
+import org.esupportail.referentiel.pcscol.config.CesureUtils;
 import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.ref_api.model.Commune;
-import org.esupportail.referentiel.pcscol.ref_api.model.Nomenclature;
 import org.esupportail.referentiel.pcscol.ref_api.model.PaysNationalite;
 import org.esupportail.referentiel.pcscol.services.ChcExterneService;
 import org.esupportail.referentiel.pcscol.services.EspaceService;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,11 +32,10 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @ConditionalOnProperty(name = "app.mode_pegase")
-public class PcscolControllerAdapter {
+public class PcscolControllerAdapter implements InitializingBean {
 
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -52,6 +50,8 @@ public class PcscolControllerAdapter {
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
 	LdapServiceInterface personService;
+	@Autowired
+	CesureUtils cesureUtils;
 
 	@Value("${app.pcscol.codeStructure}")
 	String codeStructure = "ETAB00";
@@ -61,6 +61,8 @@ public class PcscolControllerAdapter {
 
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
 	String codesPeriodesChargementFormations;
+	
+	  
 
 	@Autowired
 	private EspaceService espaceService;
@@ -330,6 +332,20 @@ public class PcscolControllerAdapter {
 
 	public void setPcscolService(PcscolService pcscolService) {
 		this.pcscolService = pcscolService;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		
+		logger.info(
+				"PcscolControllerAdapter initialized with codeStructure: {}, codePeriode: {}, codesPeriodesChargementFormations: {}",
+				codeStructure, codePeriode, codesPeriodesChargementFormations);
+		if (codesPeriodesChargementFormations == null || codesPeriodesChargementFormations.isEmpty()) {
+			codesPeriodesChargementFormations = codePeriode;
+			logger.warn("No codesPeriodesChargementFormations set, using codePeriode: {}", codePeriode);
+		}
+		logger.info("Codes Periodes Chargement Formations: {}", codesPeriodesChargementFormations);
+		logger.info("CesureUtils: {}", cesureUtils.getCesures());
 	}
 
 }
