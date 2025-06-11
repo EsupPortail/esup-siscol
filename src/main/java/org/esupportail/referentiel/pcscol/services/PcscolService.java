@@ -93,6 +93,28 @@ public class PcscolService implements PcscolServiceI {
 
 	@Autowired
 	private CesureUtils cesureUtils;
+	
+	
+	
+	@Override
+	public List<String> recupererAnneesIa(String codeStructure, String codeEtud) {
+		
+		try {
+			List<InscriptionComplete> inscriptions = inscriptionsApi.lireInscriptions(codeStructure, codeEtud)
+					.getInscriptions();
+			if (inscriptions != null && !inscriptions.isEmpty()) {
+				List<Integer> anneeUniv = inscriptions.stream().map(ins -> ins.getCible().getPeriode().getAnneeUniversitaire())
+						.distinct().collect(Collectors.toList());
+				List<String> annees = anneeUniv.stream().map(String::valueOf).collect(Collectors.toList());
+				return annees;
+				
+			}
+		} catch (ApiException e) {
+			logger.error("recupererAnneesIa : " + codeStructure + " , " + codeEtud + " : " + e.getMessage() + " : "
+					+ e.getCode());
+		}
+		return null;
+	}
 
 	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String codePeriode) {
 		logger.debug("etapeInscription : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
@@ -180,7 +202,7 @@ public class PcscolService implements PcscolServiceI {
 			if (lelps != null) {
 
 				List<ElementPedagogique> filterdlElps = lelps.stream()
-						.filter(e -> codesPeriodes.contains(e.getCodVrsVet())).collect(Collectors.toList());
+						.filter(e -> codesPeriodes.contains(e.getCodePeriode())).collect(Collectors.toList());
 				apogeeMap.setListeELPs(filterdlElps);
 			}
 
@@ -230,6 +252,7 @@ public class PcscolService implements PcscolServiceI {
 			return info;
 		} catch (ApiException e) {
 			logger.error(" lireEtudiantInfoAdm : ", codeStructure, codeApprenant, e.getMessage(), e.getCode());
+			e.printStackTrace();
 		}
 
 		return null;
@@ -583,15 +606,15 @@ public class PcscolService implements PcscolServiceI {
 
 	}
 
-	public List<ApprenantDto> recupererListeEtuParEtpEtDiplome(String codeComposante, String codePeriode,
-			String codeEtape, String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom,
-			String prenom) {
-		/**
-		 * TODO versionEtape codeEtape
-		 */
-
-		return lireApprenantDtoFromInscriptions(codeComposante, codeEtape, codePeriode, nom, prenom, codEtu);
-	}
+//	public List<ApprenantDto> recupererListeEtuParEtpEtDiplome(String codeComposante, String codePeriode,
+//			String codeEtape, String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom,
+//			String prenom) {
+//		/**
+//		 * TODO versionEtape codeEtape
+//		 */
+//
+//		return lireApprenantDtoFromInscriptions(codeComposante, codeEtape, codePeriode, nom, prenom, codEtu);
+//	}
 
 	/**
 	 * 
@@ -603,29 +626,29 @@ public class PcscolService implements PcscolServiceI {
 	 * @param codeApprenant
 	 * @return
 	 */
-	public List<ApprenantDto> lireApprenantDtoFromInscriptions(String codeStructure, String objetMaquette,
-			String periode, String nomDeNaissance, String prenom, String codeApprenant) {
-		List<Inscription> ins = lireInscriptions(codeStructure, objetMaquette, periode, nomDeNaissance, prenom,
-				codeApprenant);
-		return ApprenantEtuInfoAdmMapperInterface.Instance.inscrptionToApprenantDto(ins);
+//	public List<ApprenantDto> lireApprenantDtoFromInscriptions(String codeStructure, String objetMaquette,
+//			String periode, String nomDeNaissance, String prenom, String codeApprenant) {
+//		List<Inscription> ins = lireInscriptions(codeStructure, objetMaquette, periode, nomDeNaissance, prenom,
+//				codeApprenant);
+//		return ApprenantEtuInfoAdmMapperInterface.Instance.inscrptionToApprenantDto(ins);
+//
+//	}
 
-	}
-
-	public List<Inscription> lireInscriptionsByAnnee(String codeStructure, String objetMaquette, String annee,
-			String nomDeNaissance, String prenom, String codeApprenant) {
-		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
-		List<Inscription> inscriptions = new ArrayList<Inscription>();
-		if (periodes != null && !periodes.isEmpty()) {
-			periodes.forEach(p -> {
-				List<Inscription> ins = lireInscriptions(codeStructure, objetMaquette, p.getCode(), nomDeNaissance,
-						prenom, codeApprenant);
-				if (ins != null && !ins.isEmpty()) {
-					inscriptions.addAll(ins);
-				}
-			});
-		}
-		return inscriptions;
-	}
+//	public List<Inscription> lireInscriptionsByAnnee(String codeStructure, String objetMaquette, String annee,
+//			String nomDeNaissance, String prenom, String codeApprenant) {
+//		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
+//		List<Inscription> inscriptions = new ArrayList<Inscription>();
+//		if (periodes != null && !periodes.isEmpty()) {
+//			periodes.forEach(p -> {
+//				List<Inscription> ins = lireInscriptions(codeStructure, objetMaquette, p.getCode(), nomDeNaissance,
+//						prenom, codeApprenant);
+//				if (ins != null && !ins.isEmpty()) {
+//					inscriptions.addAll(ins);
+//				}
+//			});
+//		}
+//		return inscriptions;
+//	}
 
 	/**
 	 * 
@@ -638,65 +661,71 @@ public class PcscolService implements PcscolServiceI {
 	 * @return List<Inscription> lireInscriptions
 	 */
 
-	public List<Inscription> lireInscriptions(String codeStructure, String objetMaquette, String periode,
-			String nomDeNaissance, String prenom, String codeApprenant) {
+//	public List<Inscription> lireInscriptions(String codeStructure, String objetMaquette, String periode,
+//			String nomDeNaissance, String prenom, String codeApprenant) {
+//
+//		logger.debug(
+//				"codeStructure : {},  objetMaquette: {}, periode : {}, nomDeNaissance : {},  prenom : {},  codeApprenant : {}",
+//				codeStructure, objetMaquette, periode, nomDeNaissance, prenom, codeApprenant);
+//
+//		if (codeApprenant != null && !codeApprenant.isBlank()) {
+//			nomDeNaissance = null;
+//			prenom = null;
+//		}
+//
+//		/**
+//		 * StatutInscriptionVoeu
+//		 */
+//		List<StatutInscriptionVoeu> statutsInscription = new ArrayList<StatutInscriptionVoeu>();
+//		// statutsInscription.add(StatutInscriptionVoeu.VALIDE);
+//		// statutsInscription.add(StatutInscriptionVoeu.ANNULEE);
+//		List<StatutGlobalPiece> statutsPieces = new ArrayList<StatutGlobalPiece>();
+//		List<StatutPaiementVoeu> statutsPaiement = new ArrayList<StatutPaiementVoeu>();
+//		List<TriInscription> tri = null;
+//		String rechercheIne = null;
+//		String recherche = null;
+//		String nomOuPrenom = null;
+//		String ine = null;
+//		List<StatutIne> statutsIne = null;
+//		Integer limit = 50;
+//		
+//		try {
+//			/**
+//			 * TODO afin de passer à ins extrene remplacer listerInscriptionsValidees qui
+//			 * n'est pas disponible
+//			 */
+//			System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
+//			Inscriptions listInscriptions = inscriptionsApi.listerInscriptionsValidees(codeStructure,
+//					statutsInscription, statutsPieces, statutsPaiement, tri, rechercheIne, recherche, periode,
+//					objetMaquette, nomOuPrenom, nomDeNaissance, prenom, codeApprenant, ine, statutsIne, limit);
+//			
+//			logger.debug("listerInscriptionsValidees : {} ,listInscriptions.getTotalElements() : {}", codeStructure,
+//					listInscriptions.getTotalElements());
+//			/**
+//			 * TODO
+//			 */
+//			logger.debug("TotalElements : {}", listInscriptions.getTotalElements());
+//			List<Inscription> resultats = listInscriptions.getResultats();
+//			return resultats;
+//		} catch (ApiException e) {
+//			logger.error("listerInscriptionsValidees : " + codeStructure + " , " + objetMaquette + " , " + periode
+//					+ " : " + e.getMessage() + " : " + e.getCode());
+//		}
+//		return new ArrayList<Inscription>();
+//
+//	}
 
-		logger.debug(
-				"codeStructure : {},  objetMaquette: {}, periode : {}, nomDeNaissance : {},  prenom : {},  codeApprenant : {}",
-				codeStructure, objetMaquette, periode, nomDeNaissance, prenom, codeApprenant);
-
-		if (codeApprenant != null && !codeApprenant.isBlank()) {
-			nomDeNaissance = null;
-			prenom = null;
-		}
-
-		/**
-		 * StatutInscriptionVoeu
-		 */
-		List<StatutInscriptionVoeu> statutsInscription = new ArrayList<StatutInscriptionVoeu>();
-		// statutsInscription.add(StatutInscriptionVoeu.VALIDE);
-		// statutsInscription.add(StatutInscriptionVoeu.ANNULEE);
-		List<StatutGlobalPiece> statutsPieces = new ArrayList<StatutGlobalPiece>();
-		List<StatutPaiementVoeu> statutsPaiement = new ArrayList<StatutPaiementVoeu>();
-		List<TriInscription> tri = null;
-		String rechercheIne = null;
-		String recherche = null;
-		String nomOuPrenom = null;
-		String ine = null;
-		List<StatutIne> statutsIne = null;
-		Integer limit = 50;
-
-		try {
-			/**
-			 * TODO afin de passer à ins extrene remplacer listerInscriptionsValidees qui
-			 * n'est pas disponible
-			 */
-
-			Inscriptions listInscriptions = inscriptionsApi.listerInscriptionsValidees(codeStructure,
-					statutsInscription, statutsPieces, statutsPaiement, tri, rechercheIne, recherche, periode,
-					objetMaquette, nomOuPrenom, nomDeNaissance, prenom, codeApprenant, ine, statutsIne, limit);
-			/**
-			 * TODO
-			 */
-			logger.debug("TotalElements : {}", listInscriptions.getTotalElements());
-			List<Inscription> resultats = listInscriptions.getResultats();
-			return resultats;
-		} catch (ApiException e) {
-			logger.error("" + codeStructure, statutsInscription, periode, objetMaquette, nomDeNaissance, prenom,
-					codeApprenant);
-		}
-		return new ArrayList<Inscription>();
-
-	}
-
-	public List<String> recupererAnneesIa(String codeStructure, String codeEtud) {
-		List<String> annaeeIa = new ArrayList<String>();
-		List<Inscription> ins = lireInscriptions(codeStructure, null, null, null, null, codeEtud);
-		ins.forEach(i -> {
-			annaeeIa.add(i.getVoeu().getCible().getPeriode().getCode());
-		});
-		return annaeeIa;
-	}
+//	public List<String> recupererAnneesIa(String codeStructure, String codeEtud) {
+//		List<String> annaeeIa = new ArrayList<String>();
+//		logger.debug("recupererAnneesIa : {} , {}", codeStructure, codeEtud);
+//		List<Inscription> ins = lireInscriptions(codeStructure, null, null, null, null, codeEtud);
+//		logger.debug("recupererAnneesIa : {} inscriptions", ins);
+//		ins.forEach(i -> {
+//			annaeeIa.add(i.getVoeu().getCible().getPeriode().getCode());
+//		});
+//		logger.debug("recupererAnneesIa : {}", annaeeIa);
+//		return annaeeIa;
+//	}
 
 	public SignataireRef signaitaireRef(String composante) {
 		try {
@@ -814,5 +843,7 @@ public class PcscolService implements PcscolServiceI {
 	public void setCesureUtils(CesureUtils cesureUtils) {
 		this.cesureUtils = cesureUtils;
 	}
+
+	
 
 }

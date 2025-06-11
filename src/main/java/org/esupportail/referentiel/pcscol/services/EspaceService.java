@@ -133,7 +133,12 @@ public class EspaceService {
 	 */
 
 	public List<String> anneeUnivFromEsapces(String codeStructure, List<String> codesPeriode) {
-
+		
+		/**
+		 * TODO
+		 * 
+		 */
+		logger.debug("Recherche des années universitaires pour les codes de période : {}", codesPeriode);
 		List<Espace> espaces = allEspaces(codeStructure);
 		List<String> anneesUniv = new ArrayList<String>();
 		if (espaces != null) {
@@ -146,6 +151,7 @@ public class EspaceService {
 				
 			});
 		}
+		logger.debug("Années universitaires trouvées : {}", anneesUniv);
 		return anneesUniv;
 
 	}

@@ -145,8 +145,10 @@ public class ChcService {
 					 * TODO diplome formation
 					 */
 					// elemePeda.setCodEtp(cursus.getFormation().getCode());
+					elemePeda.setCodePeriode(cursus.getPeriode().getCode());
+					
 					elemePeda.setCodEtp(cursus.getRacinePedagogique().getCodeObjetMaquette());
-					elemePeda.setCodVrsVet(cursus.getPeriode().getCode());
+					elemePeda.setCodVrsVet(codeStructure);
 					elemePeda.setLibElp(objetMaquette.getDescripteursObjetMaquette().getLibelle());
 					elemePeda.setTemElpTypeStage(String.valueOf(dem.getStage()));
 					elemePeda.setNbrCrdElp(dem.getEcts());
@@ -155,13 +157,13 @@ public class ChcService {
 					listeElementPedagogique.add(elemePeda);
 
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.error("Erreur lors de la lecture de l'élément pédagogique pour l'objet maquette : {}",
+							objetMaquette.getCode(), e);
 				}
 
 			});
 		} catch (ApiException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur lors de la lecture du cursus : {}", cursus.getCodeStructure(), e);
 		}
 
 		return listeElementPedagogique;
@@ -184,7 +186,7 @@ public class ChcService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.debug("{}",listeElementPedagogique);
+		logger.debug("++++++++++++++++{}",listeElementPedagogique);
 		return listeElementPedagogique;
 	}
 

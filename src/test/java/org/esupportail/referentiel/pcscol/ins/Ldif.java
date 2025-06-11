@@ -32,8 +32,9 @@ public class Ldif {
 		String nomDeNaissance = null;
 		String prenom = null;
 		String codeApprenant = "000000250";
-		List<ApprenantDto> result = pcscolService.lireApprenantDtoFromInscriptions(codeStructure, objetMaquette, periode, nomDeNaissance, prenom,
-				codeApprenant);
+//		List<ApprenantDto> result = pcscolService.lireApprenantDtoFromInscriptions(codeStructure, objetMaquette, periode, nomDeNaissance, prenom,
+//				codeApprenant);
+		List<ApprenantDto> result=new ArrayList<ApprenantDto>();
 		System.out.println("+++++++++++++"+result.size());
 		List<String> listOfall=new ArrayList<String>();
 		

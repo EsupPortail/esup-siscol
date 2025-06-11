@@ -57,21 +57,6 @@ public interface PcscolServiceI {
 	
 	public List<String> recupererAnneesIa(String codeStructure,String codeEtud);
 
-	/**
-	 * 
-	 * @param codeComposante
-	 * @param annee
-	 * @param codeEtape
-	 * @param versionEtape
-	 * @param codeDiplome
-	 * @param versionDiplome
-	 * @param codEtu
-	 * @param nom
-	 * @param prenom
-	 * @return
-	 */
-	public List<ApprenantDto> recupererListeEtuParEtpEtDiplome(String codeComposante, String annee, String codeEtape,
-			String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom, String prenom);
 	
 	/**
 	 * 
