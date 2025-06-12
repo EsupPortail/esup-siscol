@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail.referentiel</groupId>
 	<artifactId>esup-siscol</artifactId>
-	<version>2.0.17-RC</version>
+	<version>2.0.18-RC</version>
 	<packaging>war</packaging>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -51,7 +51,7 @@
 		<dependency>
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
-			<version>6.50.50</version>
+			<version>6.50.73</version>
 <!--			<version>6.50.30</version>-->
 			<!--			<version>6.40.70</version>-->
 			<!--			<version>6.40.01</version>-->
