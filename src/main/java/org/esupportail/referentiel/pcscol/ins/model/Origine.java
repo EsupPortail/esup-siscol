@@ -31,7 +31,9 @@ public enum Origine {
   
   REINSCRIPTION("reinscription"),
   
-  MONMASTER("monmaster");
+  MONMASTER("monmaster"),
+  
+  DOSSIER("dossier");
 
   private String value;
 
