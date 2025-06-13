@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package org.esupportail.referentiel.pcscol.ins.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,52 +19,63 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * La voie d&#39;admission de l&#39;étudiant
  */
 public enum VoieAdmission {
-  
-  CONCOURS("concours"),
-  
-  TITRE("titre"),
-  
-  DOSSIER("dossier");
 
-  private String value;
+	CONCOURS("concours"),
 
-  VoieAdmission(String value) {
-    this.value = value;
-  }
+	TITRE("titre"),
 
-  @JsonValue
-  public String getValue() {
-    return value;
-  }
+	DOSSIER("dossier"),
 
-  @Override
-  public String toString() {
-    return String.valueOf(value);
-  }
+	PARCOURSUP("parcoursup"),
 
-  @JsonCreator
-  public static VoieAdmission fromValue(String value) {
-    for (VoieAdmission b : VoieAdmission.values()) {
-      if (b.value.equals(value)) {
-        return b;
-      }
-    }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
-  }
+	ECANDIDAT("ecandidat"),
 
-  /**
-   * Convert the instance into URL query string.
-   *
-   * @param prefix prefix of the query string
-   * @return URL query string
-   */
-  public String toUrlQueryString(String prefix) {
-    if (prefix == null) {
-      prefix = "";
-    }
+	MANUEL("manuel"),
 
-    return String.format("%s=%s", prefix, this.toString());
-  }
+	REINSCRIPTION("reinscription"),
+
+	MONMASTER("monmaster"),
+
+	ECOLEDOCTORALE("ecoledoctorale");
+
+	private String value;
+
+	VoieAdmission(String value) {
+		this.value = value;
+	}
+
+	@JsonValue
+	public String getValue() {
+		return value;
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(value);
+	}
+
+	@JsonCreator
+	public static VoieAdmission fromValue(String value) {
+		for (VoieAdmission b : VoieAdmission.values()) {
+			if (b.value.equals(value)) {
+				return b;
+			}
+		}
+		throw new IllegalArgumentException("Unexpected value '" + value + "'");
+	}
+
+	/**
+	 * Convert the instance into URL query string.
+	 *
+	 * @param prefix prefix of the query string
+	 * @return URL query string
+	 */
+	public String toUrlQueryString(String prefix) {
+		if (prefix == null) {
+			prefix = "";
+		}
+
+		return String.format("%s=%s", prefix, this.toString());
+	}
 
 }
-

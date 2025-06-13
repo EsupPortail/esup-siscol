@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-
 package org.esupportail.referentiel.pcscol.ins.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,62 +19,65 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * L&#39;origine de la candidature de l&#39;étudiant.
  */
 public enum Origine {
-  
-  CONCOURS("concours"),
-  
-  PARCOURSUP("parcoursup"),
-  
-  ECANDIDAT("ecandidat"),
-  
-  MANUEL("manuel"),
-  
-  REINSCRIPTION("reinscription"),
-  
-  MONMASTER("monmaster"),
-  
-  DOSSIER("dossier"),
-  
-  TITRE("titre");
+	// [ concours, titre, dossier, ecoledoctorale, parcoursup, ecandidat, manuel,
+	// reinscription, monmaster ]
 
-  private String value;
+	CONCOURS("concours"),
 
-  Origine(String value) {
-    this.value = value;
-  }
+	PARCOURSUP("parcoursup"),
 
-  @JsonValue
-  public String getValue() {
-    return value;
-  }
+	ECANDIDAT("ecandidat"),
 
-  @Override
-  public String toString() {
-    return String.valueOf(value);
-  }
+	MANUEL("manuel"),
 
-  @JsonCreator
-  public static Origine fromValue(String value) {
-    for (Origine b : Origine.values()) {
-      if (b.value.equals(value)) {
-        return b;
-      }
-    }
-    throw new IllegalArgumentException("Unexpected value '" + value + "'");
-  }
+	REINSCRIPTION("reinscription"),
 
-  /**
-   * Convert the instance into URL query string.
-   *
-   * @param prefix prefix of the query string
-   * @return URL query string
-   */
-  public String toUrlQueryString(String prefix) {
-    if (prefix == null) {
-      prefix = "";
-    }
+	MONMASTER("monmaster"),
 
-    return String.format("%s=%s", prefix, this.toString());
-  }
+	DOSSIER("dossier"),
+
+	TITRE("titre"),
+
+	ECOLEDOCTORALE("ecoledoctorale");
+
+	private String value;
+
+	Origine(String value) {
+		this.value = value;
+	}
+
+	@JsonValue
+	public String getValue() {
+		return value;
+	}
+
+	@Override
+	public String toString() {
+		return String.valueOf(value);
+	}
+
+	@JsonCreator
+	public static Origine fromValue(String value) {
+		for (Origine b : Origine.values()) {
+			if (b.value.equals(value)) {
+				return b;
+			}
+		}
+		throw new IllegalArgumentException("Unexpected value '" + value + "'");
+	}
+
+	/**
+	 * Convert the instance into URL query string.
+	 *
+	 * @param prefix prefix of the query string
+	 * @return URL query string
+	 */
+	public String toUrlQueryString(String prefix) {
+		if (prefix == null) {
+			prefix = "";
+		}
+
+		return String.format("%s=%s", prefix, this.toString());
+	}
 
 }
-
