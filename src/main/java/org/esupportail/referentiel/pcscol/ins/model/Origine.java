@@ -33,7 +33,9 @@ public enum Origine {
   
   MONMASTER("monmaster"),
   
-  DOSSIER("dossier");
+  DOSSIER("dossier"),
+  
+  TITRE("titre");
 
   private String value;
 
