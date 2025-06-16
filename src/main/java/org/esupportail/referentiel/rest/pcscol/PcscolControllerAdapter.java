@@ -213,7 +213,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 				// (String codeStructure, String codePeriode, String codeObjetFormation,String
 				// codeObjetFormationParent, String codeApprenant, String nom, String prenom)
-				List<ApprenantDto> apperants = chcExterneService.getApprenantDto(codeComposante, versionEtape,
+				List<ApprenantDto> apperants = chcExterneService.getApprenantDto(codeComposante, p.getCode(),
 						codeEtape, codeDiplome, codEtu, nom, prenom);
 
 				/**

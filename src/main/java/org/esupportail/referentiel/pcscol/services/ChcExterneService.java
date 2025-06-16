@@ -97,6 +97,13 @@ public class ChcExterneService {
 		 * dans ce cas on ne filtre pas mais il faut s'assurer que le codeObjetFormationParent est PIA
 		 * TODO : A verifier et à implementer
 		 */
+		
+		if (cursus == null || cursus.isEmpty()) {
+			logger.error("getCursusPourext : Aucun cursus trouvé pour les paramètres donnés {} {} {}.", codeStructure,
+					codePeriode, codeObjetFormation);
+			logger.debug("Aucun cursus trouvé pour les paramètres donnés.");
+			return null;
+		}
 		cursus = cursus.stream().filter(c -> Pattern
 				.compile(Pattern.quote(codeObjetFormationParent + ">") + ".*" + Pattern.quote(codeObjetFormation))
 				.matcher(c.getObjetFormation().getChemin()).find()).collect(Collectors.toList());
