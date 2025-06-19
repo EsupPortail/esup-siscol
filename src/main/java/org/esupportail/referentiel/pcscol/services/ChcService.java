@@ -1,9 +1,9 @@
 package org.esupportail.referentiel.pcscol.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.esupportail.referentiel.beans.ElementPedagogique;
@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(name = "app.mode_pegase")
 public class ChcService {
 
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private CursusDcaApi cursusDcaApi;
@@ -67,10 +67,10 @@ public class ChcService {
 
 	public ArbreLecture arbrePourUneFormation(String codeStructure, String codePeriode, String codeFormation) {
 		try {
-			ArbreLecture response = arbresApi.arbrePourUneFormation(codeStructure, codePeriode, codeFormation);
-			return response;
+			return arbresApi.arbrePourUneFormation(codeStructure, codePeriode, codeFormation);
 		} catch (ApiException e) {
-			logger.error(e.getMessage());
+			logger.error("Erreur lors de la lecture de l'arbre pour la formation {} : {}", codeFormation,
+					e.getMessage());
 			return null;
 		}
 	}
@@ -91,11 +91,11 @@ public class ChcService {
 
 	public List<ObjetMaquette> lireListeFormationAll(String codeStructure, String codePeriode) {
 		try {
-			List<ObjetMaquette> response = objetsMaquetteApiCHC.lireListeFormationAll(codeStructure, codePeriode);
-			return response;
+			return objetsMaquetteApiCHC.lireListeFormationAll(codeStructure, codePeriode);
 		} catch (ApiException e) {
-			logger.error(e.getMessage());
-			return null;
+			logger.error("Erreur lors de la lecture des formations pour la structure {} et la période {} : {}",
+					codeStructure, codePeriode, e.getMessage());
+			return Collections.emptyList();
 		}
 	}
 
@@ -103,7 +103,7 @@ public class ChcService {
 			String codeStructure) throws ApiException {
 		List<CursusDCA> response = cursusDcaApi.lireCusrsuApprenant(codeApprenant);
 
-		List<ElementPedagogique> listeElementPedagogique = new ArrayList<ElementPedagogique>();
+		List<ElementPedagogique> listeElementPedagogique = new ArrayList<>();
 		response.forEach(cursus -> {
 			List<ElementPedagogique> lep = listeElementPedagogiqueStageFromCursus(cursus, codeStructure);
 			listeElementPedagogique.addAll(lep);
@@ -128,7 +128,7 @@ public class ChcService {
 	 * @return
 	 */
 	public List<ElementPedagogique> listeElementPedagogiqueFromCursus(CursusDCA cursus, String codeStructure) {
-		List<ElementPedagogique> listeElementPedagogique = new ArrayList<ElementPedagogique>();
+		List<ElementPedagogique> listeElementPedagogique = new ArrayList<>();
 		List<ObjetMaquetteDetail> lomd;
 		try {
 			lomd = lireCursus(cursus);
@@ -146,7 +146,7 @@ public class ChcService {
 					 */
 					// elemePeda.setCodEtp(cursus.getFormation().getCode());
 					elemePeda.setCodePeriode(cursus.getPeriode().getCode());
-					
+
 					elemePeda.setCodEtp(cursus.getRacinePedagogique().getCodeObjetMaquette());
 					elemePeda.setCodVrsVet(codeStructure);
 					elemePeda.setLibElp(objetMaquette.getDescripteursObjetMaquette().getLibelle());
@@ -176,17 +176,17 @@ public class ChcService {
 	 */
 	public List<ElementPedagogique> listeElementPedagogiqueStageFromCursus(CursusDCA cursus, String codeStructure) {
 		List<ElementPedagogique> listeElementPedagogique = listeElementPedagogiqueFromCursus(cursus, codeStructure);
-		
+
 		try {
 			Stream<ElementPedagogique> resultFiltre = listeElementPedagogique.stream()
 					.filter(e -> e.getTemElpTypeStage().equalsIgnoreCase("true"));
 
-			listeElementPedagogique = resultFiltre.collect(Collectors.toList());
+			listeElementPedagogique = resultFiltre.toList();
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Erreur lors du filtrage des éléments pédagogiques de type stage : {}", e.getMessage());
 		}
-		logger.debug("++++++++++++++++{}",listeElementPedagogique);
+		logger.debug("listeElementPedagogiqueStageFromCursus : {}", listeElementPedagogique.size());
 		return listeElementPedagogique;
 	}
 
@@ -199,6 +199,7 @@ public class ChcService {
 	public List<ObjetMaquetteDetail> lireCursus(CursusDCA cursus) throws ApiException {
 
 		logger.debug("lireCodeEspaceCursus : {} {}", cursus.getCodeStructure(), cursus.getPeriode().getCode());
+		//rechecher espaces pour la structure et la période du cursus
 		PagedEspaces espaceDCA = espacesApi.rechercherEspaces(cursus.getCodeStructure(), pageable,
 				cursus.getPeriode().getCode(), null, null);
 
@@ -209,28 +210,34 @@ public class ChcService {
 				espaceUUID = e.getId();
 				break;
 			}
-			logger.warn("Aucune Periode pour", cursus.getCodeStructure(), cursus.getPeriode().getCode());
+			logger.warn("Code espace {} non trouvé pour le cursus (code formation) {}", cursus.getPeriode().getCode(),
+					cursus.getFormation().getCode());
 		}
+		
+		logger.debug("espaceUUID : {}", espaceUUID);
 
+		if (espaceUUID == null) {
+			logger.warn("Aucun espace trouvé pour le cursus (code formation) {}", cursus.getFormation().getCode());
+			return Collections.emptyList();
+		}
 		LignePedagogiqueDCA racinePeda = cursus.getRacinePedagogique();
-		List<String> lignes = new ArrayList<String>();
+		List<String> lignes = new ArrayList<>();
 		List<ObjetMaquetteSummary> itemsObjetMaquetteSummaries = new ArrayList<>();
+		// Récupération des lignes pédagogiques et des objets maquette associés
 		lignePedagogiqueDCARec(cursus.getCodeStructure(), racinePeda, lignes, itemsObjetMaquetteSummaries,
 				espaceUUID.toString());
 		logger.info("nbr itemsObjetMaquetteSummaries {} pour le cursus (code formation) {}",
 				itemsObjetMaquetteSummaries.size(), cursus.getFormation().getCode());
 
-		List<UUID> uuids = new ArrayList<UUID>();
-		itemsObjetMaquetteSummaries.forEach(e -> {
-			uuids.add(e.getId());
-		});
+		List<UUID> uuidsObjetMaquetteSummaries = new ArrayList<>();
+		itemsObjetMaquetteSummaries.forEach(e -> uuidsObjetMaquetteSummaries.add(e.getId()));
+		logger.debug("uuidsObjetMaquetteSummaries : {}", uuidsObjetMaquetteSummaries);
 
-		List<ObjetMaquetteDetail> listDOM = offreFormationService
-				.recherchDescripteurMaquettes(cursus.getCodeStructure(), uuids);
-		return listDOM;
+		return offreFormationService.recherchDescripteurMaquettes(cursus.getCodeStructure(), uuidsObjetMaquetteSummaries);
 	}
 
 	/**
+	 * recursive method to retrieve all pedagogical lines and their
 	 * 
 	 * @param lignesPeda
 	 * @param lignes
@@ -249,13 +256,13 @@ public class ChcService {
 					if (om.getItems() != null) {
 						Stream<ObjetMaquetteSummary> filtred = om.getItems().stream()
 								.filter(o -> o.getCode().equals(e.getCodeObjetMaquette()));
-						List<ObjetMaquetteSummary> listFiltred = filtred.collect(Collectors.toList());
+						List<ObjetMaquetteSummary> listFiltred = filtred.toList();
 						itemsObjetMaquetteSummaries.addAll(listFiltred);
 
 					}
 				} catch (ApiException e1) {
-					// TODO Auto-generated catch block
-					logger.error("lignePedagogiqueDCARec {} {} ", "", e1.getMessage());
+					logger.error("Erreur lors de la recherche de l'objet maquette {} : {}", e.getCodeObjetMaquette(),
+							e1.getMessage());
 				}
 				lignePedagogiqueDCARec(codeStructure, e, lignes, itemsObjetMaquetteSummaries, espace);
 			});

@@ -28,7 +28,7 @@ public class AccessTokenService {
 	// -H "Content-Type: application/x-www-form-urlencoded" -X POST
 	// https://authn-app.bas-esup.pc-scol.fr/cas/v1/tickets
 	
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private  Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Value("${app.pcscol.accesstoken.casUrl}")
 	private String casUrl ;

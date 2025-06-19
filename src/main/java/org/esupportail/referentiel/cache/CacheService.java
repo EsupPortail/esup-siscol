@@ -3,7 +3,6 @@ package org.esupportail.referentiel.cache;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.cache.Cache;
 import javax.cache.CacheManager;

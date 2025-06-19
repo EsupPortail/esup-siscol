@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(name = "app.mode_pegase")
 public class EspaceService {
 
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private EspacesApi espacesApi;
@@ -33,7 +33,7 @@ public class EspaceService {
 	 */
 	public List<Espace> allEspaces(String codeStructure) {
 
-		List<Espace> espaces = new ArrayList<Espace>();
+		List<Espace> espaces = new ArrayList<>();
 
 		try {
 
@@ -61,7 +61,7 @@ public class EspaceService {
 			}
 
 		} catch (ApiException e) {
-			logger.error("Erreur lors de la récupération des périodes : " + e.getMessage());
+			logger.error("Erreur lors de la récupération des espaces pour la structure {} : {}", codeStructure, e.getMessage());
 		}
 		return espaces;
 	}
@@ -73,12 +73,14 @@ public class EspaceService {
 	 * @return
 	 */
 	public List<Periode> espacesFromAnnee(String codeStructure, String annee) {
+		if (annee == null || annee.isEmpty()) {
+			logger.debug("Aucune année universitaire fournie, retour d'une liste vide.");
+			return new ArrayList<>();
+		}
 		List<Espace> espaces = allEspaces(codeStructure);
-		List<Periode> filtredEsapce = new ArrayList<Periode>();
+		List<Periode> filtredEsapce = new ArrayList<>();
 		espaces.forEach(espace -> {
-			if (espace instanceof Periode) {
-
-				Periode periode = (Periode) espace;
+			if (espace instanceof Periode periode) {
 				String anneeUniv = String.valueOf(periode.getAnneeUniversitaire());
 				if (anneeUniv.equals(annee)) {
 					filtredEsapce.add(periode);
@@ -94,7 +96,7 @@ public class EspaceService {
 	 * @return
 	 */
 	public List<String> anneeUnivFromEsapces(List<Periode> espaces) {
-		List<String> anneesUniv = new ArrayList<String>();
+		List<String> anneesUniv = new ArrayList<>();
 		if (espaces != null) {
 			espaces.forEach(e -> {
 				String anneeUniv = String.valueOf(e.getAnneeUniversitaire());
@@ -112,7 +114,7 @@ public class EspaceService {
 	 * @return
 	 */
 	public List<String> anneeUnivFromEsapces(List<Periode> espaces, List<String> codesPeriode) {
-		List<String> anneesUniv = new ArrayList<String>();
+		List<String> anneesUniv = new ArrayList<>();
 		if (espaces != null) {
 			espaces.forEach(e -> {
 				if (codesPeriode.contains(e.getCode())) {
@@ -133,22 +135,20 @@ public class EspaceService {
 	 */
 
 	public List<String> anneeUnivFromEsapces(String codeStructure, List<String> codesPeriode) {
-		
-		/**
-		 * TODO
-		 * 
-		 */
-		logger.debug("Recherche des années universitaires pour les codes de période : {}", codesPeriode);
+		if (codesPeriode == null || codesPeriode.isEmpty()) {
+			logger.debug("Aucun code de période fourni, retour d'une liste vide.");
+			return new ArrayList<>();
+		}
+		logger.debug("Recherche des espaces pour la structure : {}", codeStructure);
 		List<Espace> espaces = allEspaces(codeStructure);
-		List<String> anneesUniv = new ArrayList<String>();
+		List<String> anneesUniv = new ArrayList<>();
 		if (espaces != null) {
 			espaces.forEach(e -> {
-				if (e instanceof Periode) {
-					Periode periode = (Periode) e;
+				if (e instanceof Periode periode) {
 					String anneeUniv = String.valueOf(periode.getAnneeUniversitaire());
 					anneesUniv.add(anneeUniv);
 				}
-				
+
 			});
 		}
 		logger.debug("Années universitaires trouvées : {}", anneesUniv);
@@ -165,7 +165,7 @@ public class EspaceService {
 		// ( String codeStructure, Pageable pageable, String r, TypeEspace type, Boolean
 		// actif)
 		PagedEspaces espaces = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, true);
-		logger.debug("nbr d'Espaces pour le code   " + r + " :" + espaces.getTotalElements());
+		logger.debug("nbr d'Espaces pour le code  : {} : {}", r, espaces.getTotalElements());
 		return espaces.getItems().stream().filter(e -> e.getCode().equals(code)).toList();
 
 	}
@@ -177,18 +177,18 @@ public class EspaceService {
 		PagedEspaces espaces;
 		try {
 			espaces = espacesApi.rechercherEspaces(codeStructure, pageable, codePeriode, null, null);
-			logger.debug("" + espaces);
+			logger.debug("Recherche de l'espace pour le code : {}", codePeriode);
 			if (espaces.getItems() != null && !espaces.getItems().isEmpty()) {
-				logger.debug("" + espaces);
+				logger.debug("Nombre d'espaces trouvés pour le code {} : {}", codePeriode, espaces.getTotalElements());
 				for (Espace item : espaces.getItems()) {
 					if (item.getCode().equals(codePeriode)) {
-						UUID idEsapce = item.getId();
-						return idEsapce;
+						return item.getId();
 					}
 				}
 			}
 		} catch (ApiException e) {
-			logger.error("Erreur lors de la récupération des espaces : " + e.getMessage());
+			logger.error("Erreur lors de la récupération de l'espace pour le code {} : {}", codePeriode,
+					e.getMessage());
 		}
 
 		return null;

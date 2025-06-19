@@ -104,8 +104,10 @@ public class BlowfishUtils implements Serializable {
 			cipher.init(Cipher.DECRYPT_MODE, secretKey);
 			return cipher.doFinal(ciphertext);
 		}
-		catch (Exception e) {logger.error(""+e);} 
-		return null;
+		catch (Exception e) {
+			logger.error("{}",e.getMessage());
+		} 
+		return new byte[0];
 	}
 
 	/**

@@ -53,9 +53,9 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 
 	@GetMapping("/etapesReference")
 	public ResponseEntity<Map<String, String>> getEtapesRef() {
-		boolean point_inscription_administratif = true;
-		Map<String, String> ref = pcscolService.lireMapFormations(codeStructure, codesPeriodesChargementFormations,point_inscription_administratif);
-		return new ResponseEntity<Map<String, String>>(ref, HttpStatus.OK);
+		boolean pointInscriptionAdministratif = true;
+		Map<String, String> ref = pcscolService.lireMapFormations(codeStructure, codesPeriodesChargementFormations,pointInscriptionAdministratif);
+		return new ResponseEntity<>(ref, HttpStatus.OK);
 
 	}
 
@@ -72,8 +72,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 			logger.error("CodeEtu ou l'annee ne doit être null");
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "CodeEtu ou l'annee ne doit être null", null);
 		}
-		ResponseEntity<EtudiantRef> result = pcscolControllerAdapter.getEtudiantRef(codeApprenant, annee);
-		return result;
+		return pcscolControllerAdapter.getEtudiantRef(codeApprenant, annee);
 
 	}
 

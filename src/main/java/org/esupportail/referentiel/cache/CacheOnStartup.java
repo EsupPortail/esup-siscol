@@ -21,10 +21,10 @@ public class CacheOnStartup implements ApplicationListener<ApplicationReadyEvent
 	private static final Logger logger = LoggerFactory.getLogger(CacheOnStartup.class);
 
 	@Autowired
-	private transient CacheController cacheController;
+	private  CacheController cacheController;
 
 	@Value("${app.apogee.universityCode}")
-	private transient String universityCode;
+	private  String universityCode;
 
 	/**
 	 * Exécution au démarrage.

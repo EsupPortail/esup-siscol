@@ -181,8 +181,10 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		logger.debug("recherche des annees ins {} {} {}", codeStructure, codeEtud, list);
 
-		//List<String> listAnnee = espaceService.anneeUnivFromEsapces(codeStructure, list);
-
+		if (list == null || list.isEmpty()) {
+			logger.error("Aucune année trouvée pour l'étudiant : {}" , codeEtud);
+			return ResponseEntity.notFound().build();
+		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
