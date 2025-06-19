@@ -262,7 +262,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		if (espaces != null && !espaces.isEmpty()) {
 			espaces.forEach(e -> {
-				LinkedHashMap<String, String> partiel = pcscolService.studentEtapeVets(codeStructure, codeEtud,
+				Map<String, String> partiel = pcscolService.studentEtapeVets(codeStructure, codeEtud,
 						e.getCode());
 				lEtapeInscriptions.putAll(partiel);
 			});

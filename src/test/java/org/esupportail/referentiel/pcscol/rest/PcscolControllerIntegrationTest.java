@@ -21,13 +21,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = { "app.mode_pegase=true",
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT, properties = { "app.mode_pegase=true",
 		"app.mode_apogee=false" })
 @ActiveProfiles("test")
 class PcscolControllerIntegrationTest {
 
 	@LocalServerPort
-	private int port; // Injects the random port the app starts on
+	private int port=9090; // Injects the random port the app starts on
 
 	@Value("${credential.userscredential.root.username}")
 	private String username;

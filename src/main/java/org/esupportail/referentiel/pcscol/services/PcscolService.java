@@ -57,7 +57,7 @@ import org.springframework.web.context.annotation.SessionScope;
 @ConditionalOnProperty(name = "app.mode_pegase")
 public class PcscolService implements PcscolServiceI {
 
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private  Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private StructureApi structureApi;
@@ -151,13 +151,11 @@ public class PcscolService implements PcscolServiceI {
 		return etps;
 	}
 
-	public LinkedHashMap<String, String> studentEtapeVets(String codeStructure, String codeApprenant, String annee) {
+	public Map<String, String> studentEtapeVets(String codeStructure, String codeApprenant, String annee) {
 
 		List<EtapeInscription> etps = etapeInscription(codeStructure, codeApprenant, annee);
-		LinkedHashMap<String, String> lEtapeInscriptions = new LinkedHashMap<String, String>();
-		etps.forEach(e -> {
-			lEtapeInscriptions.put(e.getCodeEtp(), e.getCodVrsVet());
-		});
+		LinkedHashMap<String, String> lEtapeInscriptions = new LinkedHashMap<>();
+		etps.forEach(e -> lEtapeInscriptions.put(e.getCodeEtp(), e.getCodVrsVet()));
 
 		return lEtapeInscriptions;
 	}
@@ -191,7 +189,7 @@ public class PcscolService implements PcscolServiceI {
 			if (lelps != null) {
 
 				List<ElementPedagogique> filterdlElps = lelps.stream()
-						.filter(e -> codesPeriodes.contains(e.getCodePeriode())).collect(Collectors.toList());
+						.filter(e -> codesPeriodes.contains(e.getCodePeriode())).toList();
 				apogeeMap.setListeELPs(filterdlElps);
 			}
 
@@ -209,13 +207,7 @@ public class PcscolService implements PcscolServiceI {
 			logger.debug("regimeInscription : {} , {} , {}", etp.getRegimeIns(), etp.getLibRg(), etp.getTypeIns());
 			logger.debug("listeAnnee : {}", listeAnnee);
 			if (listeAnnee != null && !listeAnnee.isEmpty()) {
-				/**
-				 * * TODO annee
-				 * 
-				 * on devrait traiter les regimes d'inscription par etapes et non de façon
-				 * isolée héritage apogge
-				 */
-
+				/*  */
 			}
 			regime.setCodRegIns(etp.getRegimeIns());
 			// regime.setCodRegIns(etp.get)
@@ -236,9 +228,7 @@ public class PcscolService implements PcscolServiceI {
 		ApprenantEtInscriptions app;
 		try {
 			app = inscriptionsApi.lireInscriptions(codeStructure, codeApprenant);
-			EtudiantInfoAdm info = ApprenantEtuInfoAdmMapperInterface.Instance
-					.apprenantToEtudiantInfoAdm(app.getApprenant());
-			return info;
+			return ApprenantEtuInfoAdmMapperInterface.Instance.apprenantToEtudiantInfoAdm(app.getApprenant());
 		} catch (ApiException e) {
 			logger.error("lireEtudiantInfoAdm : {} , {}  : {} ", codeStructure, codeApprenant, e.getMessage());
 		}
@@ -280,10 +270,12 @@ public class PcscolService implements PcscolServiceI {
 				List<ObjetMaquetteSummary> maquetteSummaries = offreFormationServiceRevisited
 						.rechercheObjetMaquetteSummaryParPiaSeaulement(codeStructure, idPeriode.toString());
 				logger.debug("lireMapFormations : {} ", maquetteSummaries.size());
-				maquetteSummaries.stream().forEach(e -> {
-					logger.debug("lireMapFormations : {}  {} =>{}", e.getCode(), e.getTypeObjetFormation(),
-							e.getTypeObjetMaquette());
-				});
+				maquetteSummaries.stream().forEach(e -> logger.debug("lireMapFormations : {}  {} =>{}", e.getCode(),
+						e.getTypeObjetFormation(), e.getTypeObjetMaquette()));
+
+				/*
+				 * *
+				 */
 				HashMap<String, String> mapFormations = offreFormationServiceRevisited
 						.objetMaquetteSummaryMap(maquetteSummaries, periode);
 				logger.debug("lireMapFormations : {} ", mapFormations.size());
@@ -348,7 +340,7 @@ public class PcscolService implements PcscolServiceI {
 			String codesPeriodesChargementFormations) {
 		List<String> listCodePeriode = codePeriodeFromPeriodes(codesPeriodesChargementFormations);
 		logger.debug("listCodePeriode: {}", listCodePeriode);
-		final List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<ObjetMaquetteSummary>();
+		final List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<>();
 		logger.debug("codeStructure : {} ", codeStructure);
 
 		listCodePeriode.forEach(codePeiode -> {
@@ -380,7 +372,7 @@ public class PcscolService implements PcscolServiceI {
 		final List<ObjetMaquetteSummary> objetMaquetteSummaries = allObjetMaquetteSummariesFromPeriodes(codeStructure,
 				codesPeriodesChargementFormations);
 
-		List<DiplomeReduitDto> diplomes = new ArrayList<DiplomeReduitDto>();
+		List<DiplomeReduitDto> diplomes = new ArrayList<>();
 		objetMaquetteSummaries.forEach(f -> {
 			try {
 
@@ -391,8 +383,8 @@ public class PcscolService implements PcscolServiceI {
 				 */
 				DiplomeReduitDto diplome = OdfDtoMapperInterface.Instance
 						.diplomeReduitDtoFromObjetMaquette(objectMaqette);
-				Espace esp = espacesApi.lireEspace(codeStructure, idEspace);
-				diplome.setCodePeriode(esp.getCode());
+				Espace espace = espacesApi.lireEspace(codeStructure, idEspace);
+				diplome.setCodePeriode(espace.getCode());
 				diplome.setVersionDiplome(codeStructure);
 				diplomes.add(diplome);
 
@@ -408,7 +400,7 @@ public class PcscolService implements PcscolServiceI {
 
 					List<EnfantsStructure> enfants = listeEnfantsObjectMaquettePia(maquetteStructure);
 
-					// Enfant enfant = objectMaqette.getEnfants().get(0);
+					logger.debug("diplomeRef : {} , {} : enfants {}", codeStructure, f.getId(), enfants.size());
 
 					if (enfants != null && !enfants.isEmpty()) {
 
@@ -424,12 +416,12 @@ public class PcscolService implements PcscolServiceI {
 								/**
 								 * TODO recupere le codePeriode
 								 */
-								etp.setCodePeriode(esp.getCode());
+								etp.setCodePeriode(espace.getCode());
 								etp.setCodVrsVet(codeStructure);
 								etp.setLibWebVet(objectMaqette2.getDescripteursObjetMaquette().getLibelle());
 								diplome.getListeEtapes().add(etp);
 							} catch (ApiException e1) {
-								logger.error("{}", e1.getMessage());
+								logger.error("diplomeRef : {} , {} : {} ", codeStructure, e.getId(), e1.getMessage());
 							}
 
 						});
@@ -505,7 +497,7 @@ public class PcscolService implements PcscolServiceI {
 	public List<ElementPedagogique> studentListeElpStage(String codeStructure, String codeEtape, String versionEtape,
 			String codesPeriodesChargementFormations) {
 
-		List<ElementPedagogique> listElementPedagogique = new ArrayList<ElementPedagogique>();
+		List<ElementPedagogique> listElementPedagogique = new ArrayList<>();
 
 		List<String> listCodePeriode = codePeriodeFromPeriodes(codesPeriodesChargementFormations);
 
@@ -523,48 +515,6 @@ public class PcscolService implements PcscolServiceI {
 			}
 		}
 		return listElementPedagogique;
-
-//		
-//		
-//		
-//		
-//		
-//		List<ElementPedagogique> l = new ArrayList<ElementPedagogique>();
-//		try {
-//			
-//			
-//			
-//			List<ObjetMaquetteSummary> objetMaquetteSummaries = offreFormationService
-//					.rechercheObjetMaquetteSummary(codeStructure, codeEtape, versionEtape);
-//			if (objetMaquetteSummaries == null || objetMaquetteSummaries.isEmpty()) {
-//				logger.error("studentListeElpStage : " + codeStructure + " , " + codeEtape + " , " + versionEtape);
-//				logger.error("studentListeElpStage : " + "Aucun Objet Maquette trouvé");
-//				return l;
-//			}
-//			ObjetMaquetteSummary objetMaquetteSummary = objetMaquetteSummaries.get(0);
-//			UUID id = objetMaquetteSummary.getId();
-//			List<ObjetMaquetteDetail> llStage = offreFormationService.listeEnfantsObjectMaquetteStage(codeStructure,
-//					id.toString());
-//			llStage.forEach(e -> {
-//				ElementPedagogique elp = new ElementPedagogique();
-//				elp.setCodElp(e.getCode());
-//				elp.setLibElp(e.getDescripteursObjetMaquette().getLibelle());
-//
-//				DescripteursObjetFormation dom = (DescripteursObjetFormation) e.getDescripteursObjetMaquette();
-//
-//				elp.setTemElpTypeStage(String.valueOf(dom.getStage()));
-//				if (dom.getNature() != null)
-//					elp.setLibNatureElp(dom.getNature().getType());
-//				elp.setCodEtp(objetMaquetteSummary.getCode());
-//				elp.setCodVrsVet(versionEtape);
-//				elp.setNbrCrdElp(dom.getEcts());
-//				l.add(elp);
-//			});
-//		} catch (ApiException e) {
-//			logger.error("studentListeElpStage : " + e.getMessage());
-//		}
-//
-//		return l;
 	}
 
 	/**
@@ -583,127 +533,11 @@ public class PcscolService implements PcscolServiceI {
 
 	}
 
-//	public List<ApprenantDto> recupererListeEtuParEtpEtDiplome(String codeComposante, String codePeriode,
-//			String codeEtape, String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom,
-//			String prenom) {
-//		/**
-//		 * TODO versionEtape codeEtape
-//		 */
-//
-//		return lireApprenantDtoFromInscriptions(codeComposante, codeEtape, codePeriode, nom, prenom, codEtu);
-//	}
-
 	/**
+	 * * Récupère le signataire d'une composante. * @param composante * @return
+	 * SignataireRef
 	 * 
-	 * @param codeStructure
-	 * @param objetMaquette
-	 * @param periode
-	 * @param nomDeNaissance
-	 * @param prenom
-	 * @param codeApprenant
-	 * @return
 	 */
-//	public List<ApprenantDto> lireApprenantDtoFromInscriptions(String codeStructure, String objetMaquette,
-//			String periode, String nomDeNaissance, String prenom, String codeApprenant) {
-//		List<Inscription> ins = lireInscriptions(codeStructure, objetMaquette, periode, nomDeNaissance, prenom,
-//				codeApprenant);
-//		return ApprenantEtuInfoAdmMapperInterface.Instance.inscrptionToApprenantDto(ins);
-//
-//	}
-
-//	public List<Inscription> lireInscriptionsByAnnee(String codeStructure, String objetMaquette, String annee,
-//			String nomDeNaissance, String prenom, String codeApprenant) {
-//		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
-//		List<Inscription> inscriptions = new ArrayList<Inscription>();
-//		if (periodes != null && !periodes.isEmpty()) {
-//			periodes.forEach(p -> {
-//				List<Inscription> ins = lireInscriptions(codeStructure, objetMaquette, p.getCode(), nomDeNaissance,
-//						prenom, codeApprenant);
-//				if (ins != null && !ins.isEmpty()) {
-//					inscriptions.addAll(ins);
-//				}
-//			});
-//		}
-//		return inscriptions;
-//	}
-
-	/**
-	 * 
-	 * @param codeStructure
-	 * @param objetMaquette
-	 * @param periode
-	 * @param nomDeNaissance
-	 * @param prenom
-	 * @param codeApprenant
-	 * @return List<Inscription> lireInscriptions
-	 */
-
-//	public List<Inscription> lireInscriptions(String codeStructure, String objetMaquette, String periode,
-//			String nomDeNaissance, String prenom, String codeApprenant) {
-//
-//		logger.debug(
-//				"codeStructure : {},  objetMaquette: {}, periode : {}, nomDeNaissance : {},  prenom : {},  codeApprenant : {}",
-//				codeStructure, objetMaquette, periode, nomDeNaissance, prenom, codeApprenant);
-//
-//		if (codeApprenant != null && !codeApprenant.isBlank()) {
-//			nomDeNaissance = null;
-//			prenom = null;
-//		}
-//
-//		/**
-//		 * StatutInscriptionVoeu
-//		 */
-//		List<StatutInscriptionVoeu> statutsInscription = new ArrayList<StatutInscriptionVoeu>();
-//		// statutsInscription.add(StatutInscriptionVoeu.VALIDE);
-//		// statutsInscription.add(StatutInscriptionVoeu.ANNULEE);
-//		List<StatutGlobalPiece> statutsPieces = new ArrayList<StatutGlobalPiece>();
-//		List<StatutPaiementVoeu> statutsPaiement = new ArrayList<StatutPaiementVoeu>();
-//		List<TriInscription> tri = null;
-//		String rechercheIne = null;
-//		String recherche = null;
-//		String nomOuPrenom = null;
-//		String ine = null;
-//		List<StatutIne> statutsIne = null;
-//		Integer limit = 50;
-//		
-//		try {
-//			/**
-//			 * TODO afin de passer à ins extrene remplacer listerInscriptionsValidees qui
-//			 * n'est pas disponible
-//			 */
-//			System.out.println("++++++++++++++++++++++++++++++++++++++++++++");
-//			Inscriptions listInscriptions = inscriptionsApi.listerInscriptionsValidees(codeStructure,
-//					statutsInscription, statutsPieces, statutsPaiement, tri, rechercheIne, recherche, periode,
-//					objetMaquette, nomOuPrenom, nomDeNaissance, prenom, codeApprenant, ine, statutsIne, limit);
-//			
-//			logger.debug("listerInscriptionsValidees : {} ,listInscriptions.getTotalElements() : {}", codeStructure,
-//					listInscriptions.getTotalElements());
-//			/**
-//			 * TODO
-//			 */
-//			logger.debug("TotalElements : {}", listInscriptions.getTotalElements());
-//			List<Inscription> resultats = listInscriptions.getResultats();
-//			return resultats;
-//		} catch (ApiException e) {
-//			logger.error("listerInscriptionsValidees : " + codeStructure + " , " + objetMaquette + " , " + periode
-//					+ " : " + e.getMessage() + " : " + e.getCode());
-//		}
-//		return new ArrayList<Inscription>();
-//
-//	}
-
-//	public List<String> recupererAnneesIa(String codeStructure, String codeEtud) {
-//		List<String> annaeeIa = new ArrayList<String>();
-//		logger.debug("recupererAnneesIa : {} , {}", codeStructure, codeEtud);
-//		List<Inscription> ins = lireInscriptions(codeStructure, null, null, null, null, codeEtud);
-//		logger.debug("recupererAnneesIa : {} inscriptions", ins);
-//		ins.forEach(i -> {
-//			annaeeIa.add(i.getVoeu().getCible().getPeriode().getCode());
-//		});
-//		logger.debug("recupererAnneesIa : {}", annaeeIa);
-//		return annaeeIa;
-//	}
-
 	public SignataireRef signaitaireRef(String composante) {
 		try {
 			Structure response = structureApi.lireStructure(composante);
