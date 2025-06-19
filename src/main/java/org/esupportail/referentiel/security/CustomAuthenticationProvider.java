@@ -33,9 +33,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider, Ini
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		
 		String name = authentication.getName();
+		
 		String password = authentication.getCredentials().toString();
+		
+		
+		System.out.println(credentialComponent.getUserscredential().get(name));
 		if (credentialComponent.getUserscredential().get(name) != null) {
 			String userPassword = credentialComponent.getUserscredential().get(name).getPassword();
+			
 			if (userPassword.equals(password)) {
 				Collection<GrantedAuthority> roles = new ArrayList<>();
 				if (credentialComponent.getUserscredential().get(name).getRoles() != null) {

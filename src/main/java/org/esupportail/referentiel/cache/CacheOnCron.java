@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 @EnableScheduling
 @ConditionalOnProperty(name = "cache.scheduling.enabled", matchIfMissing = true)
 public class CacheOnCron {
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(CacheOnCron.class);
 
 	@Autowired
 	private transient CacheController cacheController;

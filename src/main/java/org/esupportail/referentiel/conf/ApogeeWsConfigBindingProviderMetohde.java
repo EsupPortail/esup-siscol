@@ -1,8 +1,9 @@
 package org.esupportail.referentiel.conf;
 
-import java.net.Authenticator;
+import java.io.Serializable;
 import java.net.MalformedURLException;
-import java.net.PasswordAuthentication;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.xml.ws.BindingProvider;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -27,8 +29,11 @@ import gouv.education.apogee.commun.client.ws.PedagogiqueMetier.PedagogiqueMetie
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ReferentielMetierServiceInterfaceService;
 
+@ConditionalOnProperty(name = "app.mode_apogee")
 @Configuration
-public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { // NO_UCD (unused code)
+public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean, Serializable { // NO_UCD (unused code)
+
+	private static final long serialVersionUID = -1521878436222655994L;
 
 	private static final Logger log = LoggerFactory.getLogger(ApogeeWsConfigBindingProviderMetohde.class);
 
@@ -100,7 +105,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 	}
 
 	@Bean
-	EtudiantMetierServiceInterface etudiantMetier() {
+	EtudiantMetierServiceInterface etudiantMetier() throws URISyntaxException {
 		String wsdlUrl = etudiantMetierUrlService + "?wsdl";
 		EtudiantMetierServiceInterfaceService etudiantMetierService = null;
 		String pwd = etudiantMetierPassword;
@@ -108,7 +113,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 
 		URL wsdlLocation;
 		try {
-			wsdlLocation = new URL(wsdlUrl);
+			wsdlLocation = new URI(wsdlUrl).toURL();
 			etudiantMetierService = new EtudiantMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
 			log.error(e.getMessage());
@@ -124,7 +129,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 	}
 
 	@Bean("administratifMetier")
-	AdministratifMetierServiceInterface administratifMetier() {
+	AdministratifMetierServiceInterface administratifMetier() throws URISyntaxException {
 
 		String wsdlUrl = administratifMetierUrlService + "?wsdl";
 		String pwd = administratifMetierPassword;
@@ -133,7 +138,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 		AdministratifMetierServiceInterfaceService administratifMetierService;
 		URL wsdlLocation;
 		try {
-			wsdlLocation = new URL(wsdlUrl);
+			wsdlLocation = new URI(wsdlUrl).toURL();
 			administratifMetierService = new AdministratifMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
 			log.error(e.getMessage());
@@ -150,7 +155,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 	}
 
 	@Bean("pedagogiqueMetier")
-	PedagogiqueMetierServiceInterface pedagogiqueMetier() {
+	PedagogiqueMetierServiceInterface pedagogiqueMetier() throws URISyntaxException {
 
 		String wsdlUrl = pedagogiqueMetierUrlService + "?wsdl";
 		String pwd = pedagogiqueMetierPassword;
@@ -158,7 +163,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 		PedagogiqueMetierServiceInterfaceService pedagogiqueMetierService;
 		URL wsdlLocation;
 		try {
-			wsdlLocation = new URL(wsdlUrl);
+			wsdlLocation = new URI(wsdlUrl).toURL();
 			pedagogiqueMetierService = new PedagogiqueMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
 			log.error(e.getMessage());
@@ -174,7 +179,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 	}
 
 	@Bean
-	GeographieMetierServiceInterface geographieMetier() {
+	GeographieMetierServiceInterface geographieMetier() throws URISyntaxException {
 
 		String wsdlUrl = geographieMetierUrlService + "?wsdl";
 		String pwd = geographieMetierPassword;
@@ -182,7 +187,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 		GeographieMetierServiceInterfaceService geographieMetierService;
 		URL wsdlLocation;
 		try {
-			wsdlLocation = new URL(wsdlUrl);
+			wsdlLocation = new URI(wsdlUrl).toURL();
 			geographieMetierService = new GeographieMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
 			log.error(e.getMessage());
@@ -198,14 +203,15 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 	}
 
 	@Bean
-	ReferentielMetierServiceInterface referentielMetier() {
+	ReferentielMetierServiceInterface referentielMetier() throws URISyntaxException {
+
 		String wsdlUrl = referentielMetierUrlService + "?wsdl";
 		String pwd = referentielMetierPassword;
 		String username = referentielMetierUserName;
 		ReferentielMetierServiceInterfaceService referentielMetierService;
 		URL wsdlLocation;
 		try {
-			wsdlLocation = new URL(wsdlUrl);
+			wsdlLocation = new URI(wsdlUrl).toURL();
 			referentielMetierService = new ReferentielMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
 			log.error(e.getMessage());
@@ -221,7 +227,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 	}
 
 	@Bean
-	OffreFormationMetierServiceInterface offreFormationMetier() {
+	OffreFormationMetierServiceInterface offreFormationMetier() throws URISyntaxException {
 		String wsdlUrl = offreFormationMetierUrlService + "?wsdl";
 		String pwd = offreFormationMetierPassword;
 		String username = offreFormationMetierUserName;
@@ -229,7 +235,7 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 		OffreFormationMetierServiceInterfaceService offreFormationMetierService;
 		URL wsdlLocation;
 		try {
-			wsdlLocation = new URL(wsdlUrl);
+			wsdlLocation = new URI(wsdlUrl).toURL();
 			offreFormationMetierService = new OffreFormationMetierServiceInterfaceService(wsdlLocation);
 		} catch (MalformedURLException e) {
 			offreFormationMetierService = new OffreFormationMetierServiceInterfaceService();
@@ -241,16 +247,6 @@ public class ApogeeWsConfigBindingProviderMetohde implements InitializingBean { 
 		bp.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, username);
 		bp.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, pwd);
 		return offreFormationMetierServiceInterface;
-	}
-
-	private URL wsdlLocation(String url) {
-		URL wsdlLocation = null;
-		try {
-			wsdlLocation = new URL(url);
-		} catch (MalformedURLException e) {
-			log.error("etudiantMetierUrlService wsdlLocation :", e);
-		}
-		return wsdlLocation;
 	}
 
 	public String getAdministratifMetierUrlService() {

@@ -1,16 +1,22 @@
 APOGEE WS à partir de la version 62031 ...Referentiel overlay Template
 =======================
 
-Generic  Referentiel WAR overlay to expose apogee and LDAP data . This programm  could be freely used.
 
-# Versions
 
-- APOGEE `6.4.x`
-- JDK `11`, `8`
-- APOGEE WS à partir de la version `62031`...
+# Prérequis et Versions
+
+- APOGEE `6.4.x` `6.5.x`
+- JDK `17`, `21`
+- APOGEE WS à partir de la version `6.xxx`...
+- Annuaire LDAP
+
+# Installation de la version compilée:
+- Téléchargez le à partir de l'url https://github.com/EsupPortail/esup-siscol/tags la derniére release
+- Pour une premiére installation il faut créer le fichier /etc/esup-siscol/application.yml à partir du modèle https://github.com/EsupPortail/esup-siscol/blob/main/etc/esup-siscol/application.yml.sample.
+- une fois paramétrer (voir ci-dessous le parmétrage) déposer le fichier esup-siscol.jar téléchargé précédement dans le webappas tomcat. 
 
 # Installation du JAR client WS-APOGEE
-Avant de commencer l'installation il faut bien installer le jar client apo-webservices-client, chaque établissement doit s'assurer que la version installée correspond au web-service qui va être interroger:
+Avant de commencer l'installation de l'application esup-siscol, il faut bien commencer par installer le jar client apo-webservices-client, chaque établissement doit s'assurer que la version installée correspond au web-service qui va être interroger:
 
 ```bash
 mvn install:install-file -Dfile=apo-webservices-client{mettre la version}.jar \ 
@@ -35,7 +41,40 @@ vim application.yml
 vim logback.xml 
 
 ```
-La première partie LDAP : renseigner les paramtères LDAP 
+
+# Les branches
+Pour visualiser la branche de travail
+
+```
+git status
+```
+
+Pour visualiser toute les branches (locales et distantes)
+
+```
+git branch -a 
+```
+
+Pour changer de banche et se mettre sur la branche esup-siscol-dev-pgase par exemple
+
+```
+git checkout esup-siscol-dev-pgase
+mvn clean install
+```
+le war est généré dans le répertoire target/
+
+# Paramétrage :
+Le fichier esup-siscol/etc/esup-siscol/application.yml.sample est à copier dans /etc/esup-siscol/application.yml et paramétrer
+
+## Mode de fonctionnement :
+pour activer ou désactiver un apogee/pegase mettre la valeur à true ou à false,
+ 
+	app:
+		mode_apogee: true
+		mode_pegase: true
+ 
+
+## La partie LDAP : renseigner les paramtères LDAP 
 
 	ldap:
     	urls: 
@@ -55,7 +94,7 @@ La première partie LDAP : renseigner les paramtères LDAP
                 etc ...
 
 
-La deuxiéme  partie  concerne les urls APOGEE
+## La partie  APOGEE
 
 	  administratifMetier: http://ws.uni.fr:8080/aws/services/AdministratifMetier
       tudiantMetier: http://ws.uni.fr:8080/aws/services/EtudiantMetier
@@ -64,16 +103,56 @@ La deuxiéme  partie  concerne les urls APOGEE
       referentielMetier: http://ws.uni.fr:8080/aws/services/ReferentielMetier
       offreFormationMetier: http://ws.uni.fr:8080/aws/services/OffreFormationMetier
 
-La troisième Partie
+
+## La Partie PcScol
+
+	pcscol:
+           codeStructure: ETAB00
+           codePeriode: PER-2020
+           codesPeriodesChargementFormations: PER-2021, PER-2022, PER-2023, PER-2024, PER-2018, ..
+           accesstoken:
+                      casUrl: https://authn-app.xxxxxxxx.pc-scol.fr/cas/v1/tickets
+                      # Username et password pour s'authentifier auprs du serveur OAuth Pgase en tant qu'applicatif MDW
+                      svcAcountLogin: svc-api
+                      svcAcountPassword: ******************
+                      # Dure en heure de conservation de l'access-token
+                      duration: 6
+           # Code de l'tablissement dans Pgase
+           etablissement: ETAB00
+           # Base Url de l'API du module INS de Pgase (attention  conserver la structure de l'url d'exemple)
+           api:
+               # Base Url de l'API CHC de Pgase
+               chc:
+                   url: https://chc.xxxxxxxxx.pc-scol.fr/api/chc/v6
+               # Base Url de l'API ODF de Pgase
+               odf:
+                   url: https://odf.xxxxxxxxx.pc-scol.fr/api/odf/v1
+               # Base Url de l'API COF de Pgase
+               ref:
+                   url: https://ref.xxxxxxxxx.pc-scol.fr/api/v1/ref
+               ins:
+                   url: https://ins.xxxxxxxxx.pc-scol.fr/api/v5/ins
+           # Permet de cibler un dossier par dfaut. /!\ Attention /!\ A renseigner uniquement pour une dmonstration ou en phase de test/dveloppement.
+           demo:
+                codeapprenant: 000000001
+                 # Liste des statuts des inscriptions  afficher dans la vue "Parcours" spars par des virgules
+           inscription:
+                      statut: valide
+	
+
+## Définition du mot de passe d'accés au service
 
 	credential:
 		userscredential:
-    		root:
-      			username: root
+    		root: # ici le login est root
+      			username: {le nom qui va être affiché}
       			password: {password}
+      			roles:
+        				- ADMIN
+      			
 
 
-
+## Version Apogee
  il faut ajouter  la bonne dépendance ({mettre la version}) dans le pom.xml	 
 			
 				<dependency>
@@ -94,7 +173,7 @@ mvn install
 Pour éxecuter le projet en mode développement il suffit de le lancer  avec la commande : 
 
 ```bash
-cp application.yml.sample application.yml
+cp etc/esup-siscol/application.yml.sample /etc/esup-siscol/application.yml
 ##configurer la partie LDAP, apogee (urls de services) et userscredential
 mvn  spring-boot:run
 ```
@@ -104,24 +183,12 @@ mvn  spring-boot:run
 
 ## en mode Tomcat:
 ```
-cp target/esup-siscol-0.1.11.jar {path}/tomcat/webapps
-unzip esup-siscol-0.1.11.jar -d esup-siscol
-cd esup-siscol/WEB-INF/classes/
-cp application.yml.sample application.yml
+cp target/esup-siscol-0.1.11.war {path}/tomcat/webapps/esup-siscol.war
 ```
 dans le fichier application.yml configurer la partie LDAP, apogee (urls de services) et userscredential
 
 
 
-## en mode java (alternative)
- ***Attention***  à adapter selon le fonctionnement de chaque établissement,
-- The `etc` directory contains the configuration files and directories that need to be copied to `/etc/apogee/config`. --example usage : 
-
-```bash
-cd path/esup-siscol
-./cp -r etc/esup-siscol/ /etc/esup-siscol/
-java -server  -noverify -Xmx2048M -jar target/esup-siscol{version}.jar  --spring.config.location=/etc/esup-siscol/
-```
 
 ### Clear Maven Cache
 
@@ -142,7 +209,7 @@ Same strategy applies to Windows too, provided you switch `$HOME` to its equival
 ## Executable WAR
 
 ```bash
-java -server  -noverify -Xmx2048M -jar target/esup-siscol{version}.jar --spring.config.location=etc/esup-siscol/
+java -server  -noverify -Xmx2048M -jar target/esup-siscol{version}.jar
 ```
 
 ## External

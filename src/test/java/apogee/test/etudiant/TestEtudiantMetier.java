@@ -21,7 +21,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import org.esupportail.referentiel.Siscol;
+import org.esupportail.referentiel.SpringBootTomcatApplication;
 import org.esupportail.referentiel.beans.ApogeeMap;
 import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeInscription;
@@ -48,7 +48,7 @@ import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplom
  * @author abdelhamid
  *
  */
-@ContextConfiguration(classes = { Siscol.class })
+@ContextConfiguration(classes = { SpringBootTomcatApplication.class })
 @SpringBootTest
 @SpringJUnitConfig
 @ActiveProfiles("test")
@@ -139,7 +139,7 @@ public class TestEtudiantMetier {
 		System.out.println(map.getStudentsEtapesVets().get("P1PSY"));
 		System.out.println(map.getListeELPs());
 		System.out.println(map.getStudentSteps());
-		System.out.println(map.getElementPedagogiques());
+
 
 	}
 

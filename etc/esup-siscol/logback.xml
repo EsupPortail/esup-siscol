@@ -4,11 +4,11 @@
 
 	<appender name="FILE"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>/opt/tomcat/logs/si-scol.log</file>
+		<file>${catalina.home}/logs/esup-siscol.log</file>
 		<rollingPolicy
 			class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
 			<!-- rollover daily -->
-			<fileNamePattern>/opt/tomcat/si-scol.log-%d{yyyy-MM-dd}.%i.log
+		<fileNamePattern>${catalina.home}/logs/esup-siscol.log-%d{yyyy-MM-dd}.%i.log
 			</fileNamePattern>
 			<!-- each file should be at most 100MB, keep 60 days worth of history, 
 				but at most 20GB -->
@@ -27,16 +27,27 @@
 		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
 			by default -->
 		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n
-			</pattern>
+			<pattern>%d{HH:mm:ss.SSS} %green([%thread]) %-5level %logger{50}.%blue(%M) - %msg%n</pattern>
+			<!--<pattern>%d{HH:mm:ss.SSS} %green([%thread]) %highlight(%-5level) (%logger{50}.%M) - %msg%n</pattern>-->
 		</encoder>
 
 	</appender>
 
+
+	<logger name="com.fasterxml" level="debug" additivity="false">
+				 <appender-ref ref="FILE"/> 
+				 <appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="javax.net" level="debug" additivity="false">
+				 <appender-ref ref="FILE"/> 
+				 <appender-ref ref="STDOUT" />
+	</logger>
+
+
 	<logger name="org.esupportail" level="debug" additivity="false">
 				 <appender-ref ref="FILE"/> 
 				 <appender-ref ref="STDOUT" />
-		
 	</logger>
 	
 	<logger name="org.springframework.boot" level="INFO" additivity="false">
@@ -44,7 +55,7 @@
 		
 	</logger>
 
-	<logger name="org.springframework.security" level="DEBUG"
+	<logger name="org.springframework.security" level="debug"
 		additivity="false">
 		<appender-ref ref="FILE" />
 		<appender-ref ref="STDOUT" />

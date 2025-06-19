@@ -3,6 +3,7 @@ package org.esupportail.referentiel.ldap.entities;
 import java.io.Serializable;
 import java.util.List;
 
+
 import javax.naming.Name;
 
 import org.springframework.ldap.odm.annotations.Attribute;

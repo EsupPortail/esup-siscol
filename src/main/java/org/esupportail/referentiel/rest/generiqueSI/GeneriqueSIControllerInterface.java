@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.esupportail.referentiel.beans.ApogeeMap;
+import org.esupportail.referentiel.beans.ApprenantDto;
 import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.beans.EtabRef;
@@ -17,18 +18,49 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public interface GeneriqueSIControllerInterface {
-
-	public ResponseEntity<EtudiantRef> getStudent(@RequestParam(value = "codEtud") String codeEtud,
+	/**
+	 * 
+	 * @param codeEtud
+	 * @param annee
+	 * @return
+	 */
+	public ResponseEntity<EtudiantRef> getEtudiantRef(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee);
 
-	public List<String> recupererAnneesIa(@RequestParam(value = "codEtud") String codeEtud);
+	/**
+	 * 
+	 * @param codeEtud
+	 * @return
+	 */
+	public ResponseEntity<List<String>> recupererAnneesIa(@RequestParam(value = "codEtud") String codeEtud);
 
-	public ApogeeMap etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
+	/**
+	 * 
+	 * @param codeEtud
+	 * @param annee
+	 * @return
+	 */
+	public  ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee);
-
-	public EtudiantInfoAdm InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud);
-
-	public List<EtudiantDTO2Ext> recupererListeEtuParEtpEtDiplome(
+	/**
+	 * 
+	 * @param numEtud
+	 * @return
+	 */
+	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud);
+	/**
+	 * @param codeComposante
+	 * @param annee
+	 * @param codeEtape
+	 * @param versionEtape
+	 * @param codeDiplome
+	 * @param versionDiplome
+	 * @param codEtu
+	 * @param nom
+	 * @param prenom
+	 * @return
+	 */
+	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "annee", required = true) String annee,
 			@RequestParam(value = "codeEtape", required = true) String codeEtape,
@@ -38,27 +70,63 @@ public interface GeneriqueSIControllerInterface {
 			@RequestParam(value = "codEtu", required = false) String codEtu,
 			@RequestParam(value = "nom", required = false) String nom,
 			@RequestParam(value = "prenom", required = false) String prenom);
-
-	public LinkedHashMap<String, String> studentEtapeVets(@RequestParam(value = "codEtud") String codeEtud,
+	/**
+	 * 
+	 * @param codeEtud
+	 * @param annee
+	 * @return
+	 */
+	public ResponseEntity<Map<String, String>> studentEtapeVets(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee);
-
-	public List<EtapeInscription> studentListeEtapesInscription(@RequestParam(value = "codEtud") String codEtud,
+	/**
+	 * 
+	 * @param codEtud
+	 * @param annee
+	 * @return
+	 */
+	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(@RequestParam(value = "codEtud") String codEtud,
 			@RequestParam(value = "annee") String annee);
-
-	public List<ElementPedagogique> studentListeElpStage(@RequestParam(value = "codeEtape") String codeEtape,
+	/**
+	 * 
+	 * @param codeEtape
+	 * @param versionEtape
+	 * @return
+	 */
+	public ResponseEntity<List<ElementPedagogique>> studentListeElpStage(@RequestParam(value = "codeEtape") String codeEtape,
 			@RequestParam(value = "versionEtape") String versionEtape);
-
-	public EtabRef etablissementReference();
-
-	public Map<String, String> getEtapesRef();
-
-	public List<DiplomeReduitDto> getDiplomesRef();
-
-	public List<DiplomeReduitDto> getDiplomesRefParComposanteEtAnnee(
+	/**
+	 * 
+	 * @return
+	 */
+	public ResponseEntity<EtabRef> etablissementReference();
+	/**
+	 * 
+	 * @return
+	 */
+	public ResponseEntity<Map<String, String>> getEtapesRef();
+	/**
+	 * 
+	 * @return
+	 */
+	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRef();
+	/**
+	 * 
+	 * @param codeComposante
+	 * @param codeAnnee
+	 * @return
+	 */
+	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "codeAnnee", required = true) String codeAnnee);
-
-	public Map<String, String> composantesPrincipalesRef();
-
-	public SignataireRef signaitaireRef(@RequestParam(value = "composante", defaultValue = "SCO") String composante);
+	/**
+	 * 
+	 * @return
+	 */
+	public ResponseEntity<Map<String, String>> composantesPrincipalesRef();
+	/**
+	 * 
+	 * @param composante
+	 * @return
+	 */
+	public ResponseEntity<SignataireRef >signaitaireRef(@RequestParam(value = "composante", defaultValue = "SCO") String composante);
 }

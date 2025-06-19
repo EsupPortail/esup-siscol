@@ -15,6 +15,8 @@ public class EtapeReduiteDto implements Serializable{
 	 * code version etape.
 	 */
 	private String codVrsVet = "";
+	
+	private String codePeriode = "";
 	/**
 	 * libelle Web Vet.
 	 */
@@ -52,6 +54,12 @@ public class EtapeReduiteDto implements Serializable{
 			return false;
 		EtapeReduiteDto other = (EtapeReduiteDto) obj;
 		return Objects.equals(codVrsVet, other.codVrsVet) && Objects.equals(codeEtp, other.codeEtp);
+	}
+	public String getCodePeriode() {
+		return codePeriode;
+	}
+	public void setCodePeriode(String codePeriode) {
+		this.codePeriode = codePeriode;
 	}
 	
 	

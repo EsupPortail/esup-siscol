@@ -27,6 +27,9 @@ public class ElementPedagogique implements Serializable{
 	 * code etape.
 	 */
 	private String codEtp = "";
+	
+	
+	private String codePeriode = "";
 	/**
 	 * code version etape.
 	 */
@@ -164,6 +167,20 @@ public class ElementPedagogique implements Serializable{
 	public void setLibNatureElp(String libNatureElp) {
 		LibNatureElp = libNatureElp;
 	}
+	@Override
+	public String toString() {
+		return "ElementPedagogique [codEtp=" + codEtp + ", codVrsVet=" + codVrsVet + ", codElp=" + codElp + ", libElp="
+				+ libElp + ", temElpTypeStage=" + temElpTypeStage + ", nbrCrdElp=" + nbrCrdElp + ", LibNatureElp="
+				+ LibNatureElp + "]";
+	}
+	public String getCodePeriode() {
+		return codePeriode;
+	}
+	public void setCodePeriode(String codePeriode) {
+		this.codePeriode = codePeriode;
+	}
 
+	
+	
 
 }

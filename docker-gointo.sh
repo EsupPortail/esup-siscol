@@ -1,1 +1,1 @@
-sudo docker exec -it apogee /bin/sh
+sudo docker exec -it esup-siscol /bin/sh

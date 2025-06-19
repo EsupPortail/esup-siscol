@@ -38,6 +38,8 @@ public class EtapeInscription implements Serializable {
 	 * code version etape.
 	 */
 	private String codVrsVet = "";
+	
+	private String codePeriode = "";
 	/**
 	 * libelle Web Vet.
 	 */
@@ -90,6 +92,35 @@ public class EtapeInscription implements Serializable {
 	private String regimeIns;
 	
 	private String libRg;
+	
+	private String statutInscription;
+	
+	
+	private String programmeEchange="";
+	
+	private String typeMobilite="";
+	
+	/*
+	 * *************************************************************** Getters et
+	 * Setters
+	 ****************************************************************/
+	
+	public String getProgrammeEchange() {
+		return programmeEchange;
+	}
+
+	public void setProgrammeEchange(String programmeEchange) {
+		this.programmeEchange = programmeEchange;
+	}
+	
+	public String getTypeMobilite() {
+		return typeMobilite;
+	}
+
+	public void setTypeMobilite(String typeMobilite) {
+		this.typeMobilite = typeMobilite;
+	}
+	
 
 	/**
 	 * @return the codeEtp
@@ -308,6 +339,32 @@ public class EtapeInscription implements Serializable {
 	public void setLibRg(String libRg) {
 		this.libRg = libRg;
 	}
+	@Override
+	public String toString() {
+		return "EtapeInscription [codeComposante=" + codeComposante + ", libComposante=" + libComposante + ", codeEtp="
+				+ codeEtp + ", codVrsVet=" + codVrsVet + ", LibWebVet=" + LibWebVet + ", typeIns=" + typeIns
+				+ ", codeDiplome=" + codeDiplome + ", versionDiplome=" + versionDiplome + ", libDiplome=" + libDiplome
+				+ ", codCursusLmd=" + codCursusLmd + ", codFinalite=" + codFinalite + ", libFinalite=" + libFinalite
+				+ ", volumeHoraire=" + volumeHoraire + ", codeCursusAmenage=" + codeCursusAmenage
+				+ ", libelleCursusAmenage=" + libelleCursusAmenage + ", regimeIns=" + regimeIns + ", libRg=" + libRg
+				+ "]";
+	}
+	public String getStatutInscription() {
+		return statutInscription;
+	}
+	public void setStatutInscription(String statutInscription) {
+		this.statutInscription = statutInscription;
+	}
+
+	public String getCodePeriode() {
+		return codePeriode;
+	}
+
+	public void setCodePeriode(String codePeriode) {
+		this.codePeriode = codePeriode;
+	}
+
+	
 	
 	
 

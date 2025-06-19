@@ -1,16 +1,14 @@
 package org.esupportail.referentiel.pcscol.services;
 
-import java.net.URI;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.esupportail.referentiel.pcscol.invoker.ApiClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -23,16 +21,17 @@ import org.springframework.web.context.annotation.SessionScope;
 
 @Service
 @SessionScope
+@ConditionalOnProperty(name = "app.mode_pegase")
 public class AccessTokenService {
 
 	// curl -d "username=svc-api&password=PASSWORD&token=true"
 	// -H "Content-Type: application/x-www-form-urlencoded" -X POST
 	// https://authn-app.bas-esup.pc-scol.fr/cas/v1/tickets
 	
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private  Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Value("${app.pcscol.accesstoken.casUrl}")
-	private String casUrl = "https://authn-app.bas-esup.pc-scol.fr/cas/v1/tickets";
+	private String casUrl ;
 
 	@Value("${app.pcscol.accesstoken.svcAcountLogin}")
 	private String svcAcountLogin = "";

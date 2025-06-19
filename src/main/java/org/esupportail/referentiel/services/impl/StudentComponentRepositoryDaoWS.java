@@ -47,7 +47,7 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.VariableAppliWSE
  * Acces au composantes du personnel personnalise.
  *
  */
-
+@ConditionalOnProperty(name = "app.mode_apogee")
 @Service
 public class StudentComponentRepositoryDaoWS implements StudentComponentRepositoryDao {
 	private static final long serialVersionUID = 949811640680344536L;
@@ -369,8 +369,8 @@ public class StudentComponentRepositoryDaoWS implements StudentComponentReposito
 		}
 
 		for (DiplomeDTO4 ld : diplomeDTO) {
-			TableauVersionDiplomeDTO4 versionDiplomeDTO = ld.getListVersionDiplome();
-			for (VersionDiplomeDTO4 lvd : versionDiplomeDTO.getItem()) {
+			TableauVersionDiplomeDTO4 versionDiplomeDTO3 = ld.getListVersionDiplome();
+			for (VersionDiplomeDTO4 lvd : versionDiplomeDTO3.getItem()) {
 				TableauEtapeDTO4 etapeDTO = lvd.getOffreFormation().getListEtape();
 				for (EtapeDTO4 le : etapeDTO.getItem()) {
 					TableauVersionEtapeDTO4 versionEtapeDTO = le.getListVersionEtape();

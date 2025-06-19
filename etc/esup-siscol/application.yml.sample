@@ -1,10 +1,13 @@
 ---
 spring:
-  ldap:
-    urls: [ldap://ldap.fr:389]
-    username: uid=user,ou=admins,dc=univ.fr
-    password: password
+ ldap:
+    urls: 
+    - ldap://annuaire.univ.fr:389
+    username: cn=admin,dc=univ,dc=fr
+    password: ********
     base: dc=univ,dc=fr
+     
+      
 springdoc:
   version: '@springdoc.version@'
   api-docs:
@@ -26,102 +29,123 @@ server:
     path: /error.html
     include-stacktrace: always
 app:
-  server-url: http://localhost:8080/esup-siscol
-  server-version: 1.0.14
+  mode_apogee: true 
+  mode_pegase: true
+        
+  server-url: http://localhost:8080 
+  server-version: 1.0.18 
   server-title: Client API SCOLARITE REST
   ldap:
-    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=sample))
+    stringFilterTeacher: (|(eduPersonAffiliation=teacher)(eduPersonAffiliation=faculty)(uid=uiduser))
     stringFilterStudent: (eduPersonAffiliation=student)
-    stringFilterStaff: (eduPersonAffiliation=staff)
+    stringFilterStaff: (|(eduPersonAffiliation=employee)(eduPersonAffiliation=faculty))
+	   
     attributes:
-      objectClass: Person
-      supannAliasLogin: supannAliasLogin
-      baseDn: ou=people
-      dn: dn
-      uid: uid
-      codEtu: supannEtuId
-      supannEtuId: supannEtuId
-      sn: sn
-      mail: mail
-      supannAutreMail: supannAutreMail
-      cn: cn
-      givenName: givenName
-      displayName: givenName
-      eduPersonPrimaryAffiliation: eduPersonPrimaryAffiliation
-      eduPersonAffiliation: eduPersonAffiliation
-      supannEntiteAffectation: supannEntiteAffectation
-      supannEntiteAffectationPrincipale: supannEntiteAffectationPrincipale
-      supannCivilite: supannCivilite
-      telephoneNumber: telephoneNumber
-      supannEtuCursusAnnee: supannEtuCursusAnnee
-      eduPersonOrgDN: eduPersonOrgDN
-      supannEmpId: supannEmpId
-      supannRefId: supannRefId
-      supannEtuEtape: supannEtuEtape
-      supannEtuAnneeInscription: supannEtuAnneeInscription
+     objectClass: Person
+     supannAliasLogin: uid 
+     baseDn: ou=people
+     dn: dn
+     uid: uid
+                  #codEtu: sn
+     codEtu: supannEtuId
+     supannEtuId: supannEtuId
+     sn: sn
+     mail: mail
+     supannAutreMail: supannAutreMail
+     cn: cn
+     givenName: givenName
+     displayName: givenName
+     eduPersonPrimaryAffiliation: eduPersonPrimaryAffiliation
+     eduPersonAffiliation: eduPersonAffiliation
+     supannEntiteAffectation: supannEntiteAffectation
+     supannEntiteAffectationPrincipale: supannEntiteAffectationPrincipale
+     supannCivilite: supannCivilite
+     telephoneNumber: telephoneNumber
+     supannEtuCursusAnnee: supannEtuCursusAnnee
+     eduPersonOrgDN: eduPersonOrgDN
+     supannEmpId: supannEmpId
+     supannRefId: supannRefId
+     supannEtuEtape: supannEtuEtape
+     supannEtuAnneeInscription: supannEtuAnneeInscription
   apogee:
     startYearMonth: 09
     startYearDay: 01
     universityCode: UPN
     codesRegimeInscriptionFC: 2;4;5
-    # valeurs de temoinRecupAnnu  possible :  TOUS,  N,   O
-    temoinRecupAnnu: N
+    # valeurs possible TOUS N O#
+    temoinRecupAnnu : N 
     urlService:
-      ##si vous n'utilisaez pas l'authentifaction ws, laissez les champs username et password vides
-      administratifMetier: http://ws.apogee.univ.fr:8080/aws/services/AdministratifMetier
-      administratifMetierUserName:
-      administratifMetierPassword:
-      etudiantMetier: http://ws.apogee.univ.fr:8080/aws/services/EtudiantMetier
-      etudiantMetierUserName:
-      etudiantMetierPassword:
-      pedagogiqueMetier: http://ws.apogee.univ.fr:8080/aws/services/PedagogiqueMetier
-      pedagogiqueMetierUserName:
-      pedagogiqueMetierPassword:
-      geographieMetier: http://ws.apogee.univ.fr:8080/aws/services/GeographieMetier
-      geographieMetierUserName:
-      geographieMetierPassword:
-      referentielMetier: http://ws.apogee.univ.fr:8080/aws/services/ReferentielMetier
-      referentielMetierUserName:
-      referentielMetierPassword:
-      offreFormationMetier: http://ws.apogee.univ.fr:8080/aws/services/OffreFormationMetier
-      offreFormationMetierUserName:
-      offreFormationMetierPassword:
+      #administratifMetier: http://univ.fr:8080/wsapogee/services/AdministratifMetier
+      administratifMetier: http://univ.fr:8080/wsapogee/services/AdministratifMetier
+      administratifMetierUserName: user
+      administratifMetierPassword: *********
+      etudiantMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/EtudiantMetier
+      etudiantMetierUserName: user
+      etudiantMetierPassword: ***********
+      pedagogiqueMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/PedagogiqueMetier
+      pedagogiqueMetierUserName: user
+      pedagogiqueMetierPassword: **********
+      geographieMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/GeographieMetier
+      geographieMetierUserName: user
+      geographieMetierPassword: ********
+      referentielMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/ReferentielMetier
+      referentielMetierUserName: user
+      referentielMetierPassword: *********
+      offreFormationMetier: http://trollius.gestion.ehess.fr:8080/wsapogee/services/OffreFormationMetier
+      offreFormationMetierUserName: user
+      offreFormationMetierPassword: **********
   pcscol:
+    cesures:
+       ANNEE: 1
+       SEMESTRE: 2
+       SANS: 3
     codeStructure: ETAB00
     codePeriode: PER-2020
+    codesPeriodesChargementFormations: PER-2021, PER-2022, PER-2023, PER-2024, PER-2018, PER-2019, PER-2020, PER-2020-21
+    typeObjetFormationChargementFormations: ANNEE, SEMESTRE
     accesstoken:
       # Url de l'API du serveur OAuth Pgase pour la rcupration de l'access-token
-      casUrl: https://authn-app.bas-esup.pc-scol.fr/cas/v1/tickets
+      casUrl: https://authn-app.univ.pc-scol.fr/cas/v1/tickets
       # Username et password pour s'authentifier auprs du serveur OAuth Pgase en tant qu'applicatif MDW
       svcAcountLogin: svc-api
-      svcAcountPassword: password
+      svcAcountPassword: **************
       # Dure en heure de conservation de l'access-token
       duration: 6
     # Code de l'tablissement dans Pgase
     etablissement: ETAB00
     # Base Url de l'API du module INS de Pgase (attention  conserver la structure de l'url d'exemple)
     api:
-      # Base Url de l'API STAGE de Pgase (attention  conserver la structure de l'url d'exemple)
-      stage:
-        url: https://sta.pc-scol.fr/api/sta/v1
-      # Base Url de l'API MOF de Pgase
-      Mof:
-        url: https://mof.pc-scol.fr/api/v1/mof
+      # Base Url de l'API CHC de Pgase
+      chc:
+        url: https://chc.partenaires.pc-scol.fr/api/chc/v6
+      # Base Url de l'API ODF de Pgase
+      odf: 
+        https://odf.partenaires.pc-scol.fr/api/odf/ext/v1
       # Base Url de l'API COF de Pgase
-      ref:
-        url: https://ref.pc-scol.fr/api/v1/ref
+      ref: 
+          url: https://ref.partenaires.pc-scol.fr/api/v1/ref
+      ins:
+          url: https://ins.partenaires.pc-scol.fr/api/ins/ext/v2
+      chcExterne:
+        url: https://chc.partenaires.pc-scol.fr/api/ext/chc/v1
     # Permet de cibler un dossier par dfaut. /!\ Attention /!\ A renseigner uniquement pour une dmonstration ou en phase de test/dveloppement.
     demo:
       codeapprenant: 000000001
     # Liste des statuts des inscriptions  afficher dans la vue "Parcours" spars par des virgules
     inscription:
       statut: valide
+  
+    
 credential:
   userscredential:
     root:
       username: root
-      password: root
-      roles: [ADMIN, USER, USER_APOGEE, USER_LDAP]
+      password: *******
+      roles:
+        - ADMIN
+        - USER
+        - USER_APOGEE
+        - USER_LDAP
   autorisation:
     supann: [USER_LDAP, ADMIN]
     referentiel:
@@ -135,7 +159,8 @@ cache:
     # Chargement au demarrage des caches
   onStartup:
         # Active ou non, par defaut : false
-    enabled: true
+        #enabled: true
+        enabled: false
     # Time-To-Live du cache temporaire, en minutes, par defaut : 60 [minutes]
     # ttl-tmp:
     # Time-To-Live du cache permanent, en heures, par defaut : 0 [heures]
@@ -146,4 +171,5 @@ cache:
         # Active ou non, par defaut : false
     enabled: false
         # Expression cron, par defaut : aucune
-    cron: 0 0 7-22 * * *
+        cron: 0 0 7-22 * * *
+

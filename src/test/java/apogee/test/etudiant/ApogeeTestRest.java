@@ -42,7 +42,7 @@ public class ApogeeTestRest {
 		ResponseEntity<ApogeeMap> result = testRestTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity,
 				ApogeeMap.class);
 
-		System.out.println(result.getBody().getElementPedagogiques());
+		
 		System.out.println(result.getBody().getListeEtapeInscriptions());
 		// etapesByEtudiantAndAnnee?codeEtud=38004031&annee=2020
 

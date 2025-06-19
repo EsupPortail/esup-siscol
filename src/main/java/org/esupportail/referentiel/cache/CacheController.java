@@ -1,10 +1,13 @@
 package org.esupportail.referentiel.cache;
 
+import java.util.concurrent.CompletableFuture;
+
 import org.esupportail.referentiel.services.StudentComponentRepositoryDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,18 +21,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Matthieu Manginot - Université de Lorraine
  *
  */
+@ConditionalOnProperty(name = "app.mode_apogee")
 @RestController
 @RequestMapping("cache")
 public class CacheController {
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger logger = LoggerFactory.getLogger(CacheController.class);
 
 	@Autowired
-	private transient StudentComponentRepositoryDao studentComponentRepositoryDao;
+	private StudentComponentRepositoryDao studentComponentRepositoryDao;
 	@Autowired
-	private transient CacheService cacheService;
+	private CacheService cacheService;
 
 	@Value("${app.apogee.universityCode}")
-	private transient String universityCode;
+	private String universityCode;
 
 	/**
 	 * API de rechargement complet des caches (invalidation puis chargement).
@@ -38,9 +42,8 @@ public class CacheController {
 	 */
 	@GetMapping("/reload")
 	public ResponseEntity<Object> reload() {
-		invalidateCaches();
-		loadCaches();
-		return new ResponseEntity<Object>(HttpStatus.OK);
+		CompletableFuture.runAsync(this::invalidateCaches).thenRunAsync(this::loadCaches);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	/**
@@ -50,8 +53,8 @@ public class CacheController {
 	 */
 	@GetMapping("/load")
 	public ResponseEntity<Object> load() {
-		loadCaches();
-		return new ResponseEntity<Object>(HttpStatus.OK);
+		CompletableFuture.runAsync(this::loadCaches);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	/**
@@ -60,9 +63,9 @@ public class CacheController {
 	 * @return {@link HttpStatus#OK}
 	 */
 	@GetMapping("/invalidate")
-	public ResponseEntity<Object> invalid() {
-		invalidateCaches();
-		return new ResponseEntity<Object>(HttpStatus.OK);
+	public ResponseEntity<Object> invalidate() {
+		CompletableFuture.runAsync(this::invalidateCaches);
+        return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	/**
@@ -82,6 +85,10 @@ public class CacheController {
 		studentComponentRepositoryDao.getEtapesRef(universityCode);
 		logger.debug("Cache for apogeeController/EtapesRef loaded.");
 	}
+	
+	
+	
+	
 
 	/**
 	 * Invalidation des caches.

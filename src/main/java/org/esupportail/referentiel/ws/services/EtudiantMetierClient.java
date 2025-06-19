@@ -57,7 +57,7 @@ import gouv.education.apogee.commun.client.ws.ReferentielMetier.RegimeInscDTO;
  * @author abdelhamid
  *
  */
-
+@ConditionalOnProperty(name = "app.mode_apogee")
 @Service
 public class EtudiantMetierClient {
 
@@ -133,11 +133,10 @@ public class EtudiantMetierClient {
 					numINE, numBoursier, codOPI, nom, prenom, dateNaiss, temoinRecupAnnu);
 			return etudiant;
 		} catch (WebBaseException_Exception e) {
-			logger.error("recupererIdentifiantsEtudiantV2 : " + codEtu + " -> "+ e.getMessage());
+			logger.error("recupererIdentifiantsEtudiantV2 : " + codEtu + " -> " + e.getMessage());
 			return null;
 		}
-		
-		
+
 	}
 
 	/**
@@ -198,8 +197,8 @@ public class EtudiantMetierClient {
 		try {
 			tabInsAdmEtp = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
 		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
-			logger.error("recupererIAEtapesV3  code :  " +  cod  +"\t  annee "+ ": "+ annee+ " : " +  e.getMessage() );
-			//e.printStackTrace();
+			logger.error("recupererIAEtapesV3  code :  " + cod + "\t  annee " + ": " + annee + " : " + e.getMessage());
+			// e.printStackTrace();
 		}
 
 		return tabInsAdmEtp;
@@ -271,11 +270,11 @@ public class EtudiantMetierClient {
 		try {
 			return etudiantMetierService.recupererInfosAdmEtuV4(codEtu);
 		} catch (WebBaseException_Exception e) {
-			logger.error("ECHEC DE LA RECUERATION DE L'ETUDIANT : " + codEtu + " ->" +e.getMessage());
-		//	e.printStackTrace();
-			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : " + codEtu + " ->" +e.getMessage());
+			logger.error("ECHEC DE LA RECUERATION DE L'ETUDIANT : " + codEtu + " ->" + e.getMessage());
+			// e.printStackTrace();
+			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : " + codEtu + " ->" + e.getMessage());
 		}
-		
+
 	}
 
 	/*
@@ -315,47 +314,46 @@ public class EtudiantMetierClient {
 				codeDipl, verDipl);
 		logger.debug("recupererListeEtuParEtpEtDiplome : {} {} {} {}  {} {}  ", codeComposante, annee, codeEtp,
 				versionEtp, codeDipl, verDipl);
-		Predicate<EtudiantDTO2> byNumEtu = etudiant -> etudiant.getCodEtu().equals(codEtu);
-		Predicate<EtudiantDTO2> byPrenom = etudiant -> etudiant.getPrenom().toUpperCase()
+		Predicate<EtudiantDTO2> byNumEtuPredicate = etudiant -> etudiant.getCodEtu().equals(codEtu);
+		Predicate<EtudiantDTO2> byPrenomPredicate = etudiant -> etudiant.getPrenom().toUpperCase()
 				.contains(prenom.toUpperCase());
 		Predicate<EtudiantDTO2> byName = etudiant -> etudiant.getNom().toUpperCase().contains(nom.toUpperCase());
 
 		List<EtudiantDTO2> etudiantsFiltres = null;
 
 		if (StringUtils.hasText(codEtu)) {
-			logger.debug("recupererListeEtuParEtpEtDiplome filtre par codeEtu : " + codEtu);
-			Stream<EtudiantDTO2> result = etudiants.stream().filter(byNumEtu);
-			etudiantsFiltres = result.collect(Collectors.toList());
+			logger.debug("recupererListeEtuParEtpEtDiplome filtre par codEtu : {}", codEtu);
+			Stream<EtudiantDTO2> result = etudiants.stream().filter(byNumEtuPredicate);
+			etudiantsFiltres = result.toList();
 			if (StringUtils.hasText(nom)) {
-				Stream<EtudiantDTO2> result_ByName = etudiantsFiltres.stream().filter(byName);
-				etudiantsFiltres = result_ByName.collect(Collectors.toList());
+				Stream<EtudiantDTO2> resultByName = etudiantsFiltres.stream().filter(byName);
+				etudiantsFiltres = resultByName.toList();
 				if (StringUtils.hasText(prenom)) {
-					Stream<EtudiantDTO2> result_ByPrenom = etudiantsFiltres.stream().filter(byPrenom);
-					etudiantsFiltres = result_ByPrenom.collect(Collectors.toList());
+					Stream<EtudiantDTO2> resultByPrenom = etudiantsFiltres.stream().filter(byPrenomPredicate);
+					etudiantsFiltres = resultByPrenom.toList();
 				}
 
+			} else if (StringUtils.hasText(prenom)) {
+				Stream<EtudiantDTO2> resultByPrenom = etudiantsFiltres.stream().filter(byPrenomPredicate);
+				etudiantsFiltres = resultByPrenom.toList();
 			}
-			else if(StringUtils.hasText(prenom)) {
-				Stream<EtudiantDTO2> result_ByPrenom = etudiantsFiltres.stream().filter(byPrenom);
-				etudiantsFiltres = result_ByPrenom.collect(Collectors.toList());
-			} 
-			
+
 		} else if (StringUtils.hasText(nom)) {
-			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Nom : " + nom);
+			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Nom : {}", nom);
 
 			Stream<EtudiantDTO2> result = etudiants.stream().filter(byName);
 			if (StringUtils.hasText(prenom)) {
-				logger.debug("recupererListeEtuParEtpEtDiplome filtre par nom  +prenom : " + prenom);
-				Stream<EtudiantDTO2> resultByPrenom = result.filter(byPrenom);
-				etudiantsFiltres = resultByPrenom.collect(Collectors.toList());
+				logger.debug("recupererListeEtuParEtpEtDiplome filtre par Prenom : {}", prenom);
+				Stream<EtudiantDTO2> resultByPrenom = result.filter(byPrenomPredicate);
+				etudiantsFiltres = resultByPrenom.toList();
 			} else {
-				etudiantsFiltres = result.collect(Collectors.toList());
+				etudiantsFiltres = result.toList();
 
 			}
 		} else if (StringUtils.hasText(prenom)) {
-			logger.debug("recupererListeEtuParEtpEtDiplome filtre par prenom : " + prenom);
-			Stream<EtudiantDTO2> resultParPrenom = etudiants.stream().filter(byPrenom);
-			etudiantsFiltres = resultParPrenom.collect(Collectors.toList());
+			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Prenom : {}", prenom);
+			Stream<EtudiantDTO2> resultParPrenom = etudiants.stream().filter(byPrenomPredicate);
+			etudiantsFiltres = resultParPrenom.toList();
 		}
 
 		if (etudiantsFiltres != null) {
@@ -393,19 +391,17 @@ public class EtudiantMetierClient {
 		criteres.setAnnee(annee);
 		criteres.setListDiplomes(diplomes);
 		criteres.setListEtapes(etps);
-		
+
 		/**
-		 * SI le code composante est renseigné et existe, on l'ajoute dans la liste des
+		 * ON vérifie si la composante existe avant de l'ajouter dans les critères sinon
+		 * on ignore
 		 */
-		if (codeComposante != null && !codeComposante.isEmpty()) {
+		if (codeComposante != null) {
 			ComposanteDTO3 composante = recupererComposanteV2(codeComposante);
 			if (composante != null) {
 				criteres.getListComposante().add(codeComposante);
 			}
-			
 		}
-		
-		
 
 		criteres.setCodeCollectionELP(null);
 		criteres.setCodeCollectionVET(null);
@@ -473,11 +469,9 @@ public class EtudiantMetierClient {
 			composante = referentielMetierService.recupererComposanteV2(codComposante, null);
 			if (composante != null && !composante.isEmpty()) {
 				return composante.get(0);
-
 			}
 		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur de récupérer la composante : {}   -> {}", codComposante, e.getMessage());
 		}
 		return null;
 

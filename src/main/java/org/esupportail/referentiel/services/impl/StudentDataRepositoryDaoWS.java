@@ -34,22 +34,29 @@ import gouv.education.apogee.commun.client.ws.EtudiantMetier.IdentifiantsEtudian
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.IndBacDTO2;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.InfoAdmEtuDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ComposanteCentreGestionDTO;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO4;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ElementPedagogiDTO22;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ElementPedagogiDTO32;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.EtapeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.EtapeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO2;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.ListeElementPedagogiDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.OffreFormationDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.OffreFormationDTO4;
+//import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauListeElementPedagogiDTO3;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauVersionDiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.TableauVersionDiplomeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionDiplomeDTO4;
+import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionEtapeDTO32;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.VersionEtapeDTO42;
 import gouv.education.apogee.commun.client.ws.ReferentielMetier.ComposanteDTO3;
 
 /**
  * Acces donnees etudiant
  */
-
+@ConditionalOnProperty(name = "app.mode_apogee")
 @Service
 public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
