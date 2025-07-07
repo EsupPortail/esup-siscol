@@ -84,6 +84,10 @@ public class PcscolService implements PcscolServiceI {
 
 	@Autowired
 	private CesureUtils cesureUtils;
+	
+	
+	
+	
 
 	@Override
 	public List<String> recupererAnneesIa(String codeStructure, String codeEtud) {
@@ -107,7 +111,7 @@ public class PcscolService implements PcscolServiceI {
 	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String codePeriode) {
 		logger.debug("etapeInscription : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
 		ApprenantEtInscriptions app;
-		List<EtapeInscription> etps = new ArrayList<EtapeInscription>();
+		List<EtapeInscription> etps = new ArrayList<>();
 		try {
 			app = inscriptionsApi.lireInscriptions(codeStructure, codeApprenant);
 			logger.debug(" Appel Apprenant {}", app.getApprenant().getEtatCivil());
@@ -116,6 +120,8 @@ public class PcscolService implements PcscolServiceI {
 			logger.debug("Inscriptions : {}", inscriptions.size());
 
 			inscriptions.forEach(ins -> {
+				logger.debug("Inscription : {} , {}, {}", ins.getCible().getPeriode().getCode(),
+						ins.getCible().getPeriode().getAnneeUniversitaire(), ins.getStatutInscription().getValue());
 
 				if (ins.getCible().getPeriode().getCode().equalsIgnoreCase(codePeriode)) {
 					EtapeInscription etpinscr = ApprenantEtuInfoAdmMapperInterface.Instance
@@ -161,7 +167,7 @@ public class PcscolService implements PcscolServiceI {
 	}
 
 	public ApogeeMap recupererIaIpParEtudiantAnnee(String codeStructure, String codeApprenant,
-			List<String> codesPeriodes) {
+			List<String> codesPeriodes,List<String> statutInscriptionChargements) {
 		ApogeeMap apogeeMap = new ApogeeMap();
 		/**
 		 * TODO regime
@@ -173,10 +179,14 @@ public class PcscolService implements PcscolServiceI {
 			logger.debug("recupererIaIpParEtudiantAnnee : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
 			List<EtapeInscription> etapeInscriptionsPartiel = etapeInscription(codeStructure, codeApprenant,
 					codePeriode);
+			etapeInscriptionsPartiel=etapeInscriptionsPartiel.stream()
+					.filter(e -> statutInscriptionChargements.contains(e.getStatutInscription())).toList();
+					
 			etapeInscriptions.addAll(etapeInscriptionsPartiel);
 		});
 
-		logger.debug("----------------------- {}", etapeInscriptions);
+		logger.debug("recupererIaIpParEtudiantAnnee : {} , {} , {} : etapeInscriptions {}", codeStructure,
+				codeApprenant, codesPeriodes, etapeInscriptions.size());
 
 		List<RegimeInscription> regimesInscriptions = new ArrayList<>();
 		apogeeMap.setListeEtapeInscriptions(etapeInscriptions);
@@ -353,7 +363,7 @@ public class PcscolService implements PcscolServiceI {
 				objetMaquetteSummaries.addAll(diplomes);
 			} catch (ApiException e) {
 				logger.error("allObjetMaquetteSummariesFromPeriodes : {} , {} : {} ", codeStructure, codePeiode,
-						e.getMessage());
+						e.getMessage(),e.getCause());
 			}
 		});
 		return objetMaquetteSummaries;
@@ -654,5 +664,7 @@ public class PcscolService implements PcscolServiceI {
 	public void setCesureUtils(CesureUtils cesureUtils) {
 		this.cesureUtils = cesureUtils;
 	}
+
+	
 
 }

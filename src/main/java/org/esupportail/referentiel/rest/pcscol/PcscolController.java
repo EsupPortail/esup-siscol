@@ -34,7 +34,7 @@ import io.swagger.v3.oas.annotations.Operation;
 @ConditionalOnProperty(name = "app.mode_pegase")
 public class PcscolController implements GeneriqueSIControllerInterface {
 
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
 	private PcscolService pcscolService;
@@ -86,8 +86,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(
 			@RequestParam(value = "codEtud", defaultValue = "000000036") String codeEtud,
 			@RequestParam(defaultValue = "2020") String annee) {
-		ResponseEntity<ApogeeMap> result = pcscolControllerAdapter.etapesByEtudiantAndAnnee(codeEtud, annee);
-		return result;
+		return pcscolControllerAdapter.etapesByEtudiantAndAnnee(codeEtud, annee);
 	}
 
 	/**
@@ -195,9 +194,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "codeAnnee", required = true) String codeAnnee) {
 
-		ResponseEntity<List<DiplomeReduitDto>> response = pcscolControllerAdapter
+		return pcscolControllerAdapter
 				.getDiplomesRefParComposanteEtAnnee(codeComposante, codeAnnee);
-		return response;
 	}
 	
 	/**

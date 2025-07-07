@@ -1,6 +1,7 @@
 package org.esupportail.referentiel.rest.pcscol;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -62,7 +63,8 @@ public class PcscolControllerAdapter implements InitializingBean {
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
 	String codesPeriodesChargementFormations;
 	
-	  
+	@Value("${app.pcscol.statutInscriptionChargement:VALIDE,EN_COURS,EN_ACTUALISATION,VALIDEE_EN_MULTI_CURSUS}")
+	String statutInscriptionChargement;
 
 	@Autowired
 	private EspaceService espaceService;
@@ -70,12 +72,12 @@ public class PcscolControllerAdapter implements InitializingBean {
 	public EtudiantInfoAdm lireEtudiantInfoAdm(String codeStructure, String numEtud) {
 		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
 		if (student != null) {
-			logger.info("rechcerche mail ldap Etudiant  : " + numEtud);
+			logger.info("rechcerche mail ldap Etudiant  : {}" , numEtud);
 			Person person = personService.findByCodEtu(numEtud);
 			if (person != null) {
 				student.setEmailAnnuaire(person.getMail());
 			} else {
-				logger.warn("Aucun mail trouvé pour l'étudiant : " + numEtud);
+				logger.warn("Aucun mail trouvé pour l'étudiant :{} " , numEtud);
 			}
 			return student;
 		}
@@ -150,25 +152,25 @@ public class PcscolControllerAdapter implements InitializingBean {
 		// generique
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
 		logger.debug("{} {}  {}", "etapesByEtudiantAndAnnee", " => nbr d'esapces ", espaces.size());
+		
+		List<String> statutInscriptionChargements=Arrays.asList(statutInscriptionChargement.split("[,;\\s]+")); 
 
 		/**
 		 * TODO relation annee periode ??
 		 */
 		if (espaces != null && !espaces.isEmpty()) {
+		List<String> codeEspaces = new ArrayList<>();
+		espaces.forEach(e -> codeEspaces.add(e.getCode()));
 
-			List<String> code_espaces = new ArrayList<String>();
-			espaces.forEach(e -> {
-				code_espaces.add(e.getCode());
-			});
+		ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, codeEspaces,statutInscriptionChargements);
+		apogeeMap.getRegimeInscription().forEach(r -> r.setAnnee(annee));
 
-			ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, code_espaces);
-			apogeeMap.getRegimeInscription().forEach(r -> {
-				r.setAnnee(annee);
-			});
+		return new ResponseEntity<>(apogeeMap, HttpStatus.OK);
+	} else {
+		logger.error("Aucun espace trouvé pour l'année : " + annee);
+		return ResponseEntity.notFound().build();
+	}
 
-			return new ResponseEntity<ApogeeMap>(apogeeMap, HttpStatus.OK);
-		}
-		return ResponseEntity.badRequest().build();
 	}
 
 	/**
@@ -182,7 +184,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 		logger.debug("recherche des annees ins {} {} {}", codeStructure, codeEtud, list);
 
 		if (list == null || list.isEmpty()) {
-			logger.error("Aucune année trouvée pour l'étudiant : {}" , codeEtud);
+			logger.error("Aucune année trouvée pour l'étudiant : {}", codeEtud);
 			return ResponseEntity.notFound().build();
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
@@ -215,8 +217,8 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 				// (String codeStructure, String codePeriode, String codeObjetFormation,String
 				// codeObjetFormationParent, String codeApprenant, String nom, String prenom)
-				List<ApprenantDto> apperants = chcExterneService.getApprenantDto(codeComposante, p.getCode(),
-						codeEtape, codeDiplome, codEtu, nom, prenom);
+				List<ApprenantDto> apperants = chcExterneService.getApprenantDto(codeComposante, p.getCode(), codeEtape,
+						codeDiplome, codEtu, nom, prenom);
 
 				/**
 				 * TODO A supprimer après confirmation l'appel inscriptionsValidees sera
@@ -262,8 +264,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		if (espaces != null && !espaces.isEmpty()) {
 			espaces.forEach(e -> {
-				Map<String, String> partiel = pcscolService.studentEtapeVets(codeStructure, codeEtud,
-						e.getCode());
+				Map<String, String> partiel = pcscolService.studentEtapeVets(codeStructure, codeEtud, e.getCode());
 				lEtapeInscriptions.putAll(partiel);
 			});
 
@@ -338,7 +339,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		
+
 		logger.info(
 				"PcscolControllerAdapter initialized with codeStructure: {}, codePeriode: {}, codesPeriodesChargementFormations: {}",
 				codeStructure, codePeriode, codesPeriodesChargementFormations);

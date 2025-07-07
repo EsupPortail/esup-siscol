@@ -68,19 +68,20 @@ public class OffreFormationServicePartielEtapes {
 		pageable.setTaille(10);
 		String r = null;
 
-		List<ObjetMaquetteSummary> result = new ArrayList<ObjetMaquetteSummary>();
+		List<ObjetMaquetteSummary> result = new ArrayList<>();
 		;
-		logger.debug("{} {}  {} {} {} {} {} {} {}  {} {} {} {} {}  {} {} {} {} {}", "rechercheObjetMaquetteSummary",
-				" => codeStructure ", codeStructure, " => espace ", espaceUUID, " => typeObjetMaquette ", typeObjetMaquette,
-				" => racine ", racine, " => typeObjetFormation ", typeObjetFormation, " => ids ", ids,
-				" => piaSeulement ", piaSeulement, " => piaActif ", piaActif, " => valideSeulement ", valideSeulement,
-				" => mutualis ", mutualis);
+		logger.debug(
+				"rechercheObjetMaquetteSummary codeStructure {} espaceUUID {} typeObjetMaquette {} racine {} typeObjetFormation {} ids {} piaSeulement {} piaActif {} valideSeulement {} mutualis {}",
+				codeStructure, espaceUUID, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
+				valideSeulement, mutualis);
 		try {
 			PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
 					espaceUUID, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
 					mutualis);
-			logger.debug(" Items().size() : {} TotalElements : {} ", "rechercheObjetMaquetteSummary", response.getItems().size(), response.getTotalElements());
-			if (response != null && response.getItems() != null) {
+			logger.debug("{} {}  {} ", "rechercheObjetMaquetteSummary", " => response size",
+					response.getItems().size());
+			
+			if ( response.getItems() != null) {
 				result.addAll(response.getItems());
 				if (response.getTotalPages() > 1) {
 					for (int i = 1; i < response.getTotalPages(); i++) {
@@ -117,7 +118,7 @@ public class OffreFormationServicePartielEtapes {
 	public List<ObjetMaquetteSummary> rechercheObjetMaquetteSummaryParPia(String codeStructure, String espaceUUID,
 			Boolean piaSeulement, Boolean piaActif, Boolean valideSeulement) {
 
-		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
+		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<>();
 		Boolean racine = null;
 		List<UUID> ids = null;
 		String typeObjetFormation;
@@ -161,7 +162,7 @@ public class OffreFormationServicePartielEtapes {
 	 */
 	public HashMap<String, String> objetMaquetteSummaryMap(List<ObjetMaquetteSummary> objetMaquetteSummaries,
 			String espaceCode) {
-		HashMap<String, String> map = new HashMap<String, String>();
+		HashMap<String, String> map = new HashMap<>();
 		for (ObjetMaquetteSummary obj : objetMaquetteSummaries) {
 			//map.put(obj.getCode() + ";" + espaceCode, obj.getLibelle());
 			try {

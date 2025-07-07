@@ -70,15 +70,15 @@ public class AccessTokenService {
 		try {
 			tokenResponse = restTemplate.exchange(url, HttpMethod.POST, null, String.class, uriVariables);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Erreur lors de la récupération du token : {} cause : {}", e.getMessage(),e.getCause().getMessage());
 		}
-		logger.debug("tokenResponse : "+tokenResponse);
+		
 		// Récupération du token dans la réponse
 		if (tokenResponse != null && tokenResponse.getStatusCode().is2xxSuccessful()
 				&& StringUtils.hasText(tokenResponse.getBody())) {
 			this.token = tokenResponse.getBody();
 			this.tokenCreatedDateTime = LocalDateTime.now();
-			logger.debug("tokenResponse : "+token);
+			logger.debug("tokenResponse {}", tokenResponse.getBody());
 			return token;
 
 		} else {

@@ -29,23 +29,22 @@ import org.springframework.web.context.annotation.SessionScope;
 @ConditionalOnProperty(name = "app.mode_pegase")
 public class PcscolConfig {
 
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Value("${app.pcscol.api.ref.url}")
 	private String apiRef;
 
 	@Value("${app.pcscol.api.odf.url}")
 	private String apiODF;
-	
+
 	@Value("${app.pcscol.api.ins.url}")
 	private String apiIns;
-	
+
 	@Value("${app.pcscol.api.chc.url}")
 	private String apiChcV6;
-	
+
 	@Value("${app.pcscol.api.chcExterne.url}")
 	private String apiChcExtrene;
-
 
 	@Autowired
 	private AccessTokenService accessTokenService;
@@ -53,156 +52,136 @@ public class PcscolConfig {
 	@Value("${app.pcscol.accesstoken.duration}")
 	private long duration = 6;
 
-	
 	@Bean
 	@SessionScope
 	NomenclatureApi nomenclatureApi() {
 		try {
 			String token = accessTokenService.getToken();
-			NomenclatureApi api = new NomenclatureApi(apiClient(apiRef, token));
-			return api;
+			return new NomenclatureApi(apiClient(apiRef, token));
 		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
+			logger.error("nomenclatureApi : {}", e.getMessage());
 			return new NomenclatureApi();
 		}
 	}
-	
-	
-	
-	
-		
+
 	@Bean
 	@SessionScope
 	ObjetsMaquetteApiCHC objetsMaquetteApiCHC() {
 		try {
 			String token = accessTokenService.getToken();
-			ObjetsMaquetteApiCHC arbreApi = new ObjetsMaquetteApiCHC(apiClient(apiChcV6, token));
-			return arbreApi;
+			return new ObjetsMaquetteApiCHC(apiClient(apiChcV6, token));
 		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
+			logger.error("objetsMaquetteApiCHC : {}", e.getMessage());
 			return new ObjetsMaquetteApiCHC();
 		}
 	}
-	
+
 	@Bean
 	@SessionScope
 	ArbresApi arbresApi() {
 		try {
 			String token = accessTokenService.getToken();
-			ArbresApi arbreApi = new ArbresApi(apiClient(apiChcV6, token));
-			return arbreApi;
+			return new ArbresApi(apiClient(apiChcV6, token));
 		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
+			logger.error("arbresApi : {}", e.getMessage());
 			return new ArbresApi();
 		}
 	}
-	
-	
-	
 
-
-    @Bean
-    @SessionScope
-    CursusDcaApi cursusDcaApi() {
+	@Bean
+	@SessionScope
+	CursusDcaApi cursusDcaApi() {
 		try {
 			String token = accessTokenService.getToken();
-			CursusDcaApi structuresApi = new CursusDcaApi(apiClient(apiChcV6, token));
-			return structuresApi;
+			return new CursusDcaApi(apiClient(apiChcV6, token));
 		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
+			logger.error("cursusDcaApi : {}", e.getMessage());
 			return new CursusDcaApi();
 		}
-		
+
 	}
 
-    @Bean
-    @SessionScope
-    StructureApi structureApi() {
+	@Bean
+	@SessionScope
+	StructureApi structureApi() {
 		try {
 			String token = accessTokenService.getToken();
-			StructureApi structuresApi = new StructureApi(apiClient(apiRef, token));
-			return structuresApi;
+			return new StructureApi(apiClient(apiRef, token));
 		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
+			logger.error("structureApi : {}", e.getMessage());
 			return new StructureApi();
 		}
 
 	}
 
-    @Bean
-    @SessionScope
-    MaquettesApi maquetteApi() {
+	@Bean
+	@SessionScope
+	MaquettesApi maquetteApi() {
 		try {
 			String token = accessTokenService.getToken();
-			MaquettesApi api = new MaquettesApi(apiClient(apiODF, token));
-			return api;
+			return new MaquettesApi(apiClient(apiODF, token));
 		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
+			logger.error("maquetteApi : {}", e.getMessage());
 			return new MaquettesApi();
 		}
 	}
 
-    @Bean
-    @SessionScope
-    ObjetsMaquetteApi objetsMaquetteApi() {
+	@Bean
+	@SessionScope
+	ObjetsMaquetteApi objetsMaquetteApi() {
 		try {
 			String token = accessTokenService.getToken();
-			ObjetsMaquetteApi api = new ObjetsMaquetteApi(apiClient(apiODF, token));
-			return api;
+			return new ObjetsMaquetteApi(apiClient(apiODF, token));
 		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
+			logger.error("objetsMaquetteApi : {}", e.getMessage());
 			return new ObjetsMaquetteApi();
 		}
 	}
 
-
-    @Bean
-    @SessionScope
-    EspacesApi espacesApi() {
+	@Bean
+	@SessionScope
+	EspacesApi espacesApi() {
 		try {
 			String token = accessTokenService.getToken();
-			EspacesApi api = new EspacesApi(apiClient(apiODF, token));
-			return api;
+			return new EspacesApi(apiClient(apiODF, token));
 		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
+			logger.error("espacesApi : {}", e.getMessage());
 			return new EspacesApi();
 		}
 	}
-    @Bean
-    @SessionScope
-    ExtractionsApi extractionsApi() {
-    	try {
-			String token = accessTokenService.getToken();
-			ExtractionsApi api = new ExtractionsApi(apiClient(apiChcExtrene, token));
-			return api;
-		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
-			return new ExtractionsApi();
-		} 
-    }
-    
-    @Bean
-    @SessionScope
-    CursusApi cursusApi() {
-    	try {
-			String token = accessTokenService.getToken();
-			CursusApi api = new CursusApi(apiClient(apiChcExtrene, token));
-			return api;
-		} catch (Exception e) {
-			logger.error(e.getMessage() + " :" + e.getMessage());
-			return new CursusApi();
-		} 
-    }
 
-    @Bean
-    @SessionScope
-    InscriptionsApi inscriptionsApi() {
+	@Bean
+	@SessionScope
+	ExtractionsApi extractionsApi() {
 		try {
 			String token = accessTokenService.getToken();
-			InscriptionsApi api=new InscriptionsApi(apiClient(apiIns,token));
-			return api ;
-			
-		}catch(Exception e) {
+			return new ExtractionsApi(apiClient(apiChcExtrene, token));
+		} catch (Exception e) {
+			logger.error("extractionsApi : {}", e.getMessage());
+			return new ExtractionsApi();
+		}
+	}
+
+	@Bean
+	@SessionScope
+	CursusApi cursusApi() {
+		try {
+			String token = accessTokenService.getToken();
+			return new CursusApi(apiClient(apiChcExtrene, token));
+		} catch (Exception e) {
+			logger.error("cursusApi : {}", e.getMessage());
+			return new CursusApi();
+		}
+	}
+
+	@Bean
+	@SessionScope
+	InscriptionsApi inscriptionsApi() {
+		try {
+			String token = accessTokenService.getToken();
+			return new InscriptionsApi(apiClient(apiIns, token));
+
+		} catch (Exception e) {
 			return new InscriptionsApi();
 		}
 	}
@@ -220,13 +199,12 @@ public class PcscolConfig {
 		apiClientIns.setBasePath(basePath);
 		Duration t = Duration.ofSeconds(duration);
 		apiClientIns.setReadTimeout(t);
-		apiClientIns.setRequestInterceptor(builder -> {
-			builder.setHeader("Authorization", "Bearer " + token);
-		});
+		apiClientIns.setRequestInterceptor(builder -> builder.setHeader("Authorization", "Bearer " + token)
+				.setHeader("Content-Type", "application/json").setHeader("Accept", "application/json"));
 
 		return apiClientIns;
 
-	};
+	}
 
 	public AccessTokenService getAccessTokenService() {
 		return accessTokenService;
@@ -283,7 +261,5 @@ public class PcscolConfig {
 	public void setApiChcExtrene(String apiChcExtrene) {
 		this.apiChcExtrene = apiChcExtrene;
 	}
-	
-	
 
 }
