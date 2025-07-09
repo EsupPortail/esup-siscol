@@ -1,13 +1,8 @@
 package org.esupportail.referentiel.beans;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -64,7 +59,8 @@ public class EtudiantRef implements Serializable {
 	private String codeSexe = "";
 	
 	// date Naissance etudiant
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "Europe/Paris")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "Europe/Paris")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Europe/Paris")
 	private Date dateNais ;
 	// libelle CPAM etudiant
 	private String libelleCPAM = "";
