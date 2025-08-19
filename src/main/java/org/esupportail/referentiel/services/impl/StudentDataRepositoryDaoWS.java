@@ -148,10 +148,11 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 	@Override
 	public InfoAdmEtuDTO4 recupererInfosAdmEtuV4(String uid) {
 		try {
-			 InfoAdmEtuDTO4 etudiant = etudiantMetierClient.recupererInfosAdmEtuV4(uid);
+			InfoAdmEtuDTO4 etudiant = etudiantMetierClient.recupererInfosAdmEtuV4(uid);
 			return etudiant;
 		} catch (Exception e) {
-			throw new RuntimeException(" recupererInfosAdmEtuV4 : ECHEC DE LA RECUERATION DE L'ETUDIANT : " + uid + " ->" + e.getMessage());
+			throw new RuntimeException(" recupererInfosAdmEtuV4 : ECHEC DE LA RECUERATION DE L'ETUDIANT : " + uid
+					+ " ->" + e.getMessage());
 		}
 
 	}
@@ -404,14 +405,18 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 			etudiantInfoAdm.setListeBacs(bacs);
 		}
 
+		logger.info("RECUPERATION DE ListeBlocages de L'ETUDIANT : {} " , apogeeinfosAdmDTO2.getListeBlocages().getItem().size());
 		if (apogeeinfosAdmDTO2.getListeBlocages() != null) {
 			String blocages = "";
 			for (BlocageDTO blocage : apogeeinfosAdmDTO2.getListeBlocages().getItem()) {
+				logger.info("Type de blocage  : {} {}", blocage.getCodBlocage(),blocage.getLibBlocage());
 				if (!blocages.isBlank())
 					blocages = blocages + ";";
-				blocages = blocages + blocage.getEtapeBlocage().getLibEtp() + ":"
-						+ blocage.getEtapeBlocage().getCodEtp() + ":" + blocage.getCodBlocage() + ":"
-						+ blocage.getLibBlocage() + ":" + blocage.getTypBlocage();
+				if (blocage.getEtapeBlocage() != null) {
+					blocages = blocages + blocage.getEtapeBlocage().getLibEtp() + ":"
+							+ blocage.getEtapeBlocage().getCodEtp() + ":" + blocage.getCodBlocage() + ":"
+							+ blocage.getLibBlocage() + ":" + blocage.getTypBlocage();
+				}
 			}
 			etudiantInfoAdm.setListeBlocages(blocages);
 		}
@@ -442,17 +447,17 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 
 		// Recherche l'etudiant dans Apogee
 		IdentifiantsEtudiantDTO2 etudiant = recupererIdentifiantsEtudiantDTO2(codeEtu);
-		if(etudiant==null) {
-			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : "+ codeEtu);
+		if (etudiant == null) {
+			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : " + codeEtu);
 		}
 
 		// Recuperation des infos de l'etudiant dans Apogee
-		
-		logger.info("RECUPERATION DE INFOS_ADM de L'ETUDIANT : "+ etudiant.getCodEtu().toString());
-		
+
+		logger.info("RECUPERATION DE INFOS_ADM de L'ETUDIANT : " + etudiant.getCodEtu().toString());
+
 		InfoAdmEtuDTO4 infosAdmEtu = recupererInfosAdmEtuV4(etudiant.getCodEtu().toString());
-		if(infosAdmEtu==null) {
-			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : "+ etudiant.getCodEtu().toString());
+		if (infosAdmEtu == null) {
+			throw new RuntimeException("ECHEC DE LA RECUERATION DE L'ETUDIANT : " + etudiant.getCodEtu().toString());
 		}
 
 		// Ajout des variables d'annee (pour permettre la modif d'anciennes conventions)
@@ -1389,7 +1394,7 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 		apogeeMap.setStudentsEtapesVetsPedago(lEtapeVetPedago);
 		apogeeMap.setListeEtapeInscriptions(listeEtapeInscriptions);
 		// apogeeMap.setStudentStudys(lComposante);
-		
+
 		apogeeMap.setListeELPs(listeELPs);
 
 		if (logger.isDebugEnabled()) {
