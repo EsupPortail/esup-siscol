@@ -99,16 +99,18 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 	@AfterMapping
 	default void setMainAdress(@MappingTarget EtudiantRef etuRef, Apprenant app) {
 
-		StringBuffer addr = new StringBuffer();
+		
 
 		List<ContactComplet> contacts = app.getContacts();
 
 		contacts.forEach(c -> {
 
 			if (c.getCanalCommunication().getValue().equalsIgnoreCase("contactAdresseComplet")) {
-				ContactAdresseComplet contactAdresseComplet = (ContactAdresseComplet) c;
-				System.out.println("contactAdresseComplet: " + contactAdresseComplet);
+				StringBuilder addr = new StringBuilder();
 				
+				ContactAdresseComplet contactAdresseComplet = (ContactAdresseComplet) c;
+				
+				System.out.println("ContactAdresseComplet proprietaire : " + contactAdresseComplet.getProprietaire());				
 				if (contactAdresseComplet.getPays() != null && !contactAdresseComplet.getPays().isEmpty()) {
 					etuRef.setCodePays(contactAdresseComplet.getPays());
 //					/etuRef.setCodeContry(contactAdresseComplet.getPays());
@@ -125,7 +127,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 
 				if (contactAdresseComplet.getLigne2OuBatiment() != null
 						&& !contactAdresseComplet.getLigne2OuBatiment().isEmpty()) {
-					if (addr.length() > 0) {
+					if (!addr.isEmpty()) {
 						addr.append(", ");
 					}
 					addr.append(contactAdresseComplet.getLigne2OuBatiment());
@@ -133,7 +135,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 
 				if (contactAdresseComplet.getLigne3OuVoie() != null
 						&& !contactAdresseComplet.getLigne3OuVoie().isEmpty()) {
-					if (addr.length() > 0) {
+					if (!addr.isEmpty()) {
 						addr.append(", ");
 					}
 
@@ -141,7 +143,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 					etuRef.setLibAd1(contactAdresseComplet.getLigne3OuVoie());
 				}
 				if (contactAdresseComplet.getLigne4OuComplement() != null && !contactAdresseComplet.getLigne4OuComplement().isEmpty()) {
-					if (addr.length() > 0) {
+					if (!addr.isEmpty()) {
 						addr.append(", ");
 					}
 					addr.append(contactAdresseComplet.getLigne4OuComplement());
@@ -150,6 +152,9 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 				etuRef.setLibAde(contactAdresseComplet.getLigne5Etranger());
 				etuRef.setPostalCode(contactAdresseComplet.getCodePostal());
 				etuRef.setTown(contactAdresseComplet.getCommune());
+				
+				String adresse = addr.toString().trim().replaceAll(",+$", ""); // remove trailing comma if exists");
+				etuRef.setMainAddress(adresse); 
 				
 			}
 			if (c.getCanalCommunication().getValue().equalsIgnoreCase("ContactTelephoneComplet")) {
@@ -164,8 +169,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 
 		});
 		
-		String adresse = addr.toString().trim().replaceAll(",+$", ""); // remove trailing comma if exists");
-		etuRef.setMainAddress(adresse); 
+		
 	}
 
 	/**

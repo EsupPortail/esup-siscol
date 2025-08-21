@@ -210,7 +210,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 		// TODO
 		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
 
-		List<ApprenantDto> apprenantDtos = new ArrayList<ApprenantDto>();
+		List<ApprenantDto> apprenantDtos = new ArrayList<>();
 
 		if (periodes != null && !periodes.isEmpty()) {
 			periodes.forEach(p -> {
