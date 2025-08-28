@@ -382,7 +382,8 @@ public class PcscolService implements PcscolServiceI {
 		objetMaquetteSummaries.forEach(objetMaquetteSummary -> {
 			try {
 
-				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, objetMaquetteSummary.getId());
+				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure,
+						objetMaquetteSummary.getId());
 				UUID idEspace = objectMaqette.getEspace();
 				/**
 				 * TODO gestion des espaces
@@ -403,12 +404,14 @@ public class PcscolService implements PcscolServiceI {
 					// objectMaqette.get
 					List<EnfantsStructure> enfants = listeEnfantsObjectMaquettePia(maquetteStructure);
 
-					logger.debug("diplomeRef : {} , {} : enfants {}", codeStructure, objetMaquetteSummary.getId(), enfants.size());
+					logger.debug("diplomeRef : {} , {} : enfants {}", codeStructure, objetMaquetteSummary.getId(),
+							enfants.size());
 					/**
 					 * 
 					 */
 					if (enfants != null && !enfants.isEmpty()) {
-						logger.debug("diplomeRef : {} , {} : PIA {}", codeStructure, objetMaquetteSummary.getLibelleLong(), enfants.size());
+						logger.debug("diplomeRef : {} , {} : PIA {}", codeStructure,
+								objetMaquetteSummary.getLibelleLong(), enfants.size());
 						enfants.forEach(e -> {
 							ObjetMaquetteDetail objectMaqette2;
 							try {
@@ -432,16 +435,37 @@ public class PcscolService implements PcscolServiceI {
 					}
 
 					else {
-						logger.debug("diplomeRef : {} , {} : Pas de PIA", codeStructure, objetMaquetteSummary.getLibelle());
+						logger.debug("diplomeRef : {} , {} : Pas de PIA", codeStructure,
+								objetMaquetteSummary.getLibelle());
 					}
 				}
 
 			} catch (ApiException e) {
-				logger.error("diplomeRef : {} , {}  {} : {} ", codeStructure, objetMaquetteSummary.getId(),objetMaquetteSummary.getLibelle() , e.getMessage());
+				logger.error("diplomeRef : {} , {}  {} : {} ", codeStructure, objetMaquetteSummary.getId(),
+						objetMaquetteSummary.getLibelle(), e.getMessage());
 			}
 		});
 
 		return diplomes;
+	}
+
+	/**
+	 * Ce code évite la récursivité et fonctionne de façon dynamique pour parcourir l'arbre.
+	 * à vérifier si il existe des PIA dans les sous niveaux de PIA
+	 * @param enfantsStructres
+	 * @param enfantsStructresPia
+	 */
+	private void dynamiqueArbreObjetPia(List<EnfantsStructure> enfantsStructres,
+			List<EnfantsStructure> enfantsStructresPia) {
+		List<EnfantsStructure> stack = new ArrayList<>(enfantsStructres);
+		while (!stack.isEmpty()) {
+			EnfantsStructure e = stack.remove(stack.size() - 1);
+			if (e.getObjetMaquette().getPia() != null &&e.getObjetMaquette().getValide() && Boolean.TRUE.equals(e.getObjetMaquette().getPia().getActif())) {
+				enfantsStructresPia.add(e);
+			} else if (!e.getObjetMaquette().getEnfants().isEmpty()) {
+				stack.addAll(e.getObjetMaquette().getEnfants());
+			}
+		}
 	}
 
 	/**
@@ -458,13 +482,15 @@ public class PcscolService implements PcscolServiceI {
 
 				logger.debug("arbreObjetPia : {} => PIA {}", e.getObjetMaquette().getLibelle(),
 						e.getObjetMaquette().getPia().getActif());
+
 				enfantsStructresPia.add(e);
 			}
-			logger.debug("arbreObjetPia : {} nbr d'enfants= {}", e.getObjetMaquette().getLibelle(),e.getObjetMaquette().getEnfants().size() );
-			if (e.getObjetMaquette().getEnfants()!= null && ! e.getObjetMaquette().getEnfants().isEmpty()) {
+
+			else if (e.getObjetMaquette().getEnfants() != null && !e.getObjetMaquette().getEnfants().isEmpty()) {
+				logger.debug("arbreObjetPia : {} nbr d'enfants= {}", e.getObjetMaquette().getLibelle(),
+						e.getObjetMaquette().getEnfants().size());
 				arbreObjetPia(e.getObjetMaquette().getEnfants(), enfantsStructresPia);
 			}
-			
 
 		});
 
@@ -478,7 +504,8 @@ public class PcscolService implements PcscolServiceI {
 	public List<EnfantsStructure> listeEnfantsObjectMaquettePia(MaquetteStructure maquetteStructure) {
 		List<EnfantsStructure> listeEnfantPia = new ArrayList<>();
 		List<EnfantsStructure> enfants = maquetteStructure.getRacine().getEnfants();
-		arbreObjetPia(enfants, listeEnfantPia);
+		dynamiqueArbreObjetPia(enfants, listeEnfantPia);
+		//arbreObjetPia(enfants, listeEnfantPia);
 		return listeEnfantPia;
 	}
 
