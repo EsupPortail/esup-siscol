@@ -4,10 +4,12 @@ import java.net.URI;
 import java.time.Duration;
 
 import org.esupportail.referentiel.pcscol.api.ArbresApi;
+import org.esupportail.referentiel.pcscol.api.CheminApi;
 import org.esupportail.referentiel.pcscol.api.CursusApi;
 import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
 import org.esupportail.referentiel.pcscol.api.EspacesApi;
 import org.esupportail.referentiel.pcscol.api.ExtractionsApi;
+import org.esupportail.referentiel.pcscol.api.InscriptionV115Api;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.MaquettesApi;
 import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
@@ -39,6 +41,9 @@ public class PcscolConfig {
 
 	@Value("${app.pcscol.api.ins.url}")
 	private String apiIns;
+	
+	@Value("${app.pcscol.api.insInterne.url}")
+	private String apiInsInterne;
 
 	@Value("${app.pcscol.api.chc.url}")
 	private String apiChcV6;
@@ -183,6 +188,31 @@ public class PcscolConfig {
 
 		} catch (Exception e) {
 			return new InscriptionsApi();
+		}
+	}
+	
+	@Bean
+	@SessionScope
+	InscriptionV115Api inscriptionsV2115Api() {
+		try {
+			String token = accessTokenService.getToken();
+			return new InscriptionV115Api(apiClient(apiInsInterne, token));
+
+		} catch (Exception e) {
+			return new InscriptionV115Api();
+		}
+	}
+	
+
+	@Bean
+	@SessionScope
+	CheminApi cheminApi() {
+		try {
+			String token = accessTokenService.getToken();
+			return new CheminApi(apiClient(apiInsInterne, token));
+
+		} catch (Exception e) {
+			return new CheminApi();
 		}
 	}
 
