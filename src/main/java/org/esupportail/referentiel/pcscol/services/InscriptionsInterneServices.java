@@ -20,7 +20,13 @@ import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
+@Service
+@SessionScope
+@ConditionalOnProperty(name = "app.mode_pegase")
 public class InscriptionsInterneServices {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -68,7 +74,7 @@ public class InscriptionsInterneServices {
 		if (apprenants != null && !apprenants.isEmpty()) {
 			return apprenants.stream().map(a -> {
 				ApprenantDto apprenantDto = new ApprenantDto();
-				apprenantDto.setCodEtu(a.getIne());
+				apprenantDto.setCodEtu(a.getCodeApprenant());
 				apprenantDto.setNom(a.getNomNaissance());
 				apprenantDto.setPrenom(a.getPrenom());
 				apprenantDto.setDateNaissance(a.getDateNaissance());
@@ -137,7 +143,11 @@ public class InscriptionsInterneServices {
 		}
 
 		if (codeEtu != null && !codeEtu.isBlank()) {
-			rechercheInscription.setIne(codeEtu);
+			String ine = chercherIneParCodeEtud(codeStructure, codeEtu);
+			if (ine != null && !ine.isBlank()) {
+				rechercheInscription.setIne(ine);
+			}
+
 		}
 		if (nomNaissance != null && !nomNaissance.isBlank()) {
 			rechercheInscription.setNomNaissance(nomNaissance);
@@ -217,14 +227,18 @@ public class InscriptionsInterneServices {
 			return null;
 		}
 	}
+
 	/**
+	 * 
+	 * 
 	 * Chercher l'INE d'un étudiant à partir de son code étudiant.
+	 * 
 	 * @param codeEtud
 	 * @return
 	 */
-	public String chercherIneParCodeEtud(String codeStructure,String codeEtud) {
+	public String chercherIneParCodeEtud(String codeStructure, String codeEtud) {
 		try {
-			return apprenantsApi.lireApprenant(codeStructure, codeEtud).getCode();
+			return apprenantsApi.lireApprenant(codeStructure, codeEtud).getBac().getIne();
 		} catch (ApiException e) {
 			logger.error("Erreur lors de l'appel à l'API Apprenant : {} {}", e.getResponseBody(), e);
 			return null;

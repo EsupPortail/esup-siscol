@@ -22,6 +22,7 @@ import org.esupportail.referentiel.pcscol.ref_api.model.Commune;
 import org.esupportail.referentiel.pcscol.ref_api.model.PaysNationalite;
 import org.esupportail.referentiel.pcscol.services.ChcExterneService;
 import org.esupportail.referentiel.pcscol.services.EspaceService;
+import org.esupportail.referentiel.pcscol.services.InscriptionsInterneServices;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,6 +54,8 @@ public class PcscolControllerAdapter implements InitializingBean {
 	LdapServiceInterface personService;
 	@Autowired
 	CesureUtils cesureUtils;
+	@Autowired
+	InscriptionsInterneServices inscriptionsInterneServices;
 
 	@Value("${app.pcscol.codeStructure}")
 	String codeStructure = "ETAB00";
@@ -62,7 +65,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
 	String codesPeriodesChargementFormations;
-	
+
 	@Value("${app.pcscol.statutInscriptionChargement:VALIDE,EN_COURS,EN_ACTUALISATION,VALIDEE_EN_MULTI_CURSUS}")
 	String statutInscriptionChargement;
 
@@ -72,12 +75,12 @@ public class PcscolControllerAdapter implements InitializingBean {
 	public EtudiantInfoAdm lireEtudiantInfoAdm(String codeStructure, String numEtud) {
 		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
 		if (student != null) {
-			logger.info("rechcerche mail ldap Etudiant  : {}" , numEtud);
+			logger.info("rechcerche mail ldap Etudiant  : {}", numEtud);
 			Person person = personService.findByCodEtu(numEtud);
 			if (person != null) {
 				student.setEmailAnnuaire(person.getMail());
 			} else {
-				logger.warn("Aucun mail trouvé pour l'étudiant :{} " , numEtud);
+				logger.warn("Aucun mail trouvé pour l'étudiant :{} ", numEtud);
 			}
 			return student;
 		}
@@ -152,24 +155,25 @@ public class PcscolControllerAdapter implements InitializingBean {
 		// generique
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
 		logger.debug("{} {}  {}", "etapesByEtudiantAndAnnee", " => nbr d'esapces ", espaces.size());
-		
-		List<String> statutInscriptionChargements=Arrays.asList(statutInscriptionChargement.split("[,;\\s]+")); 
+
+		List<String> statutInscriptionChargements = Arrays.asList(statutInscriptionChargement.split("[,;\\s]+"));
 
 		/**
 		 * TODO relation annee periode ??
 		 */
 		if (espaces != null && !espaces.isEmpty()) {
-		List<String> codeEspaces = new ArrayList<>();
-		espaces.forEach(e -> codeEspaces.add(e.getCode()));
+			List<String> codeEspaces = new ArrayList<>();
+			espaces.forEach(e -> codeEspaces.add(e.getCode()));
 
-		ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, codeEspaces,statutInscriptionChargements);
-		apogeeMap.getRegimeInscription().forEach(r -> r.setAnnee(annee));
+			ApogeeMap apogeeMap = pcscolService.recupererIaIpParEtudiantAnnee(codeStructure, codeEtud, codeEspaces,
+					statutInscriptionChargements);
+			apogeeMap.getRegimeInscription().forEach(r -> r.setAnnee(annee));
 
-		return new ResponseEntity<>(apogeeMap, HttpStatus.OK);
-	} else {
-		logger.error("Aucun espace trouvé pour l'année : " + annee);
-		return ResponseEntity.notFound().build();
-	}
+			return new ResponseEntity<>(apogeeMap, HttpStatus.OK);
+		} else {
+			logger.error("Aucun espace trouvé pour l'année : " + annee);
+			return ResponseEntity.notFound().build();
+		}
 
 	}
 
@@ -189,6 +193,50 @@ public class PcscolControllerAdapter implements InitializingBean {
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+	/**
+	 * 
+	 * @param codeComposante
+	 * @param annee
+	 * @param codeEtape
+	 * @param versionEtape
+	 * @param codeDiplome
+	 * @param versionDiplome
+	 * @param codEtu
+	 * @param nom
+	 * @param prenom
+	 * @return
+	 */
+	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplomeInsInterne(String codeComposante,
+			String annee, String codeEtape, String versionEtape, String codeDiplome, String versionDiplome,
+			String codEtu, String nom, String prenom) {
+		// (String codeStructure, String codePeriode,String codeMaquettePia, String
+		// codeMaquetteOdf, String codeEtu, String nomNaissance, String prenom)
+		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
+		List<ApprenantDto> allAppernants = new ArrayList<>();
+		periodes.forEach(p -> {
+			List<ApprenantDto> appernats = inscriptionsInterneServices.listApprenanDtotPeriodeEtChemin(codeComposante,
+					p.getCode(), codeEtape, codeDiplome, codEtu, nom, prenom);
+			if (appernats != null && !appernats.isEmpty()) {
+				allAppernants.addAll(appernats);
+			}
+		});
+
+		allAppernants.forEach(e -> {
+			try {
+				Person person = personService.findByCodEtu(e.getCodEtu());
+				if (person != null) {
+					e.setMail(person.getMail());
+				}
+			} catch (Exception e1) {
+				logger.error("Erreur lors de la recherche de l'étudiant dans LDAP : {} ", e1.getMessage());
+			}
+
+		});
+
+		return allAppernants.isEmpty() ? ResponseEntity.notFound().build()
+				: new ResponseEntity<>(allAppernants, HttpStatus.OK);
+
+	}
 
 	/**
 	 * 
@@ -207,7 +255,6 @@ public class PcscolControllerAdapter implements InitializingBean {
 			String codeEtape, String versionEtape, String codeDiplome, String versionDiplome, String codEtu, String nom,
 			String prenom) {
 
-		// TODO
 		List<Periode> periodes = espaceService.espacesFromAnnee(codeStructure, annee);
 
 		List<ApprenantDto> apprenantDtos = new ArrayList<>();
@@ -241,7 +288,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 					e.setMail(person.getMail());
 				}
 			} catch (Exception e1) {
-				logger.error("Erreur lors de la recherche de l'étudiant dans LDAP : " + e1.getMessage());
+				logger.error("Erreur lors de la recherche de l'étudiant dans LDAP : {} ", e1.getMessage());
 			}
 
 		});

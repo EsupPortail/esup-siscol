@@ -3,6 +3,7 @@ package org.esupportail.referentiel.pcscol.config;
 import java.net.URI;
 import java.time.Duration;
 
+import org.esupportail.referentiel.pcscol.api.ApprenantsApi;
 import org.esupportail.referentiel.pcscol.api.ArbresApi;
 import org.esupportail.referentiel.pcscol.api.CheminApi;
 import org.esupportail.referentiel.pcscol.api.CursusApi;
@@ -44,6 +45,8 @@ public class PcscolConfig {
 	
 	@Value("${app.pcscol.api.insInterne.url}")
 	private String apiInsInterne;
+	@Value("${app.pcscol.api.insGestion.url}")
+	private String insGestion;
 
 	@Value("${app.pcscol.api.chc.url}")
 	private String apiChcV6;
@@ -216,6 +219,20 @@ public class PcscolConfig {
 		}
 	}
 
+	@Bean
+	@SessionScope
+	ApprenantsApi apprenantsApi() {
+		try {
+			String token = accessTokenService.getToken();
+			return new ApprenantsApi(apiClient(insGestion, token));
+
+		} catch (Exception e) {
+			return new ApprenantsApi();
+		}
+	}
+	
+	
+	
 	private ApiClient apiClient(String url, String token) {
 		ApiClient apiClientIns = new ApiClient();
 		URI baseURI = URI.create(url);

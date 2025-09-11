@@ -128,7 +128,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 			@RequestParam(value = "codEtu", required = false) String codEtu,
 			@RequestParam(value = "nom", required = false) String nom,
 			@RequestParam(value = "prenom", required = false) String prenom) {
-		ResponseEntity<List<ApprenantDto>> listeDtos = pcscolControllerAdapter.recupererListeEtuParEtpEtDiplome(
+		ResponseEntity<List<ApprenantDto>> listeDtos = pcscolControllerAdapter.recupererListeEtuParEtpEtDiplomeInsInterne(
 				codeComposante, annee, codeEtape, versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
 		return listeDtos;
 	}
