@@ -56,12 +56,16 @@ public class AccessTokenService {
 		requestHeaders.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
 		// URL
+		/**
+		 * TODO pour la nouvelle version CAS, il faut supprimer &token=true
+		 */
 		String url = casUrl + "?username={username}&password={password}&token=true";
 
 		// Paramètres
 		Map<String, String> uriVariables = new HashMap<>();
 		uriVariables.put("username", svcAcountLogin);
 		uriVariables.put("password", svcAcountPassword);
+		uriVariables.put("token", "true");
 		
 		// RestTemplate
 		RestTemplate restTemplate = new RestTemplate();
@@ -70,7 +74,10 @@ public class AccessTokenService {
 		try {
 			tokenResponse = restTemplate.exchange(url, HttpMethod.POST, null, String.class, uriVariables);
 		} catch (Exception e) {
-			logger.error("Erreur lors de la récupération du token : {} cause : {}", e.getMessage(),e.getCause().getMessage());
+			logger.error("Erreur lors de la récupération du token : {} cause : {}", e.getMessage());
+			if (e.getCause() != null) {
+				logger.error("Cause détaillée : {}", e.getCause().getMessage());
+			}
 		}
 		
 		// Récupération du token dans la réponse

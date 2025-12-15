@@ -1,0 +1,44 @@
+  ______   _____  _    _  _____    _____  _____   _____   _____  ____   _       ______ 
+ |  ____| / ____|| |  | ||  __ \  / ____||_   _| / ____| / ____|/ __ \ | |     |  ____|
+ | |__   | (___  | |  | || |__) || (___    | |  | (___  | |    | |  | || |     | |__   
+ |  __|   \___ \ | |  | ||  ___/  \___ \   | |   \___ \ | |    | |  | || |     |  __|  
+ | |____  ____) || |__| || |      ____) | _| |_  ____) || |____| |__| || |____ | |____ 
+ |______||_____/  \____/ |_|     |_____/ |_____||_____/  \_____|\____/ |______||______|
+                                                                                       
+                                                                                                                                                                           
+                                                                                                                  
+
+===========================================================${AnsiColor.BRIGHT_BLUE}
+                SPRING BOOT APPLICATION${AnsiColor.DEFAULT}
+===========================================================
+
+  Application      : @project.artifactId@
+  Description      : ${@project.description@ :No description}
+  Build Time       : ${build.time}
+  Build Name       : ${build.name}
+  Build Artifact   : @project.artifactId@
+  Version          : @project.version@
+  Spring Boot	   : ${spring-boot.version}
+  
+
+----------------------- SPRING ----------------------------
+  Spring Boot      : ${spring-boot.version}
+  Active Profile   : ${spring.profiles.active: No profile set}
+
+----------------------- JAVA ------------------------------
+  Java Version     : ${java.version}
+  JVM Vendor       : ${java.vm.vendor}
+  JVM Name         : ${java.vm.name}
+  JVM Version      : ${java.vm.version}
+  PID              : ${PID}
+
+----------------------- SYSTEM ----------------------------
+  OS               : ${os.name}
+  OS Version       : ${os.version}
+  OS Arch          : ${os.arch}
+  User             : ${user.name}
+
+
+===========================================================
+ 🚀
+                                                 
