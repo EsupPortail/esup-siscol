@@ -31,16 +31,16 @@ public class InscriptionsInterneServices {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private InscriptionV115Api inscriptionV115Api;
+	private InscriptionV115Api inscriptionsV115Api;
 
 	private CheminApi cheminApi;
 
 	private ApprenantsApi apprenantsApi;
 
-	public InscriptionsInterneServices(@Autowired InscriptionV115Api inscriptionV115Api, @Autowired CheminApi cheminApi,
+	public InscriptionsInterneServices(@Autowired InscriptionV115Api inscriptionsV115Api, @Autowired CheminApi cheminApi,
 			@Autowired ApprenantsApi apprenantsApi) {
 		super();
-		this.inscriptionV115Api = inscriptionV115Api;
+		this.inscriptionsV115Api = inscriptionsV115Api;
 		this.cheminApi = cheminApi;
 		this.apprenantsApi = apprenantsApi;
 	}
@@ -164,14 +164,14 @@ public class InscriptionsInterneServices {
 		try {
 			logger.debug("Recherche inscriptions...{}", rechercheInscription);
 			PagedInscriptionsApprenantsPeriodesEtChemins response;
-			response = inscriptionV115Api.listerInscriptions(codeStructure, rechercheInscription, pageable);
+			response = inscriptionsV115Api.listerInscriptions(codeStructure, rechercheInscription, pageable);
 			logger.debug("Nombre total d'inscriptions : {}", response.getTotalElements());
 			inscriptionApprenantPeriodeEtChemin.addAll(response.getItems());
 			if (response.getTotalPages() > 1) {
 				for (int i = 1; i < response.getTotalPages(); i++) {
 					logger.debug("Lecture de la page {} sur {}", i + 1, response.getTotalPages());
 					pageable.setPage(i);
-					response = inscriptionV115Api.listerInscriptions(codeStructure, rechercheInscription, pageable);
+					response = inscriptionsV115Api.listerInscriptions(codeStructure, rechercheInscription, pageable);
 					inscriptionApprenantPeriodeEtChemin.addAll(response.getItems());
 				}
 			}

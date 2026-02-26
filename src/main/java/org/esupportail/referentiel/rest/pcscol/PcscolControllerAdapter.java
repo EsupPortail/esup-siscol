@@ -47,9 +47,6 @@ public class PcscolControllerAdapter implements InitializingBean {
 	private ChcExterneService chcExterneService;
 
 	@Autowired
-	NomenclatureApi nomenclatureApi;
-
-	@Autowired
 	@Qualifier("personServiceMapperMethod")
 	LdapServiceInterface personService;
 	@Autowired
@@ -97,12 +94,12 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		// generique
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
-		logger.debug("{} {}  {}", "getEtudiantRef", " => nbr d'esapces ", espaces.size());
+
 		/**
 		 * TODO relation annee periode ?? Attention ceci est une POF doit etre valide
 		 */
 
-		if (espaces != null && !espaces.isEmpty()) {
+		if (!espaces.isEmpty()) {
 			String espacesFictif = espaces.get(0).getCode();
 
 			EtudiantRef etudientREf = pcscolService.lireEtudiantRef(codeStructure, codeApprenant, espacesFictif);
@@ -111,9 +108,9 @@ public class PcscolControllerAdapter implements InitializingBean {
 				Person person = personService.findByCodEtu(codeApprenant);
 				if (person != null) {
 					etudientREf.setMail(person.getMail());
-					logger.debug("Mail trouvé pour l'étudiant : " + codeApprenant + " : " + person.getMail());
+					logger.debug("Mail trouvé pour l'étudiant : {} : {}", codeApprenant, person.getMail());
 				} else {
-					logger.warn("Aucun mail trouvé pour l'étudiant : " + codeApprenant);
+					logger.warn("Aucun mail trouvé pour l'étudiant :{} ", codeApprenant);
 				}
 
 				if (etudientREf.getPostalCode() != null && etudientREf.getTown() != null) {
@@ -122,23 +119,23 @@ public class PcscolControllerAdapter implements InitializingBean {
 						etudientREf.setTown(commune.getLibelleLong());
 					}
 				} else {
-					logger.warn("Aucune commune trouvée pour le code postal : " + etudientREf.getPostalCode()
-							+ " et la ville : " + etudientREf.getTown());
+					logger.warn("Aucune commune trouvée pour le code postal : {}  et la ville : {}",
+							etudientREf.getPostalCode(), etudientREf.getTown());
 				}
 				if (etudientREf.getCodePays() != null && !etudientREf.getCodePays().isBlank()) {
 					PaysNationalite pays = pcscolService.cherchePays(etudientREf.getCodePays());
 					if (pays != null) {
 						etudientREf.setCountry(pays.getLibelleLong());
 					} else {
-						logger.warn("Aucun pays trouvé pour le code : " + etudientREf.getCodePays());
+						logger.warn("Aucun pays trouvé pour le code : {} ", etudientREf.getCodePays());
 					}
 				}
 
 			}
 
-			return new ResponseEntity<EtudiantRef>(etudientREf, HttpStatus.OK);
+			return new ResponseEntity<>(etudientREf, HttpStatus.OK);
 		} else {
-			logger.error("Aucun étudiant trouvé pour le code : " + codeApprenant);
+			logger.error("Aucun étudiant trouvé pour le code : {} ", codeApprenant);
 			return ResponseEntity.notFound().build();
 		}
 
@@ -161,7 +158,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 		/**
 		 * TODO relation annee periode ??
 		 */
-		if (espaces != null && !espaces.isEmpty()) {
+		if (!espaces.isEmpty()) {
 			List<String> codeEspaces = new ArrayList<>();
 			espaces.forEach(e -> codeEspaces.add(e.getCode()));
 
@@ -171,7 +168,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 			return new ResponseEntity<>(apogeeMap, HttpStatus.OK);
 		} else {
-			logger.error("Aucun espace trouvé pour l'année : " + annee);
+			logger.error("Aucun espace trouvé pour l'année : {}", annee);
 			return ResponseEntity.notFound().build();
 		}
 
@@ -193,6 +190,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 		}
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+
 	/**
 	 * 
 	 * @param codeComposante
@@ -327,14 +325,14 @@ public class PcscolControllerAdapter implements InitializingBean {
 	 * @return List<EtapeInscription>
 	 */
 	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(String codEtud, String annee) {
-		// TODO
-		List<EtapeInscription> etapeInscriptions = new ArrayList<EtapeInscription>();
+	
+		List<EtapeInscription> etapeInscriptions = new ArrayList<>();
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
 
 		logger.debug("{} {}  {}", "studentListeEtapesInscription", " => nbr d'esapces ", espaces.size());
 		logger.debug("studentListeEtapesInscription espaces  : {}", espaces);
 
-		if (espaces != null && !espaces.isEmpty()) {
+		if (!espaces.isEmpty()) {
 			espaces.forEach(espace -> {
 
 				List<EtapeInscription> etps = pcscolService.etapeInscription(codeStructure, codEtud, espace.getCode());
@@ -358,8 +356,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(String codeComposante,
 			String annee) {
 
-		List<DiplomeReduitDto> diplomeReduitDtos = new ArrayList<DiplomeReduitDto>();
-
+		List<DiplomeReduitDto> diplomeReduitDtos = new ArrayList<>();
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
 
 		if (espaces != null && !espaces.isEmpty()) {

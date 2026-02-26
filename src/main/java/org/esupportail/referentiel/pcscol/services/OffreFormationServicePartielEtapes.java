@@ -1,6 +1,7 @@
 package org.esupportail.referentiel.pcscol.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -69,7 +70,7 @@ public class OffreFormationServicePartielEtapes {
 		String r = null;
 
 		List<ObjetMaquetteSummary> result = new ArrayList<>();
-		;
+		
 		logger.debug(
 				"rechercheObjetMaquetteSummary codeStructure {} espaceUUID {} typeObjetMaquette {} racine {} typeObjetFormation {} ids {} piaSeulement {} piaActif {} valideSeulement {} mutualis {}",
 				codeStructure, espaceUUID, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
@@ -102,7 +103,7 @@ public class OffreFormationServicePartielEtapes {
 			return result;
 		} catch (ApiException e) {
 			logger.error("Error in rechercheObjetMaquetteSummary", e);
-			return null;
+			return Collections.emptyList();
 		}
 
 	}

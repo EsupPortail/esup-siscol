@@ -56,7 +56,7 @@ public class ChcService {
 	Pageable pageable = new Pageable();
 	String r = null;
 	String espace = null;
-	List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
+	List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<>();
 	Boolean racine = null;
 	String typeObjetFormation = null;
 	List<UUID> ids = null;

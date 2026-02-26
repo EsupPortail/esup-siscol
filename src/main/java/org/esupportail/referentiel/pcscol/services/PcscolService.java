@@ -460,7 +460,7 @@ public class PcscolService implements PcscolServiceI {
 		List<EnfantsStructure> stack = new ArrayList<>(enfantsStructres);
 		while (!stack.isEmpty()) {
 			EnfantsStructure e = stack.remove(stack.size() - 1);
-			if (e.getObjetMaquette().getPia() != null &&e.getObjetMaquette().getValide() && Boolean.TRUE.equals(e.getObjetMaquette().getPia().getActif())) {
+			if (e.getObjetMaquette().getValide() && Boolean.TRUE.equals(e.getObjetMaquette().getPia().getActif())) {
 				enfantsStructresPia.add(e);
 			} else if (!e.getObjetMaquette().getEnfants().isEmpty()) {
 				stack.addAll(e.getObjetMaquette().getEnfants());
@@ -473,6 +473,7 @@ public class PcscolService implements PcscolServiceI {
 	 * @param enfantsStructres
 	 * @param enfantsStructresPia
 	 */
+	@Deprecated(since = "2024-06", forRemoval = true)
 	private void arbreObjetPia(List<EnfantsStructure> enfantsStructres, List<EnfantsStructure> enfantsStructresPia) {
 
 		enfantsStructres.forEach(e -> {

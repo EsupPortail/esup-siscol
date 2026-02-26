@@ -1,200 +1,189 @@
+
 package org.esupportail.referentiel.rest.generiqueSI;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.esupportail.referentiel.beans.ApogeeMap;
-import org.esupportail.referentiel.beans.ApprenantDto;
-import org.esupportail.referentiel.beans.DiplomeReduitDto;
-import org.esupportail.referentiel.beans.ElementPedagogique;
-import org.esupportail.referentiel.beans.EtabRef;
-import org.esupportail.referentiel.beans.EtapeInscription;
-import org.esupportail.referentiel.beans.EtudiantInfoAdm;
-import org.esupportail.referentiel.beans.EtudiantRef;
-import org.esupportail.referentiel.beans.SignataireRef;
+import java.util.*;
+import org.esupportail.referentiel.beans.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.Operation;
 
+/**
+ * Contrôleur REST pour l'accès aux données génériques du SI (étudiants, diplômes, étapes, etc.).
+ */
 @RestController
 @RequestMapping("generiqueSI")
 public class GeneriqueSIController implements GeneriqueSIControllerInterface {
 
-	@Value("@Value(${app.apogee.universityCode})")
-	private String universityCode;
+    @Value("${app.apogee.universityCode}")
+    private String universityCode;
 
-	@GetMapping("/etudiantRef")
-	public ResponseEntity<EtudiantRef> getEtudiantRef(@RequestParam(value = "codEtud") String codeEtud,
-			@RequestParam(value = "annee") String annee) {
-		EtudiantRef e = new EtudiantRef();
-		return new ResponseEntity<EtudiantRef>(e, HttpStatus.OK);
+    /**
+     * Récupère les informations de référence d'un étudiant.
+     */
+    @Operation(summary = "Récupérer les informations de référence d'un étudiant")
+    @GetMapping("/etudiantRef")
+    public ResponseEntity<EtudiantRef> getEtudiantRef(
+            @RequestParam("codEtud") String codeEtud,
+            @RequestParam("annee") String annee) {
+        return new ResponseEntity<>(new EtudiantRef(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère les années d'inscription d'un étudiant.
+     */
+    @Operation(summary = "Récupérer les années d'inscription d'un étudiant")
+    @GetMapping("/anneesIa")
+    public ResponseEntity<List<String>> recupererAnneesIa(@RequestParam("codEtud") String codeEtud) {
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère les étapes d'un étudiant pour une année donnée.
+     */
+    @Operation(summary = "Récupérer les étapes d'un étudiant pour une année donnée")
+    @GetMapping("/etapesByEtudiantAndAnnee")
+    public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(
+            @RequestParam("codEtud") String codeEtud,
+            @RequestParam("annee") String annee) {
+        return new ResponseEntity<>(new ApogeeMap(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère les informations administratives d'un étudiant.
+     */
+    @Operation(summary = "Récupérer les informations administratives d'un étudiant")
+    @GetMapping("/infosAdmEtu")
+    public ResponseEntity<EtudiantInfoAdm> infosAdmEtuV2(@RequestParam("numEtud") String numEtud) {
+        return new ResponseEntity<>(new EtudiantInfoAdm(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère la liste des étudiants par étape et diplôme.
+     */
+    @Operation(summary = "Récupérer la liste des étudiants par étape et diplôme")
+    @GetMapping("/listEtuParEtapeEtDiplome")
+    public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
+            @RequestParam("codeComposante") String codeComposante,
+            @RequestParam("annee") String annee,
+            @RequestParam("codeEtape") String codeEtape,
+            @RequestParam("versionEtape") String versionEtape,
+            @RequestParam("codeDiplome") String codeDiplome,
+            @RequestParam("versionDiplome") String versionDiplome,
+            @RequestParam(value = "codEtu", required = false) String codEtu,
+            @RequestParam(value = "nom", required = false) String nom,
+            @RequestParam(value = "prenom", required = false) String prenom) {
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère les étapes d'inscription d'un étudiant pour une année.
+     */
+    @Operation(summary = "Récupérer les étapes d'inscription d'un étudiant pour une année")
+    @GetMapping("/studentEtapeVets")
+    public ResponseEntity<Map<String, String>> studentEtapeVets(
+            @RequestParam("codEtud") String codeEtud,
+            @RequestParam("annee") String annee) {
+        return new ResponseEntity<>(new LinkedHashMap<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère la liste des étapes d'inscription d'un étudiant.
+     */
+    @Operation(summary = "Récupérer la liste des étapes d'inscription d'un étudiant")
+    @GetMapping("/studentListeEtapeInscription")
+    public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(
+            @RequestParam("codEtud") String codEtud,
+            @RequestParam("annee") String annee) {
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère la liste des éléments pédagogiques de stage pour une étape.
+     */
+    @Operation(summary = "Récupérer la liste des éléments pédagogiques de stage pour une étape")
+    @GetMapping("/studentListeElpStage")
+    public ResponseEntity<List<ElementPedagogique>> studentListeElpStage(
+            @RequestParam("codeEtape") String codeEtape,
+            @RequestParam("versionEtape") String versionEtape) {
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère la référence de l'établissement.
+     */
+    @Operation(summary = "Récupérer la référence de l'établissement")
+    @GetMapping("/etablissementReference")
+    public ResponseEntity<EtabRef> etablissementReference() {
+        return new ResponseEntity<>(new EtabRef(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère la liste des étapes de référence.
+     */
+    @Operation(summary = "Récupérer la liste des étapes de référence")
+    @GetMapping("/etapesReference")
+    public ResponseEntity<Map<String, String>> getEtapesRef() {
+        return new ResponseEntity<>(new HashMap<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère la liste des diplômes de référence.
+     */
+    @Operation(summary = "Récupérer la liste des diplômes de référence")
+    @GetMapping("/diplomesReference")
+    public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRef() {
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère la liste des diplômes de référence par composante et année.
+     */
+    @Operation(summary = "Récupérer la liste des diplômes de référence par composante et année")
+    @GetMapping("/diplomesReferenceParComposanteEtAnnee")
+    public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(
+            @RequestParam("codeComposante") String codeComposante,
+            @RequestParam("codeAnnee") String codeAnnee) {
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère la liste des composantes principales de référence.
+     */
+    @Operation(summary = "Récupérer la liste des composantes principales de référence")
+    @GetMapping("/composantesPrincipalesRef")
+    public ResponseEntity<Map<String, String>> composantesPrincipalesRef() {
+        return new ResponseEntity<>(new HashMap<>(), HttpStatus.OK);
+    }
+
+    /**
+     * Récupère le signataire de la composante.
+     */
+    @Operation(summary = "Récupérer le signataire de la composante")
+    @GetMapping("/composanteSignaitaireRef")
+    public ResponseEntity<SignataireRef> signataireRef(
+            @RequestParam(value = "composante", defaultValue = "SCO") String composante) {
+        return new ResponseEntity<>(new SignataireRef(), HttpStatus.OK);
+    }
+
+    public String getUniversityCode() {
+        return universityCode;
+    }
+
+    public void setUniversityCode(String universityCode) {
+        this.universityCode = universityCode;
+    }
+
+	@Override
+	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(String numEtud) {
+		// TODO Auto-generated method stub
+		return new ResponseEntity<EtudiantInfoAdm>(new EtudiantInfoAdm(), null);
 	}
 
-	@Operation(summary = "Récupérer les années d'inscription d'un étudiant")
-	@GetMapping("/anneesIa")
-	public ResponseEntity<List<String>> recupererAnneesIa(@RequestParam(value = "codEtud") String codeEtud) {
-		List<String> annees = new ArrayList<String>();
-		return new ResponseEntity<>(annees, HttpStatus.OK);
+	@Override
+	public ResponseEntity<SignataireRef> signaitaireRef(String composante) {
+		// TODO Auto-generated method stub
+		return new ResponseEntity<SignataireRef>(new SignataireRef(), null);
 	}
-
-	/**
-	 * 
-	 * @param codeEtud
-	 * @param annee
-	 * @return
-	 */
-	@GetMapping("/etapesByEtudiantAndAnnee")
-	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
-			@RequestParam(value = "annee") String annee) {
-		ApogeeMap map = new ApogeeMap();
-		return new ResponseEntity<ApogeeMap>(map, HttpStatus.OK);
-	}
-
-	@GetMapping("/infosAdmEtu")
-	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud) {
-		EtudiantInfoAdm student = new EtudiantInfoAdm();
-		return new ResponseEntity<>(student, HttpStatus.OK);
-	}
-
-	@GetMapping("/listEtuParEtapeEtDiplome")
-	public ResponseEntity<List<ApprenantDto>> recupererListeEtuParEtpEtDiplome(
-			@RequestParam(value = "codeComposante", required = true) String codeComposante,
-			@RequestParam(value = "annee", required = true) String annee,
-			@RequestParam(value = "codeEtape", required = true) String codeEtape,
-			@RequestParam(value = "versionEtape", required = true) String versionEtape,
-			@RequestParam(value = "codeDiplome", required = true) String codeDiplome,
-			@RequestParam(value = "versionDiplome", required = true) String versionDiplome,
-			@RequestParam(value = "codEtu", required = false) String codEtu,
-			@RequestParam(value = "nom", required = false) String nom,
-			@RequestParam(value = "prenom", required = false) String prenom) {
-
-		List<ApprenantDto> listeEtu = new ArrayList<ApprenantDto>();
-		return new ResponseEntity<>(listeEtu, HttpStatus.OK);
-
-	}
-
-	/**
-	 * 
-	 * @param codeEtud
-	 * @param annee
-	 * @return
-	 */
-	@GetMapping("/studentEtapeVets")
-	public ResponseEntity<Map<String, String>> studentEtapeVets(
-			@RequestParam(value = "codEtud") String codeEtud, @RequestParam(value = "annee") String annee) {
-		LinkedHashMap<String, String> lEtapeInscriptions = new LinkedHashMap<String, String>();
-		return new ResponseEntity<>(lEtapeInscriptions, HttpStatus.OK);
-	}
-
-	/**
-	 * 
-	 * @param codEtud
-	 * @param annee
-	 * @return List<EtapeInscription>
-	 */
-	@GetMapping("/studentListeEtapeInscription")
-	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(
-			@RequestParam(value = "codEtud") String codEtud, @RequestParam(value = "annee") String annee) {
-		List<EtapeInscription> l = new ArrayList<EtapeInscription>();
-		return new ResponseEntity<>(l, HttpStatus.OK);
-	}
-
-	/**
-	 * 
-	 * @param codeEtape
-	 * @param versionEtape
-	 * @return List<ElementPedagogique>
-	 */
-	@GetMapping("/studentListeElpStage")
-	public ResponseEntity<List<ElementPedagogique>> studentListeElpStage(
-			@RequestParam(value = "codeEtape") String codeEtape,
-			@RequestParam(value = "versionEtape") String versionEtape) {
-		List<ElementPedagogique> l = new ArrayList<ElementPedagogique>();
-		return new ResponseEntity<>(l, HttpStatus.OK);
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@GetMapping("/etablissementReference")
-	public ResponseEntity<EtabRef> etablissementReference() {
-		EtabRef etabRef = new EtabRef();
-		return new ResponseEntity<>(etabRef, HttpStatus.OK);
-
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@GetMapping("/etapesReference")
-	public ResponseEntity<Map<String, String>> getEtapesRef() {
-		Map<String, String> ref = new HashMap<String, String>();
-		return new ResponseEntity<Map<String, String>>(ref, HttpStatus.OK);
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@GetMapping("/diplomesReference")
-	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRef() {
-		List<DiplomeReduitDto> ref = new ArrayList<DiplomeReduitDto>();
-		return new ResponseEntity<>(ref, HttpStatus.OK);
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@GetMapping("/diplomesReferenceParComposanteEtAnnee")
-	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(
-			@RequestParam(value = "codeComposante", required = true) String codeComposante,
-			@RequestParam(value = "codeAnnee", required = true) String codeAnnee) {
-		List<DiplomeReduitDto> ref = new ArrayList<DiplomeReduitDto>();
-		return new ResponseEntity<>(ref, HttpStatus.OK);
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	@GetMapping("/composantesPrincipalesRef")
-	public ResponseEntity<Map<String, String>> composantesPrincipalesRef() {
-		Map<String, String> ref = new HashMap<String, String>();
-		return new ResponseEntity<Map<String, String>>(ref, HttpStatus.OK);
-
-	}
-
-	/**
-	 * 
-	 * @param composante
-	 * @return
-	 */
-	@GetMapping("/composanteSignaitaireRef")
-	public ResponseEntity<SignataireRef> signaitaireRef(
-			@RequestParam(value = "composante", defaultValue = "SCO") String composante) {
-		SignataireRef ref = new SignataireRef();
-		return new ResponseEntity<>(ref, HttpStatus.OK);
-
-	}
-
-	public String getUniversityCode() {
-		return universityCode;
-	}
-
-	public void setUniversityCode(String universityCode) {
-		this.universityCode = universityCode;
-	}
-
 }

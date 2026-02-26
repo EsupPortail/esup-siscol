@@ -198,7 +198,7 @@ public class PcscolConfig {
 	
 	@Bean
 	@SessionScope
-	InscriptionV115Api inscriptionsV2115Api() {
+	InscriptionV115Api inscriptionsV115Api() {
 		try {
 			String token = accessTokenService.getToken();
 			return new InscriptionV115Api(apiClient(apiInsInterne, token));
