@@ -1,0 +1,36 @@
+# Configuration recommended pour application.yml avec proxy HTTP
+# Ajoutez cette section à votre application.yml existant
+
+---
+# Configuration du serveur pour supporter les headers X-Forwarded-*
+server:
+  # Stratégie pour traiter les headers proxy
+  # - framework: Spring gère les headers X-Forwarded-* (recommandé)
+  # - native: Tomcat gère les headers X-Forwarded-*
+  # - none: Pas de traitement des headers proxy
+  forward-headers-strategy: framework
+  
+  # Configuration Tomcat pour accepter les headers proxy
+  tomcat:
+    # Autorise les connections derrière un proxy
+    remoteip:
+      # Pattern des IPs du proxy (regex)
+      # Remplacez par l'IP réelle de votre proxy
+      remote-ip-header: x-forwarded-for
+      protocol-header: x-forwarded-proto
+
+# Configuration CORS (gérée par WebSecurityConfig)
+# Les paramètres suivants sont appliqués automatiquement par le bean CorsFilter
+# cors:
+#   allow-credentials: true
+#   allowed-origin-patterns: ".*"
+#   allowed-headers: "*"
+#   allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+#   max-age: 3600
+
+# Configuration de sécurité pour les proxies
+# Vous pouvez ajouter une liste blanche d'IPs de proxy autorisées
+proxy:
+  # IPs autorisées à envoyer les headers X-Forwarded-*
+  # Exemple: "10.0.0.0/8" ou "192.168.1.100"
+  trusted-ips: "10.0.0.0/8,172.16.0.0/12,192.168.0.0/16"
