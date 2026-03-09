@@ -1,7 +1,8 @@
 APOGEE WS à partir de la version 62031 ...Referentiel overlay Template
 =======================
 
-
+> **📚 Nouvelle Documentation Disponible** : Guide complet pour créer une nouvelle source de données compatible avec le modèle Générique SI.  
+> Consultez l'[Index de la Documentation](docs/INDEX-DOCUMENTATION-GENERIQUE-SI.md) pour plus d'informations.
 
 # Prérequis et Versions
 
@@ -201,6 +202,42 @@ mvn dependency:purge-local-repository -DactTransitively=false -DreResolve=false
 ```
 
 Same strategy applies to Windows too, provided you switch `$HOME` to its equivalent in the above command.
+
+# Documentation
+
+## Modèle Générique SI
+
+Le projet esup-siscol utilise un **modèle Générique SI** qui permet d'intégrer n'importe quelle source de données (Apogée, Pegase/PcScol, ou source personnalisée) via une interface standardisée.
+
+### Documentation Disponible
+
+| Document | Description | Public Cible |
+|----------|-------------|--------------|
+| [**Index Documentation**](docs/INDEX-DOCUMENTATION-GENERIQUE-SI.md) | Point d'entrée principal avec navigation complète | Tous |
+| [**Guide Complet**](docs/guide-creation-source-donnees-generique-si.md) | Guide détaillé avec architecture et bonnes pratiques | Développeurs (lecture approfondie) |
+| [**Exemple d'Implémentation**](docs/exemple-implementation-nouvelle-source.md) | Exemple complet avec code source (~1500 lignes) | Développeurs (apprentissage pratique) |
+| [**Référence Rapide**](docs/reference-rapide-generique-si.md) | Checklist, templates et troubleshooting | Tous (référence quotidienne) |
+
+### Créer une Nouvelle Source de Données
+
+Pour intégrer une nouvelle source de données compatible avec le modèle Générique SI :
+
+1. **Comprendre** : Lire le [Guide Complet](docs/guide-creation-source-donnees-generique-si.md)
+2. **Apprendre** : Étudier l'[Exemple d'Implémentation](docs/exemple-implementation-nouvelle-source.md)
+3. **Implémenter** : Suivre la [Référence Rapide](docs/reference-rapide-generique-si.md)
+
+### Exemples de Sources Existantes
+
+- **Apogée** : `src/main/java/org/esupportail/referentiel/rest/apogee/`
+- **PcScol/Pegase** : `src/main/java/org/esupportail/referentiel/rest/pcscol/` (recommandé comme référence)
+- **Générique SI** : `src/main/java/org/esupportail/referentiel/rest/generiqueSI/` (template de base)
+
+### Swagger UI
+
+Une fois l'application déployée, l'interface Swagger est accessible à :
+```
+http://[serveur]:[port]/swagger-ui.html
+```
 
 # Deployment
 
