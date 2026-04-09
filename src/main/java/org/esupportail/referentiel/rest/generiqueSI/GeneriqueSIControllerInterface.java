@@ -14,7 +14,9 @@ import org.esupportail.referentiel.beans.EtudiantDTO2Ext;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.SignataireRef;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 public interface GeneriqueSIControllerInterface {
@@ -129,4 +131,7 @@ public interface GeneriqueSIControllerInterface {
 	 * @return
 	 */
 	public ResponseEntity<SignataireRef >signaitaireRef(@RequestParam(value = "composante", defaultValue = "SCO") String composante);
+	
+	@GetMapping("/regimesInscriptions")
+	public ResponseEntity<Map<String,String>> regimesInscriptions() ;
 }

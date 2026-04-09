@@ -166,6 +166,14 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface {
             @RequestParam(value = "composante", defaultValue = "SCO") String composante) {
         return new ResponseEntity<>(new SignataireRef(), HttpStatus.OK);
     }
+    
+
+    @Operation(summary = "Récupérer regimesInscriptions")
+    @GetMapping("/regimesInscriptions")
+	public ResponseEntity<Map<String, String>> regimesInscriptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
     public String getUniversityCode() {
         return universityCode;
@@ -186,4 +194,5 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface {
 		// TODO Auto-generated method stub
 		return new ResponseEntity<SignataireRef>(new SignataireRef(), null);
 	}
+
 }

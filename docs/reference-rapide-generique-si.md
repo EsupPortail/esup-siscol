@@ -93,7 +93,7 @@ Le modèle Générique SI d'esup-siscol permet d'intégrer n'importe quelle sour
 | `/studentListeEtapeInscription` | GET | codEtud, annee | List\<EtapeInscription\> | Liste inscriptions |
 | `/studentListeElpStage` | GET | codeEtape, versionEtape | List\<ElementPedagogique\> | ELP de stage |
 
-### 📚 Gestion Référentiel (6 endpoints)
+### 📚 Gestion Référentiel (7 endpoints)
 
 | Endpoint | Méthode | Paramètres | Retour | Description |
 |----------|---------|------------|--------|-------------|
@@ -103,6 +103,7 @@ Le modèle Générique SI d'esup-siscol permet d'intégrer n'importe quelle sour
 | `/diplomesReferenceParComposanteEtAnnee` | GET | codeComposante, codeAnnee | List\<DiplomeReduitDto\> | Diplômes filtrés |
 | `/composantesPrincipalesRef` | GET | - | Map\<String,String\> | Composantes |
 | `/composanteSignaitaireRef` | GET | composante? | SignataireRef | Signataire |
+| `/regimesInscriptions` | GET | - | Map\<String,String\> | Régimes d'inscription (code -> libellé) |
 
 ---
 
@@ -170,6 +171,33 @@ String codDip           // Code diplôme
 String libDip           // Libellé diplôme
 String libDipAff        // Libellé affichage
 ```
+
+---
+
+## Détail : endpoint `/pcscol/regimesInscriptions`
+
+- URI : `/pcscol/regimesInscriptions`
+- Méthode : GET
+- Paramètres : aucun
+- Retour : `Map<String,String>` où la clé est le code du régime (ex : `codRgi`) et la valeur est le libellé affiché.
+- Comportement :
+  - Appelle `ReferentielMetier.recupererRegimeInscription(...)` pour récupérer la liste des régimes.
+  - Pour chaque nomenclature, le libellé retourné est d'abord `getLibelleAffichage()` ; si celui-ci est vide ou null, on utilise `getLibelleCourt()` (fallback).
+  - Utilise une `LinkedHashMap` pour préserver l'ordre d'apparition garanti par la source.
+  - Les clés vides/null sont ignorées.
+
+Exemple de réponse (JSON) :
+```json
+{
+  "RGI01": "Inscription initiale",
+  "RGI02": "Réinscription",
+  "RGI03": "Admission sur titre"
+}
+```
+
+Notes :
+- Le endpoint ne prend pas de paramètres et renvoie l'ensemble des régimes disponibles pour l'établissement activé par la configuration (scope local du contrôleur `pcscol`).
+- En cas d'erreur lors de l'appel au service de référentiel, le contrôleur renvoie une erreur 500 ou 404 selon le contexte (voir comportement standard des contrôleurs dans ce repo).
 
 ---
 

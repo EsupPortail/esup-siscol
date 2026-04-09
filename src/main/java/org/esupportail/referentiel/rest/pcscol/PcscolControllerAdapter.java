@@ -395,4 +395,9 @@ public class PcscolControllerAdapter implements InitializingBean {
 		logger.info("CesureUtils: {}", cesureUtils.getCesures());
 	}
 
+	public Map<String, String> regimesInscriptions() {
+		return pcscolService.lireMapNomenclature("RegimeInscription");
+		
+	}
+
 }

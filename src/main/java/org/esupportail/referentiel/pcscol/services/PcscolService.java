@@ -668,6 +668,18 @@ public class PcscolService implements PcscolServiceI {
 		return null;
 
 	}
+	
+	public Map<String, String> lireMapNomenclature(String typeNomenclature) {
+		Map<String, String> map = new LinkedHashMap<>();
+		try {
+			List<Nomenclature> nomenclatures = nomenclatureApi.lireListeNomenclatures(typeNomenclature);
+			nomenclatures.forEach(n -> map.put(n.getCode(), n.getLibelleCourt()));
+		} catch (ApiException e) {
+			logger.error("Erreur lors de la récupération de la nomenclature : {} : {}", typeNomenclature,
+					e.getMessage());
+		}
+		return map;
+	}
 
 	/**
 	 * 

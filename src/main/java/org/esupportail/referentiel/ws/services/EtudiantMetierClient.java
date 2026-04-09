@@ -16,9 +16,11 @@
 package org.esupportail.referentiel.ws.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
+import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import org.esupportail.referentiel.beans.EtudiantDTO2Ext;
@@ -45,7 +47,6 @@ import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauDiplomes;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TableauEtapes;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.TypeHebergementDTO;
 import gouv.education.apogee.commun.client.ws.EtudiantMetier.WebBaseException_Exception;
-import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO3;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.DiplomeDTO4;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.OffreFormationMetierServiceInterface;
 import gouv.education.apogee.commun.client.ws.OffreFormationMetier.SECritereDTO2;
@@ -89,8 +90,7 @@ public class EtudiantMetierClient {
 			List<InsAdmEtpDTO3> IAEtapesV3 = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
 			IAEtapesV3.get(0).getCursusAmg();
 		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur test recupererIAEtapesV3 cod={} annee={}", cod, annee, e);
 		}
 	}
 
@@ -108,9 +108,7 @@ public class EtudiantMetierClient {
 			}
 
 		} catch (gouv.education.apogee.commun.client.ws.ReferentielMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			logger.error("Erreur de récupérer le détail regimeInscription" + e.getMessage());
+			logger.error("Erreur recuperereRegimeInscription code={} temoin={}", code, temoin, e);
 		}
 		return null;
 	}
@@ -129,11 +127,10 @@ public class EtudiantMetierClient {
 			String cleINE, String numBoursier, String codOPI, String nom, String prenom, String dateNaiss,
 			String temoinRecupAnnu) {
 		try {
-			IdentifiantsEtudiantDTO2 etudiant = etudiantMetierService.recupererIdentifiantsEtudiantV2(codEtu, codInd,
+			return etudiantMetierService.recupererIdentifiantsEtudiantV2(codEtu, codInd,
 					numINE, numBoursier, codOPI, nom, prenom, dateNaiss, temoinRecupAnnu);
-			return etudiant;
 		} catch (WebBaseException_Exception e) {
-			logger.error("recupererIdentifiantsEtudiantV2 : " + codEtu + " -> " + e.getMessage());
+			logger.error("recupererIdentifiantsEtudiantV2 :  {} -> {}", codEtu , e.getMessage());
 			return null;
 		}
 
@@ -146,9 +143,8 @@ public class EtudiantMetierClient {
 	 * @return IdentifiantsEtudiantDTO2
 	 */
 	public IdentifiantsEtudiantDTO2 recupererIdentifiantsEtudiantByCodEtu(String codEtu, String temoinRecupAnnu) {
-		IdentifiantsEtudiantDTO2 e = recupererIdentifiantsEtudiant(codEtu, null, null, null, null, null, null, null,
+		return recupererIdentifiantsEtudiant(codEtu, null, null, null, null, null, null, null,
 				null, temoinRecupAnnu);
-		return e;
 	}
 
 	/**
@@ -158,29 +154,28 @@ public class EtudiantMetierClient {
 	 * @return IdentifiantsEtudiantDTO2
 	 */
 	public IdentifiantsEtudiantDTO2 recupererIdentifiantsEtudiantByCodInd(String codInd, String temoinRecupAnnu) {
-		IdentifiantsEtudiantDTO2 e = recupererIdentifiantsEtudiant(null, codInd, null, null, null, null, null, null,
+		return recupererIdentifiantsEtudiant(null, codInd, null, null, null, null, null, null,
 				null, temoinRecupAnnu);
-		return e;
 	}
 
 	/**
 	 * 
-	 * @param CodEtu
+	 * @param codEtu
 	 * @param anneeCourante
 	 * @return CoordonneesDTO2
 	 */
-	public CoordonneesDTO2 recupererCoordonneesDTO2(String CodEtu, String anneeCourante, String recupAnnu) {
+	public CoordonneesDTO2 recupererCoordonneesDTO2(String codEtu, String anneeCourante, String recupAnnu) {
 		// Recuperation des coordonnees de l'etudiant
 		CoordonneesDTO2 coordonnees = new CoordonneesDTO2();
 		try {
 
-			coordonnees = etudiantMetierService.recupererAdressesEtudiantV2(CodEtu, null, recupAnnu);
+			coordonnees = etudiantMetierService.recupererAdressesEtudiantV2(codEtu, null, recupAnnu);
 		} catch (Exception wb) {
+			logger.warn("Echec recupererAdressesEtudiantV2 sans annee codEtu={}", codEtu, wb);
 			try {
-				coordonnees = etudiantMetierService.recupererAdressesEtudiantV2(CodEtu, anneeCourante, recupAnnu);
+				coordonnees = etudiantMetierService.recupererAdressesEtudiantV2(codEtu, anneeCourante, recupAnnu);
 			} catch (WebBaseException_Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error("Echec recupererAdressesEtudiantV2 avec annee codEtu={} annee={}", codEtu, anneeCourante, e);
 			}
 		}
 		return coordonnees;
@@ -193,15 +188,13 @@ public class EtudiantMetierClient {
 	 * @return List<InsAdmEtpDTO3>
 	 */
 	public List<InsAdmEtpDTO3> recupererIAEtapesV3(String cod, String annee) {
-		List<InsAdmEtpDTO3> tabInsAdmEtp = null;
 		try {
-			tabInsAdmEtp = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
+			List<InsAdmEtpDTO3> tabInsAdmEtp = serviceAdministratif.recupererIAEtapesV3(cod, annee, "E", "E");
+			return tabInsAdmEtp == null ? Collections.emptyList() : tabInsAdmEtp;
 		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
-			logger.error("recupererIAEtapesV3  code :  " + cod + "\t  annee " + ": " + annee + " : " + e.getMessage());
-			// e.printStackTrace();
+			logger.error("recupererIAEtapesV3 code={} annee={}", cod, annee, e);
+			return Collections.emptyList();
 		}
-
-		return tabInsAdmEtp;
 	}
 
 	/**
@@ -210,15 +203,13 @@ public class EtudiantMetierClient {
 	 * @return List<String>
 	 */
 	public List<String> recupererAnneesIa(String codeEtud) {
-		List<String> annees = null;
-
 		try {
-			annees = serviceAdministratif.recupererAnneesIa(codeEtud, "E");
+			List<String> annees = serviceAdministratif.recupererAnneesIa(codeEtud, "E");
+			return annees == null ? Collections.emptyList() : annees;
 		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur recupererAnneesIa codeEtud={}", codeEtud, e);
+			return Collections.emptyList();
 		}
-		return (annees);
 	}
 
 	/**
@@ -228,16 +219,13 @@ public class EtudiantMetierClient {
 	 * @return List<InsAdmAnuDTO2>
 	 */
 	public List<InsAdmAnuDTO2> recupererIAAnnuellesV2(String codeEtud, String annee) {
-		List<InsAdmAnuDTO2> insAdmAnuDTO2 = null;
-
 		try {
-			insAdmAnuDTO2 = serviceAdministratif.recupererIAAnnuellesV2(codeEtud, annee, "E");
+			List<InsAdmAnuDTO2> insAdmAnuDTO2 = serviceAdministratif.recupererIAAnnuellesV2(codeEtud, annee, "E");
+			return insAdmAnuDTO2 == null ? Collections.emptyList() : insAdmAnuDTO2;
 		} catch (gouv.education.apogee.commun.client.ws.AdministratifMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur recupererIAAnnuellesV2 codeEtud={} annee={}", codeEtud, annee, e);
+			return Collections.emptyList();
 		}
-
-		return (insAdmAnuDTO2);
 	}
 
 	/*
@@ -247,18 +235,16 @@ public class EtudiantMetierClient {
 	 * EtudiantMetierServiceInterfaceCustom#recupererTypeHebergement(java.lang.
 	 * String, java.lang.String, java.lang.String)
 	 */
-
 	public List<TypeHebergementDTO> recupererTypeHebergement(String code, String temoinService, String temoinAD) {
 		try {
 			List<TypeHebergementDTO> typeHebergementDTO = etudiantMetierService.recupererTypeHebergement(code,
 					temoinService, temoinAD);
-			return typeHebergementDTO;
+			return typeHebergementDTO == null ? Collections.emptyList() : typeHebergementDTO;
 		} catch (WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur recupererTypeHebergement code={} temoinService={} temoinAD={}", code, temoinService,
+					temoinAD, e);
+			return Collections.emptyList();
 		}
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**
@@ -286,13 +272,12 @@ public class EtudiantMetierClient {
 	 */
 
 	public List<EtudiantDTO2> recupererListeEtudiants(EtudiantCritereDTO parametres) {
-		// TODO Auto-generated method stub
 		try {
 			return etudiantMetierService.recupererListeEtudiants(parametres);
 		} catch (WebBaseException_Exception e) {
 			logger.error(e.getMessage());
 		}
-		return null;
+		return Collections.emptyList();
 	}
 
 	/**
@@ -314,52 +299,31 @@ public class EtudiantMetierClient {
 				codeDipl, verDipl);
 		logger.debug("recupererListeEtuParEtpEtDiplome : {} {} {} {}  {} {}  ", codeComposante, annee, codeEtp,
 				versionEtp, codeDipl, verDipl);
-		Predicate<EtudiantDTO2> byNumEtuPredicate = etudiant -> etudiant.getCodEtu().equals(codEtu);
-		Predicate<EtudiantDTO2> byPrenomPredicate = etudiant -> etudiant.getPrenom().toUpperCase()
-				.contains(prenom.toUpperCase());
-		Predicate<EtudiantDTO2> byName = etudiant -> etudiant.getNom().toUpperCase().contains(nom.toUpperCase());
 
-		List<EtudiantDTO2> etudiantsFiltres = null;
+		if (etudiants == null || etudiants.isEmpty()) {
+			return new ArrayList<>();
+		}
+
+		Stream<EtudiantDTO2> stream = etudiants.stream();
 
 		if (StringUtils.hasText(codEtu)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par codEtu : {}", codEtu);
-			Stream<EtudiantDTO2> result = etudiants.stream().filter(byNumEtuPredicate);
-			etudiantsFiltres = result.toList();
-			if (StringUtils.hasText(nom)) {
-				Stream<EtudiantDTO2> resultByName = etudiantsFiltres.stream().filter(byName);
-				etudiantsFiltres = resultByName.toList();
-				if (StringUtils.hasText(prenom)) {
-					Stream<EtudiantDTO2> resultByPrenom = etudiantsFiltres.stream().filter(byPrenomPredicate);
-					etudiantsFiltres = resultByPrenom.toList();
-				}
-
-			} else if (StringUtils.hasText(prenom)) {
-				Stream<EtudiantDTO2> resultByPrenom = etudiantsFiltres.stream().filter(byPrenomPredicate);
-				etudiantsFiltres = resultByPrenom.toList();
-			}
-
-		} else if (StringUtils.hasText(nom)) {
+			stream = stream.filter(etudiant -> codEtu.equals(etudiant.getCodEtu()));
+		}
+		if (StringUtils.hasText(nom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Nom : {}", nom);
-
-			Stream<EtudiantDTO2> result = etudiants.stream().filter(byName);
-			if (StringUtils.hasText(prenom)) {
-				logger.debug("recupererListeEtuParEtpEtDiplome filtre par Prenom : {}", prenom);
-				Stream<EtudiantDTO2> resultByPrenom = result.filter(byPrenomPredicate);
-				etudiantsFiltres = resultByPrenom.toList();
-			} else {
-				etudiantsFiltres = result.toList();
-
-			}
-		} else if (StringUtils.hasText(prenom)) {
+			String nomUpper = nom.toUpperCase(Locale.ROOT);
+			stream = stream.filter(etudiant -> etudiant.getNom() != null
+					&& etudiant.getNom().toUpperCase(Locale.ROOT).contains(nomUpper));
+		}
+		if (StringUtils.hasText(prenom)) {
 			logger.debug("recupererListeEtuParEtpEtDiplome filtre par Prenom : {}", prenom);
-			Stream<EtudiantDTO2> resultParPrenom = etudiants.stream().filter(byPrenomPredicate);
-			etudiantsFiltres = resultParPrenom.toList();
+			String prenomUpper = prenom.toUpperCase(Locale.ROOT);
+			stream = stream.filter(etudiant -> etudiant.getPrenom() != null
+					&& etudiant.getPrenom().toUpperCase(Locale.ROOT).contains(prenomUpper));
 		}
 
-		if (etudiantsFiltres != null) {
-			return ApogeeEtudiantMapper.Instance.etudiantDTO2ToEtudiantDTO2Ext(etudiantsFiltres);
-		} else
-			return ApogeeEtudiantMapper.Instance.etudiantDTO2ToEtudiantDTO2Ext(etudiants);
+		return ApogeeEtudiantMapper.Instance.etudiantDTO2ToEtudiantDTO2Ext(stream.toList());
 	}
 
 	/**
@@ -419,8 +383,7 @@ public class EtudiantMetierClient {
 
 		logger.info("annee : {}, codeEtape : {}, versionEtape : {} ,codeDiplome : {}, versionDiplome : {}", annee,
 				codeEtp, versionEtp, codeDipl, verDipl);
-		List<EtudiantDTO2> resultat = recupererListeEtudiants(criteres);
-		return resultat;
+		return recupererListeEtudiants(criteres);
 	}
 
 	/**
@@ -434,26 +397,19 @@ public class EtudiantMetierClient {
 
 		// recherche du cursus LMD, codFinalite
 		SECritereDTO2 seCritereDTO = new SECritereDTO2();
-//			seCritereDTO.setCodAnu(annee);
 		seCritereDTO.setCodDip("aucun");
 		seCritereDTO.setCodVrsVdi("aucun");
-//			seCritereDTO.setCodEtp("aucun");
 		seCritereDTO.setCodEtp(codeEtp);
-//			seCritereDTO.setCodVrsVet("aucun");
 		seCritereDTO.setCodVrsVet(versionEtp);
 		seCritereDTO.setCodElp("tous");
-//			seCritereDTO.setCodNatureElp("stag");
-
-		List<DiplomeDTO4> diplomeDTO = null;
 
 		try {
-			diplomeDTO = offreFormationMetierService.recupererSEV4(seCritereDTO);
+			List<DiplomeDTO4> diplomeDTO = offreFormationMetierService.recupererSEV4(seCritereDTO);
+			return diplomeDTO == null ? Collections.emptyList() : diplomeDTO;
 		} catch (gouv.education.apogee.commun.client.ws.OffreFormationMetier.WebBaseException_Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Erreur recupererListDiplomeDTO4 codeEtp={} versionEtp={}", codeEtp, versionEtp, e);
+			return Collections.emptyList();
 		}
-
-		return (diplomeDTO);
 
 	}
 
@@ -484,32 +440,42 @@ public class EtudiantMetierClient {
 	 * @return List<RegimeInscription>
 	 */
 	public List<RegimeInscription> regimeInscriptionEtudiant(String codeEtud, String annee) {
+		List<InsAdmAnuDTO2> iaAnnuelles = recupererIAAnnuellesV2(codeEtud, annee);
+		if (iaAnnuelles == null || iaAnnuelles.isEmpty()) {
+			return Collections.emptyList();
+		}
 
 		List<RegimeInscription> regimeInscriptions = new ArrayList<>();
-		List<InsAdmAnuDTO2> iaAnnuelles = recupererIAAnnuellesV2(codeEtud, annee);
-		logger.debug("iaAnnuelles : " + iaAnnuelles.size());
+		Map<String, RegimeInscDTO> regimeCache = new HashMap<>();
+
+		logger.debug("iaAnnuelles : {}", iaAnnuelles.size());
+
 		for (InsAdmAnuDTO2 insAdmAnu : iaAnnuelles) {
+			if (insAdmAnu == null || insAdmAnu.getRegimeIns() == null) {
+				continue;
+			}
+
+			String codRgi = insAdmAnu.getRegimeIns().getCodRgi();
+
 			if (logger.isDebugEnabled()) {
-				if (insAdmAnu.getRegimeIns() != null)
-					logger.debug("#anneesInscriptionFC# - [id : " + codeEtud + ", annee  : " + annee + "\tRegimeIns :\t"
-							+ insAdmAnu.getRegimeIns().getCodRgi() + " : " + insAdmAnu.getRegimeIns().getLibRgi()
-							+ "]");
+				logger.debug("#anneesInscriptionFC# - [id : {}, annee : {}, RegimeIns : {} : {}]",
+						codeEtud, annee, codRgi, insAdmAnu.getRegimeIns().getLibRgi());
 			}
-			// Regime d'inscription
-			if (insAdmAnu.getRegimeIns() != null) {
-				RegimeInscDTO regimeDetail = recuperereRegimeInscription(insAdmAnu.getRegimeIns().getCodRgi(), "O");
 
-				RegimeInscription regime = new RegimeInscription(insAdmAnu.getRegimeIns().getCodRgi(),
-						insAdmAnu.getRegimeIns().getLibRgi(), annee);
-
-				if (regimeDetail != null) {
-					regime.setLicRegIns(regimeDetail.getLicRegIns());
-					regime.setCodRegIns(regimeDetail.getCodRegIns());
-				}
-
-				regimeInscriptions.add(regime);
-
+			RegimeInscDTO regimeDetail = regimeCache.get(codRgi);
+			if (!regimeCache.containsKey(codRgi)) {
+				regimeDetail = recuperereRegimeInscription(codRgi, "O");
+				regimeCache.put(codRgi, regimeDetail);
 			}
+
+			RegimeInscription regime = new RegimeInscription(codRgi, insAdmAnu.getRegimeIns().getLibRgi(), annee);
+
+			if (regimeDetail != null) {
+				regime.setLicRegIns(regimeDetail.getLicRegIns());
+				regime.setCodRegIns(regimeDetail.getCodRegIns());
+			}
+
+			regimeInscriptions.add(regime);
 		}
 
 		return regimeInscriptions;

@@ -230,6 +230,13 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 		return new ResponseEntity<>(ref, HttpStatus.OK);
 
 	}
+	
+	@GetMapping("/regimesInscriptions")
+	public ResponseEntity<Map<String, String>> regimesInscriptions() {
+		Map<String, String> ri=pcscolControllerAdapter.regimesInscriptions();
+		
+		return new ResponseEntity<>(ri, HttpStatus.OK);
+	}
 
 	public PcscolService getPcscolService() {
 		return pcscolService;
@@ -238,5 +245,9 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	public void setPcscolService(PcscolService pcscolService) {
 		this.pcscolService = pcscolService;
 	}
+
+
+
+	
 
 }

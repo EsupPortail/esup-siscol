@@ -18,6 +18,7 @@ import org.esupportail.referentiel.mappers.ApoggeeLdapEtudiant;
 import org.esupportail.referentiel.services.StudentComponentRepositoryDao;
 import org.esupportail.referentiel.services.impl.StudentDataRepositoryDaoWS;
 import org.esupportail.referentiel.ws.services.EtudiantMetierClient;
+import org.esupportail.referentiel.ws.services.ReferentielService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.annotation.SessionScope;
 
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -49,6 +49,9 @@ public class ApogeeController { // NO_UCD (unused code)
 
 	@Autowired
 	private StudentComponentRepositoryDao studentComponentRepositoryDao;
+	
+	@Autowired
+	private ReferentielService referentielService;
 
 	@Autowired
 	@Qualifier("personServiceMapperMethod")
@@ -287,6 +290,11 @@ public class ApogeeController { // NO_UCD (unused code)
 		}
 
 	}
+	
+	@GetMapping("/regimesInscriptions")
+	public ResponseEntity<Map<String,String>> regimesInscriptions() {
+        return new ResponseEntity<>(referentielService.regimesInscriptions(), HttpStatus.OK);
+    }
 
 	public String getUniversityCode() {
 		return universityCode;
@@ -294,5 +302,13 @@ public class ApogeeController { // NO_UCD (unused code)
 
 	public void setUniversityCode(String universityCode) {
 		this.universityCode = universityCode;
+	}
+
+	public ReferentielService getReferentielService() {
+		return referentielService;
+	}
+
+	public void setReferentielService(ReferentielService referentielService) {
+		this.referentielService = referentielService;
 	}
 }
