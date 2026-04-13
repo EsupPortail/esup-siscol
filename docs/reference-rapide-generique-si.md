@@ -103,7 +103,7 @@ Le modèle Générique SI d'esup-siscol permet d'intégrer n'importe quelle sour
 | `/diplomesReferenceParComposanteEtAnnee` | GET | codeComposante, codeAnnee | List\<DiplomeReduitDto\> | Diplômes filtrés |
 | `/composantesPrincipalesRef` | GET | - | Map\<String,String\> | Composantes |
 | `/composanteSignaitaireRef` | GET | composante? | SignataireRef | Signataire |
-| `/regimesInscriptions` | GET | - | Map\<String,String\> | Régimes d'inscription (code -> libellé) |
+| `/regimesInscriptions` | GET | - |List\<regimesInscriptionsDetail\> | Régimes d'inscription  |
 
 ---
 

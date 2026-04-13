@@ -170,7 +170,7 @@ public class GeneriqueSIController implements GeneriqueSIControllerInterface {
 
     @Operation(summary = "Récupérer regimesInscriptions")
     @GetMapping("/regimesInscriptions")
-	public ResponseEntity<Map<String, String>> regimesInscriptions() {
+	public ResponseEntity<List<RegimeInscriptionReduit>> regimesInscriptions() {
 		// TODO Auto-generated method stub
 		return null;
 	}

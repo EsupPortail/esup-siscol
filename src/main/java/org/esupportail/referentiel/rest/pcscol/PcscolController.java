@@ -11,6 +11,7 @@ import org.esupportail.referentiel.beans.EtabRef;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
+import org.esupportail.referentiel.beans.RegimeInscriptionReduit;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.pcscol.services.PcscolService;
 import org.esupportail.referentiel.rest.generiqueSI.GeneriqueSIControllerInterface;
@@ -232,8 +233,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	}
 	
 	@GetMapping("/regimesInscriptions")
-	public ResponseEntity<Map<String, String>> regimesInscriptions() {
-		Map<String, String> ri=pcscolControllerAdapter.regimesInscriptions();
+	public ResponseEntity<List<RegimeInscriptionReduit>> regimesInscriptions() {
+		List<RegimeInscriptionReduit> ri = pcscolControllerAdapter.regimesInscriptionsDetail();
 		
 		return new ResponseEntity<>(ri, HttpStatus.OK);
 	}

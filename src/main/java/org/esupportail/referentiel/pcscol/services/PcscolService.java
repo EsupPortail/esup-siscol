@@ -680,6 +680,17 @@ public class PcscolService implements PcscolServiceI {
 		}
 		return map;
 	}
+	
+	public List<Nomenclature> lireNomenclature(String typeNomenclature) {
+		try {
+			logger.debug("lireNomenclature : {} ", typeNomenclature);
+			return nomenclatureApi.lireListeNomenclatures(typeNomenclature);
+		} catch (ApiException e) {
+			logger.error("Erreur lors de la récupération de la nomenclature : {} : {}", typeNomenclature,
+					e.getMessage());
+		}
+		return Collections.emptyList();
+	}
 
 	/**
 	 * 

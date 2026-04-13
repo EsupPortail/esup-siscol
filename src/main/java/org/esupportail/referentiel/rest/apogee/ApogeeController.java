@@ -12,6 +12,7 @@ import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantDTO2Ext;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
+import org.esupportail.referentiel.beans.RegimeInscriptionReduit;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
 import org.esupportail.referentiel.mappers.ApoggeeLdapEtudiant;
@@ -249,8 +250,8 @@ public class ApogeeController { // NO_UCD (unused code)
 			return new ResponseEntity<>(studentComponentRepositoryDao.getListeDiplomeDTO(codeComposante, codeAnnee),
 					HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("erreur lors de la récupération diplomesReferenceParComposanteEtAnnee pour : " + codeComposante
-					+ " -> " + e.getMessage());
+			logger.error("erreur lors de la récupération diplomesReferenceParComposanteEtAnnee pour :  {} -->{}" , universityCode
+					, e.getMessage());
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
@@ -292,8 +293,8 @@ public class ApogeeController { // NO_UCD (unused code)
 	}
 	
 	@GetMapping("/regimesInscriptions")
-	public ResponseEntity<Map<String,String>> regimesInscriptions() {
-        return new ResponseEntity<>(referentielService.regimesInscriptions(), HttpStatus.OK);
+	public ResponseEntity<List<RegimeInscriptionReduit> > regimesInscriptions() {
+        return new ResponseEntity<>(referentielService.regimesInscriptionsReduit(), HttpStatus.OK);
     }
 
 	public String getUniversityCode() {

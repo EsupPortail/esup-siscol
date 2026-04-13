@@ -13,6 +13,7 @@ import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantDTO2Ext;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
+import org.esupportail.referentiel.beans.RegimeInscriptionReduit;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,7 @@ public interface GeneriqueSIControllerInterface {
 	 * @param annee
 	 * @return
 	 */
-	public ResponseEntity<EtudiantRef> getEtudiantRef(@RequestParam(value = "codEtud") String codeEtud,
-			@RequestParam(value = "annee") String annee);
+	public ResponseEntity<EtudiantRef> getEtudiantRef(@RequestParam(value = "codEtud") String codeEtud, String annee);
 
 	/**
 	 * 
@@ -42,14 +42,16 @@ public interface GeneriqueSIControllerInterface {
 	 * @param annee
 	 * @return
 	 */
-	public  ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
+	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee);
+
 	/**
 	 * 
 	 * @param numEtud
 	 * @return
 	 */
 	public ResponseEntity<EtudiantInfoAdm> InfosAdmEtuV2(@RequestParam(value = "numEtud") String numEtud);
+
 	/**
 	 * @param codeComposante
 	 * @param annee
@@ -72,6 +74,7 @@ public interface GeneriqueSIControllerInterface {
 			@RequestParam(value = "codEtu", required = false) String codEtu,
 			@RequestParam(value = "nom", required = false) String nom,
 			@RequestParam(value = "prenom", required = false) String prenom);
+
 	/**
 	 * 
 	 * @param codeEtud
@@ -80,37 +83,44 @@ public interface GeneriqueSIControllerInterface {
 	 */
 	public ResponseEntity<Map<String, String>> studentEtapeVets(@RequestParam(value = "codEtud") String codeEtud,
 			@RequestParam(value = "annee") String annee);
+
 	/**
 	 * 
 	 * @param codEtud
 	 * @param annee
 	 * @return
 	 */
-	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(@RequestParam(value = "codEtud") String codEtud,
-			@RequestParam(value = "annee") String annee);
+	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(
+			@RequestParam(value = "codEtud") String codEtud, @RequestParam(value = "annee") String annee);
+
 	/**
 	 * 
 	 * @param codeEtape
 	 * @param versionEtape
 	 * @return
 	 */
-	public ResponseEntity<List<ElementPedagogique>> studentListeElpStage(@RequestParam(value = "codeEtape") String codeEtape,
+	public ResponseEntity<List<ElementPedagogique>> studentListeElpStage(
+			@RequestParam(value = "codeEtape") String codeEtape,
 			@RequestParam(value = "versionEtape") String versionEtape);
+
 	/**
 	 * 
 	 * @return
 	 */
 	public ResponseEntity<EtabRef> etablissementReference();
+
 	/**
 	 * 
 	 * @return
 	 */
 	public ResponseEntity<Map<String, String>> getEtapesRef();
+
 	/**
 	 * 
 	 * @return
 	 */
 	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRef();
+
 	/**
 	 * 
 	 * @param codeComposante
@@ -120,18 +130,21 @@ public interface GeneriqueSIControllerInterface {
 	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRefParComposanteEtAnnee(
 			@RequestParam(value = "codeComposante", required = true) String codeComposante,
 			@RequestParam(value = "codeAnnee", required = true) String codeAnnee);
+
 	/**
 	 * 
 	 * @return
 	 */
 	public ResponseEntity<Map<String, String>> composantesPrincipalesRef();
+
 	/**
 	 * 
 	 * @param composante
 	 * @return
 	 */
-	public ResponseEntity<SignataireRef >signaitaireRef(@RequestParam(value = "composante", defaultValue = "SCO") String composante);
-	
+	public ResponseEntity<SignataireRef> signaitaireRef(
+			@RequestParam(value = "composante", defaultValue = "SCO") String composante);
+
 	@GetMapping("/regimesInscriptions")
-	public ResponseEntity<Map<String,String>> regimesInscriptions() ;
+	public ResponseEntity<List<RegimeInscriptionReduit>> regimesInscriptions();
 }

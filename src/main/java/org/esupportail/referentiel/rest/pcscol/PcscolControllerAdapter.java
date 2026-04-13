@@ -13,12 +13,14 @@ import org.esupportail.referentiel.beans.DiplomeReduitDto;
 import org.esupportail.referentiel.beans.EtapeInscription;
 import org.esupportail.referentiel.beans.EtudiantInfoAdm;
 import org.esupportail.referentiel.beans.EtudiantRef;
+import org.esupportail.referentiel.beans.RegimeInscriptionReduit;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
 import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
 import org.esupportail.referentiel.pcscol.config.CesureUtils;
 import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.ref_api.model.Commune;
+import org.esupportail.referentiel.pcscol.ref_api.model.Nomenclature;
 import org.esupportail.referentiel.pcscol.ref_api.model.PaysNationalite;
 import org.esupportail.referentiel.pcscol.services.ChcExterneService;
 import org.esupportail.referentiel.pcscol.services.EspaceService;
@@ -398,6 +400,17 @@ public class PcscolControllerAdapter implements InitializingBean {
 	public Map<String, String> regimesInscriptions() {
 		return pcscolService.lireMapNomenclature("RegimeInscription");
 		
+	}
+	
+	public List<RegimeInscriptionReduit> regimesInscriptionsDetail() {
+		List<RegimeInscriptionReduit> regimeInscriptionReduitList = new ArrayList<>();
+		List<Nomenclature> list = pcscolService.lireNomenclature("RegimeInscription");
+		if (list != null) {
+			regimeInscriptionReduitList = list.stream()
+					.map(dto -> new RegimeInscriptionReduit(dto.getCode(), dto.getLibelleLong(), dto.getLibelleCourt()))
+					.toList();
+		}
+		return regimeInscriptionReduitList;
 	}
 
 }
