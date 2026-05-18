@@ -30,6 +30,9 @@ import org.esupportail.referentiel.pcscol.config.CesureUtils;
 import org.esupportail.referentiel.pcscol.ins.model.Apprenant;
 import org.esupportail.referentiel.pcscol.ins.model.ApprenantEtInscriptions;
 import org.esupportail.referentiel.pcscol.ins.model.InscriptionComplete;
+import org.esupportail.referentiel.pcscol.ins.model.VueCheminCible;
+import org.esupportail.referentiel.pcscol.ins.model.VueInscription;
+import org.esupportail.referentiel.pcscol.ins.model.VueInscriptions;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.mapper.ApprenantEtuInfoAdmMapperInterface;
 import org.esupportail.referentiel.pcscol.mapper.OdfDtoMapperInterface;
@@ -39,6 +42,7 @@ import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.MaquetteStructure;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
+import org.esupportail.referentiel.pcscol.odf.model.Pageable;
 import org.esupportail.referentiel.pcscol.ref_api.model.Adresse;
 import org.esupportail.referentiel.pcscol.ref_api.model.Commune;
 import org.esupportail.referentiel.pcscol.ref_api.model.Nomenclature;
@@ -103,8 +107,72 @@ public class PcscolService implements PcscolServiceI {
 		}
 		return Collections.emptyList();
 	}
+	
+	
+	/**
+	 * Récupère les inscriptions d'un apprenant pour une période donnée et construit une liste de VueInscription.
+	 * manque regime inscription et chemin cible
+	 * @param codeStructure
+	 * @param codeApprenant
+	 * @param codePeriode
+	 * @return
+	 */
+	@Deprecated(since = "2026-05", forRemoval = true)
+	public List<VueInscription> etapeInscriptionVue(String codeStructure, String codeApprenant, String codePeriode) {
+		/**
+		 * Long depuis, Long jusqua, Boolean photo, String codePeriode, Pageable pageable, String codeApprenant
+		 */
+		Pageable pageable=new Pageable();
+		pageable.setPage(0);
+		pageable.setTaille(10);
+		List<VueInscription> resultats=new ArrayList<>();
+		try {
+			Long depuis=null;
+			Long jusqua=null;
+			VueInscriptions fluxInscriptions = inscriptionsApi.listerFluxInscriptionsPagine(depuis, jusqua, false, codePeriode, pageable, codeApprenant);
+			Long totalElements = fluxInscriptions.getTotalElements();
+			logger.debug("etapeInscriptionVue : totalElements {}", totalElements);
+			List<VueInscription> resultatsPartiel = fluxInscriptions.getResultats();
+			
+			logger.debug("etapeInscriptionVue : resultats {}", resultats.size());
+			
+			resultats.addAll(resultatsPartiel);
+			
+			if (totalElements > resultats.size()) {
+				int page = 1;
+				while (resultats.size() < totalElements) {
+					pageable.setPage(page);
+					VueInscriptions fluxInscriptionsPage = inscriptionsApi.listerFluxInscriptionsPagine(depuis, jusqua,
+							false, codePeriode, pageable, codeApprenant);
+					resultats.addAll(fluxInscriptionsPage.getResultats());
+					logger.debug("etapeInscriptionVue : page {} resultats {}", page, resultats.size());
+					page++;
+				}
+			}
+			
+			for (VueInscription vueInscription : resultats) {
+            
+				logger.debug("etapeInscriptionVue : VueInscription  Regime  : {} ", vueInscription.getRegime());
+				List<VueCheminCible> chemins = vueInscription.getChemin();
+				logger.debug("etapeInscriptionVue : VueInscription  Chemins  : {} ", chemins.size());
+				chemins.forEach(chemin -> {
+					logger.debug("etapeInscriptionVue : VueInscription  Chemin  : {} {} ", chemin.getCode(), chemin.getLibelleLong());
+				});
+            }
+
+			
+			
+		
+		} catch (ApiException e) {
+			logger.error("etapeInscriptionVue  : {} , {} , {}  : {} ", codeStructure, codeApprenant, codePeriode,
+					e.getMessage());
+			
+		}
+		return resultats;
+	}
 
 	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String codePeriode) {
+				
 		logger.debug("etapeInscription : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
 		ApprenantEtInscriptions app;
 		List<EtapeInscription> etps = new ArrayList<>();
@@ -202,19 +270,16 @@ public class PcscolService implements PcscolServiceI {
 		} catch (ApiException e) {
 			logger.error(e.getMessage());
 		}
-
+		
 		apogeeMap.getListeEtapeInscriptions().forEach(etp -> {
 
-			List<String> listeAnnee = espaceService.anneeUnivFromEsapces(codeStructure, codesPeriodes);
+			
 			etp.getRegimeIns();
 			etp.getLibRg();
 			etp.getTypeIns();
 			RegimeInscription regime = new RegimeInscription();
 			logger.debug("regimeInscription : {} , {} , {}", etp.getRegimeIns(), etp.getLibRg(), etp.getTypeIns());
-			logger.debug("listeAnnee : {}", listeAnnee);
-			if (listeAnnee != null && !listeAnnee.isEmpty()) {
-				/*  */
-			}
+
 			regime.setCodRegIns(etp.getRegimeIns());
 			// regime.setCodRegIns(etp.get)
 			regime.setLicRegIns(etp.getRegimeIns());
