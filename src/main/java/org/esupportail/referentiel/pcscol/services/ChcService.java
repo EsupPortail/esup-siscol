@@ -100,9 +100,16 @@ public class ChcService {
 	}
 
 	public List<ElementPedagogique> lirelisteElementPedagogiqueStageApprenant(String codeApprenant,
-			String codeStructure) throws ApiException {
+			String codeStructure, String codeEspace) throws ApiException {
 		List<CursusDCA> response = cursusDcaApi.lireCusrsuApprenant(codeApprenant);
 
+		if (codeEspace != null && !codeEspace.isBlank()) {
+			response = response.stream().filter(cursus -> cursus.getPeriode() != null
+					&& codeEspace.equals(cursus.getPeriode().getCode())).toList();
+		}
+		
+		/**
+		 */
 		List<ElementPedagogique> listeElementPedagogique = new ArrayList<>();
 		response.forEach(cursus -> {
 			List<ElementPedagogique> lep = listeElementPedagogiqueStageFromCursus(cursus, codeStructure);

@@ -37,7 +37,7 @@ public class CursusDcaApiTest {
 		String codeApprenant = "000000001";
 		String codStructure = "ETAB00";
 		List<ElementPedagogique> response = chcService.lirelisteElementPedagogiqueStageApprenant(codeApprenant,
-				codStructure);
+				codStructure, null);
 		System.out.println(response);
 
 	}

@@ -107,11 +107,11 @@ public class PcscolService implements PcscolServiceI {
 		}
 		return Collections.emptyList();
 	}
-	
-	
+
 	/**
-	 * Récupère les inscriptions d'un apprenant pour une période donnée et construit une liste de VueInscription.
-	 * manque regime inscription et chemin cible
+	 * Récupère les inscriptions d'un apprenant pour une période donnée et construit
+	 * une liste de VueInscription. manque regime inscription et chemin cible
+	 * 
 	 * @param codeStructure
 	 * @param codeApprenant
 	 * @param codePeriode
@@ -120,24 +120,26 @@ public class PcscolService implements PcscolServiceI {
 	@Deprecated(since = "2026-05", forRemoval = true)
 	public List<VueInscription> etapeInscriptionVue(String codeStructure, String codeApprenant, String codePeriode) {
 		/**
-		 * Long depuis, Long jusqua, Boolean photo, String codePeriode, Pageable pageable, String codeApprenant
+		 * Long depuis, Long jusqua, Boolean photo, String codePeriode, Pageable
+		 * pageable, String codeApprenant
 		 */
-		Pageable pageable=new Pageable();
+		Pageable pageable = new Pageable();
 		pageable.setPage(0);
 		pageable.setTaille(10);
-		List<VueInscription> resultats=new ArrayList<>();
+		List<VueInscription> resultats = new ArrayList<>();
 		try {
-			Long depuis=null;
-			Long jusqua=null;
-			VueInscriptions fluxInscriptions = inscriptionsApi.listerFluxInscriptionsPagine(depuis, jusqua, false, codePeriode, pageable, codeApprenant);
+			Long depuis = null;
+			Long jusqua = null;
+			VueInscriptions fluxInscriptions = inscriptionsApi.listerFluxInscriptionsPagine(depuis, jusqua, false,
+					codePeriode, pageable, codeApprenant);
 			Long totalElements = fluxInscriptions.getTotalElements();
 			logger.debug("etapeInscriptionVue : totalElements {}", totalElements);
 			List<VueInscription> resultatsPartiel = fluxInscriptions.getResultats();
-			
+
 			logger.debug("etapeInscriptionVue : resultats {}", resultats.size());
-			
+
 			resultats.addAll(resultatsPartiel);
-			
+
 			if (totalElements > resultats.size()) {
 				int page = 1;
 				while (resultats.size() < totalElements) {
@@ -149,30 +151,28 @@ public class PcscolService implements PcscolServiceI {
 					page++;
 				}
 			}
-			
+
 			for (VueInscription vueInscription : resultats) {
-            
+
 				logger.debug("etapeInscriptionVue : VueInscription  Regime  : {} ", vueInscription.getRegime());
 				List<VueCheminCible> chemins = vueInscription.getChemin();
 				logger.debug("etapeInscriptionVue : VueInscription  Chemins  : {} ", chemins.size());
 				chemins.forEach(chemin -> {
-					logger.debug("etapeInscriptionVue : VueInscription  Chemin  : {} {} ", chemin.getCode(), chemin.getLibelleLong());
+					logger.debug("etapeInscriptionVue : VueInscription  Chemin  : {} {} ", chemin.getCode(),
+							chemin.getLibelleLong());
 				});
-            }
+			}
 
-			
-			
-		
 		} catch (ApiException e) {
 			logger.error("etapeInscriptionVue  : {} , {} , {}  : {} ", codeStructure, codeApprenant, codePeriode,
 					e.getMessage());
-			
+
 		}
 		return resultats;
 	}
 
 	public List<EtapeInscription> etapeInscription(String codeStructure, String codeApprenant, String codePeriode) {
-				
+
 		logger.debug("etapeInscription : {} , {} , {}", codeStructure, codeApprenant, codePeriode);
 		ApprenantEtInscriptions app;
 		List<EtapeInscription> etps = new ArrayList<>();
@@ -234,7 +234,7 @@ public class PcscolService implements PcscolServiceI {
 			List<String> codesPeriodes, List<String> statutInscriptionChargements) {
 		ApogeeMap apogeeMap = new ApogeeMap();
 		/**
-		 * TODO regime
+		 * regime
 		 */
 
 		List<EtapeInscription> etapeInscriptions = new ArrayList<>();
@@ -256,24 +256,26 @@ public class PcscolService implements PcscolServiceI {
 		apogeeMap.setListeEtapeInscriptions(etapeInscriptions);
 
 		logger.debug("recupererIaIpParEtudiantAnnee : {} , {} , {}", codeStructure, codeApprenant, codesPeriodes);
+		List<ElementPedagogique> lelps = new ArrayList<>();
 
-		try {
-			List<ElementPedagogique> lelps = chcService.lirelisteElementPedagogiqueStageApprenant(codeApprenant,
-					codeStructure);
-			if (lelps != null) {
-
-				List<ElementPedagogique> filterdlElps = lelps.stream()
-						.filter(e -> codesPeriodes.contains(e.getCodePeriode())).toList();
-				apogeeMap.setListeELPs(filterdlElps);
+		codesPeriodes.forEach(codePeriode -> {
+			logger.debug("recupererIaIpParEtudiantAnnee : codePeriode {}", codePeriode);
+			try {
+				List<ElementPedagogique> lelpsPartiel = chcService
+						.lirelisteElementPedagogiqueStageApprenant(codeApprenant, codeStructure, codePeriode);
+				lelps.addAll(lelpsPartiel);
+			} catch (ApiException e) {
+				logger.error("recupererIaIpParEtudiantAnnee : {} , {} , {} : {} ", codeStructure, codeApprenant,
+						codePeriode, e.getMessage());
 			}
+		});
 
-		} catch (ApiException e) {
-			logger.error(e.getMessage());
-		}
-		
+		List<ElementPedagogique> filterdlElps = lelps.stream().filter(e -> codesPeriodes.contains(e.getCodePeriode()))
+				.toList();
+		apogeeMap.setListeELPs(filterdlElps);
+
 		apogeeMap.getListeEtapeInscriptions().forEach(etp -> {
 
-			
 			etp.getRegimeIns();
 			etp.getLibRg();
 			etp.getTypeIns();
@@ -515,8 +517,9 @@ public class PcscolService implements PcscolServiceI {
 	}
 
 	/**
-	 * Ce code évite la récursivité et fonctionne de façon dynamique pour parcourir l'arbre.
-	 * à vérifier si il existe des PIA dans les sous niveaux de PIA
+	 * Ce code évite la récursivité et fonctionne de façon dynamique pour parcourir
+	 * l'arbre. à vérifier si il existe des PIA dans les sous niveaux de PIA
+	 * 
 	 * @param enfantsStructres
 	 * @param enfantsStructresPia
 	 */
@@ -571,7 +574,7 @@ public class PcscolService implements PcscolServiceI {
 		List<EnfantsStructure> listeEnfantPia = new ArrayList<>();
 		List<EnfantsStructure> enfants = maquetteStructure.getRacine().getEnfants();
 		dynamiqueArbreObjetPia(enfants, listeEnfantPia);
-		//arbreObjetPia(enfants, listeEnfantPia);
+		// arbreObjetPia(enfants, listeEnfantPia);
 		return listeEnfantPia;
 	}
 
@@ -733,7 +736,7 @@ public class PcscolService implements PcscolServiceI {
 		return null;
 
 	}
-	
+
 	public Map<String, String> lireMapNomenclature(String typeNomenclature) {
 		Map<String, String> map = new LinkedHashMap<>();
 		try {
@@ -745,7 +748,7 @@ public class PcscolService implements PcscolServiceI {
 		}
 		return map;
 	}
-	
+
 	public List<Nomenclature> lireNomenclature(String typeNomenclature) {
 		try {
 			logger.debug("lireNomenclature : {} ", typeNomenclature);
