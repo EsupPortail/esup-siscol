@@ -1,8 +1,12 @@
 package org.esupportail.referentiel.pcscol.services;
 
 import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.Collections;
+import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 
@@ -231,7 +235,7 @@ public class ChcService {
 		List<String> lignes = new ArrayList<>();
 		List<ObjetMaquetteSummary> itemsObjetMaquetteSummaries = new ArrayList<>();
 		// Récupération des lignes pédagogiques et des objets maquette associés
-		lignePedagogiqueDCARec(cursus.getCodeStructure(), racinePeda, lignes, itemsObjetMaquetteSummaries,
+		lignePedagogiqueDCADynamic(cursus.getCodeStructure(), racinePeda, lignes, itemsObjetMaquetteSummaries,
 				espaceUUID.toString());
 		logger.info("nbr itemsObjetMaquetteSummaries {} pour le cursus (code formation) {}",
 				itemsObjetMaquetteSummaries.size(), cursus.getFormation().getCode());
@@ -277,6 +281,67 @@ public class ChcService {
 			// lignePedagogiqueDCARec(LignePedagogiqueDCA lignesPeda,List<String> lignes)
 		}
 
+	}
+
+	/**
+	 * Variante itérative (pile explicite) pour éviter la récursivité profonde et
+	 * limiter les appels API redondants.
+	 */
+	public void lignePedagogiqueDCADynamic(String codeStructure, LignePedagogiqueDCA racinePeda, List<String> lignes,
+			List<ObjetMaquetteSummary> itemsObjetMaquetteSummaries, String espace) {
+		if (racinePeda == null) {
+			return;
+		}
+
+		Deque<LignePedagogiqueDCA> pile = new ArrayDeque<>();
+		Set<String> codesLignesVisites = new HashSet<>();
+		Set<String> codesObjetsDejaCharges = new HashSet<>();
+		pile.push(racinePeda);
+
+		while (!pile.isEmpty()) {
+			LignePedagogiqueDCA courante = pile.pop();
+			if (courante == null) {
+				continue;
+			}
+
+			String codeCourant = courante.getCodeObjetMaquette();
+			if (codeCourant != null && codesLignesVisites.add(codeCourant)) {
+				lignes.add(codeCourant);
+			}
+
+			List<LignePedagogiqueDCA> enfants = courante.getEnfants();
+			if (enfants == null || enfants.isEmpty()) {
+				continue;
+			}
+
+			for (int i = enfants.size() - 1; i >= 0; i--) {
+				LignePedagogiqueDCA enfant = enfants.get(i);
+				if (enfant == null) {
+					continue;
+				}
+
+				String codeEnfant = enfant.getCodeObjetMaquette();
+				if (codeEnfant != null && codesObjetsDejaCharges.add(codeEnfant)) {
+					try {
+						PagedObjetMaquetteSummaries om = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
+								codeEnfant, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement,
+								piaActif, valideSeulement, mutualise);
+						if (om.getItems() != null && !om.getItems().isEmpty()) {
+							for (ObjetMaquetteSummary objet : om.getItems()) {
+								if (codeEnfant.equals(objet.getCode())) {
+									itemsObjetMaquetteSummaries.add(objet);
+								}
+							}
+						}
+					} catch (ApiException e) {
+						logger.error("Erreur lors de la recherche de l'objet maquette {} : {}", codeEnfant,
+								e.getMessage());
+					}
+				}
+
+				pile.push(enfant);
+			}
+		}
 	}
 
 }
