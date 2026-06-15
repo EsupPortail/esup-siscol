@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.esupportail.referentiel</groupId>
 	<artifactId>esup-siscol</artifactId>
-	<version>2.1.16</version>
+	<version>2.1.17</version>
 	<packaging>war</packaging>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -44,19 +44,14 @@
 		</dependency>
 		<!-- mettre la version du client apogee installée -->
 		<!-- exemple mvn install:install-file
-		-Dfile=apo-webservices-client62070.jar 
-			-DgroupId=gouv.education.apogee -DartifactId=apo-webservices-client
-		-Dversion=62070 
-			-Dpackaging=jar le version dans ce cas c'est la 62070 -->
+		-Dfile=apo-webservices-client-67020.jar -DgroupId=gouv.education.apogee
+		-DartifactId=apo-webservices-client -Dversion=6.70.20 -Dpackaging=jar
+		-DgeneratePom=truele version dans ce cas c'est la 6.70.20 -->
 		<dependency>
 			<groupId>gouv.education.apogee</groupId>
 			<artifactId>apo-webservices-client</artifactId>
-			<version>6.50.73</version>
-			<!--			<version>6.50.30</version>-->
-			<!--			<version>6.40.70</version>-->
-			<!--			<version>6.40.01</version>-->
-			<!--			<version>6.30.50</version>-->
-			<!--			<version>63030</version>-->
+			<version>6.70.20</version>
+			
 		</dependency>
 		<dependency>
 			<groupId>jakarta.annotation</groupId>
@@ -354,7 +349,7 @@
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 
