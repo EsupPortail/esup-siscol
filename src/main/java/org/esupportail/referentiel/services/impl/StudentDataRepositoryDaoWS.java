@@ -404,12 +404,13 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 			}
 			etudiantInfoAdm.setListeBacs(bacs);
 		}
-
-		logger.info("RECUPERATION DE ListeBlocages de L'ETUDIANT : {} " , apogeeinfosAdmDTO2.getListeBlocages().getItem().size());
+		
 		if (apogeeinfosAdmDTO2.getListeBlocages() != null) {
+			logger.info("RECUPERATION DE ListeBlocages de L'ETUDIANT : {} ",
+					apogeeinfosAdmDTO2.getListeBlocages().getItem().size());
 			String blocages = "";
 			for (BlocageDTO blocage : apogeeinfosAdmDTO2.getListeBlocages().getItem()) {
-				logger.info("Type de blocage  : {} {}", blocage.getCodBlocage(),blocage.getLibBlocage());
+				logger.info("Type de blocage  : {} {}", blocage.getCodBlocage(), blocage.getLibBlocage());
 				if (!blocages.isBlank())
 					blocages = blocages + ";";
 				if (blocage.getEtapeBlocage() != null) {
@@ -419,6 +420,8 @@ public class StudentDataRepositoryDaoWS implements StudentDataRepositoryDao {
 				}
 			}
 			etudiantInfoAdm.setListeBlocages(blocages);
+		} else {
+			logger.info("RECUPERATION DE ListeBlocages de L'ETUDIANT : (Récupération NULL) )");
 		}
 
 		return etudiantInfoAdm;
