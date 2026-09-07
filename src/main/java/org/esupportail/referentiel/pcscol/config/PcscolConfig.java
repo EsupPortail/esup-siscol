@@ -3,7 +3,7 @@ package org.esupportail.referentiel.pcscol.config;
 import java.net.URI;
 import java.time.Duration;
 
-import org.esupportail.referentiel.pcscol.api.ApprenantsApi;
+import org.esupportail.referentiel.pcscol.api.ApprenantExterneApi;
 import org.esupportail.referentiel.pcscol.api.ArbresApi;
 import org.esupportail.referentiel.pcscol.api.CheminApi;
 import org.esupportail.referentiel.pcscol.api.CursusApi;
@@ -45,6 +45,7 @@ public class PcscolConfig {
 	
 	@Value("${app.pcscol.api.insInterne.url}")
 	private String apiInsInterne;
+	
 	@Value("${app.pcscol.api.insGestion.url}")
 	private String insGestion;
 
@@ -53,6 +54,11 @@ public class PcscolConfig {
 
 	@Value("${app.pcscol.api.chcExterne.url}")
 	private String apiChcExtrene;
+	
+	@Value("${app.pcscol.api.identite.url}")
+	private String apiIdentite;
+
+	
 
 	@Autowired
 	private AccessTokenService accessTokenService;
@@ -221,15 +227,17 @@ public class PcscolConfig {
 		}
 	}
 
+	
+	
 	@Bean
 	@SessionScope
-	ApprenantsApi apprenantsApi() {
+	ApprenantExterneApi apprenantExterneApi() {
 		try {
 			String token = accessTokenService.getToken();
-			return new ApprenantsApi(apiClient(insGestion, token));
+			return new ApprenantExterneApi(apiClient(apiIdentite, token));
 
 		} catch (Exception e) {
-			return new ApprenantsApi();
+			return new ApprenantExterneApi();
 		}
 	}
 	
@@ -309,6 +317,14 @@ public class PcscolConfig {
 
 	public void setApiChcExtrene(String apiChcExtrene) {
 		this.apiChcExtrene = apiChcExtrene;
+	}
+	
+	public String getApiIdentite() {
+		return apiIdentite;
+	}
+
+	public void setApiIdentite(String apiIdentite) {
+		this.apiIdentite = apiIdentite;
 	}
 
 }

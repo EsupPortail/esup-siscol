@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.esupportail.referentiel.beans.ApprenantDto;
-import org.esupportail.referentiel.pcscol.api.ApprenantsApi;
 import org.esupportail.referentiel.pcscol.api.CheminApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionV115Api;
+import org.esupportail.referentiel.pcscol.identite.model.IdentiteApprenantSummary;
 import org.esupportail.referentiel.pcscol.insv115.model.Apprenant;
 import org.esupportail.referentiel.pcscol.insv115.model.Chemin;
 import org.esupportail.referentiel.pcscol.insv115.model.InscriptionApprenantPeriodeEtChemin;
@@ -35,14 +35,14 @@ public class InscriptionsInterneServices {
 
 	private CheminApi cheminApi;
 
-	private ApprenantsApi apprenantsApi;
+	private IdentiteService identiteService;
 
-	public InscriptionsInterneServices(@Autowired InscriptionV115Api inscriptionsV115Api, @Autowired CheminApi cheminApi,
-			@Autowired ApprenantsApi apprenantsApi) {
+	public InscriptionsInterneServices(@Autowired InscriptionV115Api inscriptionsV115Api,
+			@Autowired CheminApi cheminApi, @Autowired IdentiteService identiteService) {
 		super();
 		this.inscriptionsV115Api = inscriptionsV115Api;
 		this.cheminApi = cheminApi;
-		this.apprenantsApi = apprenantsApi;
+		this.identiteService = identiteService;
 	}
 
 	/**
@@ -221,9 +221,17 @@ public class InscriptionsInterneServices {
 
 	public String chercherCodeEtudParIne(String codeStructure, String ine) {
 		try {
-			return apprenantsApi.lireApprenantParIne(codeStructure, ine).getCode();
-		} catch (ApiException e) {
-			logger.error("Erreur lors de l'appel à l'API Apprenant : {} {}", e.getResponseBody(), e);
+			IdentiteApprenantSummary app = identiteService.getIdentiteByCodeEtu(codeStructure, ine);
+			if (app==null) {
+				logger.warn("Aucune identité trouvée pour le code étudiant {} dans la structure {}", ine,
+						codeStructure);
+				return null;
+			}
+			
+			return app.getCodeApprenant();
+
+		} catch (Exception e) {
+			logger.error("Erreur lors de l'appel à l'API Apprenant : {} {}", e.getMessage(), e);
 			return null;
 		}
 	}
@@ -238,9 +246,17 @@ public class InscriptionsInterneServices {
 	 */
 	public String chercherIneParCodeEtud(String codeStructure, String codeEtud) {
 		try {
-			return apprenantsApi.lireApprenant(codeStructure, codeEtud).getBac().getIne();
-		} catch (ApiException e) {
-			logger.error("Erreur lors de l'appel à l'API Apprenant : {} {}", e.getResponseBody(), e);
+
+			IdentiteApprenantSummary app = identiteService.getIdentiteByCodeEtu(codeStructure, codeEtud);
+			if (app==null) {
+				logger.warn("Aucune identité trouvée pour le code étudiant {} dans la structure {}", codeEtud,
+						codeStructure);
+				return null;
+			}
+			return app.getIneMaitre();
+
+		} catch (Exception e) {
+			logger.error("Erreur lors de l'appel à l'API Apprenant : {} {}", e.getMessage(), e);
 			return null;
 		}
 	}
