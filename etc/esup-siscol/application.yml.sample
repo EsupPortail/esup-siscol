@@ -133,6 +133,9 @@ app:
         url: https://ins.test-partenaires.pc-scol.fr/api/v5/ins
       insInterne:
         url: https://ins.test-partenaires.pc-scol.fr/api/ins/v1
+      identite:
+        url: https://idt.test-partenaires.pc-scol.fr/api/idt/ext/v1
+      
       
     # Permet de cibler un dossier par dfaut. /!\ Attention /!\ A renseigner uniquement pour une dmonstration ou en phase de test/dveloppement.
     demo:
