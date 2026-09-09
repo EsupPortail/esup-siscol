@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.esupportail.referentiel.pcscol.api.MaquettesApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+import org.esupportail.referentiel.pcscol.api.MaquettesExterneApi;
+
+import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
 import org.esupportail.referentiel.pcscol.odf.model.EnfantsStructure;
@@ -40,10 +41,10 @@ public class OffreFormationService {
 	private Boolean mutualise = null;
 
 	@Autowired
-	private ObjetsMaquetteApi objetsMaquetteApi;
+	private ObjetsMaquetteExterneApi objetsMaquetteApi;
 
 	@Autowired
-	private MaquettesApi maquettesApi;
+	private MaquettesExterneApi maquettesApi;
 
 	@Autowired
 	private PcscolService pcScoleService;
@@ -159,13 +160,16 @@ public class OffreFormationService {
 		pageable.setPage(0);
 		pageable.setTaille(20);
 		String r = null;
+		Boolean protege=false;
+		List<String> codesPerimetresIn=null;
+		List<String> codesPerimetresOut=null;
 		logger.debug(
 				"codeStructure: {},  r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
 				codeStructure, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
 				valideSeulement, mutualise);
 		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
 				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
-				mutualise);
+				mutualise,protege,codesPerimetresIn,codesPerimetresOut);
 
 		if (response == null || response.getItems() == null) {
 			logger.info("rechercheObjetMaquetteSummary vide {} : {}", codeStructure, espace);
@@ -178,7 +182,7 @@ public class OffreFormationService {
 				pageable.setPage(i);
 				PagedObjetMaquetteSummaries responsePartial = objetsMaquetteApi.rechercherObjetMaquette(codeStructure,
 						pageable, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
-						valideSeulement, mutualise);
+						valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
 				objetMaquetteSummaries.addAll(responsePartial.getItems());
 
 			}
@@ -202,6 +206,11 @@ public class OffreFormationService {
 
 		pageable.setPage(0);
 		pageable.setTaille(10);
+		
+		Boolean protege=false;
+		List<String> codesPerimetresIn=null;
+		List<String> codesPerimetresOut=null;
+		
 		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{} )", codeStructure, codeFormation, codePeriode);
 		UUID idEsapce = espaceService.chercherEspaceFromCode(codeStructure, codePeriode);
 		if (idEsapce == null) {
@@ -210,7 +219,7 @@ public class OffreFormationService {
 		}
 		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
 				codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, piaActif, valideSeulement,
-				mutualise);
+				mutualise,protege,codesPerimetresIn,codesPerimetresOut);
 
 		if (response == null || response.getItems() == null) {
 			logger.info("rechercheObjetMaquetteSummary vide : {} : {}", codeFormation, codePeriode);
@@ -223,7 +232,7 @@ public class OffreFormationService {
 				pageable.setPage(i);
 				PagedObjetMaquetteSummaries responsePartiel = objetsMaquetteApi.rechercherObjetMaquette(codeStructure,
 						pageable, codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, piaActif,
-						valideSeulement, mutualise);
+						valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
 				listMaquetteSummaries.addAll(responsePartiel.getItems());
 			}
 
@@ -324,7 +333,7 @@ public class OffreFormationService {
 				logger.debug("rechercherObjetMaquette : {} {} {}", codeStructure, espace, f.getId());
 				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, f.getId());
 				UUID idEspace = objectMaqette.getEspace();
-				Espace esp = espaceService.getEspacesApi().lireEspace(codeStructure, idEspace);
+				Espace esp = espaceService.lireEspace(codeStructure, idEspace);
 				mapVDI.put(f.getCode() + ";" + esp.getCode(), f.getLibelle());
 
 			} catch (ApiException e) {
@@ -624,9 +633,7 @@ public class OffreFormationService {
 		this.mutualise = mutualise;
 	}
 
-	public void setObjetsMaquetteApi(ObjetsMaquetteApi objetsMaquetteApi) {
-		this.objetsMaquetteApi = objetsMaquetteApi;
-	}
+	
 
 	public void setPcScoleService(PcscolService pcScoleService) {
 		this.pcScoleService = pcScoleService;
@@ -648,9 +655,6 @@ public class OffreFormationService {
 		return mutualise;
 	}
 
-	public ObjetsMaquetteApi getObjetsMaquetteApi() {
-		return objetsMaquetteApi;
-	}
 
 	public PcscolService getPcScoleService() {
 		return pcScoleService;

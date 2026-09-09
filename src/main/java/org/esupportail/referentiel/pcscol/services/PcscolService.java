@@ -21,10 +21,10 @@ import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.RegimeInscription;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.cache.CacheConfig;
-import org.esupportail.referentiel.pcscol.api.EspacesApi;
+import org.esupportail.referentiel.pcscol.api.EspacesExterneApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
 import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
 import org.esupportail.referentiel.pcscol.config.CesureUtils;
 import org.esupportail.referentiel.pcscol.ins.model.Apprenant;
@@ -66,9 +66,9 @@ public class PcscolService implements PcscolServiceI {
 	private InscriptionsApi inscriptionsApi;
 
 	@Autowired
-	private ObjetsMaquetteApi objetsMaquetteApi;
+	private ObjetsMaquetteExterneApi objetsMaquetteApi;
 	@Autowired
-	private EspacesApi espacesApi;
+	private EspacesExterneApi espacesApi;
 	@Autowired
 	private OffreFormationService offreFormationService;
 	@Autowired
@@ -283,12 +283,24 @@ public class PcscolService implements PcscolServiceI {
 				List<ObjetMaquetteSummary> maquetteSummaries = offreFormationServiceRevisited
 						.rechercheObjetMaquetteSummaryParPiaSeaulement(codeStructure, idPeriode.toString());
 				logger.debug("lireMapFormations : {} ", maquetteSummaries.size());
-				maquetteSummaries.stream().forEach(e -> logger.debug("lireMapFormations : {}  {} =>{}", e.getCode(),
-						e.getTypeObjetFormation(), e.getTypeObjetMaquette()));
+				
+//				maquetteSummaries.stream().forEach(e -> logger.debug("lireMapFormations : {}  {} =>{}", e.getCode(),
+//						e.getTypeObjetFormation(), e.getTypeObjetMaquette()));
 
 				/*
 				 * *
 				 */
+				
+				
+				System.out.println("lireMapFormations : " + codeStructure + " , " + periode + " => "
+						+ maquetteSummaries.size());
+				
+				for (ObjetMaquetteSummary maquetteSummary : maquetteSummaries) {
+					System.out.println("lireMapFormations : " +maquetteSummary);
+				}
+				
+				
+				
 				HashMap<String, String> mapFormations = offreFormationServiceRevisited
 						.objetMaquetteSummaryMap(maquetteSummaries, periode);
 				logger.debug("lireMapFormations : {} ", mapFormations.size());

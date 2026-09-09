@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-import org.esupportail.referentiel.pcscol.api.MaquettesApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+
+import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;
@@ -30,11 +30,9 @@ public class OffreFormationServicePartielEtapes {
 	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private ObjetsMaquetteApi objetsMaquetteApi;
+	private ObjetsMaquetteExterneApi objetsMaquetteApi;
 
-	@Autowired
-	private MaquettesApi maquettesApi;
-
+	
 	@Autowired
 	private PcscolService pcScoleService;
 
@@ -68,6 +66,9 @@ public class OffreFormationServicePartielEtapes {
 		pageable.setPage(0);
 		pageable.setTaille(10);
 		String r = null;
+		Boolean protege=false;
+		List<String> codesPerimetresIn=null;
+		List<String> codesPerimetresOut=null;
 
 		List<ObjetMaquetteSummary> result = new ArrayList<>();
 		
@@ -78,7 +79,7 @@ public class OffreFormationServicePartielEtapes {
 		try {
 			PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
 					espaceUUID, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
-					mutualis);
+					mutualis,protege,codesPerimetresIn,codesPerimetresOut);
 			logger.debug("{} {}  {} ", "rechercheObjetMaquetteSummary", " => response size",
 					response.getItems().size());
 			
@@ -90,7 +91,7 @@ public class OffreFormationServicePartielEtapes {
 						logger.debug("rechercheObjetMaquetteSummary page {}", i);
 						response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r, espaceUUID,
 								typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
-								valideSeulement, mutualis);
+								valideSeulement, mutualis,protege,codesPerimetresIn,codesPerimetresOut);
 						if (response != null && response.getItems() != null) {
 							logger.debug("{} {}  {} ", "rechercheObjetMaquetteSummary", " => response size", response.getItems().size());
 							result.addAll(response.getItems());
@@ -181,21 +182,7 @@ public class OffreFormationServicePartielEtapes {
 		this.espaceService = espaceService;
 	}
 
-	public ObjetsMaquetteApi getObjetsMaquetteApi() {
-		return objetsMaquetteApi;
-	}
-
-	public void setObjetsMaquetteApi(ObjetsMaquetteApi objetsMaquetteApi) {
-		this.objetsMaquetteApi = objetsMaquetteApi;
-	}
-
-	public MaquettesApi getMaquettesApi() {
-		return maquettesApi;
-	}
-
-	public void setMaquettesApi(MaquettesApi maquettesApi) {
-		this.maquettesApi = maquettesApi;
-	}
+	
 
 	public PcscolService getPcScoleService() {
 		return pcScoleService;

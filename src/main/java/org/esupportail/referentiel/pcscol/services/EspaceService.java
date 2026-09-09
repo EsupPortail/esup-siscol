@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import org.esupportail.referentiel.pcscol.api.EspacesApi;
-import org.esupportail.referentiel.pcscol.odf.model.Periode;
+
+import org.esupportail.referentiel.pcscol.api.EspacesExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;
 import org.esupportail.referentiel.pcscol.odf.model.PagedEspaces;
+import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.odf.model.TypeEspace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ public class EspaceService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	private EspacesApi espacesApi;
+	private EspacesExterneApi espacesApi;
 
 	/**
 	 * 
@@ -194,12 +195,14 @@ public class EspaceService {
 		return null;
 
 	}
-
-	public EspacesApi getEspacesApi() {
-		return espacesApi;
+	
+	public Espace lireEspace(String codeStructure,UUID idEspace) {
+		try {
+			return espacesApi.lireEspace(codeStructure, idEspace);
+		} catch (ApiException e) {
+			logger.error("Erreur lors de la récupération de l'espace pour l'ID {} : {}", idEspace, e.getMessage());
+			return null;
+		}
 	}
 
-	public void setEspacesApi(EspacesApi espacesApi) {
-		this.espacesApi = espacesApi;
-	}
 }

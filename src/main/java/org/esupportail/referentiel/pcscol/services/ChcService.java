@@ -1,7 +1,7 @@
 package org.esupportail.referentiel.pcscol.services;
 
-import java.util.ArrayList;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.HashSet;
@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 import org.esupportail.referentiel.beans.ElementPedagogique;
 import org.esupportail.referentiel.pcscol.api.ArbresApi;
 import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
-import org.esupportail.referentiel.pcscol.api.EspacesApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+import org.esupportail.referentiel.pcscol.api.EspacesExterneApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApiCHC;
+import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.chcv6.model.ArbreLecture;
 import org.esupportail.referentiel.pcscol.chcv6.model.ArbreObjetFormation;
 import org.esupportail.referentiel.pcscol.chcv6.model.CursusDCA;
@@ -47,11 +47,11 @@ public class ChcService {
 	@Autowired
 	private ArbresApi arbresApi;
 	@Autowired
-	private ObjetsMaquetteApi objetsMaquetteApi;
+	private ObjetsMaquetteExterneApi objetsMaquetteApi;
 	@Autowired
 	private ObjetsMaquetteApiCHC objetsMaquetteApiCHC;
 	@Autowired
-	private EspacesApi espacesApi;
+	private EspacesExterneApi espacesApi;
 
 	@Autowired
 	private OffreFormationService offreFormationService;
@@ -68,6 +68,9 @@ public class ChcService {
 	Boolean piaActif = null;
 	Boolean valideSeulement = false;
 	Boolean mutualise = null;
+	Boolean protege=false;
+	List<String> codesPerimetresIn=null;
+	List<String> codesPerimetresOut=null;
 
 	public ArbreLecture arbrePourUneFormation(String codeStructure, String codePeriode, String codeFormation) {
 		try {
@@ -441,7 +444,7 @@ public class ChcService {
 				try {
 					PagedObjetMaquetteSummaries om = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
 							e.getCodeObjetMaquette(), espace, typeObjetMaquette, racine, typeObjetFormation, ids,
-							piaSeulement, piaActif, valideSeulement, mutualise);
+							piaSeulement, piaActif, valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
 					if (om.getItems() != null) {
 						Stream<ObjetMaquetteSummary> filtred = om.getItems().stream()
 								.filter(o -> o.getCode().equals(e.getCodeObjetMaquette()));
@@ -539,7 +542,7 @@ public class ChcService {
 					try {
 						PagedObjetMaquetteSummaries om = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
 								codeEnfant, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement,
-								piaActif, valideSeulement, mutualise);
+								piaActif, valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
 						if (om.getItems() != null && !om.getItems().isEmpty()) {
 							for (ObjetMaquetteSummary objet : om.getItems()) {
 								if (codeEnfant.equals(objet.getCode())) {

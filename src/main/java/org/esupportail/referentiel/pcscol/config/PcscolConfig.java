@@ -8,14 +8,14 @@ import org.esupportail.referentiel.pcscol.api.ArbresApi;
 import org.esupportail.referentiel.pcscol.api.CheminApi;
 import org.esupportail.referentiel.pcscol.api.CursusApi;
 import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
-import org.esupportail.referentiel.pcscol.api.EspacesApi;
+import org.esupportail.referentiel.pcscol.api.EspacesExterneApi;
 import org.esupportail.referentiel.pcscol.api.ExtractionsApi;
 import org.esupportail.referentiel.pcscol.api.InscriptionV115Api;
 import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
-import org.esupportail.referentiel.pcscol.api.MaquettesApi;
+import org.esupportail.referentiel.pcscol.api.MaquettesExterneApi;
 import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApiCHC;
+import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.api.StructureApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiClient;
 import org.esupportail.referentiel.pcscol.services.AccessTokenService;
@@ -130,39 +130,39 @@ public class PcscolConfig {
 
 	@Bean
 	@SessionScope
-	MaquettesApi maquetteApi() {
+	MaquettesExterneApi maquetteApi() {
 		try {
 			String token = accessTokenService.getToken();
-			return new MaquettesApi(apiClient(apiODF, token));
+			return new MaquettesExterneApi(apiClient(apiODF, token));
 		} catch (Exception e) {
 			logger.error("maquetteApi : {}", e.getMessage());
-			return new MaquettesApi();
+			return new MaquettesExterneApi();
 		}
 	}
 
 	@Bean
 	@SessionScope
-	ObjetsMaquetteApi objetsMaquetteApi() {
+	ObjetsMaquetteExterneApi objetsMaquetteApi() {
 		try {
 			String token = accessTokenService.getToken();
-			return new ObjetsMaquetteApi(apiClient(apiODF, token));
+			return new ObjetsMaquetteExterneApi(apiClient(apiODF, token));
 		} catch (Exception e) {
 			logger.error("objetsMaquetteApi : {}", e.getMessage());
-			return new ObjetsMaquetteApi();
+			return new ObjetsMaquetteExterneApi();
 		}
 	}
 
 	@Bean
 	@SessionScope
-	EspacesApi espacesApi() {
+	EspacesExterneApi espacesApi() {
 		try {
 			logger.info("Initialisation espacesApi");
 			logger.info("TOKEN: "+ accessTokenService.getToken());
 			String token = accessTokenService.getToken();
-			return new EspacesApi(apiClient(apiODF, token));
+			return new EspacesExterneApi(apiClient(apiODF, token));
 		} catch (Exception e) {
 			logger.error("espacesApi : {}", e.getMessage());
-			return new EspacesApi();
+			return new EspacesExterneApi();
 		}
 	}
 

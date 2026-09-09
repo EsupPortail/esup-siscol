@@ -18,8 +18,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.esupportail.referentiel.SpringBootTomcatApplication;
-import org.esupportail.referentiel.pcscol.api.EspacesApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+import org.esupportail.referentiel.pcscol.api.EspacesExterneApi;
+import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
@@ -48,9 +48,9 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 public class MaquetteApiTest {
 
 	@Autowired
-	ObjetsMaquetteApi objetsMaquetteApi;
+	ObjetsMaquetteExterneApi objetsMaquetteApi;
 	@Autowired
-	EspacesApi espacesApi;
+	EspacesExterneApi espacesApi;
 	@Autowired
 	OffreFormationService offreFormationService;
 
@@ -190,7 +190,7 @@ public class MaquetteApiTest {
 
 		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
 				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
-				mutualise);
+				mutualise,null,null,null);
 		System.out.println(response);
 	}
 
