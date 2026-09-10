@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.esupportail.referentiel.pcscol.api.MaquettesExterneApi;
-
 import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
@@ -31,13 +30,16 @@ import org.springframework.stereotype.Service;
 @ConditionalOnProperty(name = "app.mode_pegase")
 public class OffreFormationService {
 
+	private static final int DEFAULT_PAGE_SIZE = 20;
+	private static final int SMALL_PAGE_SIZE = 10;
+
 //	@Autowired
 //	private EspacesApi espacesApi;
 
 	@Autowired
 	private EspaceService espaceService;
 
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	final  Logger logger = LoggerFactory.getLogger(this.getClass());
 	private Boolean mutualise = null;
 
 	@Autowired
@@ -56,20 +58,12 @@ public class OffreFormationService {
 	private Boolean piaSeulement = false;
 	private Boolean valideSeulement = true;
 
-//	public List<Espace> checherPeriodeParCode(String codeStructure, String code) throws ApiException {
-//		Pageable pageable = new Pageable();
-//		pageable.setPage(0);
-//		pageable.setTaille(20);
-//		String r = code;
-//		TypeEspace type = null;
-//		// ( String codeStructure, Pageable pageable, String r, TypeEspace type, Boolean
-//		// actif)
-//		PagedEspaces espaces = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, true);
-//		logger.debug("nbr d'Espaces pour le code   " + r + " :" + espaces.getTotalElements());
-//		return espaces.getItems();
-//
-//	}
-
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param idMaquette
+	 * @return
+	 */
 	public MaquetteStructure lireMaquette(String codeStructure, String idMaquette) {
 		logger.debug("lireMaquette( {} ,{} )", codeStructure, idMaquette);
 		try {
@@ -145,7 +139,7 @@ public class OffreFormationService {
 	 * @param racine
 	 * @param typeObjetFormation
 	 * @param espace
-	 * @param newParam    
+	 * @param newParam
 	 * @return
 	 * @throws ApiException
 	 */
@@ -154,40 +148,22 @@ public class OffreFormationService {
 			String espace, boolean piaSeulement) throws ApiException {
 		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{},{},{} ,{} )", codeStructure, typeObjetMaquette, racine,
 				typeObjetFormation, ids, espace);
-
-		List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<>();
-		Pageable pageable = new Pageable();
-		pageable.setPage(0);
-		pageable.setTaille(20);
 		String r = null;
-		Boolean protege=false;
-		List<String> codesPerimetresIn=null;
-		List<String> codesPerimetresOut=null;
 		logger.debug(
 				"codeStructure: {},  r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
 				codeStructure, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
 				valideSeulement, mutualise);
-		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
-				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
-				mutualise,protege,codesPerimetresIn,codesPerimetresOut);
 
-		if (response == null || response.getItems() == null) {
+		List<ObjetMaquetteSummary> objetMaquetteSummaries = rechercheObjetMaquetteSummaryPaginee(codeStructure, r,
+				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, DEFAULT_PAGE_SIZE);
+		if (objetMaquetteSummaries.isEmpty()) {
 			logger.info("rechercheObjetMaquetteSummary vide {} : {}", codeStructure, espace);
-			return objetMaquetteSummaries;
 		}
-		objetMaquetteSummaries.addAll(response.getItems());
-		Integer nbrPage = response.getTotalPages();
-		if (nbrPage > 1) {
-			for (int i = 1; i < nbrPage; i++) {
-				pageable.setPage(i);
-				PagedObjetMaquetteSummaries responsePartial = objetsMaquetteApi.rechercherObjetMaquette(codeStructure,
-						pageable, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
-						valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
-				objetMaquetteSummaries.addAll(responsePartial.getItems());
-
-			}
-		}
+		
+		
 		objetMaquetteSummaries = objetMaquetteSummaries.stream().distinct().toList();
+		
+		System.out.println("rechercheObjetMaquetteSummary : " + codeStructure + " " + espace + " " + objetMaquetteSummaries);
 		return objetMaquetteSummaries;
 	}
 
@@ -201,47 +177,25 @@ public class OffreFormationService {
 	 */
 	public List<ObjetMaquetteSummary> rechercheObjetMaquetteSummary(String codeStructure, String codeFormation,
 			String codePeriode) throws ApiException {
-		Pageable pageable = new Pageable();
-		List<ObjetMaquetteSummary> listMaquetteSummaries = new ArrayList<>();
-
-		pageable.setPage(0);
-		pageable.setTaille(10);
-		
-		Boolean protege=false;
-		List<String> codesPerimetresIn=null;
-		List<String> codesPerimetresOut=null;
-		
 		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{} )", codeStructure, codeFormation, codePeriode);
 		UUID idEsapce = espaceService.chercherEspaceFromCode(codeStructure, codePeriode);
 		if (idEsapce == null) {
 			logger.error("ID espace null pour la periode {}", codePeriode);
 			return Collections.emptyList();
 		}
-		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
-				codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, piaActif, valideSeulement,
-				mutualise,protege,codesPerimetresIn,codesPerimetresOut);
 
-		if (response == null || response.getItems() == null) {
+		List<ObjetMaquetteSummary> listMaquetteSummaries = rechercheObjetMaquetteSummaryPaginee(codeStructure,
+				codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, SMALL_PAGE_SIZE);
+
+		if (listMaquetteSummaries.isEmpty()) {
 			logger.info("rechercheObjetMaquetteSummary vide : {} : {}", codeFormation, codePeriode);
 			return listMaquetteSummaries;
 		}
-		listMaquetteSummaries.addAll(response.getItems());
 
-		if (response.getTotalPages() > 1) {
-			for (int i = 1; i < response.getTotalPages(); i++) {
-				pageable.setPage(i);
-				PagedObjetMaquetteSummaries responsePartiel = objetsMaquetteApi.rechercherObjetMaquette(codeStructure,
-						pageable, codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, piaActif,
-						valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
-				listMaquetteSummaries.addAll(responsePartiel.getItems());
-			}
-
-		}
 		logger.debug("rechercheObjetMaquetteSummary : {} {} {}", codeStructure, codeFormation,
 				listMaquetteSummaries.size());
-		logger.info("rechercheObjetMaquetteSummary : {} {} {}", codeStructure, codeFormation,
-				response.getTotalElements());
-		return response.getItems();
+		logger.info("rechercheObjetMaquetteSummary : {} {} {}", codeStructure, codeFormation, listMaquetteSummaries.size());
+		return listMaquetteSummaries;
 	}
 
 	/**
@@ -327,14 +281,26 @@ public class OffreFormationService {
 		List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure, tom, racine,
 				typeObjetFormation, ids, espace, piaSeulement);
 		logger.debug("rechercherObjetMaquette : {} {} {}", codeStructure, espace, allObjetMaquetteDetail.size());
+		Map<UUID, String> espaceCodeCache = new HashMap<>();
 		allObjetMaquetteDetail.forEach(f -> {
 
 			try {
 				logger.debug("rechercherObjetMaquette : {} {} {}", codeStructure, espace, f.getId());
 				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, f.getId());
 				UUID idEspace = objectMaqette.getEspace();
-				Espace esp = espaceService.lireEspace(codeStructure, idEspace);
-				mapVDI.put(f.getCode() + ";" + esp.getCode(), f.getLibelle());
+				if (idEspace == null) {
+					return;
+				}
+				String codeEspace = espaceCodeCache.get(idEspace);
+				if (codeEspace == null) {
+					Espace esp = espaceService.lireEspace(codeStructure, idEspace);
+					if (esp == null || esp.getCode() == null) {
+						return;
+					}
+					codeEspace = esp.getCode();
+					espaceCodeCache.put(idEspace, codeEspace);
+				}
+				mapVDI.put(f.getCode() + ";" + codeEspace, f.getLibelle());
 
 			} catch (ApiException e) {
 				logger.error("Erreur lors de la lecture de l'objet maquette {} : {}", f.getId(), e.getMessage());
@@ -385,6 +351,8 @@ public class OffreFormationService {
 					typesObjetMaquette, racine, typeObjetFormation, ids, idPeriode.toString(), piaSeulementContrainte);
 			logger.debug("rechercherObjetMaquetteDiplomeReferences : {} {} {}", codeStructure, periode,
 					allObjetMaquetteDetail.size());
+			
+			System.out.println("rechercherObjetMaquetteDiplomeReferences : " + allObjetMaquetteDetail);
 			return allObjetMaquetteDetail;
 		} else
 			return Collections.emptyList();
@@ -583,7 +551,10 @@ public class OffreFormationService {
 	 */
 	public List<ObjetMaquetteDetail> listeEnfantsObjectMaquetteStage(String codeStructure, String idMaquetteStructure) {
 		MaquetteStructure maquetteStructure = lireMaquette(codeStructure, idMaquetteStructure);
-
+		if (maquetteStructure == null || maquetteStructure.getRacine() == null
+				|| maquetteStructure.getRacine().getEnfants() == null) {
+			return Collections.emptyList();
+		}
 		return listeEnfantsObjectMaquetteStage(codeStructure, maquetteStructure.getRacine().getEnfants());
 	}
 
@@ -608,6 +579,10 @@ public class OffreFormationService {
 	 */
 	public void listeEnfantsObjectMaquetteStage(String codeStructure, EnfantsStructure enfantStructure,
 			List<ObjetMaquetteDetail> stagesObjectMaquette) {
+		if (enfantStructure == null || enfantStructure.getObjetMaquette() == null
+				|| enfantStructure.getObjetMaquette().getId() == null) {
+			return;
+		}
 
 		try {
 
@@ -617,23 +592,119 @@ public class OffreFormationService {
 			if (dom.getStage() != null && dom.getStage())
 				stagesObjectMaquette.add(objectMaqette);
 		} catch (ApiException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+
+			logger.error("Erreur lors de la lecture de l'objet maquette {} : {}",
+					enfantStructure.getObjetMaquette().getId(), e1.getMessage());
 		} catch (ClassCastException e2) {
 			logger.warn(e2.getMessage());
 		}
 
 		List<EnfantsStructure> enfants = enfantStructure.getObjetMaquette().getEnfants();
+		if (enfants != null && !enfants.isEmpty()) {
+			enfants.forEach(e -> listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette));
+		}
 
-		enfants.forEach(e -> listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette));
+	}
+
+	private List<ObjetMaquetteSummary> rechercheObjetMaquetteSummaryPaginee(String codeStructure, String r,
+			String espace, List<TypeObjetMaquette> typeObjetMaquette, Boolean racine, String typeObjetFormation,
+			List<UUID> ids, Boolean piaSeulementParam, int pageSize) throws ApiException {
+		List<ObjetMaquetteSummary> summaries = new ArrayList<>();
+		Pageable pageable = new Pageable();
+		pageable.setPage(0);
+		pageable.setTaille(pageSize);
+
+		Boolean protege = false;
+		List<String> codesPerimetresIn = new ArrayList<>();
+		List<String> codesPerimetresOut = new ArrayList<>();
+		logger.debug(
+				"codeStructure: {},  r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
+				codeStructure, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulementParam,
+				piaActif, valideSeulement, mutualise);
+		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
+				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulementParam, piaActif, valideSeulement,
+				mutualise, protege, codesPerimetresIn, codesPerimetresOut);
+		
+		
+		logger.debug("{} {}  {} ", "rechercheObjetMaquetteSummaryPaginee", " => response size",
+				response);
+		if (response == null || response.getItems() == null) {
+			return summaries;
+		}
+
+		summaries.addAll(response.getItems());
+		int totalPages =  response.getTotalPages();
+		for (int i = 1; i < totalPages; i++) {
+			pageable.setPage(i);
+			
+			logger.debug("rechercheObjetMaquetteSummaryPaginee page {}", i);
+			logger.debug(
+					"codeStructure: {},  r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
+					codeStructure, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulementParam,
+					piaActif, valideSeulement, mutualise);
+			PagedObjetMaquetteSummaries pageResponse = objetsMaquetteApi.rechercherObjetMaquette(
+					codeStructure, 
+					pageable,
+					r, 
+					espace, 
+					typeObjetMaquette, 
+					racine, 
+					typeObjetFormation, 
+					ids, 
+					piaSeulementParam, 
+					piaActif,
+					valideSeulement, 
+					mutualise, 
+					protege, 
+					codesPerimetresIn, 
+					codesPerimetresOut);
+			logger.debug("{} {}  {} ", "rechercheObjetMaquetteSummaryPaginee", " => response size",
+					pageResponse.getItems().size());
+			if ( pageResponse.getItems() != null) {
+				summaries.addAll(pageResponse.getItems());
+			}
+		}
+
+		return summaries;
+	}
+
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param codeObjetMaquette
+	 * @param codePeriode
+	 * @param piaSeulement
+	 * @param piaActif
+	 * @return
+	 */
+	public PagedObjetMaquetteSummaries rechercheObjetMaquette(String codeStructure, String codeObjetMaquette,
+			String codePeriode, Boolean piaSeulement, Boolean piaActif) {
+
+		Pageable pageable = new Pageable();
+		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<>();
+		Boolean racine = null;
+		String typeObjetFormation = null;
+		List<UUID> ids = null;
+		Boolean protege = false;
+		List<String> codesPerimetresIn = null;
+		List<String> codesPerimetresOut = null;
+
+		try {
+
+			return objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, codeObjetMaquette, codePeriode,
+					typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
+					mutualise, protege, codesPerimetresIn, codesPerimetresOut);
+
+		} catch (ApiException e) {
+			logger.error("Erreur lors de la recherche d'objet maquette : {}", e.getMessage());
+			return null;
+		}
 
 	}
 
 	public void setMutualise(Boolean mutualise) {
 		this.mutualise = mutualise;
 	}
-
-	
 
 	public void setPcScoleService(PcscolService pcScoleService) {
 		this.pcScoleService = pcScoleService;
@@ -654,7 +725,6 @@ public class OffreFormationService {
 	public Boolean getMutualise() {
 		return mutualise;
 	}
-
 
 	public PcscolService getPcScoleService() {
 		return pcScoleService;

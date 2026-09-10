@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 /**
  * ObjetMaquetteSummary
@@ -48,6 +49,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
   allowSetters = true // allows the typeObjetMaquette to be set during deserialization
 )
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "typeObjetMaquette", visible = true)
+@JsonSubTypes({
+  @JsonSubTypes.Type(value = ObjetMaquetteSummary.class, name = "FORMATION"),
+  @JsonSubTypes.Type(value = ObjetMaquetteSummary.class, name = "OBJET-FORMATION"),
+  @JsonSubTypes.Type(value = ObjetMaquetteSummary.class, name = "GROUPEMENT"),
+  @JsonSubTypes.Type(value = ObjetMaquetteSummary.class, name = "ObjetMaquetteSummary")
+})
 
 public class ObjetMaquetteSummary {
   public static final String JSON_PROPERTY_ID = "id";
@@ -478,6 +485,9 @@ public class ObjetMaquetteSummary {
 static {
   // Initialize and register the discriminator mappings.
   Map<String, Class<?>> mappings = new HashMap<String, Class<?>>();
+  mappings.put("FORMATION", ObjetMaquetteSummary.class);
+  mappings.put("OBJET-FORMATION", ObjetMaquetteSummary.class);
+  mappings.put("GROUPEMENT", ObjetMaquetteSummary.class);
   mappings.put("ObjetMaquetteSummary", ObjetMaquetteSummary.class);
   JSON.registerDiscriminator(ObjetMaquetteSummary.class, "typeObjetMaquette", mappings);
 }

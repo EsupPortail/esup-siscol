@@ -65,6 +65,41 @@ public class MaquetteApiTest {
 	String strId = "14f54729-4db4-4341-8af6-47e276fe3058";
 	String codeStructure = "ETAB00";
 
+	
+	
+	
+	public void testDiplome() throws ApiException {
+		
+	}
+	
+	
+	
+	@Test
+	public void testRechercherObjetMaquette() throws ApiException {
+		Pageable pageable = new Pageable();
+		pageable.setTaille(50);
+		String r = null;
+		String espace = "b16a4bd4-a32b-402a-b7f8-fcf2f832aa57";
+		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
+		typeObjetMaquette.add(TypeObjetMaquette.FORMATION);
+		Boolean racine = null;
+		String typeObjetFormation = null;
+		List<UUID> ids = new ArrayList<UUID>();
+		Boolean piaSeulement = false;
+		Boolean piaActif = null;
+		Boolean valideSeulement = true;
+		Boolean mutualise = null;
+
+		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
+				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
+				mutualise,null,null,null);
+		System.out.println(response);
+	}
+	
+	
+	
+	
+	
 	@Test
 	public void testEspaces() {
 		List<Espace> espaces = new ArrayList<Espace>();

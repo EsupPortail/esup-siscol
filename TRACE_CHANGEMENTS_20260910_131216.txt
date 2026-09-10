@@ -1,0 +1,858 @@
+=== STATUS ===
+ M pom.xml
+ M src/main/java/org/esupportail/referentiel/pcscol/odf/model/ObjetMaquetteSummary.java
+ M src/main/java/org/esupportail/referentiel/pcscol/services/ChcService.java
+ M src/main/java/org/esupportail/referentiel/pcscol/services/OffreFormationService.java
+ M src/test/java/org/esupportail/referentiel/pcscol/odf/MaquetteApiTest.java
+?? TRACE_CHANGEMENTS_20260910_131216.txt
+
+=== BRANCH ===
+feature/maj-dev-pgase
+
+=== LAST COMMIT ===
+94cb087 WIP: modifs après push sur dev-pgase
+
+=== DIFF (non staged) ===
+diff --git a/pom.xml b/pom.xml
+index 6f40e9b..071aee1 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -4,12 +4,12 @@
+ 	<modelVersion>4.0.0</modelVersion>
+ 	<groupId>org.esupportail.referentiel</groupId>
+ 	<artifactId>esup-siscol</artifactId>
+-	<version>2.1.17</version>
++	<version>2.1.18</version>
+ 	<packaging>war</packaging>
+ 	<parent>
+ 		<groupId>org.springframework.boot</groupId>
+ 		<artifactId>spring-boot-starter-parent</artifactId>
+-		<version>3.5.11</version>
++		<version>3.5.16</version>
+ 		<relativePath /> <!-- lookup parent from repository -->
+ 	</parent>
+ 	<properties>
+diff --git a/src/main/java/org/esupportail/referentiel/pcscol/odf/model/ObjetMaquetteSummary.java b/src/main/java/org/esupportail/referentiel/pcscol/odf/model/ObjetMaquetteSummary.java
+index bec0c23..a1d298b 100644
+--- a/src/main/java/org/esupportail/referentiel/pcscol/odf/model/ObjetMaquetteSummary.java
++++ b/src/main/java/org/esupportail/referentiel/pcscol/odf/model/ObjetMaquetteSummary.java
+@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+ import com.fasterxml.jackson.annotation.JsonInclude;
+ import com.fasterxml.jackson.annotation.JsonProperty;
+ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
++import com.fasterxml.jackson.annotation.JsonSubTypes;
+ import com.fasterxml.jackson.annotation.JsonTypeInfo;
+ /**
+  * ObjetMaquetteSummary
+@@ -48,6 +49,12 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
+   allowSetters = true // allows the typeObjetMaquette to be set during deserialization
+ )
+ @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "typeObjetMaquette", visible = true)
++@JsonSubTypes({
++  @JsonSubTypes.Type(value = ObjetMaquetteSummary.class, name = "FORMATION"),
++  @JsonSubTypes.Type(value = ObjetMaquetteSummary.class, name = "OBJET-FORMATION"),
++  @JsonSubTypes.Type(value = ObjetMaquetteSummary.class, name = "GROUPEMENT"),
++  @JsonSubTypes.Type(value = ObjetMaquetteSummary.class, name = "ObjetMaquetteSummary")
++})
+ 
+ public class ObjetMaquetteSummary {
+   public static final String JSON_PROPERTY_ID = "id";
+@@ -478,6 +485,9 @@ public class ObjetMaquetteSummary {
+ static {
+   // Initialize and register the discriminator mappings.
+   Map<String, Class<?>> mappings = new HashMap<String, Class<?>>();
++  mappings.put("FORMATION", ObjetMaquetteSummary.class);
++  mappings.put("OBJET-FORMATION", ObjetMaquetteSummary.class);
++  mappings.put("GROUPEMENT", ObjetMaquetteSummary.class);
+   mappings.put("ObjetMaquetteSummary", ObjetMaquetteSummary.class);
+   JSON.registerDiscriminator(ObjetMaquetteSummary.class, "typeObjetMaquette", mappings);
+ }
+diff --git a/src/main/java/org/esupportail/referentiel/pcscol/services/ChcService.java b/src/main/java/org/esupportail/referentiel/pcscol/services/ChcService.java
+index b8c878d..b968779 100644
+--- a/src/main/java/org/esupportail/referentiel/pcscol/services/ChcService.java
++++ b/src/main/java/org/esupportail/referentiel/pcscol/services/ChcService.java
+@@ -46,8 +46,7 @@ public class ChcService {
+ 	private CursusDcaApi cursusDcaApi;
+ 	@Autowired
+ 	private ArbresApi arbresApi;
+-	@Autowired
+-	private ObjetsMaquetteExterneApi objetsMaquetteApi;
++	
+ 	@Autowired
+ 	private ObjetsMaquetteApiCHC objetsMaquetteApiCHC;
+ 	@Autowired
+@@ -56,21 +55,7 @@ public class ChcService {
+ 	@Autowired
+ 	private OffreFormationService offreFormationService;
+ 
+-	// String codeStructure = "ETAB00";
+-	Pageable pageable = new Pageable();
+-	String r = null;
+-	String espace = null;
+-	List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<>();
+-	Boolean racine = null;
+-	String typeObjetFormation = null;
+-	List<UUID> ids = null;
+-	Boolean piaSeulement = null;
+-	Boolean piaActif = null;
+-	Boolean valideSeulement = false;
+-	Boolean mutualise = null;
+-	Boolean protege=false;
+-	List<String> codesPerimetresIn=null;
+-	List<String> codesPerimetresOut=null;
++	
+ 
+ 	public ArbreLecture arbrePourUneFormation(String codeStructure, String codePeriode, String codeFormation) {
+ 		try {
+@@ -107,8 +92,8 @@ public class ChcService {
+ 	}
+ 
+ 	/**
+-	 * Retourne la liste des {@link ElementPedagogique} de type <b>stage</b> associés
+-	 * à un apprenant, en parcourant toute la chaîne d'appel suivante :
++	 * Retourne la liste des {@link ElementPedagogique} de type <b>stage</b>
++	 * associés à un apprenant, en parcourant toute la chaîne d'appel suivante :
+ 	 *
+ 	 * <pre>
+ 	 * 1. CursusDcaApi.lireCusrsuApprenant(codeApprenant)
+@@ -158,8 +143,8 @@ public class ChcService {
+ 	 *
+ 	 * @param codeApprenant code unique de l'apprenant dans Pégase
+ 	 * @param codeStructure code de l'établissement (ex. "ETAB00")
+-	 * @param codeEspace    code de l'espace/période à filtrer ; si {@code null} ou vide,
+-	 *                      tous les cursus de l'apprenant sont traités
++	 * @param codeEspace    code de l'espace/période à filtrer ; si {@code null} ou
++	 *                      vide, tous les cursus de l'apprenant sont traités
+ 	 * @return liste (possiblement vide) des éléments pédagogiques de type stage
+ 	 * @throws ApiException en cas d'erreur lors de l'appel à
+ 	 *                      {@code CursusDcaApi.lireCusrsuApprenant}
+@@ -169,10 +154,11 @@ public class ChcService {
+ 		List<CursusDCA> response = cursusDcaApi.lireCusrsuApprenant(codeApprenant);
+ 
+ 		if (codeEspace != null && !codeEspace.isBlank()) {
+-			response = response.stream().filter(cursus -> cursus.getPeriode() != null
+-					&& codeEspace.equals(cursus.getPeriode().getCode())).toList();
++			response = response.stream()
++					.filter(cursus -> cursus.getPeriode() != null && codeEspace.equals(cursus.getPeriode().getCode()))
++					.toList();
+ 		}
+-		
++
+ 		/**
+ 		 */
+ 		List<ElementPedagogique> listeElementPedagogique = new ArrayList<>();
+@@ -189,29 +175,37 @@ public class ChcService {
+ 	 * <p>
+ 	 * Appel HTTP : {@code GET /cursus-dca?codeApprenant={codeApprenant}}
+ 	 * </p>
+-	 * Retourne la liste brute de tous les cursus de l'apprenant sans aucun filtrage.
+-	 * Chaque {@link CursusDCA} contient :
++	 * Retourne la liste brute de tous les cursus de l'apprenant sans aucun
++	 * filtrage. Chaque {@link CursusDCA} contient :
+ 	 * <ul>
+-	 *   <li>{@code codeStructure} – code de l'établissement</li>
+-	 *   <li>{@code periode} ({@link org.esupportail.referentiel.pcscol.chcv6.model.PeriodeDCA}) – période du cursus</li>
+-	 *   <li>{@code formation} ({@link org.esupportail.referentiel.pcscol.chcv6.model.FormationDCA}) – formation associée</li>
+-	 *   <li>{@code racinePedagogique} ({@link org.esupportail.referentiel.pcscol.chcv6.model.LignePedagogiqueDCA}) – racine de l'arbre pédagogique récursif</li>
++	 * <li>{@code codeStructure} – code de l'établissement</li>
++	 * <li>{@code periode}
++	 * ({@link org.esupportail.referentiel.pcscol.chcv6.model.PeriodeDCA}) – période
++	 * du cursus</li>
++	 * <li>{@code formation}
++	 * ({@link org.esupportail.referentiel.pcscol.chcv6.model.FormationDCA}) –
++	 * formation associée</li>
++	 * <li>{@code racinePedagogique}
++	 * ({@link org.esupportail.referentiel.pcscol.chcv6.model.LignePedagogiqueDCA})
++	 * – racine de l'arbre pédagogique récursif</li>
+ 	 * </ul>
+ 	 *
+ 	 * @param codeApprenant code unique de l'apprenant dans Pégase (obligatoire)
+ 	 * @return liste de {@link CursusDCA} (peut être vide, jamais {@code null})
+-	 * @throws ApiException si l'appel HTTP échoue (4xx / 5xx) ou si {@code codeApprenant} est {@code null}
++	 * @throws ApiException si l'appel HTTP échoue (4xx / 5xx) ou si
++	 *                      {@code codeApprenant} est {@code null}
+ 	 */
+ 	public List<CursusDCA> lireCusrsuApprenant(String codeApprenant) throws ApiException {
+ 		return cursusDcaApi.lireCusrsuApprenant(codeApprenant);
+ 	}
+ 
+ 	/**
+-	 * Construit la liste des {@link ElementPedagogique} correspondant à <em>tous</em>
+-	 * les objets maquette trouvés dans un {@link CursusDCA}.
++	 * Construit la liste des {@link ElementPedagogique} correspondant à
++	 * <em>tous</em> les objets maquette trouvés dans un {@link CursusDCA}.
+ 	 * <p>
+ 	 * Chaîne d'appel interne :
+ 	 * </p>
++	 * 
+ 	 * <pre>
+ 	 * ChcService.lireCursus(cursus)
+ 	 *   → EspacesApi.rechercherEspaces(codeStructure, pageable, codePeriode, null, null)
+@@ -238,8 +232,8 @@ public class ChcService {
+ 	 *
+ 	 * @param cursus        cursus de l'apprenant (jamais {@code null})
+ 	 * @param codeStructure code de l'établissement (ex. "ETAB00")
+-	 * @return liste (possiblement vide) de tous les {@link ElementPedagogique} du cursus,
+-	 *         tous types confondus (stages et non-stages)
++	 * @return liste (possiblement vide) de tous les {@link ElementPedagogique} du
++	 *         cursus, tous types confondus (stages et non-stages)
+ 	 */
+ 	public List<ElementPedagogique> listeElementPedagogiqueFromCursus(CursusDCA cursus, String codeStructure) {
+ 		List<ElementPedagogique> listeElementPedagogique = new ArrayList<>();
+@@ -284,12 +278,15 @@ public class ChcService {
+ 	}
+ 
+ 	/**
+-	 * Filtre les {@link ElementPedagogique} d'un {@link CursusDCA} pour ne conserver
+-	 * que ceux dont {@code temElpTypeStage} vaut {@code "true"} (insensible à la casse).
++	 * Filtre les {@link ElementPedagogique} d'un {@link CursusDCA} pour ne
++	 * conserver que ceux dont {@code temElpTypeStage} vaut {@code "true"}
++	 * (insensible à la casse).
+ 	 * <p>
+-	 * Délègue d'abord à {@link #listeElementPedagogiqueFromCursus(CursusDCA, String)}
+-	 * pour construire la liste complète, puis applique le filtre :
++	 * Délègue d'abord à
++	 * {@link #listeElementPedagogiqueFromCursus(CursusDCA, String)} pour construire
++	 * la liste complète, puis applique le filtre :
+ 	 * </p>
++	 * 
+ 	 * <pre>
+ 	 * listeElementPedagogiqueFromCursus(cursus, codeStructure)
+ 	 *   → (voir Javadoc de cette méthode pour la chaîne d'appel complète)
+@@ -300,7 +297,8 @@ public class ChcService {
+ 	 *
+ 	 * @param cursus        cursus de l'apprenant (jamais {@code null})
+ 	 * @param codeStructure code de l'établissement (ex. "ETAB00")
+-	 * @return liste (possiblement vide) des {@link ElementPedagogique} dont le type est stage
++	 * @return liste (possiblement vide) des {@link ElementPedagogique} dont le type
++	 *         est stage
+ 	 */
+ 	public List<ElementPedagogique> listeElementPedagogiqueStageFromCursus(CursusDCA cursus, String codeStructure) {
+ 		List<ElementPedagogique> listeElementPedagogique = listeElementPedagogiqueFromCursus(cursus, codeStructure);
+@@ -319,12 +317,13 @@ public class ChcService {
+ 	}
+ 
+ 	/**
+-	 * Résout l'arbre pédagogique d'un {@link CursusDCA} en une liste de {@link ObjetMaquetteDetail}
+-	 * exploitables, en trois étapes :
++	 * Résout l'arbre pédagogique d'un {@link CursusDCA} en une liste de
++	 * {@link ObjetMaquetteDetail} exploitables, en trois étapes :
+ 	 *
+ 	 * <ol>
+-	 *   <li><b>Résolution de l'espace (période)</b> :
+-	 *       <pre>
++	 * <li><b>Résolution de l'espace (période)</b> :
++	 * 
++	 * <pre>
+ 	 * EspacesApi.rechercherEspaces(cursus.getCodeStructure(), pageable,
+ 	 *                              cursus.getPeriode().getCode(), null, null)
+ 	 *   → GET /etablissement/{codeStructure}/espaces
+@@ -332,11 +331,13 @@ public class ChcService {
+ 	 *   → PagedEspaces
+ 	 *   → Filtre l'Espace dont e.getCode() == cursus.getPeriode().getCode()
+ 	 *   → espaceUUID (UUID de l'espace)
+-	 *       </pre>
+-	 *       Si aucun espace ne correspond, retourne une liste vide.</li>
++	 * </pre>
++	 * 
++	 * Si aucun espace ne correspond, retourne une liste vide.</li>
+ 	 *
+-	 *   <li><b>Parcours de l'arbre pédagogique (DFS itératif)</b> :
+-	 *       <pre>
++	 * <li><b>Parcours de l'arbre pédagogique (DFS itératif)</b> :
++	 * 
++	 * <pre>
+ 	 * ChcService.lignePedagogiqueDCADynamic(codeStructure, racinePedagogique,
+ 	 *                                        lignes, itemsObjetMaquetteSummaries,
+ 	 *                                        espaceUUID.toString())
+@@ -350,28 +351,35 @@ public class ChcService {
+ 	 *         → PagedObjetMaquetteSummaries
+ 	 *         → Filtre objet.getCode() == codeEnfant
+ 	 *         → Accumule dans itemsObjetMaquetteSummaries
+-	 *       </pre></li>
++	 * </pre>
++	 * 
++	 * </li>
+ 	 *
+-	 *   <li><b>Lecture des détails des objets maquette</b> :
+-	 *       <pre>
++	 * <li><b>Lecture des détails des objets maquette</b> :
++	 * 
++	 * <pre>
+ 	 * OffreFormationService.recherchDescripteurMaquettes(codeStructure, uuids)
+ 	 *   → Pour chaque UUID dans la liste :
+ 	 *       ObjetsMaquetteApi.lireObjetMaquette(codeStructure, id)
+ 	 *         → GET /etablissement/{codeStructure}/objets-maquette/{id}
+ 	 *         → ObjetMaquetteDetail
+ 	 *   → Retourne List&lt;ObjetMaquetteDetail&gt;
+-	 *       </pre></li>
++	 * </pre>
++	 * 
++	 * </li>
+ 	 * </ol>
+ 	 *
+-	 * @param cursus le cursus à traiter (ne doit pas être {@code null}, ni avoir une
+-	 *               période ou une formation {@code null})
+-	 * @return liste (possiblement vide) des {@link ObjetMaquetteDetail} trouvés dans l'arbre du cursus
++	 * @param cursus le cursus à traiter (ne doit pas être {@code null}, ni avoir
++	 *               une période ou une formation {@code null})
++	 * @return liste (possiblement vide) des {@link ObjetMaquetteDetail} trouvés
++	 *         dans l'arbre du cursus
+ 	 * @throws ApiException si l'appel à {@code EspacesApi.rechercherEspaces} échoue
+ 	 */
+ 	public List<ObjetMaquetteDetail> lireCursus(CursusDCA cursus) throws ApiException {
+ 
+ 		logger.debug("lireCodeEspaceCursus : {} {}", cursus.getCodeStructure(), cursus.getPeriode().getCode());
+-		//rechecher espaces pour la structure et la période du cursus
++		Pageable pageable=new Pageable();
++		// rechecher espaces pour la structure et la période du cursus
+ 		PagedEspaces espaceDCA = espacesApi.rechercherEspaces(cursus.getCodeStructure(), pageable,
+ 				cursus.getPeriode().getCode(), null, null);
+ 
+@@ -385,7 +393,7 @@ public class ChcService {
+ 			logger.warn("Code espace {} non trouvé pour le cursus (code formation) {}", cursus.getPeriode().getCode(),
+ 					cursus.getFormation().getCode());
+ 		}
+-		
++
+ 		logger.debug("espaceUUID : {}", espaceUUID);
+ 
+ 		if (espaceUUID == null) {
+@@ -405,72 +413,19 @@ public class ChcService {
+ 		itemsObjetMaquetteSummaries.forEach(e -> uuidsObjetMaquetteSummaries.add(e.getId()));
+ 		logger.debug("uuidsObjetMaquetteSummaries : {}", uuidsObjetMaquetteSummaries);
+ 
+-		return offreFormationService.recherchDescripteurMaquettes(cursus.getCodeStructure(), uuidsObjetMaquetteSummaries);
+-	}
+-
+-	/**
+-	 * Variante <b>récursive</b> de parcours de l'arbre {@link LignePedagogiqueDCA}.
+-	 * <p>
+-	 * Pour chaque nœud enfant de {@code lignesPeda}, effectue l'appel suivant :
+-	 * </p>
+-	 * <pre>
+-	 * ObjetsMaquetteApi.rechercherObjetMaquette(
+-	 *     codeStructure, pageable, e.getCodeObjetMaquette(), espace,
+-	 *     typeObjetMaquette, racine, typeObjetFormation,
+-	 *     ids, piaSeulement, piaActif, valideSeulement, mutualise)
+-	 *   → GET /etablissement/{codeStructure}/objets-maquette
+-	 *         ?r={codeObjetMaquette}&espace={espace}&...
+-	 *   → PagedObjetMaquetteSummaries
+-	 *   → Filtre les items dont objet.getCode() == e.getCodeObjetMaquette()
+-	 *   → Accumule dans itemsObjetMaquetteSummaries
+-	 * </pre>
+-	 * <p>
+-	 * Puis s'appelle récursivement sur chaque enfant.
+-	 * <br><b>Attention :</b> pour des arbres profonds, préférer
+-	 * {@link #lignePedagogiqueDCADynamic} qui évite les débordements de pile.
+-	 * </p>
+-	 *
+-	 * @param codeStructure               code de l'établissement
+-	 * @param lignesPeda                  nœud courant de l'arbre pédagogique
+-	 * @param lignes                      liste de codes des nœuds visités (accumulée)
+-	 * @param itemsObjetMaquetteSummaries liste des {@link ObjetMaquetteSummary} trouvés (accumulée)
+-	 * @param espace                      UUID de l'espace (sous forme String) pour filtrer les objets maquette
+-	 */
+-	public void lignePedagogiqueDCARec(String codeStructure, LignePedagogiqueDCA lignesPeda, List<String> lignes,
+-			List<ObjetMaquetteSummary> itemsObjetMaquetteSummaries, String espace) {
+-		lignes.add(lignesPeda.getCodeObjetMaquette());
+-		if (lignesPeda.getEnfants() != null && !lignesPeda.getEnfants().isEmpty()) {
+-			lignesPeda.getEnfants().forEach(e -> {
+-				try {
+-					PagedObjetMaquetteSummaries om = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
+-							e.getCodeObjetMaquette(), espace, typeObjetMaquette, racine, typeObjetFormation, ids,
+-							piaSeulement, piaActif, valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
+-					if (om.getItems() != null) {
+-						Stream<ObjetMaquetteSummary> filtred = om.getItems().stream()
+-								.filter(o -> o.getCode().equals(e.getCodeObjetMaquette()));
+-						List<ObjetMaquetteSummary> listFiltred = filtred.toList();
+-						itemsObjetMaquetteSummaries.addAll(listFiltred);
+-
+-					}
+-				} catch (ApiException e1) {
+-					logger.error("Erreur lors de la recherche de l'objet maquette {} : {}", e.getCodeObjetMaquette(),
+-							e1.getMessage());
+-				}
+-				lignePedagogiqueDCARec(codeStructure, e, lignes, itemsObjetMaquetteSummaries, espace);
+-			});
+-
+-			// lignePedagogiqueDCARec(LignePedagogiqueDCA lignesPeda,List<String> lignes)
+-		}
+-
++		return offreFormationService.recherchDescripteurMaquettes(cursus.getCodeStructure(),
++				uuidsObjetMaquetteSummaries);
+ 	}
+ 
+ 	/**
+ 	 * Variante <b>itérative</b> (pile explicite) du parcours DFS de l'arbre
+ 	 * {@link LignePedagogiqueDCA}, conçue pour éviter les débordements de pile et
+-	 * limiter les appels API redondants grâce à deux ensembles de codes déjà visités.
++	 * limiter les appels API redondants grâce à deux ensembles de codes déjà
++	 * visités.
+ 	 * <p>
+ 	 * Algorithme :
+ 	 * </p>
++	 * 
+ 	 * <pre>
+ 	 * pile ← [racinePeda]
+ 	 * codesLignesVisites    ← {} (évite de remettre en liste un même code)
+@@ -495,13 +450,17 @@ public class ChcService {
+ 	 * </pre>
+ 	 *
+ 	 * @param codeStructure               code de l'établissement (ex. "ETAB00")
+-	 * @param racinePeda                  nœud racine de l'arbre pédagogique du cursus ;
+-	 *                                    si {@code null}, la méthode retourne immédiatement
+-	 * @param lignes                      liste (accumulée) des codes des nœuds visités
+-	 * @param itemsObjetMaquetteSummaries liste (accumulée) des {@link ObjetMaquetteSummary}
+-	 *                                    trouvés pour chaque enfant unique
+-	 * @param espace                      UUID de l'espace (sous forme {@code String}) utilisé
+-	 *                                    comme critère de filtrage dans l'appel à
++	 * @param racinePeda                  nœud racine de l'arbre pédagogique du
++	 *                                    cursus ; si {@code null}, la méthode
++	 *                                    retourne immédiatement
++	 * @param lignes                      liste (accumulée) des codes des nœuds
++	 *                                    visités
++	 * @param itemsObjetMaquetteSummaries liste (accumulée) des
++	 *                                    {@link ObjetMaquetteSummary} trouvés pour
++	 *                                    chaque enfant unique
++	 * @param espace                      UUID de l'espace (sous forme
++	 *                                    {@code String}) utilisé comme critère de
++	 *                                    filtrage dans l'appel à
+ 	 *                                    {@code ObjetsMaquetteApi.rechercherObjetMaquette}
+ 	 */
+ 	public void lignePedagogiqueDCADynamic(String codeStructure, LignePedagogiqueDCA racinePeda, List<String> lignes,
+@@ -540,9 +499,12 @@ public class ChcService {
+ 				String codeEnfant = enfant.getCodeObjetMaquette();
+ 				if (codeEnfant != null && codesObjetsDejaCharges.add(codeEnfant)) {
+ 					try {
+-						PagedObjetMaquetteSummaries om = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
+-								codeEnfant, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement,
+-								piaActif, valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
++						Boolean piaSeulement = null;
++						Boolean piaActif = null;
++
++						PagedObjetMaquetteSummaries om = offreFormationService.rechercheObjetMaquette(codeStructure,
++								codeEnfant, espace, piaSeulement, piaActif);
++
+ 						if (om.getItems() != null && !om.getItems().isEmpty()) {
+ 							for (ObjetMaquetteSummary objet : om.getItems()) {
+ 								if (codeEnfant.equals(objet.getCode())) {
+@@ -550,7 +512,7 @@ public class ChcService {
+ 								}
+ 							}
+ 						}
+-					} catch (ApiException e) {
++					} catch (Exception e) {
+ 						logger.error("Erreur lors de la recherche de l'objet maquette {} : {}", codeEnfant,
+ 								e.getMessage());
+ 					}
+diff --git a/src/main/java/org/esupportail/referentiel/pcscol/services/OffreFormationService.java b/src/main/java/org/esupportail/referentiel/pcscol/services/OffreFormationService.java
+index 144f488..3bd4291 100644
+--- a/src/main/java/org/esupportail/referentiel/pcscol/services/OffreFormationService.java
++++ b/src/main/java/org/esupportail/referentiel/pcscol/services/OffreFormationService.java
+@@ -8,7 +8,6 @@ import java.util.Map;
+ import java.util.UUID;
+ 
+ import org.esupportail.referentiel.pcscol.api.MaquettesExterneApi;
+-
+ import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
+ import org.esupportail.referentiel.pcscol.invoker.ApiException;
+ import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
+@@ -31,13 +30,16 @@ import org.springframework.stereotype.Service;
+ @ConditionalOnProperty(name = "app.mode_pegase")
+ public class OffreFormationService {
+ 
++	private static final int DEFAULT_PAGE_SIZE = 20;
++	private static final int SMALL_PAGE_SIZE = 10;
++
+ //	@Autowired
+ //	private EspacesApi espacesApi;
+ 
+ 	@Autowired
+ 	private EspaceService espaceService;
+ 
+-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
++	final  Logger logger = LoggerFactory.getLogger(this.getClass());
+ 	private Boolean mutualise = null;
+ 
+ 	@Autowired
+@@ -56,20 +58,12 @@ public class OffreFormationService {
+ 	private Boolean piaSeulement = false;
+ 	private Boolean valideSeulement = true;
+ 
+-//	public List<Espace> checherPeriodeParCode(String codeStructure, String code) throws ApiException {
+-//		Pageable pageable = new Pageable();
+-//		pageable.setPage(0);
+-//		pageable.setTaille(20);
+-//		String r = code;
+-//		TypeEspace type = null;
+-//		// ( String codeStructure, Pageable pageable, String r, TypeEspace type, Boolean
+-//		// actif)
+-//		PagedEspaces espaces = espacesApi.rechercherEspaces(codeStructure, pageable, r, type, true);
+-//		logger.debug("nbr d'Espaces pour le code   " + r + " :" + espaces.getTotalElements());
+-//		return espaces.getItems();
+-//
+-//	}
+-
++	/**
++	 * 
++	 * @param codeStructure
++	 * @param idMaquette
++	 * @return
++	 */
+ 	public MaquetteStructure lireMaquette(String codeStructure, String idMaquette) {
+ 		logger.debug("lireMaquette( {} ,{} )", codeStructure, idMaquette);
+ 		try {
+@@ -145,7 +139,7 @@ public class OffreFormationService {
+ 	 * @param racine
+ 	 * @param typeObjetFormation
+ 	 * @param espace
+-	 * @param newParam    
++	 * @param newParam
+ 	 * @return
+ 	 * @throws ApiException
+ 	 */
+@@ -154,40 +148,22 @@ public class OffreFormationService {
+ 			String espace, boolean piaSeulement) throws ApiException {
+ 		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{},{},{} ,{} )", codeStructure, typeObjetMaquette, racine,
+ 				typeObjetFormation, ids, espace);
+-
+-		List<ObjetMaquetteSummary> objetMaquetteSummaries = new ArrayList<>();
+-		Pageable pageable = new Pageable();
+-		pageable.setPage(0);
+-		pageable.setTaille(20);
+ 		String r = null;
+-		Boolean protege=false;
+-		List<String> codesPerimetresIn=null;
+-		List<String> codesPerimetresOut=null;
+ 		logger.debug(
+ 				"codeStructure: {},  r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
+ 				codeStructure, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
+ 				valideSeulement, mutualise);
+-		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
+-				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
+-				mutualise,protege,codesPerimetresIn,codesPerimetresOut);
+ 
+-		if (response == null || response.getItems() == null) {
++		List<ObjetMaquetteSummary> objetMaquetteSummaries = rechercheObjetMaquetteSummaryPaginee(codeStructure, r,
++				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, DEFAULT_PAGE_SIZE);
++		if (objetMaquetteSummaries.isEmpty()) {
+ 			logger.info("rechercheObjetMaquetteSummary vide {} : {}", codeStructure, espace);
+-			return objetMaquetteSummaries;
+-		}
+-		objetMaquetteSummaries.addAll(response.getItems());
+-		Integer nbrPage = response.getTotalPages();
+-		if (nbrPage > 1) {
+-			for (int i = 1; i < nbrPage; i++) {
+-				pageable.setPage(i);
+-				PagedObjetMaquetteSummaries responsePartial = objetsMaquetteApi.rechercherObjetMaquette(codeStructure,
+-						pageable, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif,
+-						valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
+-				objetMaquetteSummaries.addAll(responsePartial.getItems());
+-
+-			}
+ 		}
++		
++		
+ 		objetMaquetteSummaries = objetMaquetteSummaries.stream().distinct().toList();
++		
++		System.out.println("rechercheObjetMaquetteSummary : " + codeStructure + " " + espace + " " + objetMaquetteSummaries);
+ 		return objetMaquetteSummaries;
+ 	}
+ 
+@@ -201,47 +177,25 @@ public class OffreFormationService {
+ 	 */
+ 	public List<ObjetMaquetteSummary> rechercheObjetMaquetteSummary(String codeStructure, String codeFormation,
+ 			String codePeriode) throws ApiException {
+-		Pageable pageable = new Pageable();
+-		List<ObjetMaquetteSummary> listMaquetteSummaries = new ArrayList<>();
+-
+-		pageable.setPage(0);
+-		pageable.setTaille(10);
+-		
+-		Boolean protege=false;
+-		List<String> codesPerimetresIn=null;
+-		List<String> codesPerimetresOut=null;
+-		
+ 		logger.debug("rechercheObjetMaquetteSummary( {} ,{} ,{} )", codeStructure, codeFormation, codePeriode);
+ 		UUID idEsapce = espaceService.chercherEspaceFromCode(codeStructure, codePeriode);
+ 		if (idEsapce == null) {
+ 			logger.error("ID espace null pour la periode {}", codePeriode);
+ 			return Collections.emptyList();
+ 		}
+-		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
+-				codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, piaActif, valideSeulement,
+-				mutualise,protege,codesPerimetresIn,codesPerimetresOut);
+ 
+-		if (response == null || response.getItems() == null) {
++		List<ObjetMaquetteSummary> listMaquetteSummaries = rechercheObjetMaquetteSummaryPaginee(codeStructure,
++				codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, SMALL_PAGE_SIZE);
++
++		if (listMaquetteSummaries.isEmpty()) {
+ 			logger.info("rechercheObjetMaquetteSummary vide : {} : {}", codeFormation, codePeriode);
+ 			return listMaquetteSummaries;
+ 		}
+-		listMaquetteSummaries.addAll(response.getItems());
+-
+-		if (response.getTotalPages() > 1) {
+-			for (int i = 1; i < response.getTotalPages(); i++) {
+-				pageable.setPage(i);
+-				PagedObjetMaquetteSummaries responsePartiel = objetsMaquetteApi.rechercherObjetMaquette(codeStructure,
+-						pageable, codeFormation, idEsapce.toString(), null, null, null, null, piaSeulement, piaActif,
+-						valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
+-				listMaquetteSummaries.addAll(responsePartiel.getItems());
+-			}
+ 
+-		}
+ 		logger.debug("rechercheObjetMaquetteSummary : {} {} {}", codeStructure, codeFormation,
+ 				listMaquetteSummaries.size());
+-		logger.info("rechercheObjetMaquetteSummary : {} {} {}", codeStructure, codeFormation,
+-				response.getTotalElements());
+-		return response.getItems();
++		logger.info("rechercheObjetMaquetteSummary : {} {} {}", codeStructure, codeFormation, listMaquetteSummaries.size());
++		return listMaquetteSummaries;
+ 	}
+ 
+ 	/**
+@@ -327,14 +281,26 @@ public class OffreFormationService {
+ 		List<ObjetMaquetteSummary> allObjetMaquetteDetail = rechercheObjetMaquetteSummary(codeStructure, tom, racine,
+ 				typeObjetFormation, ids, espace, piaSeulement);
+ 		logger.debug("rechercherObjetMaquette : {} {} {}", codeStructure, espace, allObjetMaquetteDetail.size());
++		Map<UUID, String> espaceCodeCache = new HashMap<>();
+ 		allObjetMaquetteDetail.forEach(f -> {
+ 
+ 			try {
+ 				logger.debug("rechercherObjetMaquette : {} {} {}", codeStructure, espace, f.getId());
+ 				ObjetMaquetteDetail objectMaqette = objetsMaquetteApi.lireObjetMaquette(codeStructure, f.getId());
+ 				UUID idEspace = objectMaqette.getEspace();
+-				Espace esp = espaceService.lireEspace(codeStructure, idEspace);
+-				mapVDI.put(f.getCode() + ";" + esp.getCode(), f.getLibelle());
++				if (idEspace == null) {
++					return;
++				}
++				String codeEspace = espaceCodeCache.get(idEspace);
++				if (codeEspace == null) {
++					Espace esp = espaceService.lireEspace(codeStructure, idEspace);
++					if (esp == null || esp.getCode() == null) {
++						return;
++					}
++					codeEspace = esp.getCode();
++					espaceCodeCache.put(idEspace, codeEspace);
++				}
++				mapVDI.put(f.getCode() + ";" + codeEspace, f.getLibelle());
+ 
+ 			} catch (ApiException e) {
+ 				logger.error("Erreur lors de la lecture de l'objet maquette {} : {}", f.getId(), e.getMessage());
+@@ -385,6 +351,8 @@ public class OffreFormationService {
+ 					typesObjetMaquette, racine, typeObjetFormation, ids, idPeriode.toString(), piaSeulementContrainte);
+ 			logger.debug("rechercherObjetMaquetteDiplomeReferences : {} {} {}", codeStructure, periode,
+ 					allObjetMaquetteDetail.size());
++			
++			System.out.println("rechercherObjetMaquetteDiplomeReferences : " + allObjetMaquetteDetail);
+ 			return allObjetMaquetteDetail;
+ 		} else
+ 			return Collections.emptyList();
+@@ -583,7 +551,10 @@ public class OffreFormationService {
+ 	 */
+ 	public List<ObjetMaquetteDetail> listeEnfantsObjectMaquetteStage(String codeStructure, String idMaquetteStructure) {
+ 		MaquetteStructure maquetteStructure = lireMaquette(codeStructure, idMaquetteStructure);
+-
++		if (maquetteStructure == null || maquetteStructure.getRacine() == null
++				|| maquetteStructure.getRacine().getEnfants() == null) {
++			return Collections.emptyList();
++		}
+ 		return listeEnfantsObjectMaquetteStage(codeStructure, maquetteStructure.getRacine().getEnfants());
+ 	}
+ 
+@@ -608,6 +579,10 @@ public class OffreFormationService {
+ 	 */
+ 	public void listeEnfantsObjectMaquetteStage(String codeStructure, EnfantsStructure enfantStructure,
+ 			List<ObjetMaquetteDetail> stagesObjectMaquette) {
++		if (enfantStructure == null || enfantStructure.getObjetMaquette() == null
++				|| enfantStructure.getObjetMaquette().getId() == null) {
++			return;
++		}
+ 
+ 		try {
+ 
+@@ -617,15 +592,113 @@ public class OffreFormationService {
+ 			if (dom.getStage() != null && dom.getStage())
+ 				stagesObjectMaquette.add(objectMaqette);
+ 		} catch (ApiException e1) {
+-			// TODO Auto-generated catch block
+-			e1.printStackTrace();
++
++			logger.error("Erreur lors de la lecture de l'objet maquette {} : {}",
++					enfantStructure.getObjetMaquette().getId(), e1.getMessage());
+ 		} catch (ClassCastException e2) {
+ 			logger.warn(e2.getMessage());
+ 		}
+ 
+ 		List<EnfantsStructure> enfants = enfantStructure.getObjetMaquette().getEnfants();
++		if (enfants != null && !enfants.isEmpty()) {
++			enfants.forEach(e -> listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette));
++		}
+ 
+-		enfants.forEach(e -> listeEnfantsObjectMaquetteStage(codeStructure, e, stagesObjectMaquette));
++	}
++
++	private List<ObjetMaquetteSummary> rechercheObjetMaquetteSummaryPaginee(String codeStructure, String r,
++			String espace, List<TypeObjetMaquette> typeObjetMaquette, Boolean racine, String typeObjetFormation,
++			List<UUID> ids, Boolean piaSeulementParam, int pageSize) throws ApiException {
++		List<ObjetMaquetteSummary> summaries = new ArrayList<>();
++		Pageable pageable = new Pageable();
++		pageable.setPage(0);
++		pageable.setTaille(pageSize);
++
++		Boolean protege = false;
++		List<String> codesPerimetresIn = new ArrayList<>();
++		List<String> codesPerimetresOut = new ArrayList<>();
++		logger.debug(
++				"codeStructure: {},  r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
++				codeStructure, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulementParam,
++				piaActif, valideSeulement, mutualise);
++		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
++				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulementParam, piaActif, valideSeulement,
++				mutualise, protege, codesPerimetresIn, codesPerimetresOut);
++		
++		
++		logger.debug("{} {}  {} ", "rechercheObjetMaquetteSummaryPaginee", " => response size",
++				response);
++		if (response == null || response.getItems() == null) {
++			return summaries;
++		}
++
++		summaries.addAll(response.getItems());
++		int totalPages =  response.getTotalPages();
++		for (int i = 1; i < totalPages; i++) {
++			pageable.setPage(i);
++			
++			logger.debug("rechercheObjetMaquetteSummaryPaginee page {}", i);
++			logger.debug(
++					"codeStructure: {},  r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
++					codeStructure, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulementParam,
++					piaActif, valideSeulement, mutualise);
++			PagedObjetMaquetteSummaries pageResponse = objetsMaquetteApi.rechercherObjetMaquette(
++					codeStructure, 
++					pageable,
++					r, 
++					espace, 
++					typeObjetMaquette, 
++					racine, 
++					typeObjetFormation, 
++					ids, 
++					piaSeulementParam, 
++					piaActif,
++					valideSeulement, 
++					mutualise, 
++					protege, 
++					codesPerimetresIn, 
++					codesPerimetresOut);
++			logger.debug("{} {}  {} ", "rechercheObjetMaquetteSummaryPaginee", " => response size",
++					pageResponse.getItems().size());
++			if ( pageResponse.getItems() != null) {
++				summaries.addAll(pageResponse.getItems());
++			}
++		}
++
++		return summaries;
++	}
++
++	/**
++	 * 
++	 * @param codeStructure
++	 * @param codeObjetMaquette
++	 * @param codePeriode
++	 * @param piaSeulement
++	 * @param piaActif
++	 * @return
++	 */
++	public PagedObjetMaquetteSummaries rechercheObjetMaquette(String codeStructure, String codeObjetMaquette,
++			String codePeriode, Boolean piaSeulement, Boolean piaActif) {
++
++		Pageable pageable = new Pageable();
++		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<>();
++		Boolean racine = null;
++		String typeObjetFormation = null;
++		List<UUID> ids = null;
++		Boolean protege = false;
++		List<String> codesPerimetresIn = null;
++		List<String> codesPerimetresOut = null;
++
++		try {
++
++			return objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, codeObjetMaquette, codePeriode,
++					typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
++					mutualise, protege, codesPerimetresIn, codesPerimetresOut);
++
++		} catch (ApiException e) {
++			logger.error("Erreur lors de la recherche d'objet maquette : {}", e.getMessage());
++			return null;
++		}
+ 
+ 	}
+ 
+@@ -633,8 +706,6 @@ public class OffreFormationService {
+ 		this.mutualise = mutualise;
+ 	}
+ 
+-	
+-
+ 	public void setPcScoleService(PcscolService pcScoleService) {
+ 		this.pcScoleService = pcScoleService;
+ 	}
+@@ -655,7 +726,6 @@ public class OffreFormationService {
+ 		return mutualise;
+ 	}
+ 
+-
+ 	public PcscolService getPcScoleService() {
+ 		return pcScoleService;
+ 	}
+diff --git a/src/test/java/org/esupportail/referentiel/pcscol/odf/MaquetteApiTest.java b/src/test/java/org/esupportail/referentiel/pcscol/odf/MaquetteApiTest.java
+index bf26e65..ca9be46 100644
+--- a/src/test/java/org/esupportail/referentiel/pcscol/odf/MaquetteApiTest.java
++++ b/src/test/java/org/esupportail/referentiel/pcscol/odf/MaquetteApiTest.java
+@@ -65,6 +65,40 @@ public class MaquetteApiTest {
+ 	String strId = "14f54729-4db4-4341-8af6-47e276fe3058";
+ 	String codeStructure = "ETAB00";
+ 
++	
++	
++	
++	public void testDiplome() throws ApiException {
++		
++	}
++	
++	
++	
++	@Test
++	public void testRechercherObjetMaquette() throws ApiException {
++		Pageable pageable = new Pageable();
++		pageable.setTaille(50);
++		String r = null;
++		String espace = null;
++		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
++		Boolean racine = null;
++		String typeObjetFormation = null;
++		List<UUID> ids = new ArrayList<UUID>();
++		Boolean piaSeulement = null;
++		Boolean piaActif = null;
++		Boolean valideSeulement = null;
++		Boolean mutualise = null;
++
++		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
++				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
++				mutualise,null,null,null);
++		System.out.println(response);
++	}
++	
++	
++	
++	
++	
+ 	@Test
+ 	public void testEspaces() {
+ 		List<Espace> espaces = new ArrayList<Espace>();
+
+=== DIFF (staged) ===

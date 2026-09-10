@@ -46,8 +46,7 @@ public class ChcService {
 	private CursusDcaApi cursusDcaApi;
 	@Autowired
 	private ArbresApi arbresApi;
-	@Autowired
-	private ObjetsMaquetteExterneApi objetsMaquetteApi;
+	
 	@Autowired
 	private ObjetsMaquetteApiCHC objetsMaquetteApiCHC;
 	@Autowired
@@ -56,21 +55,7 @@ public class ChcService {
 	@Autowired
 	private OffreFormationService offreFormationService;
 
-	// String codeStructure = "ETAB00";
-	Pageable pageable = new Pageable();
-	String r = null;
-	String espace = null;
-	List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<>();
-	Boolean racine = null;
-	String typeObjetFormation = null;
-	List<UUID> ids = null;
-	Boolean piaSeulement = null;
-	Boolean piaActif = null;
-	Boolean valideSeulement = false;
-	Boolean mutualise = null;
-	Boolean protege=false;
-	List<String> codesPerimetresIn=null;
-	List<String> codesPerimetresOut=null;
+	
 
 	public ArbreLecture arbrePourUneFormation(String codeStructure, String codePeriode, String codeFormation) {
 		try {
@@ -107,8 +92,8 @@ public class ChcService {
 	}
 
 	/**
-	 * Retourne la liste des {@link ElementPedagogique} de type <b>stage</b> associés
-	 * à un apprenant, en parcourant toute la chaîne d'appel suivante :
+	 * Retourne la liste des {@link ElementPedagogique} de type <b>stage</b>
+	 * associés à un apprenant, en parcourant toute la chaîne d'appel suivante :
 	 *
 	 * <pre>
 	 * 1. CursusDcaApi.lireCusrsuApprenant(codeApprenant)
@@ -158,8 +143,8 @@ public class ChcService {
 	 *
 	 * @param codeApprenant code unique de l'apprenant dans Pégase
 	 * @param codeStructure code de l'établissement (ex. "ETAB00")
-	 * @param codeEspace    code de l'espace/période à filtrer ; si {@code null} ou vide,
-	 *                      tous les cursus de l'apprenant sont traités
+	 * @param codeEspace    code de l'espace/période à filtrer ; si {@code null} ou
+	 *                      vide, tous les cursus de l'apprenant sont traités
 	 * @return liste (possiblement vide) des éléments pédagogiques de type stage
 	 * @throws ApiException en cas d'erreur lors de l'appel à
 	 *                      {@code CursusDcaApi.lireCusrsuApprenant}
@@ -169,10 +154,11 @@ public class ChcService {
 		List<CursusDCA> response = cursusDcaApi.lireCusrsuApprenant(codeApprenant);
 
 		if (codeEspace != null && !codeEspace.isBlank()) {
-			response = response.stream().filter(cursus -> cursus.getPeriode() != null
-					&& codeEspace.equals(cursus.getPeriode().getCode())).toList();
+			response = response.stream()
+					.filter(cursus -> cursus.getPeriode() != null && codeEspace.equals(cursus.getPeriode().getCode()))
+					.toList();
 		}
-		
+
 		/**
 		 */
 		List<ElementPedagogique> listeElementPedagogique = new ArrayList<>();
@@ -189,29 +175,37 @@ public class ChcService {
 	 * <p>
 	 * Appel HTTP : {@code GET /cursus-dca?codeApprenant={codeApprenant}}
 	 * </p>
-	 * Retourne la liste brute de tous les cursus de l'apprenant sans aucun filtrage.
-	 * Chaque {@link CursusDCA} contient :
+	 * Retourne la liste brute de tous les cursus de l'apprenant sans aucun
+	 * filtrage. Chaque {@link CursusDCA} contient :
 	 * <ul>
-	 *   <li>{@code codeStructure} – code de l'établissement</li>
-	 *   <li>{@code periode} ({@link org.esupportail.referentiel.pcscol.chcv6.model.PeriodeDCA}) – période du cursus</li>
-	 *   <li>{@code formation} ({@link org.esupportail.referentiel.pcscol.chcv6.model.FormationDCA}) – formation associée</li>
-	 *   <li>{@code racinePedagogique} ({@link org.esupportail.referentiel.pcscol.chcv6.model.LignePedagogiqueDCA}) – racine de l'arbre pédagogique récursif</li>
+	 * <li>{@code codeStructure} – code de l'établissement</li>
+	 * <li>{@code periode}
+	 * ({@link org.esupportail.referentiel.pcscol.chcv6.model.PeriodeDCA}) – période
+	 * du cursus</li>
+	 * <li>{@code formation}
+	 * ({@link org.esupportail.referentiel.pcscol.chcv6.model.FormationDCA}) –
+	 * formation associée</li>
+	 * <li>{@code racinePedagogique}
+	 * ({@link org.esupportail.referentiel.pcscol.chcv6.model.LignePedagogiqueDCA})
+	 * – racine de l'arbre pédagogique récursif</li>
 	 * </ul>
 	 *
 	 * @param codeApprenant code unique de l'apprenant dans Pégase (obligatoire)
 	 * @return liste de {@link CursusDCA} (peut être vide, jamais {@code null})
-	 * @throws ApiException si l'appel HTTP échoue (4xx / 5xx) ou si {@code codeApprenant} est {@code null}
+	 * @throws ApiException si l'appel HTTP échoue (4xx / 5xx) ou si
+	 *                      {@code codeApprenant} est {@code null}
 	 */
 	public List<CursusDCA> lireCusrsuApprenant(String codeApprenant) throws ApiException {
 		return cursusDcaApi.lireCusrsuApprenant(codeApprenant);
 	}
 
 	/**
-	 * Construit la liste des {@link ElementPedagogique} correspondant à <em>tous</em>
-	 * les objets maquette trouvés dans un {@link CursusDCA}.
+	 * Construit la liste des {@link ElementPedagogique} correspondant à
+	 * <em>tous</em> les objets maquette trouvés dans un {@link CursusDCA}.
 	 * <p>
 	 * Chaîne d'appel interne :
 	 * </p>
+	 * 
 	 * <pre>
 	 * ChcService.lireCursus(cursus)
 	 *   → EspacesApi.rechercherEspaces(codeStructure, pageable, codePeriode, null, null)
@@ -238,8 +232,8 @@ public class ChcService {
 	 *
 	 * @param cursus        cursus de l'apprenant (jamais {@code null})
 	 * @param codeStructure code de l'établissement (ex. "ETAB00")
-	 * @return liste (possiblement vide) de tous les {@link ElementPedagogique} du cursus,
-	 *         tous types confondus (stages et non-stages)
+	 * @return liste (possiblement vide) de tous les {@link ElementPedagogique} du
+	 *         cursus, tous types confondus (stages et non-stages)
 	 */
 	public List<ElementPedagogique> listeElementPedagogiqueFromCursus(CursusDCA cursus, String codeStructure) {
 		List<ElementPedagogique> listeElementPedagogique = new ArrayList<>();
@@ -284,12 +278,15 @@ public class ChcService {
 	}
 
 	/**
-	 * Filtre les {@link ElementPedagogique} d'un {@link CursusDCA} pour ne conserver
-	 * que ceux dont {@code temElpTypeStage} vaut {@code "true"} (insensible à la casse).
+	 * Filtre les {@link ElementPedagogique} d'un {@link CursusDCA} pour ne
+	 * conserver que ceux dont {@code temElpTypeStage} vaut {@code "true"}
+	 * (insensible à la casse).
 	 * <p>
-	 * Délègue d'abord à {@link #listeElementPedagogiqueFromCursus(CursusDCA, String)}
-	 * pour construire la liste complète, puis applique le filtre :
+	 * Délègue d'abord à
+	 * {@link #listeElementPedagogiqueFromCursus(CursusDCA, String)} pour construire
+	 * la liste complète, puis applique le filtre :
 	 * </p>
+	 * 
 	 * <pre>
 	 * listeElementPedagogiqueFromCursus(cursus, codeStructure)
 	 *   → (voir Javadoc de cette méthode pour la chaîne d'appel complète)
@@ -300,7 +297,8 @@ public class ChcService {
 	 *
 	 * @param cursus        cursus de l'apprenant (jamais {@code null})
 	 * @param codeStructure code de l'établissement (ex. "ETAB00")
-	 * @return liste (possiblement vide) des {@link ElementPedagogique} dont le type est stage
+	 * @return liste (possiblement vide) des {@link ElementPedagogique} dont le type
+	 *         est stage
 	 */
 	public List<ElementPedagogique> listeElementPedagogiqueStageFromCursus(CursusDCA cursus, String codeStructure) {
 		List<ElementPedagogique> listeElementPedagogique = listeElementPedagogiqueFromCursus(cursus, codeStructure);
@@ -319,12 +317,13 @@ public class ChcService {
 	}
 
 	/**
-	 * Résout l'arbre pédagogique d'un {@link CursusDCA} en une liste de {@link ObjetMaquetteDetail}
-	 * exploitables, en trois étapes :
+	 * Résout l'arbre pédagogique d'un {@link CursusDCA} en une liste de
+	 * {@link ObjetMaquetteDetail} exploitables, en trois étapes :
 	 *
 	 * <ol>
-	 *   <li><b>Résolution de l'espace (période)</b> :
-	 *       <pre>
+	 * <li><b>Résolution de l'espace (période)</b> :
+	 * 
+	 * <pre>
 	 * EspacesApi.rechercherEspaces(cursus.getCodeStructure(), pageable,
 	 *                              cursus.getPeriode().getCode(), null, null)
 	 *   → GET /etablissement/{codeStructure}/espaces
@@ -332,11 +331,13 @@ public class ChcService {
 	 *   → PagedEspaces
 	 *   → Filtre l'Espace dont e.getCode() == cursus.getPeriode().getCode()
 	 *   → espaceUUID (UUID de l'espace)
-	 *       </pre>
-	 *       Si aucun espace ne correspond, retourne une liste vide.</li>
+	 * </pre>
+	 * 
+	 * Si aucun espace ne correspond, retourne une liste vide.</li>
 	 *
-	 *   <li><b>Parcours de l'arbre pédagogique (DFS itératif)</b> :
-	 *       <pre>
+	 * <li><b>Parcours de l'arbre pédagogique (DFS itératif)</b> :
+	 * 
+	 * <pre>
 	 * ChcService.lignePedagogiqueDCADynamic(codeStructure, racinePedagogique,
 	 *                                        lignes, itemsObjetMaquetteSummaries,
 	 *                                        espaceUUID.toString())
@@ -350,28 +351,35 @@ public class ChcService {
 	 *         → PagedObjetMaquetteSummaries
 	 *         → Filtre objet.getCode() == codeEnfant
 	 *         → Accumule dans itemsObjetMaquetteSummaries
-	 *       </pre></li>
+	 * </pre>
+	 * 
+	 * </li>
 	 *
-	 *   <li><b>Lecture des détails des objets maquette</b> :
-	 *       <pre>
+	 * <li><b>Lecture des détails des objets maquette</b> :
+	 * 
+	 * <pre>
 	 * OffreFormationService.recherchDescripteurMaquettes(codeStructure, uuids)
 	 *   → Pour chaque UUID dans la liste :
 	 *       ObjetsMaquetteApi.lireObjetMaquette(codeStructure, id)
 	 *         → GET /etablissement/{codeStructure}/objets-maquette/{id}
 	 *         → ObjetMaquetteDetail
 	 *   → Retourne List&lt;ObjetMaquetteDetail&gt;
-	 *       </pre></li>
+	 * </pre>
+	 * 
+	 * </li>
 	 * </ol>
 	 *
-	 * @param cursus le cursus à traiter (ne doit pas être {@code null}, ni avoir une
-	 *               période ou une formation {@code null})
-	 * @return liste (possiblement vide) des {@link ObjetMaquetteDetail} trouvés dans l'arbre du cursus
+	 * @param cursus le cursus à traiter (ne doit pas être {@code null}, ni avoir
+	 *               une période ou une formation {@code null})
+	 * @return liste (possiblement vide) des {@link ObjetMaquetteDetail} trouvés
+	 *         dans l'arbre du cursus
 	 * @throws ApiException si l'appel à {@code EspacesApi.rechercherEspaces} échoue
 	 */
 	public List<ObjetMaquetteDetail> lireCursus(CursusDCA cursus) throws ApiException {
 
 		logger.debug("lireCodeEspaceCursus : {} {}", cursus.getCodeStructure(), cursus.getPeriode().getCode());
-		//rechecher espaces pour la structure et la période du cursus
+		Pageable pageable=new Pageable();
+		// rechecher espaces pour la structure et la période du cursus
 		PagedEspaces espaceDCA = espacesApi.rechercherEspaces(cursus.getCodeStructure(), pageable,
 				cursus.getPeriode().getCode(), null, null);
 
@@ -385,7 +393,7 @@ public class ChcService {
 			logger.warn("Code espace {} non trouvé pour le cursus (code formation) {}", cursus.getPeriode().getCode(),
 					cursus.getFormation().getCode());
 		}
-		
+
 		logger.debug("espaceUUID : {}", espaceUUID);
 
 		if (espaceUUID == null) {
@@ -405,72 +413,19 @@ public class ChcService {
 		itemsObjetMaquetteSummaries.forEach(e -> uuidsObjetMaquetteSummaries.add(e.getId()));
 		logger.debug("uuidsObjetMaquetteSummaries : {}", uuidsObjetMaquetteSummaries);
 
-		return offreFormationService.recherchDescripteurMaquettes(cursus.getCodeStructure(), uuidsObjetMaquetteSummaries);
-	}
-
-	/**
-	 * Variante <b>récursive</b> de parcours de l'arbre {@link LignePedagogiqueDCA}.
-	 * <p>
-	 * Pour chaque nœud enfant de {@code lignesPeda}, effectue l'appel suivant :
-	 * </p>
-	 * <pre>
-	 * ObjetsMaquetteApi.rechercherObjetMaquette(
-	 *     codeStructure, pageable, e.getCodeObjetMaquette(), espace,
-	 *     typeObjetMaquette, racine, typeObjetFormation,
-	 *     ids, piaSeulement, piaActif, valideSeulement, mutualise)
-	 *   → GET /etablissement/{codeStructure}/objets-maquette
-	 *         ?r={codeObjetMaquette}&espace={espace}&...
-	 *   → PagedObjetMaquetteSummaries
-	 *   → Filtre les items dont objet.getCode() == e.getCodeObjetMaquette()
-	 *   → Accumule dans itemsObjetMaquetteSummaries
-	 * </pre>
-	 * <p>
-	 * Puis s'appelle récursivement sur chaque enfant.
-	 * <br><b>Attention :</b> pour des arbres profonds, préférer
-	 * {@link #lignePedagogiqueDCADynamic} qui évite les débordements de pile.
-	 * </p>
-	 *
-	 * @param codeStructure               code de l'établissement
-	 * @param lignesPeda                  nœud courant de l'arbre pédagogique
-	 * @param lignes                      liste de codes des nœuds visités (accumulée)
-	 * @param itemsObjetMaquetteSummaries liste des {@link ObjetMaquetteSummary} trouvés (accumulée)
-	 * @param espace                      UUID de l'espace (sous forme String) pour filtrer les objets maquette
-	 */
-	public void lignePedagogiqueDCARec(String codeStructure, LignePedagogiqueDCA lignesPeda, List<String> lignes,
-			List<ObjetMaquetteSummary> itemsObjetMaquetteSummaries, String espace) {
-		lignes.add(lignesPeda.getCodeObjetMaquette());
-		if (lignesPeda.getEnfants() != null && !lignesPeda.getEnfants().isEmpty()) {
-			lignesPeda.getEnfants().forEach(e -> {
-				try {
-					PagedObjetMaquetteSummaries om = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
-							e.getCodeObjetMaquette(), espace, typeObjetMaquette, racine, typeObjetFormation, ids,
-							piaSeulement, piaActif, valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
-					if (om.getItems() != null) {
-						Stream<ObjetMaquetteSummary> filtred = om.getItems().stream()
-								.filter(o -> o.getCode().equals(e.getCodeObjetMaquette()));
-						List<ObjetMaquetteSummary> listFiltred = filtred.toList();
-						itemsObjetMaquetteSummaries.addAll(listFiltred);
-
-					}
-				} catch (ApiException e1) {
-					logger.error("Erreur lors de la recherche de l'objet maquette {} : {}", e.getCodeObjetMaquette(),
-							e1.getMessage());
-				}
-				lignePedagogiqueDCARec(codeStructure, e, lignes, itemsObjetMaquetteSummaries, espace);
-			});
-
-			// lignePedagogiqueDCARec(LignePedagogiqueDCA lignesPeda,List<String> lignes)
-		}
-
+		return offreFormationService.recherchDescripteurMaquettes(cursus.getCodeStructure(),
+				uuidsObjetMaquetteSummaries);
 	}
 
 	/**
 	 * Variante <b>itérative</b> (pile explicite) du parcours DFS de l'arbre
 	 * {@link LignePedagogiqueDCA}, conçue pour éviter les débordements de pile et
-	 * limiter les appels API redondants grâce à deux ensembles de codes déjà visités.
+	 * limiter les appels API redondants grâce à deux ensembles de codes déjà
+	 * visités.
 	 * <p>
 	 * Algorithme :
 	 * </p>
+	 * 
 	 * <pre>
 	 * pile ← [racinePeda]
 	 * codesLignesVisites    ← {} (évite de remettre en liste un même code)
@@ -495,13 +450,17 @@ public class ChcService {
 	 * </pre>
 	 *
 	 * @param codeStructure               code de l'établissement (ex. "ETAB00")
-	 * @param racinePeda                  nœud racine de l'arbre pédagogique du cursus ;
-	 *                                    si {@code null}, la méthode retourne immédiatement
-	 * @param lignes                      liste (accumulée) des codes des nœuds visités
-	 * @param itemsObjetMaquetteSummaries liste (accumulée) des {@link ObjetMaquetteSummary}
-	 *                                    trouvés pour chaque enfant unique
-	 * @param espace                      UUID de l'espace (sous forme {@code String}) utilisé
-	 *                                    comme critère de filtrage dans l'appel à
+	 * @param racinePeda                  nœud racine de l'arbre pédagogique du
+	 *                                    cursus ; si {@code null}, la méthode
+	 *                                    retourne immédiatement
+	 * @param lignes                      liste (accumulée) des codes des nœuds
+	 *                                    visités
+	 * @param itemsObjetMaquetteSummaries liste (accumulée) des
+	 *                                    {@link ObjetMaquetteSummary} trouvés pour
+	 *                                    chaque enfant unique
+	 * @param espace                      UUID de l'espace (sous forme
+	 *                                    {@code String}) utilisé comme critère de
+	 *                                    filtrage dans l'appel à
 	 *                                    {@code ObjetsMaquetteApi.rechercherObjetMaquette}
 	 */
 	public void lignePedagogiqueDCADynamic(String codeStructure, LignePedagogiqueDCA racinePeda, List<String> lignes,
@@ -540,9 +499,12 @@ public class ChcService {
 				String codeEnfant = enfant.getCodeObjetMaquette();
 				if (codeEnfant != null && codesObjetsDejaCharges.add(codeEnfant)) {
 					try {
-						PagedObjetMaquetteSummaries om = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable,
-								codeEnfant, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement,
-								piaActif, valideSeulement, mutualise,protege,codesPerimetresIn,codesPerimetresOut);
+						Boolean piaSeulement = null;
+						Boolean piaActif = null;
+
+						PagedObjetMaquetteSummaries om = offreFormationService.rechercheObjetMaquette(codeStructure,
+								codeEnfant, espace, piaSeulement, piaActif);
+
 						if (om.getItems() != null && !om.getItems().isEmpty()) {
 							for (ObjetMaquetteSummary objet : om.getItems()) {
 								if (codeEnfant.equals(objet.getCode())) {
@@ -550,7 +512,7 @@ public class ChcService {
 								}
 							}
 						}
-					} catch (ApiException e) {
+					} catch (Exception e) {
 						logger.error("Erreur lors de la recherche de l'objet maquette {} : {}", codeEnfant,
 								e.getMessage());
 					}
