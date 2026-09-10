@@ -15,7 +15,7 @@ import org.esupportail.referentiel.pcscol.ins.model.ContactAdresseComplet;
 import org.esupportail.referentiel.pcscol.ins.model.ContactComplet;
 import org.esupportail.referentiel.pcscol.ins.model.ContactMelComplet;
 import org.esupportail.referentiel.pcscol.ins.model.ContactTelephoneComplet;
-import org.esupportail.referentiel.pcscol.ins.model.Inscription;
+
 import org.esupportail.referentiel.pcscol.ins.model.InscriptionComplete;
 import org.esupportail.referentiel.pcscol.ins.model.OccurrenceNomenclature;
 import org.esupportail.referentiel.utils.DateMapper;
@@ -40,21 +40,7 @@ public interface ApprenantEtuInfoAdmMapperInterface {
 
 	public ApprenantEtuInfoAdmMapperInterface Instance = Mappers.getMapper(ApprenantEtuInfoAdmMapperInterface.class);
 
-	/**
-	 * 
-	 * @param inscription
-	 * @return
-	 */
-
-	@Mapping(target = "nom", source = "etatCivil.nomDeNaissance")
-	@Mapping(target = "prenom", source = "etatCivil.prenom")
-	@Mapping(target = "codEtu", source = "meta.codeApprenant")
-	@Mapping(target = "dateNaissance", source = "naissance.dateDeNaissance")
-	@Mapping(target = "numeroIne", source = "bac.ine")
-	public ApprenantDto inscrptionToApprenantDto(Inscription inscription);
-
-	public List<ApprenantDto> inscrptionToApprenantDto(List<Inscription> inscription);
-
+	
 	/**
 	 * 
 	 * @param app

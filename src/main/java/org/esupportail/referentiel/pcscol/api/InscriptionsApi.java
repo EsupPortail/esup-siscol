@@ -1,8 +1,8 @@
 /*
- * INSCRIPTION Externe V1 [EXTERNE]
- * Liste l'ensemble des services et des opérations Ins (Module Inscription) marquées comme [EXTERNE].  Ils peuvent être utilisés par des outils externes à Pegase.  ### Authentification/autorisation obligatoire  Pour tout appel à une opération vous devez être authentifié/authorisé à l'aide d'un [token jwt](https://jwt.io/). Pour cela, chaque requête HTTP doit contenir un token valide dans le header HTTP `Authorization`.  Le format est `Authorization: Bearer <token-jwt>`. Par exemple `Authorization: Bearer xxxx.yyyy.zzzz`.  Lien vers la documentation qui décrit l'authentification aux APIs de Pegase : [pdf](https://share.pc-scol.fr/f/4487c726ade84022ae16/?dl=1)  ### Type de données  Sauf indications spécifiques données au niveau de l'opération, les types de données utilisés dans cette API sont les suivants :   * string - Chaîne de caractères encodée en UTF8 (ex : `Une chaîne de caractère`)     * Dans le cas des descripteurs de type `codeXxx`, seuls les caractères de A à Z, de 0 à 9 et le tiret(-) sont autorisés     * Dans le cas des descripteurs de type montant ou nombre avec une partie décimale, seuls les caractères de 0 à 9 et le point(.) sont autorisés (ex : `12525.99`)   * string($date) - Une date sous la forme d'une chaîne de caractères (ex : `2020-02-25`, norme [ISO-8601](https://fr.wikipedia.org/wiki/ISO_8601))   * string($date-time) - Une date et heure avec fuseau horaire sous la forme d'une chaîne de caractères (ex : `2020-02-25T18:36:22+02:00`, norme [ISO-8601](https://fr.wikipedia.org/wiki/ISO_8601))   * integer($int64) - Un entier sur 64 bits (de -9 223 372 036 854 775 808 à 9 223 372 036 854 775 807) (ex : `2542`)   * integer($int32) - Un entier sur 32 bits (de –2 147 483 648 à 2 147 483 647) (ex : `2542`)   * boolean - Un booléen représenté par `true` ou `false`  ### Code retour  * 200 - Ok : L'opération s'est déroulée avec succès * 201 - Created : L'opération a aboutie à la création d'une ressource * 400 - Bad request :   * Un ou des paramètres d'entrées sont erronées   * Une erreur fonctionnelle s'est produite * 401 - Unauthorized - Vous n'êtes pas authentifié   * Il n'y a pas de token passé dans le header HTTP `Authorization`   * Le token passé n'est pas au bon format (Bearer <[token-jwt](https://jwt.io/)>) * 403 - Forbidden - Vous êtes authentifié mais pas autorisé à exécuter cette opération   * La signature du token est incorrecte / n'a pas pû être vérifiée   * Le token est expiré   * Les habilitations de l'utilisateur ne permettent pas d'exécuter cette opération. Vérifier les droits de l'utilisateur * 404 - Not Found : La ressource demandée n'est pas trouvé     * Remarque : Dans le cas des opérations retournant une liste, on recevra un code 200 avec en résultat une liste vide * 500 - Internal server error : Erreur inattendue et non gérés 
+ * INS - Inscription Externe API - V2
+ *  # Introduction  Liste l'ensemble des services et des opérations Ins (Module Inscription) identifiés pour un usage externe.  La documentation d'intégration de Pégase est publiée par version dans  [ce répertoire](https://share.pc-scol.fr/d/d98bdddb6485406b9422/).  Vous y retrouverez notamment des informations sur le modèle objet métier,  le versionning des APIs, les cas d'usage des APIs externes.  # Authentification/autorisation obligatoire  Pour tout appel à une opération vous devez être authentifié/authorisé à l'aide d'un [token jwt](https://jwt.io/). Pour cela, chaque requête HTTP doit contenir un token valide dans le header HTTP `Authorization`.  Le format est `Authorization: Bearer <token-jwt>`. Par exemple `Authorization: Bearer xxxx.yyyy.zzzz`.  Lien vers [la documentation](https://share.pc-scol.fr/f/4487c726ade84022ae16/?dl=1) qui décrit l'authentification aux APIs de Pegase.  # Type de données  Sauf indications spécifiques données au niveau de l'opération, les types de données utilisés dans cette API sont les suivants :   * string - Chaîne de caractères encodée en UTF8 (ex : `Une chaîne de caractère`)     * Dans le cas des descripteurs de type `codeXxx`, seuls les caractères de A à Z, de 0 à 9 et le tiret(-) sont autorisés     * Dans le cas des descripteurs de type montant ou nombre avec une partie décimale, seuls les caractères de 0 à 9 et le point(.) sont autorisés (ex : `12525.99`)   * string($date) - Une date sous la forme d'une chaîne de caractères (ex : `2020-02-25`, norme [ISO-8601](https://fr.wikipedia.org/wiki/ISO_8601))   * string($date-time) - Une date et heure avec fuseau horaire sous la forme d'une chaîne de caractères (ex : `2020-02-25T18:36:22+02:00`, norme [ISO-8601](https://fr.wikipedia.org/wiki/ISO_8601))   * integer($int64) - Un entier sur 64 bits (de -9 223 372 036 854 775 808 à 9 223 372 036 854 775 807) (ex : `2542`)   * integer($int32) - Un entier sur 32 bits (de –2 147 483 648 à 2 147 483 647) (ex : `2542`)   * boolean - Un booléen représenté par `true` ou `false`  # Gestion des erreurs  ## StatusCode  | Code    | Description                                | |---------|--------------------------------------------| | 200     | Opération effectuée                        | |         | Cas particulier: Dans le cas d'APIs de     | |         | type bulk, un 200 peut aussi être retourné | |         | si des données de la requête sont          | |         | considérées en erreur                      | | 201     | Ressource créée                            | | 400     | Données envoyées par le client invalides   | | 403     | Accès refusé                               | | 404     | Ressource inexistante                      | | 409     | donnée déjà existante                      | | 500     | Erreur technique rencontrée par le serveur |   ## Codes d'erreurs  | Code      | Description                                | |-----------|--------------------------------------------| | notNull   | la propriété est obligatoire               | | notBlank  | la propriété ne doit pas être vide         | | size      | la longueur de la propriété est invalide   | | pattern   | les caractères ou la syntaxe de            | |           | la propriété est invalide                  | | genre     | le genre de la personne est invalide       | | dateEntre | la date est invalide                       | | telephone | le téléphone est invalide                  | | email     | le mail est invalide                       | 
  *
- * The version of the OpenAPI document: 1.3.1
+ * The version of the OpenAPI document: 2.6.0
  * 
  *
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
@@ -22,23 +22,44 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
 
 import org.esupportail.referentiel.pcscol.ins.model.ApprenantEtInscriptions;
+import org.esupportail.referentiel.pcscol.ins.model.Pageable;
 import org.esupportail.referentiel.pcscol.ins.model.VueInscriptions;
 import org.esupportail.referentiel.pcscol.invoker.ApiClient;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.invoker.ApiResponse;
 import org.esupportail.referentiel.pcscol.invoker.Configuration;
 import org.esupportail.referentiel.pcscol.invoker.Pair;
-import org.esupportail.referentiel.pcscol.odf.model.Pageable;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-04-03T14:58:20.840329264+02:00[Europe/Paris]", comments = "Generator version: 7.12.0")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-03T14:40:06.291788276+02:00[Europe/Paris]", comments = "Generator version: 7.15.0")
 public class InscriptionsApi {
+  /**
+   * Utility class for extending HttpRequest.Builder functionality.
+   */
+  private static class HttpRequestBuilderExtensions {
+    /**
+     * Adds additional headers to the provided HttpRequest.Builder. Useful for adding method/endpoint specific headers.
+     *
+     * @param builder the HttpRequest.Builder to which headers will be added
+     * @param headers a map of header names and values to add; may be null
+     * @return the same HttpRequest.Builder instance with the additional headers set
+     */
+    static HttpRequest.Builder withAdditionalHeaders(HttpRequest.Builder builder, Map<String, String> headers) {
+        if (headers != null) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
+                builder.header(entry.getKey(), entry.getValue());
+            }
+        }
+        return builder;
+    }
+  }
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
   private final String memberVarBaseUri;
@@ -61,6 +82,7 @@ public class InscriptionsApi {
     memberVarAsyncResponseInterceptor = apiClient.getAsyncResponseInterceptor();
   }
 
+
   protected ApiException getApiException(String operationId, HttpResponse<InputStream> response) throws IOException {
     String body = response.body() == null ? null : new String(response.body().readAllBytes());
     String message = formatExceptionMessage(operationId, response.statusCode(), body);
@@ -75,112 +97,51 @@ public class InscriptionsApi {
   }
 
   /**
-   * Contenu de la pièce
-   * Contenu de la pièce
-   * @param codeStructure Le code de l&#39;établissement (required)
-   * @param codeApprenant Le code apprenant (required)
-   * @param codeCible Le code cible avec la période (required)
-   * @param codePiece Le code de la demande de pièce (required)
+   * Download file from the given response.
+   *
+   * @param response Response
    * @return File
-   * @throws ApiException if fails to make API call
-   * @deprecated
+   * @throws ApiException If fail to read file content from response and write to disk
    */
-  @Deprecated
-  public File contenuPiece(String codeStructure, String codeApprenant, String codeCible, String codePiece) throws ApiException {
-    ApiResponse<File> localVarResponse = contenuPieceWithHttpInfo(codeStructure, codeApprenant, codeCible, codePiece);
-    return localVarResponse.getData();
-  }
-
-  /**
-   * Contenu de la pièce
-   * Contenu de la pièce
-   * @param codeStructure Le code de l&#39;établissement (required)
-   * @param codeApprenant Le code apprenant (required)
-   * @param codeCible Le code cible avec la période (required)
-   * @param codePiece Le code de la demande de pièce (required)
-   * @return ApiResponse&lt;File&gt;
-   * @throws ApiException if fails to make API call
-   * @deprecated
-   */
-  @Deprecated
-  public ApiResponse<File> contenuPieceWithHttpInfo(String codeStructure, String codeApprenant, String codeCible, String codePiece) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = contenuPieceRequestBuilder(codeStructure, codeApprenant, codeCible, codePiece);
+  public File downloadFileFromResponse(HttpResponse<InputStream> response) throws ApiException {
     try {
-      HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
-          localVarRequestBuilder.build(),
-          HttpResponse.BodyHandlers.ofInputStream());
-      if (memberVarResponseInterceptor != null) {
-        memberVarResponseInterceptor.accept(localVarResponse);
-      }
-      try {
-        if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("contenuPiece", localVarResponse);
-        }
-        if (localVarResponse.body() == null) {
-          return new ApiResponse<File>(
-              localVarResponse.statusCode(),
-              localVarResponse.headers().map(),
-              null
-          );
-        }
-
-        String responseBody = new String(localVarResponse.body().readAllBytes());
-        localVarResponse.body().close();
-
-        return new ApiResponse<File>(
-            localVarResponse.statusCode(),
-            localVarResponse.headers().map(),
-            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<File>() {})
-        );
-      } finally {
-      }
+      File file = prepareDownloadFile(response);
+      java.nio.file.Files.copy(response.body(), file.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+      return file;
     } catch (IOException e) {
       throw new ApiException(e);
     }
-    catch (InterruptedException e) {
-      Thread.currentThread().interrupt();
-      throw new ApiException(e);
-    }
   }
 
-  private HttpRequest.Builder contenuPieceRequestBuilder(String codeStructure, String codeApprenant, String codeCible, String codePiece) throws ApiException {
-    // verify the required parameter 'codeStructure' is set
-    if (codeStructure == null) {
-      throw new ApiException(400, "Missing the required parameter 'codeStructure' when calling contenuPiece");
+  /**
+   * <p>Prepare the file for download from the response.</p>
+   *
+   * @param response a {@link java.net.http.HttpResponse} object.
+   * @return a {@link java.io.File} object.
+   * @throws java.io.IOException if any.
+   */
+  private File prepareDownloadFile(HttpResponse<InputStream> response) throws IOException {
+    String filename = null;
+    java.util.Optional<String> contentDisposition = response.headers().firstValue("Content-Disposition");
+    if (contentDisposition.isPresent() && !"".equals(contentDisposition.get())) {
+      // Get filename from the Content-Disposition header.
+      java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("filename=['\"]?([^'\"\\s]+)['\"]?");
+      java.util.regex.Matcher matcher = pattern.matcher(contentDisposition.get());
+      if (matcher.find())
+        filename = matcher.group(1);
     }
-    // verify the required parameter 'codeApprenant' is set
-    if (codeApprenant == null) {
-      throw new ApiException(400, "Missing the required parameter 'codeApprenant' when calling contenuPiece");
+    File file = null;
+    if (filename != null) {
+      java.nio.file.Path tempDir = java.nio.file.Files.createTempDirectory("swagger-gen-native");
+      java.nio.file.Path filePath = java.nio.file.Files.createFile(tempDir.resolve(filename));
+      file = filePath.toFile();
+      tempDir.toFile().deleteOnExit();   // best effort cleanup
+      file.deleteOnExit(); // best effort cleanup
+    } else {
+      file = java.nio.file.Files.createTempFile("download-", "").toFile();
+      file.deleteOnExit(); // best effort cleanup
     }
-    // verify the required parameter 'codeCible' is set
-    if (codeCible == null) {
-      throw new ApiException(400, "Missing the required parameter 'codeCible' when calling contenuPiece");
-    }
-    // verify the required parameter 'codePiece' is set
-    if (codePiece == null) {
-      throw new ApiException(400, "Missing the required parameter 'codePiece' when calling contenuPiece");
-    }
-
-    HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
-
-    String localVarPath = "/gestion/inscriptions/{codeStructure}/{codeApprenant}/{codeCible}/{codePiece}/contenu"
-        .replace("{codeStructure}", ApiClient.urlEncode(codeStructure.toString()))
-        .replace("{codeApprenant}", ApiClient.urlEncode(codeApprenant.toString()))
-        .replace("{codeCible}", ApiClient.urlEncode(codeCible.toString()))
-        .replace("{codePiece}", ApiClient.urlEncode(codePiece.toString()));
-
-    localVarRequestBuilder.uri(URI.create(memberVarBaseUri + localVarPath));
-
-    localVarRequestBuilder.header("Accept", "image/png, image/jpg, application/pdf");
-
-    localVarRequestBuilder.method("GET", HttpRequest.BodyPublishers.noBody());
-    if (memberVarReadTimeout != null) {
-      localVarRequestBuilder.timeout(memberVarReadTimeout);
-    }
-    if (memberVarInterceptor != null) {
-      memberVarInterceptor.accept(localVarRequestBuilder);
-    }
-    return localVarRequestBuilder;
+    return file;
   }
 
   /**
@@ -191,8 +152,21 @@ public class InscriptionsApi {
    * @return ApprenantEtInscriptions
    * @throws ApiException if fails to make API call
    */
-  public ApprenantEtInscriptions lireInscriptions(String codeStructure, String codeApprenant) throws ApiException {
-    ApiResponse<ApprenantEtInscriptions> localVarResponse = lireInscriptionsWithHttpInfo(codeStructure, codeApprenant);
+  public ApprenantEtInscriptions lireInscriptions(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull String codeApprenant) throws ApiException {
+    return lireInscriptions(codeStructure, codeApprenant, null);
+  }
+
+  /**
+   * Récupérer le dossier complet d&#39;un apprenant
+   * Récupérer le dossier complet d&#39;un apprenant 
+   * @param codeStructure Le code de l&#39;établissement (required)
+   * @param codeApprenant Le code de l&#39;apprenant (required)
+   * @param headers Optional headers to include in the request
+   * @return ApprenantEtInscriptions
+   * @throws ApiException if fails to make API call
+   */
+  public ApprenantEtInscriptions lireInscriptions(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull String codeApprenant, Map<String, String> headers) throws ApiException {
+    ApiResponse<ApprenantEtInscriptions> localVarResponse = lireInscriptionsWithHttpInfo(codeStructure, codeApprenant, headers);
     return localVarResponse.getData();
   }
 
@@ -204,8 +178,21 @@ public class InscriptionsApi {
    * @return ApiResponse&lt;ApprenantEtInscriptions&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<ApprenantEtInscriptions> lireInscriptionsWithHttpInfo(String codeStructure, String codeApprenant) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = lireInscriptionsRequestBuilder(codeStructure, codeApprenant);
+  public ApiResponse<ApprenantEtInscriptions> lireInscriptionsWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull String codeApprenant) throws ApiException {
+    return lireInscriptionsWithHttpInfo(codeStructure, codeApprenant, null);
+  }
+
+  /**
+   * Récupérer le dossier complet d&#39;un apprenant
+   * Récupérer le dossier complet d&#39;un apprenant 
+   * @param codeStructure Le code de l&#39;établissement (required)
+   * @param codeApprenant Le code de l&#39;apprenant (required)
+   * @param headers Optional headers to include in the request
+   * @return ApiResponse&lt;ApprenantEtInscriptions&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<ApprenantEtInscriptions> lireInscriptionsWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull String codeApprenant, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = lireInscriptionsRequestBuilder(codeStructure, codeApprenant, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -225,13 +212,17 @@ public class InscriptionsApi {
           );
         }
 
+        
+        
         String responseBody = new String(localVarResponse.body().readAllBytes());
+        ApprenantEtInscriptions responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<ApprenantEtInscriptions>() {});
+        
         localVarResponse.body().close();
 
         return new ApiResponse<ApprenantEtInscriptions>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
-            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<ApprenantEtInscriptions>() {})
+            responseValue
         );
       } finally {
       }
@@ -244,7 +235,7 @@ public class InscriptionsApi {
     }
   }
 
-  private HttpRequest.Builder lireInscriptionsRequestBuilder(String codeStructure, String codeApprenant) throws ApiException {
+  private HttpRequest.Builder lireInscriptionsRequestBuilder(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull String codeApprenant, Map<String, String> headers) throws ApiException {
     // verify the required parameter 'codeStructure' is set
     if (codeStructure == null) {
       throw new ApiException(400, "Missing the required parameter 'codeStructure' when calling lireInscriptions");
@@ -268,6 +259,8 @@ public class InscriptionsApi {
     if (memberVarReadTimeout != null) {
       localVarRequestBuilder.timeout(memberVarReadTimeout);
     }
+    // Add custom headers if provided
+    localVarRequestBuilder = HttpRequestBuilderExtensions.withAdditionalHeaders(localVarRequestBuilder, headers);
     if (memberVarInterceptor != null) {
       memberVarInterceptor.accept(localVarRequestBuilder);
     }
@@ -281,13 +274,30 @@ public class InscriptionsApi {
    * @param jusqua L&#39;horodatage à partir duquel les entrées sont exclues (exprimé en nombre de secondes depuis le 01/01/1970). Si absent ou 0, toutes les entrées seront remontées depuis l&#39;horodatage depuis. (optional, default to 0)
    * @param photo Inclure la photo d&#39;identité binaire dans les réponses. (optional, default to false)
    * @param codePeriode Code de la période (optional)
-   * @param pageable L&#39;objet de pagination (page : le numéro de la page (défaut 0), taille : le nombre d&#39;élément par page (défaut 50)) (optional)
+   * @param pageable L&#39;objet de pagination (page : le numéro de la page (défaut 0), taille : le nombre d&#39;élément par page, strictement positif, défaut 50, limité à 500 sans photo, 50 avec photo (optional)
    * @param codeApprenant Code apprenant (optional)
    * @return VueInscriptions
    * @throws ApiException if fails to make API call
    */
-  public VueInscriptions listerFluxInscriptionsPagine(Long depuis, Long jusqua, Boolean photo, String codePeriode, Pageable pageable, String codeApprenant) throws ApiException {
-    ApiResponse<VueInscriptions> localVarResponse = listerFluxInscriptionsPagineWithHttpInfo(depuis, jusqua, photo, codePeriode, pageable, codeApprenant);
+  public VueInscriptions listerFluxInscriptionsPagine(@jakarta.annotation.Nullable Long depuis, @jakarta.annotation.Nullable Long jusqua, @jakarta.annotation.Nullable Boolean photo, @jakarta.annotation.Nullable String codePeriode, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String codeApprenant) throws ApiException {
+    return listerFluxInscriptionsPagine(depuis, jusqua, photo, codePeriode, pageable, codeApprenant, null);
+  }
+
+  /**
+   * Chercher les données de la carte multi-services permettant également de répondre au besoin du flux des comptes
+   * Les données renvoyées correspondent aux inscriptions validées, annulées ou ayant fait l&#39;objet d&#39;une actualisation
+   * @param depuis L&#39;horodatage de la dernière extraction (exprimé en nombre de secondes depuis le 01/01/1970). Les entrées modifiées ou créées depuis seront remontées. (optional)
+   * @param jusqua L&#39;horodatage à partir duquel les entrées sont exclues (exprimé en nombre de secondes depuis le 01/01/1970). Si absent ou 0, toutes les entrées seront remontées depuis l&#39;horodatage depuis. (optional, default to 0)
+   * @param photo Inclure la photo d&#39;identité binaire dans les réponses. (optional, default to false)
+   * @param codePeriode Code de la période (optional)
+   * @param pageable L&#39;objet de pagination (page : le numéro de la page (défaut 0), taille : le nombre d&#39;élément par page, strictement positif, défaut 50, limité à 500 sans photo, 50 avec photo (optional)
+   * @param codeApprenant Code apprenant (optional)
+   * @param headers Optional headers to include in the request
+   * @return VueInscriptions
+   * @throws ApiException if fails to make API call
+   */
+  public VueInscriptions listerFluxInscriptionsPagine(@jakarta.annotation.Nullable Long depuis, @jakarta.annotation.Nullable Long jusqua, @jakarta.annotation.Nullable Boolean photo, @jakarta.annotation.Nullable String codePeriode, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String codeApprenant, Map<String, String> headers) throws ApiException {
+    ApiResponse<VueInscriptions> localVarResponse = listerFluxInscriptionsPagineWithHttpInfo(depuis, jusqua, photo, codePeriode, pageable, codeApprenant, headers);
     return localVarResponse.getData();
   }
 
@@ -298,13 +308,30 @@ public class InscriptionsApi {
    * @param jusqua L&#39;horodatage à partir duquel les entrées sont exclues (exprimé en nombre de secondes depuis le 01/01/1970). Si absent ou 0, toutes les entrées seront remontées depuis l&#39;horodatage depuis. (optional, default to 0)
    * @param photo Inclure la photo d&#39;identité binaire dans les réponses. (optional, default to false)
    * @param codePeriode Code de la période (optional)
-   * @param pageable L&#39;objet de pagination (page : le numéro de la page (défaut 0), taille : le nombre d&#39;élément par page (défaut 50)) (optional)
+   * @param pageable L&#39;objet de pagination (page : le numéro de la page (défaut 0), taille : le nombre d&#39;élément par page, strictement positif, défaut 50, limité à 500 sans photo, 50 avec photo (optional)
    * @param codeApprenant Code apprenant (optional)
    * @return ApiResponse&lt;VueInscriptions&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<VueInscriptions> listerFluxInscriptionsPagineWithHttpInfo(Long depuis, Long jusqua, Boolean photo, String codePeriode, Pageable pageable, String codeApprenant) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = listerFluxInscriptionsPagineRequestBuilder(depuis, jusqua, photo, codePeriode, pageable, codeApprenant);
+  public ApiResponse<VueInscriptions> listerFluxInscriptionsPagineWithHttpInfo(@jakarta.annotation.Nullable Long depuis, @jakarta.annotation.Nullable Long jusqua, @jakarta.annotation.Nullable Boolean photo, @jakarta.annotation.Nullable String codePeriode, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String codeApprenant) throws ApiException {
+    return listerFluxInscriptionsPagineWithHttpInfo(depuis, jusqua, photo, codePeriode, pageable, codeApprenant, null);
+  }
+
+  /**
+   * Chercher les données de la carte multi-services permettant également de répondre au besoin du flux des comptes
+   * Les données renvoyées correspondent aux inscriptions validées, annulées ou ayant fait l&#39;objet d&#39;une actualisation
+   * @param depuis L&#39;horodatage de la dernière extraction (exprimé en nombre de secondes depuis le 01/01/1970). Les entrées modifiées ou créées depuis seront remontées. (optional)
+   * @param jusqua L&#39;horodatage à partir duquel les entrées sont exclues (exprimé en nombre de secondes depuis le 01/01/1970). Si absent ou 0, toutes les entrées seront remontées depuis l&#39;horodatage depuis. (optional, default to 0)
+   * @param photo Inclure la photo d&#39;identité binaire dans les réponses. (optional, default to false)
+   * @param codePeriode Code de la période (optional)
+   * @param pageable L&#39;objet de pagination (page : le numéro de la page (défaut 0), taille : le nombre d&#39;élément par page, strictement positif, défaut 50, limité à 500 sans photo, 50 avec photo (optional)
+   * @param codeApprenant Code apprenant (optional)
+   * @param headers Optional headers to include in the request
+   * @return ApiResponse&lt;VueInscriptions&gt;
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<VueInscriptions> listerFluxInscriptionsPagineWithHttpInfo(@jakarta.annotation.Nullable Long depuis, @jakarta.annotation.Nullable Long jusqua, @jakarta.annotation.Nullable Boolean photo, @jakarta.annotation.Nullable String codePeriode, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String codeApprenant, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = listerFluxInscriptionsPagineRequestBuilder(depuis, jusqua, photo, codePeriode, pageable, codeApprenant, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -324,13 +351,17 @@ public class InscriptionsApi {
           );
         }
 
+        
+        
         String responseBody = new String(localVarResponse.body().readAllBytes());
+        VueInscriptions responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<VueInscriptions>() {});
+        
         localVarResponse.body().close();
 
         return new ApiResponse<VueInscriptions>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
-            responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<VueInscriptions>() {})
+            responseValue
         );
       } finally {
       }
@@ -343,7 +374,7 @@ public class InscriptionsApi {
     }
   }
 
-  private HttpRequest.Builder listerFluxInscriptionsPagineRequestBuilder(Long depuis, Long jusqua, Boolean photo, String codePeriode, Pageable pageable, String codeApprenant) throws ApiException {
+  private HttpRequest.Builder listerFluxInscriptionsPagineRequestBuilder(@jakarta.annotation.Nullable Long depuis, @jakarta.annotation.Nullable Long jusqua, @jakarta.annotation.Nullable Boolean photo, @jakarta.annotation.Nullable String codePeriode, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String codeApprenant, Map<String, String> headers) throws ApiException {
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
@@ -383,6 +414,8 @@ public class InscriptionsApi {
     if (memberVarReadTimeout != null) {
       localVarRequestBuilder.timeout(memberVarReadTimeout);
     }
+    // Add custom headers if provided
+    localVarRequestBuilder = HttpRequestBuilderExtensions.withAdditionalHeaders(localVarRequestBuilder, headers);
     if (memberVarInterceptor != null) {
       memberVarInterceptor.accept(localVarRequestBuilder);
     }
