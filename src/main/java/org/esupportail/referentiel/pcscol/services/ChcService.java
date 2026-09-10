@@ -11,11 +11,11 @@ import java.util.UUID;
 import java.util.stream.Stream;
 
 import org.esupportail.referentiel.beans.ElementPedagogique;
-import org.esupportail.referentiel.pcscol.api.ArbresApi;
-import org.esupportail.referentiel.pcscol.api.CursusDcaApi;
-import org.esupportail.referentiel.pcscol.api.EspacesExterneApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApiCHC;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
+import org.esupportail.referentiel.pcscol.api.chc.ArbresApi;
+import org.esupportail.referentiel.pcscol.api.chc.CursusDcaApi;
+import org.esupportail.referentiel.pcscol.api.chc.ObjetsMaquetteApiCHC;
+import org.esupportail.referentiel.pcscol.api.odf.EspacesExterneApi;
+import org.esupportail.referentiel.pcscol.api.odf.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.chcv6.model.ArbreLecture;
 import org.esupportail.referentiel.pcscol.chcv6.model.ArbreObjetFormation;
 import org.esupportail.referentiel.pcscol.chcv6.model.CursusDCA;

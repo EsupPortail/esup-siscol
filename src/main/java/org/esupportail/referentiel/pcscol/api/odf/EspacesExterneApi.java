@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.esupportail.referentiel.pcscol.api;
+package org.esupportail.referentiel.pcscol.api.odf;
 
 import java.io.File;
 import java.io.IOException;
@@ -32,15 +32,16 @@ import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.invoker.ApiResponse;
 import org.esupportail.referentiel.pcscol.invoker.Configuration;
 import org.esupportail.referentiel.pcscol.invoker.Pair;
-import org.esupportail.referentiel.pcscol.odf.model.Diplome;
+import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;
-import org.esupportail.referentiel.pcscol.odf.model.PagedDiplomeSummaries;
+import org.esupportail.referentiel.pcscol.odf.model.PagedEspaces;
+import org.esupportail.referentiel.pcscol.odf.model.TypeEspace;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-09-08T14:13:08.589940369+02:00[Europe/Paris]", comments = "Generator version: 7.15.0")
-public class DiplomesExterneApi {
+public class EspacesExterneApi {
   /**
    * Utility class for extending HttpRequest.Builder functionality.
    */
@@ -69,11 +70,11 @@ public class DiplomesExterneApi {
   private final Consumer<HttpResponse<InputStream>> memberVarResponseInterceptor;
   private final Consumer<HttpResponse<String>> memberVarAsyncResponseInterceptor;
 
-  public DiplomesExterneApi() {
+  public EspacesExterneApi() {
     this(Configuration.getDefaultApiClient());
   }
 
-  public DiplomesExterneApi(ApiClient apiClient) {
+  public EspacesExterneApi(ApiClient apiClient) {
     memberVarHttpClient = apiClient.getHttpClient();
     memberVarObjectMapper = apiClient.getObjectMapper();
     memberVarBaseUri = apiClient.getBaseUri();
@@ -146,54 +147,54 @@ public class DiplomesExterneApi {
   }
 
   /**
-   * Lire un diplôme
-   * Lecture d&#39;un diplôme 
+   * Lire un espace
+   * Lecture d&#39;un espace 
    * @param codeStructure Le code de l&#39;établissement (required)
    * @param id Identifiant d&#39;une ressource (required)
-   * @return Diplome
+   * @return Espace
    * @throws ApiException if fails to make API call
    */
-  public Diplome lireDiplome(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id) throws ApiException {
-    return lireDiplome(codeStructure, id, null);
+  public Espace lireEspace(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id) throws ApiException {
+    return lireEspace(codeStructure, id, null);
   }
 
   /**
-   * Lire un diplôme
-   * Lecture d&#39;un diplôme 
+   * Lire un espace
+   * Lecture d&#39;un espace 
    * @param codeStructure Le code de l&#39;établissement (required)
    * @param id Identifiant d&#39;une ressource (required)
    * @param headers Optional headers to include in the request
-   * @return Diplome
+   * @return Espace
    * @throws ApiException if fails to make API call
    */
-  public Diplome lireDiplome(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
-    ApiResponse<Diplome> localVarResponse = lireDiplomeWithHttpInfo(codeStructure, id, headers);
+  public Espace lireEspace(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
+    ApiResponse<Espace> localVarResponse = lireEspaceWithHttpInfo(codeStructure, id, headers);
     return localVarResponse.getData();
   }
 
   /**
-   * Lire un diplôme
-   * Lecture d&#39;un diplôme 
+   * Lire un espace
+   * Lecture d&#39;un espace 
    * @param codeStructure Le code de l&#39;établissement (required)
    * @param id Identifiant d&#39;une ressource (required)
-   * @return ApiResponse&lt;Diplome&gt;
+   * @return ApiResponse&lt;Espace&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Diplome> lireDiplomeWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id) throws ApiException {
-    return lireDiplomeWithHttpInfo(codeStructure, id, null);
+  public ApiResponse<Espace> lireEspaceWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id) throws ApiException {
+    return lireEspaceWithHttpInfo(codeStructure, id, null);
   }
 
   /**
-   * Lire un diplôme
-   * Lecture d&#39;un diplôme 
+   * Lire un espace
+   * Lecture d&#39;un espace 
    * @param codeStructure Le code de l&#39;établissement (required)
    * @param id Identifiant d&#39;une ressource (required)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;Diplome&gt;
+   * @return ApiResponse&lt;Espace&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Diplome> lireDiplomeWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = lireDiplomeRequestBuilder(codeStructure, id, headers);
+  public ApiResponse<Espace> lireEspaceWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = lireEspaceRequestBuilder(codeStructure, id, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -203,10 +204,10 @@ public class DiplomesExterneApi {
       }
       try {
         if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("lireDiplome", localVarResponse);
+          throw getApiException("lireEspace", localVarResponse);
         }
         if (localVarResponse.body() == null) {
-          return new ApiResponse<Diplome>(
+          return new ApiResponse<Espace>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -216,11 +217,11 @@ public class DiplomesExterneApi {
         
         
         String responseBody = new String(localVarResponse.body().readAllBytes());
-        Diplome responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Diplome>() {});
+        Espace responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<Espace>() {});
         
         localVarResponse.body().close();
 
-        return new ApiResponse<Diplome>(
+        return new ApiResponse<Espace>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
@@ -236,19 +237,19 @@ public class DiplomesExterneApi {
     }
   }
 
-  private HttpRequest.Builder lireDiplomeRequestBuilder(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
+  private HttpRequest.Builder lireEspaceRequestBuilder(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nonnull UUID id, Map<String, String> headers) throws ApiException {
     // verify the required parameter 'codeStructure' is set
     if (codeStructure == null) {
-      throw new ApiException(400, "Missing the required parameter 'codeStructure' when calling lireDiplome");
+      throw new ApiException(400, "Missing the required parameter 'codeStructure' when calling lireEspace");
     }
     // verify the required parameter 'id' is set
     if (id == null) {
-      throw new ApiException(400, "Missing the required parameter 'id' when calling lireDiplome");
+      throw new ApiException(400, "Missing the required parameter 'id' when calling lireEspace");
     }
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
-    String localVarPath = "/etablissement/{codeStructure}/diplome/{id}"
+    String localVarPath = "/etablissement/{codeStructure}/espace/{id}"
         .replace("{codeStructure}", ApiClient.urlEncode(codeStructure.toString()))
         .replace("{id}", ApiClient.urlEncode(id.toString()));
 
@@ -269,70 +270,66 @@ public class DiplomesExterneApi {
   }
 
   /**
-   * Lire les diplômes
-   * Lecture des diplômes 
+   * Lire les espaces
+   * Lecture des espaces 
    * @param codeStructure Le code de l&#39;établissement (required)
    * @param pageable  (optional)
-   * @param r Critères de recherche (contient).  Ce critère sera utilisé pour retourner des diplômes dont le code ou le libellé contiennent cette valeur.  (optional)
-   * @param espaceId  (optional)
+   * @param r Critères de recherche (contient).  Ce critère sera utilisé pour retourner des espace dont le code ou le libellé contiennent cette valeur.  (optional)
+   * @param type  (optional)
    * @param actif  (optional)
-   * @param finaliteDiplome  (optional)
-   * @return PagedDiplomeSummaries
+   * @return PagedEspaces
    * @throws ApiException if fails to make API call
    */
-  public PagedDiplomeSummaries rechercherDiplomes(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable UUID espaceId, @jakarta.annotation.Nullable Boolean actif, @jakarta.annotation.Nullable String finaliteDiplome) throws ApiException {
-    return rechercherDiplomes(codeStructure, pageable, r, espaceId, actif, finaliteDiplome, null);
+  public PagedEspaces rechercherEspaces(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable TypeEspace type, @jakarta.annotation.Nullable Boolean actif) throws ApiException {
+    return rechercherEspaces(codeStructure, pageable, r, type, actif, null);
   }
 
   /**
-   * Lire les diplômes
-   * Lecture des diplômes 
+   * Lire les espaces
+   * Lecture des espaces 
    * @param codeStructure Le code de l&#39;établissement (required)
    * @param pageable  (optional)
-   * @param r Critères de recherche (contient).  Ce critère sera utilisé pour retourner des diplômes dont le code ou le libellé contiennent cette valeur.  (optional)
-   * @param espaceId  (optional)
+   * @param r Critères de recherche (contient).  Ce critère sera utilisé pour retourner des espace dont le code ou le libellé contiennent cette valeur.  (optional)
+   * @param type  (optional)
    * @param actif  (optional)
-   * @param finaliteDiplome  (optional)
    * @param headers Optional headers to include in the request
-   * @return PagedDiplomeSummaries
+   * @return PagedEspaces
    * @throws ApiException if fails to make API call
    */
-  public PagedDiplomeSummaries rechercherDiplomes(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable UUID espaceId, @jakarta.annotation.Nullable Boolean actif, @jakarta.annotation.Nullable String finaliteDiplome, Map<String, String> headers) throws ApiException {
-    ApiResponse<PagedDiplomeSummaries> localVarResponse = rechercherDiplomesWithHttpInfo(codeStructure, pageable, r, espaceId, actif, finaliteDiplome, headers);
+  public PagedEspaces rechercherEspaces(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable TypeEspace type, @jakarta.annotation.Nullable Boolean actif, Map<String, String> headers) throws ApiException {
+    ApiResponse<PagedEspaces> localVarResponse = rechercherEspacesWithHttpInfo(codeStructure, pageable, r, type, actif, headers);
     return localVarResponse.getData();
   }
 
   /**
-   * Lire les diplômes
-   * Lecture des diplômes 
+   * Lire les espaces
+   * Lecture des espaces 
    * @param codeStructure Le code de l&#39;établissement (required)
    * @param pageable  (optional)
-   * @param r Critères de recherche (contient).  Ce critère sera utilisé pour retourner des diplômes dont le code ou le libellé contiennent cette valeur.  (optional)
-   * @param espaceId  (optional)
+   * @param r Critères de recherche (contient).  Ce critère sera utilisé pour retourner des espace dont le code ou le libellé contiennent cette valeur.  (optional)
+   * @param type  (optional)
    * @param actif  (optional)
-   * @param finaliteDiplome  (optional)
-   * @return ApiResponse&lt;PagedDiplomeSummaries&gt;
+   * @return ApiResponse&lt;PagedEspaces&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<PagedDiplomeSummaries> rechercherDiplomesWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable UUID espaceId, @jakarta.annotation.Nullable Boolean actif, @jakarta.annotation.Nullable String finaliteDiplome) throws ApiException {
-    return rechercherDiplomesWithHttpInfo(codeStructure, pageable, r, espaceId, actif, finaliteDiplome, null);
+  public ApiResponse<PagedEspaces> rechercherEspacesWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable TypeEspace type, @jakarta.annotation.Nullable Boolean actif) throws ApiException {
+    return rechercherEspacesWithHttpInfo(codeStructure, pageable, r, type, actif, null);
   }
 
   /**
-   * Lire les diplômes
-   * Lecture des diplômes 
+   * Lire les espaces
+   * Lecture des espaces 
    * @param codeStructure Le code de l&#39;établissement (required)
    * @param pageable  (optional)
-   * @param r Critères de recherche (contient).  Ce critère sera utilisé pour retourner des diplômes dont le code ou le libellé contiennent cette valeur.  (optional)
-   * @param espaceId  (optional)
+   * @param r Critères de recherche (contient).  Ce critère sera utilisé pour retourner des espace dont le code ou le libellé contiennent cette valeur.  (optional)
+   * @param type  (optional)
    * @param actif  (optional)
-   * @param finaliteDiplome  (optional)
    * @param headers Optional headers to include in the request
-   * @return ApiResponse&lt;PagedDiplomeSummaries&gt;
+   * @return ApiResponse&lt;PagedEspaces&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<PagedDiplomeSummaries> rechercherDiplomesWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable UUID espaceId, @jakarta.annotation.Nullable Boolean actif, @jakarta.annotation.Nullable String finaliteDiplome, Map<String, String> headers) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = rechercherDiplomesRequestBuilder(codeStructure, pageable, r, espaceId, actif, finaliteDiplome, headers);
+  public ApiResponse<PagedEspaces> rechercherEspacesWithHttpInfo(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable TypeEspace type, @jakarta.annotation.Nullable Boolean actif, Map<String, String> headers) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = rechercherEspacesRequestBuilder(codeStructure, pageable, r, type, actif, headers);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -342,10 +339,10 @@ public class DiplomesExterneApi {
       }
       try {
         if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("rechercherDiplomes", localVarResponse);
+          throw getApiException("rechercherEspaces", localVarResponse);
         }
         if (localVarResponse.body() == null) {
-          return new ApiResponse<PagedDiplomeSummaries>(
+          return new ApiResponse<PagedEspaces>(
               localVarResponse.statusCode(),
               localVarResponse.headers().map(),
               null
@@ -355,11 +352,11 @@ public class DiplomesExterneApi {
         
         
         String responseBody = new String(localVarResponse.body().readAllBytes());
-        PagedDiplomeSummaries responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<PagedDiplomeSummaries>() {});
+        PagedEspaces responseValue = responseBody.isBlank()? null: memberVarObjectMapper.readValue(responseBody, new TypeReference<PagedEspaces>() {});
         
         localVarResponse.body().close();
 
-        return new ApiResponse<PagedDiplomeSummaries>(
+        return new ApiResponse<PagedEspaces>(
             localVarResponse.statusCode(),
             localVarResponse.headers().map(),
             responseValue
@@ -375,15 +372,15 @@ public class DiplomesExterneApi {
     }
   }
 
-  private HttpRequest.Builder rechercherDiplomesRequestBuilder(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable UUID espaceId, @jakarta.annotation.Nullable Boolean actif, @jakarta.annotation.Nullable String finaliteDiplome, Map<String, String> headers) throws ApiException {
+  private HttpRequest.Builder rechercherEspacesRequestBuilder(@jakarta.annotation.Nonnull String codeStructure, @jakarta.annotation.Nullable Pageable pageable, @jakarta.annotation.Nullable String r, @jakarta.annotation.Nullable TypeEspace type, @jakarta.annotation.Nullable Boolean actif, Map<String, String> headers) throws ApiException {
     // verify the required parameter 'codeStructure' is set
     if (codeStructure == null) {
-      throw new ApiException(400, "Missing the required parameter 'codeStructure' when calling rechercherDiplomes");
+      throw new ApiException(400, "Missing the required parameter 'codeStructure' when calling rechercherEspaces");
     }
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
-    String localVarPath = "/etablissement/{codeStructure}/diplomes/"
+    String localVarPath = "/etablissement/{codeStructure}/espaces"
         .replace("{codeStructure}", ApiClient.urlEncode(codeStructure.toString()));
 
     List<Pair> localVarQueryParams = new ArrayList<>();
@@ -395,12 +392,10 @@ public class DiplomesExterneApi {
     localVarQueryParams.addAll(ApiClient.parameterToPairs("multi", "tri", pageable.getTri()));
     localVarQueryParameterBaseName = "r";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("r", r));
-    localVarQueryParameterBaseName = "espaceId";
-    localVarQueryParams.addAll(ApiClient.parameterToPairs("espaceId", espaceId));
+    localVarQueryParameterBaseName = "type";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("type", type));
     localVarQueryParameterBaseName = "actif";
     localVarQueryParams.addAll(ApiClient.parameterToPairs("actif", actif));
-    localVarQueryParameterBaseName = "finaliteDiplome";
-    localVarQueryParams.addAll(ApiClient.parameterToPairs("finaliteDiplome", finaliteDiplome));
 
     if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
       StringJoiner queryJoiner = new StringJoiner("&");

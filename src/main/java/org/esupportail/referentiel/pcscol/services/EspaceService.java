@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-
-import org.esupportail.referentiel.pcscol.api.EspacesExterneApi;
+import org.esupportail.referentiel.pcscol.api.odf.EspacesExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;

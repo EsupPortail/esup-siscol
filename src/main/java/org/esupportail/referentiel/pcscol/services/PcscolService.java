@@ -21,11 +21,11 @@ import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.RegimeInscription;
 import org.esupportail.referentiel.beans.SignataireRef;
 import org.esupportail.referentiel.cache.CacheConfig;
-import org.esupportail.referentiel.pcscol.api.EspacesExterneApi;
-import org.esupportail.referentiel.pcscol.api.InscriptionsApi;
-import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
-import org.esupportail.referentiel.pcscol.api.StructureApi;
+import org.esupportail.referentiel.pcscol.api.insexterne.InscriptionsApi;
+import org.esupportail.referentiel.pcscol.api.odf.EspacesExterneApi;
+import org.esupportail.referentiel.pcscol.api.odf.ObjetsMaquetteExterneApi;
+import org.esupportail.referentiel.pcscol.api.ref.NomenclatureApi;
+import org.esupportail.referentiel.pcscol.api.ref.StructureApi;
 import org.esupportail.referentiel.pcscol.config.CesureUtils;
 import org.esupportail.referentiel.pcscol.ins.model.Apprenant;
 import org.esupportail.referentiel.pcscol.ins.model.ApprenantEtInscriptions;
@@ -282,24 +282,9 @@ public class PcscolService implements PcscolServiceI {
 				logger.debug("lireMapFormations : {} , {} ", codeStructure, idPeriode);
 				List<ObjetMaquetteSummary> maquetteSummaries = offreFormationServiceRevisited
 						.rechercheObjetMaquetteSummaryParPiaSeaulement(codeStructure, idPeriode.toString());
-				logger.debug("lireMapFormations : {} ", maquetteSummaries.size());
 				
-//				maquetteSummaries.stream().forEach(e -> logger.debug("lireMapFormations : {}  {} =>{}", e.getCode(),
-//						e.getTypeObjetFormation(), e.getTypeObjetMaquette()));
-
-				/*
-				 * *
-				 */
-				
-				
-				System.out.println("lireMapFormations : " + codeStructure + " , " + periode + " => "
-						+ maquetteSummaries.size());
-				
-				for (ObjetMaquetteSummary maquetteSummary : maquetteSummaries) {
-					System.out.println("lireMapFormations : " +maquetteSummary);
-				}
-				
-				
+				logger.debug("lireMapFormations : {} , {} : maquetteSummaries {}", codeStructure, periode,
+						maquetteSummaries.size());
 				
 				HashMap<String, String> mapFormations = offreFormationServiceRevisited
 						.objetMaquetteSummaryMap(maquetteSummaries, periode);

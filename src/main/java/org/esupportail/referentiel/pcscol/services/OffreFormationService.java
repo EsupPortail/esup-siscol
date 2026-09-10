@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.esupportail.referentiel.pcscol.api.MaquettesExterneApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
+import org.esupportail.referentiel.pcscol.api.odf.MaquettesExterneApi;
+import org.esupportail.referentiel.pcscol.api.odf.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.DescripteursObjetFormation;
 import org.esupportail.referentiel.pcscol.odf.model.EnfantsStructure;
@@ -163,7 +163,7 @@ public class OffreFormationService {
 		
 		objetMaquetteSummaries = objetMaquetteSummaries.stream().distinct().toList();
 		
-		System.out.println("rechercheObjetMaquetteSummary : " + codeStructure + " " + espace + " " + objetMaquetteSummaries);
+		
 		return objetMaquetteSummaries;
 	}
 
@@ -352,7 +352,7 @@ public class OffreFormationService {
 			logger.debug("rechercherObjetMaquetteDiplomeReferences : {} {} {}", codeStructure, periode,
 					allObjetMaquetteDetail.size());
 			
-			System.out.println("rechercherObjetMaquetteDiplomeReferences : " + allObjetMaquetteDetail);
+			
 			return allObjetMaquetteDetail;
 		} else
 			return Collections.emptyList();
@@ -605,7 +605,20 @@ public class OffreFormationService {
 		}
 
 	}
-
+	/**
+	 * 
+	 * @param codeStructure
+	 * @param r
+	 * @param espace
+	 * @param typeObjetMaquette
+	 * @param racine
+	 * @param typeObjetFormation
+	 * @param ids
+	 * @param piaSeulementParam
+	 * @param pageSize
+	 * @return
+	 * @throws ApiException
+	 */
 	private List<ObjetMaquetteSummary> rechercheObjetMaquetteSummaryPaginee(String codeStructure, String r,
 			String espace, List<TypeObjetMaquette> typeObjetMaquette, Boolean racine, String typeObjetFormation,
 			List<UUID> ids, Boolean piaSeulementParam, int pageSize) throws ApiException {
@@ -614,9 +627,9 @@ public class OffreFormationService {
 		pageable.setPage(0);
 		pageable.setTaille(pageSize);
 
-		Boolean protege = false;
-		List<String> codesPerimetresIn = new ArrayList<>();
-		List<String> codesPerimetresOut = new ArrayList<>();
+		Boolean protege = null;
+		List<String> codesPerimetresIn = null;
+		List<String> codesPerimetresOut = null;
 		logger.debug(
 				"codeStructure: {},  r: {}, espace: {}, typeObjetMaquette: {}, racine: {}, typeObjetFormation: {}, ids: {}, piaSeulement: {}, piaActif: {}, valideSeulement: {},mutualise: {}",
 				codeStructure, r, espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulementParam,
@@ -685,7 +698,7 @@ public class OffreFormationService {
 		Boolean racine = null;
 		String typeObjetFormation = null;
 		List<UUID> ids = null;
-		Boolean protege = false;
+		Boolean protege = null;
 		List<String> codesPerimetresIn = null;
 		List<String> codesPerimetresOut = null;
 

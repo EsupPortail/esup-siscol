@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteExterneApi;
+import org.esupportail.referentiel.pcscol.api.odf.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteSummary;
 import org.esupportail.referentiel.pcscol.odf.model.Pageable;
@@ -66,7 +65,7 @@ public class OffreFormationServicePartielEtapes {
 		pageable.setPage(0);
 		pageable.setTaille(10);
 		String r = null;
-		Boolean protege=false;
+		Boolean protege=null;
 		List<String> codesPerimetresIn=null;
 		List<String> codesPerimetresOut=null;
 

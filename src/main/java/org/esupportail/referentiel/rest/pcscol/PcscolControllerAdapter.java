@@ -16,7 +16,7 @@ import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.RegimeInscriptionReduit;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
-import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
+import org.esupportail.referentiel.pcscol.api.ref.NomenclatureApi;
 import org.esupportail.referentiel.pcscol.config.CesureUtils;
 import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.ref_api.model.Commune;
