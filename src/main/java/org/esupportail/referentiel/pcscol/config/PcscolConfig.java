@@ -157,7 +157,6 @@ public class PcscolConfig {
 	EspacesExterneApi espacesApi() {
 		try {
 			logger.info("Initialisation espacesApi");
-			logger.info("TOKEN: "+ accessTokenService.getToken());
 			String token = accessTokenService.getToken();
 			return new EspacesExterneApi(apiClient(apiODF, token));
 		} catch (Exception e) {
