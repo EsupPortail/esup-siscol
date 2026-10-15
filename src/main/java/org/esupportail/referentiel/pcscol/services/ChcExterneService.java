@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.esupportail.referentiel.beans.ApprenantDto;
-import org.esupportail.referentiel.pcscol.api.CursusApi;
-import org.esupportail.referentiel.pcscol.api.ExtractionsApi;
+import org.esupportail.referentiel.pcscol.api.chcExterne.CursusApi;
+import org.esupportail.referentiel.pcscol.api.chcExterne.ExtractionsApi;
 import org.esupportail.referentiel.pcscol.chcExterneV1.model.ApprenantPourext;
 import org.esupportail.referentiel.pcscol.chcExterneV1.model.Cursus;
 import org.esupportail.referentiel.pcscol.chcExterneV1.model.CursusPourext;

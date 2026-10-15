@@ -116,6 +116,20 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 		global_f.and(filter).and(new HardcodedFilter(stringFilterStudent));
 		return findPersonByFilter(global_f);
 	}
+	@Override
+	public Person findStudentBycodEtu(String codEtu) {
+		AndFilter global_f = new AndFilter();
+		logger.debug("findStudentBycodEtu codEtu : {} " , codEtu);
+		global_f.and(new HardcodedFilter("("+ldapAtributes.getCodEtu()+"="+codEtu+")")).and(new HardcodedFilter(stringFilterStudent));
+		logger.debug("findStudentBycodEtu global_f : {} " , global_f.encode());
+		List<Person> response = findPersonByFilter(global_f);
+		if (response != null && !response.isEmpty()) {
+			return response.get(0);
+		} else {
+			logger.info("Aucun étudiant trouvé pour le codEtu : {}", codEtu);
+			return null;
+		}
+	}
 
 	@Override
 	public List<Person> findStaffByFilter(Filter filter) {
@@ -132,21 +146,21 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 					new PersonContextMapper(ldapAtributes));
 			return persons.get(0);
 		} catch (Exception e) {
-			logger.error("LDAP EXCEPTION ", e);
+			logger.error("LDAP EXCEPTION ", e.getMessage());
 			return null;
 		}
 
 	}
 
 	@Override
-	public Person findByCodEtu(String CodEtu) {
+	public Person findByCodEtu(String codEtu) {
 		try {
 			List<Person> persons = ldapTemplate.search(query().base(ldapAtributes.getBaseDn()).where("objectclass")
-					.is(ldapAtributes.getObjectClass()).and(ldapAtributes.getCodEtu()).is(CodEtu),
+					.is(ldapAtributes.getObjectClass()).and(ldapAtributes.getCodEtu()).is(codEtu),
 					new PersonContextMapper(ldapAtributes));
 			return persons.get(0);
 		} catch (Exception e) {
-			logger.error("LDAP EXCEPTION codeEtud  {} {} ",CodEtu, e.getMessage());
+			logger.error("LDAP EXCEPTION codeEtud  {} {} ",codEtu, e.getMessage());
 			return null;
 		}
 	}
@@ -172,7 +186,7 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 
 	@Override
 	public List<Person> findPersonByFilter(Filter formAsFliter) {
-		logger.debug("formAsFliter : " + formAsFliter.toString());
+		logger.debug("formAsFliter : {}" , formAsFliter.toString());
 		List<Person> persons = ldapTemplate.search((query().base(ldapAtributes.getBaseDn()).filter(formAsFliter)),
 				new PersonContextMapper(ldapAtributes));
 		return persons;

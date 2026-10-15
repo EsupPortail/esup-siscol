@@ -2,7 +2,7 @@ package org.esupportail.referentiel.pcscol.services;
 
 import java.util.List;
 
-import org.esupportail.referentiel.pcscol.api.ApprenantExterneApi;
+import org.esupportail.referentiel.pcscol.api.identite.ApprenantExterneApi;
 import org.esupportail.referentiel.pcscol.identite.model.IdentiteApprenantSummary;
 import org.esupportail.referentiel.pcscol.identite.model.Pageable;
 import org.esupportail.referentiel.pcscol.identite.model.PagedIdentiteApprenantSummaries;

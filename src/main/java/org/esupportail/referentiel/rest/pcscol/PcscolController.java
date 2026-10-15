@@ -85,8 +85,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/etapesByEtudiantAndAnnee")
 	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(
-			@RequestParam(value = "codEtud", defaultValue = "000000036") String codeEtud,
-			@RequestParam(defaultValue = "2020") String annee) {
+			@RequestParam(value = "codEtud", defaultValue = "000000109") String codeEtud,
+			@RequestParam(defaultValue = "2021") String annee) {
 		return pcscolControllerAdapter.etapesByEtudiantAndAnnee(codeEtud, annee);
 	}
 

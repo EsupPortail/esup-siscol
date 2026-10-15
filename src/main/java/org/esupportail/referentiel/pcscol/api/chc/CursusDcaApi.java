@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.esupportail.referentiel.pcscol.api;
+package org.esupportail.referentiel.pcscol.api.chc;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
 
-import org.esupportail.referentiel.pcscol.chcv6.model.ArbreLecture;
+import org.esupportail.referentiel.pcscol.chcv6.model.CursusDCA;
 import org.esupportail.referentiel.pcscol.invoker.ApiClient;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.invoker.ApiResponse;
@@ -34,7 +34,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2024-09-26T14:04:50.284799424+02:00[Europe/Paris]", comments = "Generator version: 7.8.0")
-public class ArbresApi {
+public class CursusDcaApi {
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
   private final String memberVarBaseUri;
@@ -43,11 +43,11 @@ public class ArbresApi {
   private final Consumer<HttpResponse<InputStream>> memberVarResponseInterceptor;
   private final Consumer<HttpResponse<String>> memberVarAsyncResponseInterceptor;
 
-  public ArbresApi() {
+  public CursusDcaApi() {
     this(new ApiClient());
   }
 
-  public ArbresApi(ApiClient apiClient) {
+  public CursusDcaApi(ApiClient apiClient) {
     memberVarHttpClient = apiClient.getHttpClient();
     memberVarObjectMapper = apiClient.getObjectMapper();
     memberVarBaseUri = apiClient.getBaseUri();
@@ -71,30 +71,26 @@ public class ArbresApi {
   }
 
   /**
-   * Lire un arbre pour un établissement et une période
+   * Liste des cursus de l&#39;apprenant
    * 
-   * @param codeStructure Le code structure de l&#39;établissement (required)
-   * @param codePeriode Le code periode (required)
-   * @param codeFormation Le code formation (required)
-   * @return ArbreLecture
+   * @param codeApprenant Le code de l&#39;apprenant (required)
+   * @return List&lt;CursusDCA&gt;
    * @throws ApiException if fails to make API call
    */
-  public ArbreLecture arbrePourUneFormation(String codeStructure, String codePeriode, String codeFormation) throws ApiException {
-    ApiResponse<ArbreLecture> localVarResponse = arbrePourUneFormationWithHttpInfo(codeStructure, codePeriode, codeFormation);
+  public List<CursusDCA> lireCusrsuApprenant(String codeApprenant) throws ApiException {
+    ApiResponse<List<CursusDCA>> localVarResponse = lireCusrsuApprenantWithHttpInfo(codeApprenant);
     return localVarResponse.getData();
   }
 
   /**
-   * Lire un arbre pour un établissement et une période
+   * Liste des cursus de l&#39;apprenant
    * 
-   * @param codeStructure Le code structure de l&#39;établissement (required)
-   * @param codePeriode Le code periode (required)
-   * @param codeFormation Le code formation (required)
-   * @return ApiResponse&lt;ArbreLecture&gt;
+   * @param codeApprenant Le code de l&#39;apprenant (required)
+   * @return ApiResponse&lt;List&lt;CursusDCA&gt;&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<ArbreLecture> arbrePourUneFormationWithHttpInfo(String codeStructure, String codePeriode, String codeFormation) throws ApiException {
-    HttpRequest.Builder localVarRequestBuilder = arbrePourUneFormationRequestBuilder(codeStructure, codePeriode, codeFormation);
+  public ApiResponse<List<CursusDCA>> lireCusrsuApprenantWithHttpInfo(String codeApprenant) throws ApiException {
+    HttpRequest.Builder localVarRequestBuilder = lireCusrsuApprenantRequestBuilder(codeApprenant);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
           localVarRequestBuilder.build(),
@@ -104,12 +100,12 @@ public class ArbresApi {
       }
       try {
         if (localVarResponse.statusCode()/ 100 != 2) {
-          throw getApiException("arbrePourUneFormation", localVarResponse);
+          throw getApiException("lireCusrsuApprenant", localVarResponse);
         }
-        return new ApiResponse<ArbreLecture>(
+        return new ApiResponse<List<CursusDCA>>(
           localVarResponse.statusCode(),
           localVarResponse.headers().map(),
-          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<ArbreLecture>() {}) // closes the InputStream
+          localVarResponse.body() == null ? null : memberVarObjectMapper.readValue(localVarResponse.body(), new TypeReference<List<CursusDCA>>() {}) // closes the InputStream
         );
       } finally {
       }
@@ -122,31 +118,21 @@ public class ArbresApi {
     }
   }
 
-  private HttpRequest.Builder arbrePourUneFormationRequestBuilder(String codeStructure, String codePeriode, String codeFormation) throws ApiException {
-    // verify the required parameter 'codeStructure' is set
-    if (codeStructure == null) {
-      throw new ApiException(400, "Missing the required parameter 'codeStructure' when calling arbrePourUneFormation");
-    }
-    // verify the required parameter 'codePeriode' is set
-    if (codePeriode == null) {
-      throw new ApiException(400, "Missing the required parameter 'codePeriode' when calling arbrePourUneFormation");
-    }
-    // verify the required parameter 'codeFormation' is set
-    if (codeFormation == null) {
-      throw new ApiException(400, "Missing the required parameter 'codeFormation' when calling arbrePourUneFormation");
+  private HttpRequest.Builder lireCusrsuApprenantRequestBuilder(String codeApprenant) throws ApiException {
+    // verify the required parameter 'codeApprenant' is set
+    if (codeApprenant == null) {
+      throw new ApiException(400, "Missing the required parameter 'codeApprenant' when calling lireCusrsuApprenant");
     }
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
-    String localVarPath = "/arbre/{codeStructure}/{codeFormation}"
-        .replace("{codeStructure}", ApiClient.urlEncode(codeStructure.toString()))
-        .replace("{codeFormation}", ApiClient.urlEncode(codeFormation.toString()));
+    String localVarPath = "/cursus-dca";
 
     List<Pair> localVarQueryParams = new ArrayList<>();
     StringJoiner localVarQueryStringJoiner = new StringJoiner("&");
     String localVarQueryParameterBaseName;
-    localVarQueryParameterBaseName = "codePeriode";
-    localVarQueryParams.addAll(ApiClient.parameterToPairs("codePeriode", codePeriode));
+    localVarQueryParameterBaseName = "codeApprenant";
+    localVarQueryParams.addAll(ApiClient.parameterToPairs("codeApprenant", codeApprenant));
 
     if (!localVarQueryParams.isEmpty() || localVarQueryStringJoiner.length() != 0) {
       StringJoiner queryJoiner = new StringJoiner("&");
