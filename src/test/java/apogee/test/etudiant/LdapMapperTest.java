@@ -49,7 +49,7 @@ public class LdapMapperTest {
 	@Test
 	public void findStudentByFilterTest() {
 
-		List<Person> ps = ldapServiceInterface.findStudentBycodEtu("260010");
+		Person ps = ldapServiceInterface.findStudentBycodEtu("260010");
 		System.out.println("***********************");
 		System.out.println(ps);
 	}

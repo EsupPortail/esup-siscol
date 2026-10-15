@@ -117,10 +117,18 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 		return findPersonByFilter(global_f);
 	}
 	@Override
-	public List<Person> findStudentBycodEtu(String codEtu) {
+	public Person findStudentBycodEtu(String codEtu) {
 		AndFilter global_f = new AndFilter();
+		logger.debug("findStudentBycodEtu codEtu : {} " , codEtu);
 		global_f.and(new HardcodedFilter("("+ldapAtributes.getCodEtu()+"="+codEtu+")")).and(new HardcodedFilter(stringFilterStudent));
-		return findPersonByFilter(global_f);
+		logger.debug("findStudentBycodEtu global_f : {} " , global_f.encode());
+		List<Person> response = findPersonByFilter(global_f);
+		if (response != null && !response.isEmpty()) {
+			return response.get(0);
+		} else {
+			logger.info("Aucun étudiant trouvé pour le codEtu : {}", codEtu);
+			return null;
+		}
 	}
 
 	@Override
@@ -178,7 +186,7 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 
 	@Override
 	public List<Person> findPersonByFilter(Filter formAsFliter) {
-		logger.debug("formAsFliter : " + formAsFliter.toString());
+		logger.debug("formAsFliter : {}" , formAsFliter.toString());
 		List<Person> persons = ldapTemplate.search((query().base(ldapAtributes.getBaseDn()).filter(formAsFliter)),
 				new PersonContextMapper(ldapAtributes));
 		return persons;

@@ -83,10 +83,10 @@ public class PcscolControllerAdapter implements InitializingBean {
 		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
 		if (student != null) {
 			logger.info("rechcerche mail ldap Etudiant  : {}", numEtud);
-			//Person person = personService.findByCodEtu(numEtud);
-			List<Person> persons = personService.findStudentBycodEtu(numEtud);
-			if (persons != null && !persons.isEmpty()) {
-				student.setEmailAnnuaire(persons.get(0).getMail());
+		
+			Person person = personService.findStudentBycodEtu(numEtud);
+			if (person != null ) {
+				student.setEmailAnnuaire(person.getMail());
 			} else {
 				logger.warn("Aucun mail trouvé pour l'étudiant :{} ", numEtud);
 			}
@@ -116,7 +116,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 			EtudiantRef etudientREf = pcscolService.lireEtudiantRef(codeStructure, codeApprenant, espacesFictif);
 
 			if (etudientREf != null) {
-				Person person = personService.findByCodEtu(codeApprenant);
+				Person person = personService.findStudentBycodEtu(codeApprenant);
 				if (person != null) {
 					etudientREf.setMail(person.getMail());
 					logger.debug("Mail trouvé pour l'étudiant : {} : {}", codeApprenant, person.getMail());
@@ -229,7 +229,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		allAppernants.forEach(e -> {
 			try {
-				Person person = personService.findByCodEtu(e.getCodEtu());
+				Person person = personService.findStudentBycodEtu(e.getCodEtu());
 				if (person != null) {
 					e.setMail(person.getMail());
 				}
@@ -282,7 +282,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		apprenantDtos.forEach(e -> {
 			try {
-				Person person = personService.findByCodEtu(e.getCodEtu());
+				Person person = personService.findStudentBycodEtu(e.getCodEtu());
 				if (person != null) {
 					e.setMail(person.getMail());
 				}

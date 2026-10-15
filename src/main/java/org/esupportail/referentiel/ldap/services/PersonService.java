@@ -74,14 +74,14 @@ public class PersonService implements LdapServiceInterface{
 		return students;
 	}
 	
-	public List<Person> findStudentBycodEtu(String codEtu){
+	public Person findStudentBycodEtu(String codEtu){
 		HardcodedFilter s_f = new HardcodedFilter(stringFilterStudent);
 		AndFilter global_f = new AndFilter();
 		global_f.and(s_f).and(new HardcodedFilter("(supannEtuId="+codEtu+")"));
 		LdapQuery query = LdapQueryBuilder.query().base(dnPeople).countLimit(10).filter(global_f);
 		logger.trace(query.toString());
 		List<Person> students = (List<Person>) personRepository.findAll(query);
-		return students;
+		return students.get(0);
 	}
 
 	/**
