@@ -83,9 +83,10 @@ public class PcscolControllerAdapter implements InitializingBean {
 		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
 		if (student != null) {
 			logger.info("rechcerche mail ldap Etudiant  : {}", numEtud);
-			Person person = personService.findByCodEtu(numEtud);
-			if (person != null) {
-				student.setEmailAnnuaire(person.getMail());
+			//Person person = personService.findByCodEtu(numEtud);
+			List<Person> persons = personService.findStudentBycodEtu(numEtud);
+			if (persons != null && !persons.isEmpty()) {
+				student.setEmailAnnuaire(persons.get(0).getMail());
 			} else {
 				logger.warn("Aucun mail trouvé pour l'étudiant :{} ", numEtud);
 			}

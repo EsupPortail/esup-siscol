@@ -116,6 +116,12 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 		global_f.and(filter).and(new HardcodedFilter(stringFilterStudent));
 		return findPersonByFilter(global_f);
 	}
+	@Override
+	public List<Person> findStudentBycodEtu(String codEtu) {
+		AndFilter global_f = new AndFilter();
+		global_f.and(new HardcodedFilter("("+ldapAtributes.getCodEtu()+"="+codEtu+")")).and(new HardcodedFilter(stringFilterStudent));
+		return findPersonByFilter(global_f);
+	}
 
 	@Override
 	public List<Person> findStaffByFilter(Filter filter) {
@@ -132,21 +138,21 @@ public class PersonServiceMapperMethod implements LdapServiceInterface {
 					new PersonContextMapper(ldapAtributes));
 			return persons.get(0);
 		} catch (Exception e) {
-			logger.error("LDAP EXCEPTION ", e);
+			logger.error("LDAP EXCEPTION ", e.getMessage());
 			return null;
 		}
 
 	}
 
 	@Override
-	public Person findByCodEtu(String CodEtu) {
+	public Person findByCodEtu(String codEtu) {
 		try {
 			List<Person> persons = ldapTemplate.search(query().base(ldapAtributes.getBaseDn()).where("objectclass")
-					.is(ldapAtributes.getObjectClass()).and(ldapAtributes.getCodEtu()).is(CodEtu),
+					.is(ldapAtributes.getObjectClass()).and(ldapAtributes.getCodEtu()).is(codEtu),
 					new PersonContextMapper(ldapAtributes));
 			return persons.get(0);
 		} catch (Exception e) {
-			logger.error("LDAP EXCEPTION codeEtud  {} {} ",CodEtu, e.getMessage());
+			logger.error("LDAP EXCEPTION codeEtud  {} {} ",codEtu, e.getMessage());
 			return null;
 		}
 	}

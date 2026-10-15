@@ -27,17 +27,29 @@ public class LdapMapperTest {
 	@Test
 	public void findByUid() {
 
-		Person r = ldapServiceInterface.findByUid("boop");
+		Person r = ldapServiceInterface.findByUid("dupond");
 
-		System.out.println(r.getSupannAliasLogin());
+		if (r == null  ) {
+			System.out.println("Person not found");
+		} else {
+			System.out.println(r.getSupannAliasLogin());
+		}
 	}
-	
+
 	@Test
 	public void findPersonByFilterTest() {
-		String filter="(sn=*raga*)";
+		String filter = "(sn=*raga*)";
 		HardcodedFilter s_f = new HardcodedFilter(filter);
-		
+
 		List<Person> ps = ldapServiceInterface.findPersonByFilter(s_f);
+		System.out.println("***********************");
+		System.out.println(ps);
+	}
+
+	@Test
+	public void findStudentByFilterTest() {
+
+		List<Person> ps = ldapServiceInterface.findStudentBycodEtu("260010");
 		System.out.println("***********************");
 		System.out.println(ps);
 	}
