@@ -51,9 +51,6 @@ public class OffreFormationService {
 	@Autowired
 	private PcscolService pcScoleService;
 
-	@Value("${app.pcscol.typeObjetFormationChargementFormations}")
-	String typeObjetFormationChargementFormations;
-
 	private Boolean piaActif = null;
 	private Boolean piaSeulement = false;
 	private Boolean valideSeulement = true;

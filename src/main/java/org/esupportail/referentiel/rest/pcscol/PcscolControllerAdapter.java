@@ -37,7 +37,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @ConditionalOnProperty(name = "app.mode_pegase")
-public class PcscolControllerAdapter implements InitializingBean {
+public class PcscolControllerAdapter  {
 
 	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -69,9 +69,6 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 	@Value("${app.pcscol.codeStructure}")
 	String codeStructure = "ETAB00";
-
-	@Value("${app.pcscol.codePeriode}")
-	String codePeriode = "PER-2020";
 
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
 	String codesPeriodesChargementFormations;
@@ -370,19 +367,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 		return new ResponseEntity<>(diplomeReduitDtos, HttpStatus.OK);
 	}
 
-	@Override
-	public void afterPropertiesSet() throws Exception {
-
-		logger.info(
-				"PcscolControllerAdapter initialized with codeStructure: {}, codePeriode: {}, codesPeriodesChargementFormations: {}",
-				codeStructure, codePeriode, codesPeriodesChargementFormations);
-		if (codesPeriodesChargementFormations == null || codesPeriodesChargementFormations.isEmpty()) {
-			codesPeriodesChargementFormations = codePeriode;
-			logger.warn("No codesPeriodesChargementFormations set, using codePeriode: {}", codePeriode);
-		}
-		logger.info("Codes Periodes Chargement Formations: {}", codesPeriodesChargementFormations);
-		logger.info("CesureUtils: {}", cesureUtils.getCesures());
-	}
+	
 
 	public Map<String, String> regimesInscriptions() {
 		return pcscolService.lireMapNomenclature("RegimeInscription");

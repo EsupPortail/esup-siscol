@@ -35,9 +35,6 @@ public class OffreFormationServicePartielEtapes {
 	@Autowired
 	private PcscolService pcScoleService;
 
-	@Value("${app.pcscol.typeObjetFormationChargementFormations:null}")
-	String typeObjetFormationChargementFormations;
-	
 	@Value("${app.pcscol.codeStructure}")
 	String codeStructure = "ETAB00";
 
@@ -191,12 +188,5 @@ public class OffreFormationServicePartielEtapes {
 		this.pcScoleService = pcScoleService;
 	}
 
-	public String getTypeObjetFormationChargementFormations() {
-		return typeObjetFormationChargementFormations;
-	}
-
-	public void setTypeObjetFormationChargementFormations(String typeObjetFormationChargementFormations) {
-		this.typeObjetFormationChargementFormations = typeObjetFormationChargementFormations;
-	}
-
+	
 }
