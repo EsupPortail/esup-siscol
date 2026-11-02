@@ -35,8 +35,7 @@ public class RestTest {
 	@Value("${app.pcscol.codeStructure}")
 	String codeStructure = "ETAB00";
 
-	@Value("${app.pcscol.codePeriode}")
-	String codePeriode = "PER-2020";
+
 
 	
 	String codesPeriodesChargementFormations = null;

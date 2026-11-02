@@ -39,18 +39,17 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 
 	@Autowired
 	private PcscolService pcscolService;
+	
+	@Autowired
+	PcscolControllerAdapter pcscolControllerAdapter;
 
 	@Value("${app.pcscol.codeStructure}")
 	String codeStructure = "ETAB00";
 
-	@Value("${app.pcscol.codePeriode}")
-	String codePeriode;
-
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
 	String codesPeriodesChargementFormations;
 
-	@Autowired
-	PcscolControllerAdapter pcscolControllerAdapter;
+	
 
 	@GetMapping("/etapesReference")
 	public ResponseEntity<Map<String, String>> getEtapesRef() {
@@ -85,8 +84,8 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/etapesByEtudiantAndAnnee")
 	public ResponseEntity<ApogeeMap> etapesByEtudiantAndAnnee(
-			@RequestParam(value = "codEtud", defaultValue = "000000036") String codeEtud,
-			@RequestParam(defaultValue = "2020") String annee) {
+			@RequestParam(value = "codEtud", defaultValue = "000000109") String codeEtud,
+			@RequestParam(defaultValue = "2021") String annee) {
 		return pcscolControllerAdapter.etapesByEtudiantAndAnnee(codeEtud, annee);
 	}
 
@@ -181,7 +180,7 @@ public class PcscolController implements GeneriqueSIControllerInterface {
 	 */
 	@GetMapping("/diplomesReference")
 	public ResponseEntity<List<DiplomeReduitDto>> getDiplomesRef() {
-		logger.debug("getDiplomesRef  : {} period {}", codeStructure, codePeriode);
+		logger.debug("getDiplomesRef  : {} period {}", codeStructure, codesPeriodesChargementFormations);
 		List<DiplomeReduitDto> ref = pcscolService.diplomeRef(codeStructure, codesPeriodesChargementFormations);
 		return new ResponseEntity<>(ref, HttpStatus.OK);
 	}

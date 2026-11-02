@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-package org.esupportail.referentiel.pcscol.api;
+package org.esupportail.referentiel.pcscol.api.ref;
 
 import java.io.IOException;
 import java.io.InputStream;

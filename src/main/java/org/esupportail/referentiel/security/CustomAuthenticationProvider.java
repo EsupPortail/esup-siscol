@@ -37,7 +37,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider, Ini
 		String password = authentication.getCredentials().toString();
 		
 		
-		System.out.println(credentialComponent.getUserscredential().get(name));
+		
 		if (credentialComponent.getUserscredential().get(name) != null) {
 			String userPassword = credentialComponent.getUserscredential().get(name).getPassword();
 			

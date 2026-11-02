@@ -11,6 +11,8 @@ public interface LdapServiceInterface {
 	
 	public List<Person> findStudentByFilter(Filter filter);
 	
+	public Person findStudentBycodEtu(String codEtu);
+	
 	public List<Person> findStaffByFilter(Filter filter);
 	
 	public Person findByUid(String uid);

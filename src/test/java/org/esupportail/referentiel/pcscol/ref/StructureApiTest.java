@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.esupportail.referentiel.SpringBootTomcatApplication;
-import org.esupportail.referentiel.pcscol.api.StructureApi;
+import org.esupportail.referentiel.pcscol.api.ref.StructureApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.ref_api.model.Structure;
 import org.esupportail.referentiel.pcscol.services.PcscolService;

@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.esupportail.referentiel.beans.ApprenantDto;
-import org.esupportail.referentiel.pcscol.api.CheminApi;
-import org.esupportail.referentiel.pcscol.api.InscriptionV115Api;
+import org.esupportail.referentiel.pcscol.api.insinterne.CheminApi;
+import org.esupportail.referentiel.pcscol.api.insinterne.InscriptionV115Api;
 import org.esupportail.referentiel.pcscol.identite.model.IdentiteApprenantSummary;
 import org.esupportail.referentiel.pcscol.insv115.model.Apprenant;
 import org.esupportail.referentiel.pcscol.insv115.model.Chemin;

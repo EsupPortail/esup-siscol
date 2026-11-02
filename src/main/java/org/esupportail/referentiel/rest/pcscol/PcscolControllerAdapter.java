@@ -3,7 +3,6 @@ package org.esupportail.referentiel.rest.pcscol;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +15,6 @@ import org.esupportail.referentiel.beans.EtudiantRef;
 import org.esupportail.referentiel.beans.RegimeInscriptionReduit;
 import org.esupportail.referentiel.ldap.entities.Person;
 import org.esupportail.referentiel.ldap.services.interfaces.LdapServiceInterface;
-import org.esupportail.referentiel.pcscol.api.NomenclatureApi;
 import org.esupportail.referentiel.pcscol.config.CesureUtils;
 import org.esupportail.referentiel.pcscol.odf.model.Periode;
 import org.esupportail.referentiel.pcscol.ref_api.model.Commune;
@@ -39,28 +37,38 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @ConditionalOnProperty(name = "app.mode_pegase")
-public class PcscolControllerAdapter implements InitializingBean {
+public class PcscolControllerAdapter  {
 
-	final transient Logger logger = LoggerFactory.getLogger(this.getClass());
+	final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	@Autowired
-	private PcscolService pcscolService;
-	@Autowired
-	private ChcExterneService chcExterneService;
+	final PcscolService pcscolService;
 
-	@Autowired
-	@Qualifier("personServiceMapperMethod")
-	LdapServiceInterface personService;
-	@Autowired
-	CesureUtils cesureUtils;
-	@Autowired
-	InscriptionsInterneServices inscriptionsInterneServices;
+	final ChcExterneService chcExterneService;
+
+	final LdapServiceInterface personService;
+
+	final EspaceService espaceService;
+
+	final CesureUtils cesureUtils;
+
+	final InscriptionsInterneServices inscriptionsInterneServices;
+
+	public PcscolControllerAdapter(@Autowired PcscolService pcscolService,
+			@Autowired ChcExterneService chcExterneService,
+			@Autowired @Qualifier("personServiceMapperMethod") LdapServiceInterface personService,
+			@Autowired InscriptionsInterneServices inscriptionsInterneServices, @Autowired EspaceService espaceService,
+			@Autowired CesureUtils cesureUtils) {
+		super();
+		this.pcscolService = pcscolService;
+		this.chcExterneService = chcExterneService;
+		this.personService = personService;
+		this.inscriptionsInterneServices = inscriptionsInterneServices;
+		this.espaceService = espaceService;
+		this.cesureUtils = cesureUtils;
+	}
 
 	@Value("${app.pcscol.codeStructure}")
 	String codeStructure = "ETAB00";
-
-	@Value("${app.pcscol.codePeriode}")
-	String codePeriode = "PER-2020";
 
 	@Value("${app.pcscol.codesPeriodesChargementFormations}")
 	String codesPeriodesChargementFormations;
@@ -68,15 +76,13 @@ public class PcscolControllerAdapter implements InitializingBean {
 	@Value("${app.pcscol.statutInscriptionChargement:VALIDE,EN_COURS,EN_ACTUALISATION,VALIDEE_EN_MULTI_CURSUS}")
 	String statutInscriptionChargement;
 
-	@Autowired
-	private EspaceService espaceService;
-
 	public EtudiantInfoAdm lireEtudiantInfoAdm(String codeStructure, String numEtud) {
 		EtudiantInfoAdm student = pcscolService.lireEtudiantInfoAdm(codeStructure, numEtud);
 		if (student != null) {
 			logger.info("rechcerche mail ldap Etudiant  : {}", numEtud);
-			Person person = personService.findByCodEtu(numEtud);
-			if (person != null) {
+		
+			Person person = personService.findStudentBycodEtu(numEtud);
+			if (person != null ) {
 				student.setEmailAnnuaire(person.getMail());
 			} else {
 				logger.warn("Aucun mail trouvé pour l'étudiant :{} ", numEtud);
@@ -107,7 +113,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 			EtudiantRef etudientREf = pcscolService.lireEtudiantRef(codeStructure, codeApprenant, espacesFictif);
 
 			if (etudientREf != null) {
-				Person person = personService.findByCodEtu(codeApprenant);
+				Person person = personService.findStudentBycodEtu(codeApprenant);
 				if (person != null) {
 					etudientREf.setMail(person.getMail());
 					logger.debug("Mail trouvé pour l'étudiant : {} : {}", codeApprenant, person.getMail());
@@ -157,9 +163,6 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		List<String> statutInscriptionChargements = Arrays.asList(statutInscriptionChargement.split("[,;\\s]+"));
 
-		/**
-		 * TODO relation annee periode ??
-		 */
 		if (!espaces.isEmpty()) {
 			List<String> codeEspaces = new ArrayList<>();
 			espaces.forEach(e -> codeEspaces.add(e.getCode()));
@@ -223,7 +226,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		allAppernants.forEach(e -> {
 			try {
-				Person person = personService.findByCodEtu(e.getCodEtu());
+				Person person = personService.findStudentBycodEtu(e.getCodEtu());
 				if (person != null) {
 					e.setMail(person.getMail());
 				}
@@ -267,14 +270,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 				List<ApprenantDto> apperants = chcExterneService.getApprenantDto(codeComposante, p.getCode(), codeEtape,
 						codeDiplome, codEtu, nom, prenom);
 
-				/**
-				 * TODO A supprimer après confirmation l'appel inscriptionsValidees sera
-				 * supprimé
-				 */
-//				List<ApprenantDto> apperants = pcscolService.recupererListeEtuParEtpEtDiplome(codeComposante, p.getCode(), codeEtape,
-//						versionEtape, codeDiplome, versionDiplome, codEtu, nom, prenom);
-//				
-				logger.debug("recupererListeEtuParEtpEtDiplome : " + apperants);
+				logger.debug("recupererListeEtuParEtpEtDiplome : {}", apperants);
 				if (apperants != null && !apperants.isEmpty()) {
 					apprenantDtos.addAll(apperants);
 				}
@@ -283,7 +279,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		apprenantDtos.forEach(e -> {
 			try {
-				Person person = personService.findByCodEtu(e.getCodEtu());
+				Person person = personService.findStudentBycodEtu(e.getCodEtu());
 				if (person != null) {
 					e.setMail(person.getMail());
 				}
@@ -305,7 +301,6 @@ public class PcscolControllerAdapter implements InitializingBean {
 	 */
 
 	public ResponseEntity<Map<String, String>> studentEtapeVets(String codeEtud, String annee) {
-		// TODO
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
 		Map<String, String> lEtapeInscriptions = new HashMap<String, String>();
 
@@ -327,7 +322,7 @@ public class PcscolControllerAdapter implements InitializingBean {
 	 * @return List<EtapeInscription>
 	 */
 	public ResponseEntity<List<EtapeInscription>> studentListeEtapesInscription(String codEtud, String annee) {
-	
+
 		List<EtapeInscription> etapeInscriptions = new ArrayList<>();
 		List<Periode> espaces = espaceService.espacesFromAnnee(codeStructure, annee);
 
@@ -343,9 +338,6 @@ public class PcscolControllerAdapter implements InitializingBean {
 
 		}
 
-		// 22
-		// List<EtapeInscription> l = pcscolService.etapeInscription(codeStructure,
-		// codEtud, annee);
 		return new ResponseEntity<>(etapeInscriptions, HttpStatus.OK);
 	}
 
@@ -375,33 +367,13 @@ public class PcscolControllerAdapter implements InitializingBean {
 		return new ResponseEntity<>(diplomeReduitDtos, HttpStatus.OK);
 	}
 
-	public PcscolService getPcscolService() {
-		return pcscolService;
-	}
-
-	public void setPcscolService(PcscolService pcscolService) {
-		this.pcscolService = pcscolService;
-	}
-
-	@Override
-	public void afterPropertiesSet() throws Exception {
-
-		logger.info(
-				"PcscolControllerAdapter initialized with codeStructure: {}, codePeriode: {}, codesPeriodesChargementFormations: {}",
-				codeStructure, codePeriode, codesPeriodesChargementFormations);
-		if (codesPeriodesChargementFormations == null || codesPeriodesChargementFormations.isEmpty()) {
-			codesPeriodesChargementFormations = codePeriode;
-			logger.warn("No codesPeriodesChargementFormations set, using codePeriode: {}", codePeriode);
-		}
-		logger.info("Codes Periodes Chargement Formations: {}", codesPeriodesChargementFormations);
-		logger.info("CesureUtils: {}", cesureUtils.getCesures());
-	}
+	
 
 	public Map<String, String> regimesInscriptions() {
 		return pcscolService.lireMapNomenclature("RegimeInscription");
-		
+
 	}
-	
+
 	public List<RegimeInscriptionReduit> regimesInscriptionsDetail() {
 		List<RegimeInscriptionReduit> regimeInscriptionReduitList = new ArrayList<>();
 		List<Nomenclature> list = pcscolService.lireNomenclature("RegimeInscription");

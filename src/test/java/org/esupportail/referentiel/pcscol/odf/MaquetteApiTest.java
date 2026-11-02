@@ -18,8 +18,8 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.esupportail.referentiel.SpringBootTomcatApplication;
-import org.esupportail.referentiel.pcscol.api.EspacesApi;
-import org.esupportail.referentiel.pcscol.api.ObjetsMaquetteApi;
+import org.esupportail.referentiel.pcscol.api.odf.EspacesExterneApi;
+import org.esupportail.referentiel.pcscol.api.odf.ObjetsMaquetteExterneApi;
 import org.esupportail.referentiel.pcscol.invoker.ApiException;
 import org.esupportail.referentiel.pcscol.odf.model.Espace;
 import org.esupportail.referentiel.pcscol.odf.model.ObjetMaquetteDetail;
@@ -48,9 +48,9 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 public class MaquetteApiTest {
 
 	@Autowired
-	ObjetsMaquetteApi objetsMaquetteApi;
+	ObjetsMaquetteExterneApi objetsMaquetteApi;
 	@Autowired
-	EspacesApi espacesApi;
+	EspacesExterneApi espacesApi;
 	@Autowired
 	OffreFormationService offreFormationService;
 
@@ -64,6 +64,38 @@ public class MaquetteApiTest {
 
 	String strId = "14f54729-4db4-4341-8af6-47e276fe3058";
 	String codeStructure = "ETAB00";
+
+	public void testDiplome() throws ApiException {
+
+	}
+
+	@Test
+	public void testRechercherObjetMaquette() throws ApiException {
+
+		// codeStructure: ETAB00, r: null, espace: b16a4bd4-a32b-402a-b7f8-fcf2f832aa57,
+		// typeObjetMaquette: [FORMATION], racine: false, typeObjetFormation: null, ids:
+		// null, piaSeulement: false, piaActif: null, valideSeulement: true,mutualise:
+		// null
+
+		Pageable pageable = new Pageable();
+		pageable.setTaille(50);
+		String r = null;
+		String espace = "b16a4bd4-a32b-402a-b7f8-fcf2f832aa57";
+		List<TypeObjetMaquette> typeObjetMaquette = new ArrayList<TypeObjetMaquette>();
+		typeObjetMaquette.add(TypeObjetMaquette.FORMATION);
+		Boolean racine = false;
+		String typeObjetFormation = null;
+		List<UUID> ids = null;
+		Boolean piaSeulement = false;
+		Boolean piaActif = null;
+		Boolean valideSeulement = true;
+		Boolean mutualise = null;
+
+		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
+				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
+				mutualise, null, null, null);
+		System.out.println(response);
+	}
 
 	@Test
 	public void testEspaces() {
@@ -99,7 +131,7 @@ public class MaquetteApiTest {
 	public void rechercherObjetMaquetteObjetFormaion() throws ApiException {
 
 		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,
-				"PER-2021",true);
+				"PER-2021", true);
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
 		}
@@ -118,7 +150,7 @@ public class MaquetteApiTest {
 	@Test
 	public void rechercherObjetMaquetteVET() throws ApiException {
 		Map<String, String> test = offreFormationService.rechercherObjetMaquetteObjetFormation(codeStructure,
-				"PER-2021",false);
+				"PER-2021", false);
 
 		for (String s : test.keySet()) {
 			System.out.println(s + " : " + test.get(s));
@@ -190,7 +222,7 @@ public class MaquetteApiTest {
 
 		PagedObjetMaquetteSummaries response = objetsMaquetteApi.rechercherObjetMaquette(codeStructure, pageable, r,
 				espace, typeObjetMaquette, racine, typeObjetFormation, ids, piaSeulement, piaActif, valideSeulement,
-				mutualise);
+				mutualise, null, null, null);
 		System.out.println(response);
 	}
 
